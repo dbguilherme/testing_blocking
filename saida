@@ -1,0 +1,500 @@
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.10; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 96.774194 
+ revocacao 100.000000 numero falso match 30 1
+  Query timing (min / max / avrg): 0.000 / 0.007 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 122 / 54
+  Memory usage: 40 MB (resident: 15 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.20; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 96.774194 
+ revocacao 100.000000 numero falso match 30 1
+  Query timing (min / max / avrg): 0.000 / 0.007 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 122 / 54
+  Memory usage: 40 MB (resident: 14 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.30; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 96.774194 
+ revocacao 100.000000 numero falso match 30 1
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 122 / 54
+  Memory usage: 40 MB (resident: 14 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.40; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 96.774194 
+ revocacao 100.000000 numero falso match 30 1
+  Query timing (min / max / avrg): 0.000 / 0.007 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 122 / 54
+  Memory usage: 40 MB (resident: 14 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.50; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 96.774194 
+ revocacao 100.000000 numero falso match 30 1
+  Query timing (min / max / avrg): 0.000 / 0.007 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 122 / 54
+  Memory usage: 39 MB (resident: 13 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.60; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 100.000000 
+ revocacao 100.000000 numero falso match 30 0
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 122 / 53
+  Memory usage: 38 MB (resident: 12 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.70; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 100.000000 
+ revocacao 100.000000 numero falso match 30 0
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 118 / 51
+  Memory usage: 37 MB (resident: 11 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.80; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 100.000000 
+ revocacao 100.000000 numero falso match 30 0
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 118 / 51
+  Memory usage: 37 MB (resident: 11 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 100.000000 
+ revocacao 100.000000 numero falso match 30 0
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 118 / 51
+  Memory usage: 37 MB (resident: 11 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+130
+	 Loaded file:                teste2.txt
+	 Total number of records: 130
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 129:
+
+	 Number of records in rec_dict is 130
+	 Number of records in build_records is 1
+	 Number of records in query_records is 129
+	 Total number of records for build + query is 130
+
+
+ Loading time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  16
+	    Maximum number of records in an inverted index list: 1
+	    Sum of lengths of all inverted index lists:          16
+	  Number of unique values in similarity dictionary:   16
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    16
+	    Maximum number of records in a block list:    1
+	    Sum of lengths of all block dictionary lists: 16
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 36 MB (resident: 10 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+ TAMANHO GAB 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 1.00; minimum total threshold: 8.00
+  Matching accuracy: 30/30 true matches (100.00%)
+ precisao 100.000000 
+ revocacao 100.000000 numero falso match 30 0
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
+  Number of comparisons (min / max / avrg): 2 / 118 / 51
+  Memory usage: 37 MB (resident: 11 MB)

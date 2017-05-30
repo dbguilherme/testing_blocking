@@ -1,0 +1,29 @@
+ID,recid, culture, sex, age, date_of_birth, title, given_name, surname, state, suburb, postcode, street_number, address_1, address_2, phone_number, soc_sec_id, blocking_number, family_role
+1,1079, eng, f,9,20070322, , broo e, bonney, , hadspen,4880,344, tantangara street, tathra river est, 04 99866263,5228309,9, NoRole
+2,6908,   usa, f,26,19900212, , giuliana, lai, qld, trotter creek,2560,17, moon place, , 613 03902074,4688954,2, NoRole
+3,4508,   usa, ,39,19770807, , takeisha, adams, nsw, hinchinbrook,4709,2, waramanga place, , 2 43906256,4462043,0, NoRole
+4,2823,   chi, ,37,19790610, ms, jake, kam, nsw, grahamstown,7260,21, kudyera place, , 02 59926198,3429535,6, NoRole
+5,1319,   eng, f,27,19890608, pfc, finn, dick, vic, strathbogie,4069,1, derrington crescent, , 8 31195607,2945164,6, NoRole
+6,9432,   swe, , ,19151018, , emiily, ekerot, qld, great keppel island,5264,65, garling street, , 07 77243524,8659008,1, NoRole
+7,6925,   eng, ,32,19841223, , , derrickson, qld, wyaga,2163,131, malara street, bindana downs, 3 23502478,6783112,9, NoRole
+8,4775,   ind, f, ,19020203, ms, oscar, sunanda, wa, balladong,4133,130, wheeler crescent, arawang, 08 35159622,7371208,7, NoRole
+9,1952,   usa, f,31,19850817, , james, hood, , allawah,3070,132, albermarle place, , 03 68693541,5403435,4, NoRole
+10,5336,   usa, f,35, , , daniel, king, nsw, marsden park,2577,29, elyard place, , 2 54573416,2651681,0, NoRole
+11,6420,   usa, f, ,19980531, , , rivers, wa, nudgee beach,4285,65, friend place, , 8 92213682,1357105,8, NoRole
+12,6860,   chi, f,32,19840708, dr, logan, jin, vic, naracoorte,6102,30, wargi place, lignum, 08 58025306,5636147,5, NoRole
+13,767,   pol, m,32,19841227, pfc, emma, brzezinski, qld, valley view,2583,5, saville close, , 03 34964549,7570588,1, NoRole
+14,4348,   eng, f,6,20100531, , holly, wescott, qld, barlil,2295,43, newdegate street, , 3 66620453,9167695,1, NoRole
+15,4091,   usa, f,30,19861207, , madison, riddle, , ourimbah,4055,63, croton street, peak view, 03 15412402,8528472,6, NoRole
+16,9582,   ara, f, ,19551202, , emiily, basmah, , kingston,4060,73, moorhouse street, , 03 94581479,5384109,8, NoRole
+17,6801,   eng, f,23,19930901, , john, hodson, vic, fernbank,2208,117, pitcairn street, booroondoo north, 8 68381919,2345881,6, NoRole
+18,6906,   usa, f,10,20060503, , joel, kaufman, qld, stafford heights,4304,452, , , 613 58678686,8926740,0, NoRole
+19,7988,   eng, f,28,19880324, , thomas, samuelson, vic, camberwell west,2770,26, waldock street, greenhills, 08 09588645,2061362,8, NoRole
+20,4547,   usa, f,26,19900103, , brooke, sears, vic, dennington,2681,23, vanzetti crescent, harkness station, 618 12971308,2685314,7, NoRole
+21,3252,   ger, f,9,20070127, , ebony, meinecke, nsw, blue haven,3020,4, priddle street, adelaide, 2 48219862,9531944,8, NoRole
+22,280,   ind, f,30,19861001, , tommy, rajamani, vic, flynn,4573,5, ashby circuit, killarney, 8 96751555,4940119,6, NoRole
+23,9223,   eng, f,34,19821217, , jack, rattray, nsw, kangaloon,5169,10, chaffey crescent, , 02 81989773,5466356,2, NoRole
+24,2557,   gre, ,26,19901106, ms, oliver, toka, nsw, north strathfield,2075,6, pasley place, , 612 16172930,7938628,4, NoRole
+25,9703,   ara, f,25,19910128, , jack, shaistah, nsw, north ryde,2305,4, aland place, , 2 41795646,5536815,1, NoRole
+26,1488,   eng, m,9,20070921, , aidan, tash, , como,2071,280, amagula avenue, , 03 08070042,6880535,7, NoRole
+27,1488,   eng, m,9,20070921, , aidan, tash, , como,2071,280, amagula avenue, , 03 08070042,6880535,7, NoRole
+28,1488,   eng, m,9,20070921, , aidan, tash, , como,2071,280, amagula avenue, , 03 08070042,6880535,7, NoRole

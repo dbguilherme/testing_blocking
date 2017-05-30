@@ -697,7 +697,7 @@ if __name__ == '__main__':
     
     
     
-    total_num_attr = 19  # Total number of attribute 
+    total_num_attr = 18  # Total number of attribute 
                         # including rec-id, and ent-id
     
     
@@ -841,6 +841,7 @@ if __name__ == '__main__':
     for inv_list in ind.inv_index_gab.itervalues():
         if(len(inv_list)>1):
             size_gab+=len(inv_list)-1 
+            print inv_list[0]
     print ' TAMANHO GAB %d' % size_gab
 
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -

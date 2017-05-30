@@ -435,9 +435,10 @@ class DySimII:
             for i in range(1,num_attr_without_rec_id):   
                 rec_val = rec_values[i]
                 ent_id = rec_values[0]
-                if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
+               # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
+                #    continue
+                if(rec_val == 'norole' ):
                     continue
-                
                 self.Insert_value(rec_id,ent_id, rec_val, i)
                 #print '%s %s %s ' % (rec_id, ent_id, rec_val)
             num_rec += 1
@@ -552,7 +553,8 @@ class DySimII:
             
             rec_val = query_rec[i]  
             
-            if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
+           # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
+            if(   rec_val == 'norole' ):
                     continue
            # print rec_val
             

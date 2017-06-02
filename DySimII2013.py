@@ -176,7 +176,7 @@ class DySimII:
         #for line in open(filename):
             
         #return lines
-        saida=open('teste2.txt', 'w')
+        saida=open('teste5.txt', 'w')
         with open(filename) as books:
             lines = books.readlines()
         
@@ -185,8 +185,9 @@ class DySimII:
         for rec in lines:
             rec = rec.lower().strip()
             rec = rec.split(',')
-            rec[0]= rec[0].replace('rec-','').replace('-org','').replace('-dup-0','')
-
+            rec[0]= rec[0].replace('rec-','').replace('-org','')
+            #.replace('-dup-0','')
+            #rec[0]=rec[0].replace('-dup-1','').replace('-dup-2','').replace('-dup-3','').replace('-dup-4','').replace('-dup-5','')
             if (count == 0):
                 saida.write('id')
             else:    
@@ -198,28 +199,40 @@ class DySimII:
             
             
             #self.inv_index_gab[count]= rec[0];   
-            rec_id_list = inv_index_gab.get(rec[0], [])
+            rec_id_list = inv_index_gab.get(rec[0].split('-')[0], [])
             
             if len(rec_id_list)>0:
+                #print rec[0].split('-')[0]
                 rec_id_list.append(rec[0])
-                inv_index_gab[rec[0]] = rec_id_list
+                inv_index_gab[rec[0].split('-')[0]] = rec_id_list
                 #print 'xxxx '
             else:
+                
+               # print rec[0].split('-')[0]
                 rec_id_list.append(rec[0])
-                inv_index_gab[rec[0]] = rec_id_list
+                inv_index_gab[rec[0].split('-')[0]] = rec_id_list
                 
             
             
             
             
             saida.write(",".join(rec))
-            #join=rec[0]+", "+rec[6]+", "+rec[7]+", "+rec[8]+", "+rec[9]+", "+rec[15]+", "+rec[14]+", "+rec[13]+", "+rec[12]+", "+rec[11]
-            #saida.write(join)
+           # join=rec[0]+", "+rec[6]+", "+rec[7]+", "+rec[8]+", "+rec[9]+", "+rec[14]
+           # saida.write(join)
             saida.write('\n')
             count+=1
             
+            
+            
+           # print join
+        size_gab=0   
+        for inv_list in ind.inv_index_gab.itervalues():
+            if(len(inv_list)>1):
+                size_gab+=len(inv_list)-1 
+           # print inv_list[0]
+        print ' TAMANHO GAB %d' % size_gab
         saida.close()
-        return "teste2.txt"
+        return "teste5.txt"
         
 
 # ===============================================================================================        
@@ -549,10 +562,8 @@ class DySimII:
                 accu_phase = 1  # Accu can grow with new record identifiers being added
             else:
                 accu_phase = 2  # No new record identifiers are added (as they would
-                                # not reach the minimum threshold)
-            
-            rec_val = query_rec[i]  
-            
+                                # not reach the minimum threshold)            
+            rec_val = query_rec[i]              
            # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
             if(   rec_val == 'norole' ):
                     continue
@@ -571,9 +582,10 @@ class DySimII:
                 num_case_one += 1
                 case_counts[1] = case_counts[1] + 1
                 start_time = time.time()
-                
+                if(rec_val == 'norole' ):
+                    continue     
                 self.Insert_value(rec_id,query_rec[0],rec_val,i)
-               # print 'indice len %d %s' % (len(inv_index), rec_val)
+                #print 'indice len %d %s' % (len(inv_index), rec_val)
             # Case 2: This record value is available in the inverted index
             # in this case the record id will be added to the inverted index (RI)   
             else:
@@ -697,7 +709,7 @@ if __name__ == '__main__':
     
     
     
-    total_num_attr = 18  # Total number of attribute 
+    total_num_attr = 19  # Total number of attribute 
                         # including rec-id, and ent-id
     
     
@@ -724,8 +736,7 @@ if __name__ == '__main__':
     # Note: first element in the list should always be None. 
     enco_methods = [None, encode.dmetaphone, encode.dmetaphone, 
                     encode.dmetaphone, __get_substr__,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,]
-    comp_methods = [None, stringcmp.jaro, stringcmp.jaro, 
-                    stringcmp.jaro , __postcode_cmp__, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro]
+    comp_methods = [None, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro , stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro]
     
     
     ind = DySimII(total_num_attr,enco_methods, comp_methods, 
@@ -820,18 +831,48 @@ if __name__ == '__main__':
             
             for i in range(len(res_list)):
                 #print ' %s\n' % res_list[i][0]
-                if (ent_id)== res_list[i][1] and rec_id != res_list[i][0]:
-                    query_acc_res.append('TM') 
-                    rec_list=ind.inv_index_gab.get((ent_id),[])
-                   # print 'sffsd %s' % (rec_list[0])
-                    rec_list.remove((ent_id))
-                    ind.inv_index_gab[(ent_id)]=rec_list            
-                else:
-                    query_acc_res.append('FM')  
+              #  if(res_list[i][1]=='136'):
+              #      print "%s -------%s " % (clean_rec, res_list[i]) 
+                if (ent_id.split('-')[0])== res_list[i][1].split('-')[0] and rec_id != res_list[i][0]:
+                   
+                   
+                    #if (rec_id in ind.inv_index_gab):
+                   
+                    rec_list=ind.inv_index_gab.get((ent_id.split('-')[0]),[])
                     
+                    
+                    if(len(rec_list)>0):
+                        if(ent_id.__contains__("dup") and res_list[i][1].__contains__("dup")):
+                            print "entrou %s %s %s"    % (res_list[i] , rec_list, ent_id)
+                            continue;
+                        if((res_list[i][1].__contains__("dup") or ent_id.__contains__("dup"))  ):
+                            if(ent_id in rec_list and ent_id.__contains__("dup")):
+                                rec_list.remove((ent_id))
+                            else:
+                                if(res_list[i][1] in rec_list and res_list[i][1].__contains__("dup")):
+                                    rec_list.remove((res_list[i][1]))
+                                else:
+                                    print "erro "    
+                            query_acc_res.append('TM') 
+                            
+                            print "         %s" %rec_list
+                        else:
+                            print "   ja foi removido %s %s %s %s" % (ent_id, res_list[i][1] ,rec_id , res_list[i][0])    
+                    else:
+                        print 'sffsd %s' % ( (res_list[i][1]))
+                    ind.inv_index_gab[(ent_id.split('-')[0])]=rec_list    
+                   # if(len(rec_list)==0):
+                    #    ind.inv_index_gab.pop(ent_id.split('-')[0])        
+                        #else:
+                        #    print 'rec %s' % rec_list
+                        #    ind.inv_index_gab.pop(ent_id)
+                            
+                         #   ind.inv_index_gab.remove(ent_id)
+                else:
+                    if (rec_id in ind.inv_index_gab):
+                        query_acc_res.append('FM')                     
         
-        query_cnt += 1
-        
+        query_cnt += 1        
     assert (query_cnt - 1) == len(ind.query_records), \
                (query_cnt, len(ind.query_records))
         
@@ -839,9 +880,11 @@ if __name__ == '__main__':
         
     size_gab=0   
     for inv_list in ind.inv_index_gab.itervalues():
-        if(len(inv_list)>1):
-            size_gab+=len(inv_list)-1 
-            print inv_list[0]
+        if(len(inv_list)>1  ):
+            size_gab+=len(inv_list)
+            #print "%s %d " % (inv_list[0],len(inv_list))
+            #for i in inv_list:
+            print "gab %s" % inv_list
     print ' TAMANHO GAB %d' % size_gab
 
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -856,14 +899,14 @@ if __name__ == '__main__':
     print '  Optimisation: %d; minimum threshold: %.2f;' % \
               (optimise_flag, min_threshold) + ' minimum total threshold: %.2f' % \
               (min_total_threshold)
-    if ind.count > 0:
-        print '  Matching accuracy: %d/%d true matches (%.2f%%)' % \
-              (num_tm, ind.count, 100.0 * num_tm / ind.count) 
-    else:
-        print' No duplicates where found' 
+    #if ind.count > 0:
+        #print '  Matching accuracy: %d/%d true matches (%.2f%%)' % \
+              #(num_tm, ind.count, 100.0 * num_tm / ind.count) 
+    #else:
+        #print' No duplicates where found' 
     if num_tm>0 :    
         print ' precisao %f ' %  (100.0*num_tm/(num_tm+num_fm))
-        print ' revocacao %f numero falso match %d %d' %  (100.0*num_tm/(size_gab+num_tm),num_tm, num_fm)
+        print ' revocacao %f true pos %d  false posit %d' %  (100.0*num_tm/(size_gab+num_tm),num_tm, num_fm)
     else:
         print 'true matching equal zero'
         

@@ -1,0 +1,41 @@
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+11000
+	 Loaded file:                teste2.txt
+	 Total number of records: 11000
+
+	 (1.0%) of the total records are used to build the index
+	 Query records are 10890:
+
+	 Number of records in rec_dict is 11000
+	 Number of records in build_records is 110
+	 Number of records in query_records is 10890
+	 Total number of records for build + query is 11000
+
+
+ Loading time: 0.2 sec
+     Memory usage: 52 MB (resident: 27 MB)
+
+ Building the index is starting ... 
+	 Processed 100 records in the build phase
+	 Number of unique record values (inverted index keys):  1017
+	    Maximum number of records in an inverted index list: 78
+	    Sum of lengths of all inverted index lists:          1760
+	  Number of unique values in similarity dictionary:   976
+	    Maximum number of records in a similarity set:    109
+	    Sum of lengths of all similarity dictionary sets: 32670
+	  Number of unique values in block dictionary:    547
+	    Maximum number of records in a block list:    110
+	    Sum of lengths of all block dictionary lists: 976
+
+  Finished building the index. 
+  Building time: 0.3 sec
+     Memory usage: 57 MB (resident: 31 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase

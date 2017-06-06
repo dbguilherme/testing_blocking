@@ -70,6 +70,7 @@ import re
 import auxiliary  
 import encode
 import stringcmp
+import random
 
 
 class DySimII:
@@ -176,11 +177,10 @@ class DySimII:
         #for line in open(filename):
             
         #return lines
-        saida=open('teste5.txt', 'w')
+        file_out="/tmp/teste"+str(random.randint(0, 100))
+        saida=open(file_out, 'w')
         with open(filename) as books:
-            lines = books.readlines()
-        
-        
+            lines = books.readlines()   
         
         for rec in lines:
             rec = rec.lower().strip()
@@ -193,10 +193,7 @@ class DySimII:
             else:    
                 saida.write(str(count))
             
-            
-            
             saida.write(',')
-            
             
             #self.inv_index_gab[count]= rec[0];   
             rec_id_list = inv_index_gab.get(rec[0].split('-')[0], [])
@@ -211,10 +208,6 @@ class DySimII:
                # print rec[0].split('-')[0]
                 rec_id_list.append(rec[0])
                 inv_index_gab[rec[0].split('-')[0]] = rec_id_list
-                
-            
-            
-            
             
             saida.write(",".join(rec))
            # join=rec[0]+", "+rec[6]+", "+rec[7]+", "+rec[8]+", "+rec[9]+", "+rec[14]
@@ -232,7 +225,7 @@ class DySimII:
            # print inv_list[0]
         print ' TAMANHO GAB %d' % size_gab
         saida.close()
-        return "teste5.txt"
+        return file_out
         
 
 # ===============================================================================================        
@@ -663,12 +656,12 @@ class DySimII:
             
                 if ((optimise == 0) or (total_sim_val >= min_tot_thres)):
         
-                    if (total_sim_val > max_sim_val):  # A new maximum similarity value
-                        max_sim_val = total_sim_val
-                        sim_rec_id_list = [this_rec_id]
-                    elif (total_sim_val == max_sim_val):  # Same as previous largest
-                        sim_rec = this_rec_id
-                        sim_rec_id_list.append(sim_rec)      # Similarity value
+                    #if (total_sim_val > max_sim_val):  # A new maximum similarity value
+                        #max_sim_val = total_sim_val
+                        #sim_rec_id_list = [this_rec_id]
+                    #elif (total_sim_val == max_sim_val):  # Same as previous largest
+                    sim_rec = this_rec_id
+                    sim_rec_id_list.append(sim_rec)      # Similarity value
         del accu
         
         # Similarity aware inverted index specific information: The number of case
@@ -819,7 +812,7 @@ if __name__ == '__main__':
         if (spec_info[2][2] > 0):  # There were case 2
                 case_timing[2] = case_timing[2] + (spec_info[1][2] / spec_info[2][2])
                 case_counts[2] = case_counts[2] + 1
-        
+    
         
         if (res_list != []):  # Some results were returned
 
@@ -828,7 +821,6 @@ if __name__ == '__main__':
             # identifier
             #
            
-            
             for i in range(len(res_list)):
                 #print ' %s\n' % res_list[i][0]
               #  if(res_list[i][1]=='136'):
@@ -842,8 +834,10 @@ if __name__ == '__main__':
                     
                     
                     if(len(rec_list)>0):
+                      #  if(ent_id.__contains__("916-") or res_list[i][1].__contains__("916-")):
+                      #         print "xzzzzzzzzzzzzzzzzzzzzzzzzzzzz %s %s" % (clean_rec, res_list)
                         if(ent_id.__contains__("dup") and res_list[i][1].__contains__("dup")):
-                            print "entrou %s %s %s"    % (res_list[i] , rec_list, ent_id)
+                      #      print "entrou %s %s %s"    % (res_list[i] , rec_list, ent_id)
                             continue;
                         if((res_list[i][1].__contains__("dup") or ent_id.__contains__("dup"))  ):
                             if(ent_id in rec_list and ent_id.__contains__("dup")):
@@ -855,7 +849,7 @@ if __name__ == '__main__':
                                     print "erro "    
                             query_acc_res.append('TM') 
                             
-                            print "         %s" %rec_list
+                           # print "         %s" %rec_list
                         else:
                             print "   ja foi removido %s %s %s %s" % (ent_id, res_list[i][1] ,rec_id , res_list[i][0])    
                     else:
@@ -884,7 +878,7 @@ if __name__ == '__main__':
             size_gab+=len(inv_list)
             #print "%s %d " % (inv_list[0],len(inv_list))
             #for i in inv_list:
-            print "gab %s" % inv_list
+            print "\n\ngab %s" % inv_list
     print ' TAMANHO GAB %d' % size_gab
 
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -905,8 +899,8 @@ if __name__ == '__main__':
     #else:
         #print' No duplicates where found' 
     if num_tm>0 :    
-        print ' precisao %f ' %  (100.0*num_tm/(num_tm+num_fm))
-        print ' revocacao %f true pos %d  false posit %d' %  (100.0*num_tm/(size_gab+num_tm),num_tm, num_fm)
+        print ' precisao %f  revo %f' %  ((100.0*num_tm/(num_tm+num_fm)),(100.0*num_tm/(size_gab+num_tm)))
+        print ' true pos %d  false posit %d' %  (num_tm, num_fm)
     else:
         print 'true matching equal zero'
         

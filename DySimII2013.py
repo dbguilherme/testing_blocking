@@ -1,44 +1,9 @@
 '''
-Created on Mar 22, 2013
-@author: Banda Ramadan
-
-    This program provides a dynamic inverted index .
-    The program first loads a data set that follows the following format:
-        rec_id, entity_id, attr1, attr2, ..., attr(n). where rec_id is a 
-        unique identifier for records, and entity_id is an identifier for 
-        each real-world entity (when two records have the same entity-id
-        this means that they both represents the same real-world entity)
-        however they both have unique rec_id in the data set.
-        
-   When loading the data set, the program break the data set into to parts, 
-        build records and query records. 
-        the build record are used to build the initial 
-        index while the query records are used as stream of query records to
-        query the built index. Arriving queries are added to index.
-             
-    
-    Things to change in the main section of the program to run the required 
-    data set successfully:
-        - Total_num_attr: The total number of fields in the data set including 
-                           rec-id and ent-id so if we have a data set that have
-                           the following fields:
-                                rec-id, ent-id, first-name, last-name, 
-                                suburb, post-code
-                           then the number of attributes should be = 6.
-                           
-        - file_name: the data set full path and name.
-          
-        - enco_methods: the list of encoding methods for each of the 
-                        attributes in the data set 
-        
-        - comp_methods: the list of comparison methods for each of the 
-                        attributes in the data set.        
-        
-    
+  
         
         
     To run the code, type:
-              python DySimII2013.py t 0.75 2.5 50 
+              python ANOB2013.py t 0.75 2.5 50 
               where:
                     t (optimisation option) leave it always as t
                     0.75 (minimum threshold) this threshold is used to compare single attribute values
@@ -73,7 +38,7 @@ import stringcmp
 import random
 
 
-class DySimII:
+class ANOB:
     def __init__(self, total_num_attr, encoding_methods, comparison_methods, 
                  min_threshold, min_total_threshold):
         """
@@ -371,7 +336,7 @@ class DySimII:
         rec_id_list.append(this_rec_id)
         
         inv_index[rec_val_ind] = rec_id_list
-        print "add %s %s " % (rec_val_ind,this_rec_id)
+       # print "     add %s %s " % (rec_val_ind,this_rec_id)
         
         # Check if this record value has already been processed or not (if it
         # has, then nothing needs to be done)
@@ -559,9 +524,12 @@ class DySimII:
 #             else:
 #                 accu_phase = 2  # No new record identifiers are added (as they would
                                 # not reach the minimum threshold)            
-            rec_val = query_rec[i]              
+            rec_val = query_rec[i]   
+            
+            
+          #  print "     performing att rec_val %s \n" % rec_val
            # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
-            if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
+            if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<3):
                     continue
            # print rec_val
             
@@ -579,7 +547,8 @@ class DySimII:
                 case_counts[1] = case_counts[1] + 1
                 start_time = time.time()
                 if(rec_val == 'norole' ):
-                    continue     
+                    continue  
+                #print "             insert att into index"
                 self.Insert_value(rec_id,rec_val,i)
                 #print 'indice len %d %s' % (len(inv_index), rec_val)
             # Case 2: This record value is available in the inverted index
@@ -591,19 +560,26 @@ class DySimII:
               
                              
                 # Add the record id into the inverted index
-#                 temp_list = inv_index.get(rec_val_ind, [])
-#                 #print 'indice len %d %s' % (len(inv_index), rec_val)
-#                 temp_list.append((rec_id,ent_id))
-#                 inv_index[rec_val_ind]= temp_list 
+                temp_list = inv_index.get(rec_val_ind, [])
+                if(len(temp_list)>10000):
+                    continue
+                
+                #print 'indice len %d %s' % (len(inv_index), rec_val)
+                temp_list.append((rec_id))
+                inv_index[rec_val_ind]= temp_list 
                   
             
-                rec_id_list=inv_index.get(rec_val_ind, [])                         
+                rec_id_list_temp=inv_index.get(rec_val_ind, [])                 
                 if(len(rec_id_list)==0):                    
-                    rec_id_list=inv_index.get(rec_val_ind, [])
+                    rec_id_list=rec_id_list_temp;
                 else:
-                    rec_id_list.append(ent_id);
+                    for id in rec_id_list_temp:
+                
+                        if(id not in rec_id_list):
+                            rec_id_list.append(id);
+                           # print "xxxxxxxxxxxxxxxxxxxxxxxxXXXXXXXXXXXXXXXx %s" % rec_id_list;
                  
-                      
+           #     print "             att value alread exists %s" % rec_id_list      
                      
 #                     temp_id_list=temp_rec_id_list[i];
 #                     if(temp_id_list not in rec_id_list):
@@ -617,13 +593,13 @@ class DySimII:
 #                             print "sem loop %s---- %s ----%s" % (rec_id_list,temp_id_list,rec_val)    
                             
          
-        print   (rec_id_list)                                           
-        sim_rec_id_list = []    # List with record identifiers of the records that
-        for i in range(len(rec_id_list)): 
-            this_rec_id = rec_id_list[i];  
-            if(this_rec_id[0] != str(rec_id)):
-                sim_rec = this_rec_id
-                sim_rec_id_list.append(sim_rec)      # Similarity value
+        #print  "rec_id_list %s" % (rec_id_list)                                           
+        #sim_rec_id_list = []    # List with record identifiers of the records that
+        #for i in range(len(rec_id_list)): 
+            #this_rec_id = rec_id_list[i];  
+            #if(this_rec_id[0] != str(rec_id)):
+                #sim_rec = this_rec_id
+                #sim_rec_id_list.append(sim_rec)      # Similarity value
         
         
         # Similarity aware inverted index specific information: The number of case
@@ -631,7 +607,7 @@ class DySimII:
         #
         spec_info = (num_case_two, case_timings, case_counts)
         
-        return (sim_rec_id_list, 0, spec_info)    
+        return (rec_id_list, 0, spec_info)    
 #rec_id_list = inv_index.get(rec_val_ind, [])
            # if( len(rec_id_list)>50):
            #     print '%s --%i' % (rec_val_ind,len(rec_id_list))
@@ -645,7 +621,7 @@ class DySimII:
 #                     # Only update similarities of existing records
 #                     if (this_rec_id in accu): 
 #                         accu[this_rec_id] = 1.0 + accu[this_rec_id]
-#              
+#              print "performing att rec_val %s \n" % rec_val
 #                          
 #             # Next get approximate matches and insert them into accu with their
 #             # similarity values
@@ -654,7 +630,7 @@ class DySimII:
 #             
 #             # For all other similar records and their similarities
 #             #
-#             for other_rec_val in rec_val_sim_dict:
+#             for other_rec_val in recprint "performing att rec_val %s \n" % rec_val_val_sim_dict:
 #                 sim_val = rec_val_sim_dict[other_rec_val]
 #                 other_rec_val_ind = '%s%d' % (other_rec_val, i) # Attribute qualifier
 #                     
@@ -768,7 +744,7 @@ if __name__ == '__main__':
     comp_methods = [None, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro , stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro]
     
     
-    ind = DySimII(total_num_attr,enco_methods, comp_methods, 
+    ind = ANOB(total_num_attr,enco_methods, comp_methods, 
                   min_threshold, min_total_threshold)
     
     print
@@ -819,15 +795,14 @@ if __name__ == '__main__':
     print
 
     # Go through query records and try to find a match for each query 
-  
+    
     count = 0 # count of true duplicates 
     for rec_id, clean_rec in ind.query_records.iteritems():
        
       
-        ent_id = clean_rec[0]
-        if(ent_id== '191'):
-            print "entrou"
-        #print '%s ---%s' %   ((rec_id,clean_rec))
+        ent_id = rec_id
+        
+        #print 'PERFOMING RECORD %s \n\n' %   ((rec_id))
         start_time = time.time()
         res_list, num_comp, spec_info = ind.query(rec_id,clean_rec, optimise=optimise_flag)
         query_time = time.time() - start_time
@@ -842,28 +817,77 @@ if __name__ == '__main__':
             
         # Process index specific special information returned
         #        
-        case_two_sum += spec_info[0]        
-        if (spec_info[2][1] > 0):  # There were case 1
-                case_timing[1] = case_timing[1] + (spec_info[1][1] / spec_info[2][1])
-                case_counts[1] = case_counts[1] + 1
-        if (spec_info[2][2] > 0):  # There were case 2
-                case_timing[2] = case_timing[2] + (spec_info[1][2] / spec_info[2][2])
-                case_counts[2] = case_counts[2] + 1
+        #case_two_sum += spec_info[0]        
+        #if (spec_info[2][1] > 0):  # There were case 1
+                #case_timing[1] = case_timing[1] + (spec_info[1][1] / spec_info[2][1])
+                #case_counts[1] = case_counts[1] + 1
+        #if (spec_info[2][2] > 0):  # There were case 2
+                #case_timing[2] = case_timing[2] + (spec_info[1][2] / spec_info[2][2])
+                #case_counts[2] = case_counts[2] + 1
     
         
-        if (res_list != [] or len(res_list)>1):  # Some results were returned
-            print ' chegou processamento %s ---%s\n' % (res_list,ent_id)
+        if (res_list != [] and len(res_list)>1):  # Some results were returned
+            
       
+            
             # Check if the result list contains the correct matching record 
             # identifier
             #
-           
-#             for i in range(len(res_list)):
-#                 
-#               #  if(res_list[i][1]=='136'):
-#               #      print "%s -------%s " % (clean_rec, res_list[i]) 
-#                 try:
-#                     if (ent_id.split('-')[0]== (res_list[i][1]).split('-')[0] and rec_id != res_list[i][0]):
+            #print ind.inv_index_gab 
+            for i in range(len(res_list)):
+                 try:
+                                       
+                    if(ent_id==res_list[i]):
+                        continue
+                     
+                    
+                    if(("dup") not in ent_id and  ("dup") not in res_list[i]):
+                    #    print "false match 1"
+                        query_acc_res.append('FM')
+                        continue;
+                    else:
+                        
+                        if(("dup") in ent_id and  ("dup") in res_list[i]):
+                            continue;
+                        
+                        
+                        #last case:
+                        if(("dup") in ent_id):
+                            ent_clean=ent_id.split("-")[0]
+                            dirty=ent_id
+                        else:
+                            ent_clean=ent_id
+                            #print "ent clean %s" % ent_clean
+                        if(("dup") in res_list[i]):
+                            res_clean=res_list[i].split("-")[0]
+                            dirty=res_list[i]
+                        else:
+                            res_clean=res_list[i]                        
+                        #if("507-" in ent_id):
+                        #        print "chegouuuuuuuuuuuuuuuuuuuuuuuuuuuu %s  %s" % (res_clean, res_list );  
+                        if(res_clean==ent_clean):
+                            
+                            gab_list=ind.inv_index_gab.get(res_clean,[])
+                            count+=1
+                            if(dirty in gab_list or res_list[i] in gab_list):                             
+                                
+                                gab_list.remove(dirty)
+                                query_acc_res.append('TM')
+                                ind.inv_index_gab[dirty]=gab_list
+                                
+                            else:
+                                print "XXXXXres clean %s %s" % (res_clean,gab_list)
+                        else:
+                           # print "false match 2"
+                            query_acc_res.append('FM')
+                            
+                        
+                            
+                    #    if(
+                        
+                    #if (ent_id.split('-')[0]== (res_list[i][1]).split('-')[0] ):
+                        
+                    
 #                    
 #                    
 #                     #if (rec_id in ind.inv_index_gab):
@@ -893,8 +917,8 @@ if __name__ == '__main__':
 #                         else:
 #                             print 'sffsd %s' % ( (res_list[i][1]))
 #                         ind.inv_index_gab[(ent_id.split('-')[0])]=rec_list    
-#                 except IndexError:
-#                     print "Oops!  That was no valid number.  Try again... %s %s" % (ent_id,res_list) 
+                 except IndexError:
+                        print "Oops!  That was no valid number.  Try again... %s %s" % (ent_id,res_list) 
 #                    # if(len(rec_list)==0):
 #                     #    ind.inv_index_gab.pop(ent_id.split('-')[0])        
 #                         #else:
@@ -906,12 +930,12 @@ if __name__ == '__main__':
 #                     if (rec_id in ind.inv_index_gab):
 #                         query_acc_res.append('FM')                     
         
-        query_cnt += 1        
-    assert (query_cnt - 1) == len(ind.query_records), \
-               (query_cnt, len(ind.query_records))
+ ##       query_cnt += 1        
+ #   assert (query_cnt - 1) == len(ind.query_records), \
+ #              (query_cnt, len(ind.query_records))
         
     query_memo_str = auxiliary.get_memory_usage()
-        
+    print "COUNTTTTT %s" % count;    
     size_gab=0   
     for inv_list in ind.inv_index_gab.itervalues():
         if(len(inv_list)>1  ):

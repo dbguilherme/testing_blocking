@@ -157,6 +157,7 @@ class DySimII:
         # i.e. without the rec-id and ent-id
         self.num_compared_attr = self.total_num_attr - 2  
 
+        self.maior=0;
 # ===============================================================================================        
     
     
@@ -360,7 +361,7 @@ class DySimII:
         enco_methods = self.enco_methods
         comp_methods = self.comp_methods
         
-        rec_val_ind = '%s%d' % (rec_val, i)     # Add attribute qualifier for the
+        rec_val_ind = '%s' % (rec_val)     # Add attribute qualifier for the
                                                 # inverted index values
     
         # Insert the record value with qualifier into the inverted index
@@ -380,7 +381,7 @@ class DySimII:
             # Compute the encoding of this value and add attribute qualifier
             #
           
-            this_code = '%s%d' % (enco_methods[i](rec_val), i)
+            this_code = '%s' % (enco_methods[i](rec_val))
             
             # Get the other record values from this attribute in this block
             #
@@ -397,10 +398,10 @@ class DySimII:
                 sim_val = comp_methods[i](rec_val, other_val)
                 
                 
-                if (sim_val >= min_thres):  # Only if a certain similarity
-               # if(rec_val ==other_val):
+               # if (sim_val >0.9):  # Only if a certain similarity
+                if(rec_val == other_val):
                     this_sim_dict[other_val] = sim_val
-                  #  print 'entrou ---> %s ---%s--%f' % (other_val, rec_val, sim_val )
+                    print 'entrou ---> %s ---%s--%f' % (other_val, rec_val, sim_val )
                     # Also insert this new record value into the similarity set of
                     # the other record values
                     #
@@ -417,6 +418,13 @@ class DySimII:
             this_block_list.append(rec_val)
             
             block_dict[this_code] = this_block_list
+            if( len(this_block_list)> self.maior):
+                self.maior=len(this_block_list);
+               # print this_block_list
+            
+            if len(block_dict)%1000==0: 
+                print "%i %i %i" % (len(block_dict), len (this_block_list) , self.maior)
+                
             
 # ===============================================================================================        
 
@@ -558,12 +566,23 @@ class DySimII:
                                 # not reach the minimum threshold)            
             rec_val = query_rec[i]              
            # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
-            if(   rec_val == 'norole' ):
+            if( rec_val == 'norole' or  not rec_val or len(rec_val)<2):
                     continue
+                
            # print rec_val
             
-            rec_val_ind = '%s%d' % (rec_val, i)     # Add attribute type for inverted
+            rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
                                                     # index values
+            
+            # Get all records from inverted index with this value 
+            
+            rec_id_list = inv_index.get(rec_val_ind, [])
+            
+                
+            if (not rec_val or len(rec_id_list)>20):
+                #print "%s XXX%sXXX" % (rec_id_list , rec_val)
+                continue; 
+           # print "%s ----%sXXX" % (rec_id_list , rec_val)
             
             # Case 1: A new record value, not stored in the inverted index 
             # (Note that in this case the index is updated and the new record value added to
@@ -594,12 +613,12 @@ class DySimII:
                 inv_index[rec_val_ind]= temp_list 
                   
             
-            # Get all records from inverted index with this value 
-            rec_id_list = inv_index.get(rec_val_ind, [])
+            
            # if( len(rec_id_list)>50):
            #     print '%s --%i' % (rec_val_ind,len(rec_id_list))
           #      continue
-            # Exactly matching other records                       
+            # Exactly matching other records    
+           
             for this_rec_id in rec_id_list:  
                 if(accu_phase == 1):  
                     # Add new record identifier into accu
@@ -619,7 +638,7 @@ class DySimII:
             #
             for other_rec_val in rec_val_sim_dict:
                 sim_val = rec_val_sim_dict[other_rec_val]
-                other_rec_val_ind = '%s%d' % (other_rec_val, i) # Attribute qualifier
+                other_rec_val_ind = '%s' % (other_rec_val) # Attribute qualifier
                     
                 # Get record identifiers of this record value (possibly there are no
                 # such values in the similarity dictionary for this attribute)

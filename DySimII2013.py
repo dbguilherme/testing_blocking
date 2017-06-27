@@ -157,7 +157,6 @@ class DySimII:
         # i.e. without the rec-id and ent-id
         self.num_compared_attr = self.total_num_attr - 2  
 
-        self.maior=0;
 # ===============================================================================================        
     
     
@@ -178,7 +177,8 @@ class DySimII:
         #for line in open(filename):
             
         #return lines
-        file_out="/tmp/teste"+str(random.randint(0, 100))
+        #file_out="/tmp/teste"+str(random.randint(0, 100))
+        file_out="/tmp/teste"
         saida=open(file_out, 'w')
         with open(filename) as books:
             lines = books.readlines()   
@@ -189,12 +189,12 @@ class DySimII:
             rec[0]= rec[0].replace('rec-','').replace('-org','')
             #.replace('-dup-0','')
             #rec[0]=rec[0].replace('-dup-1','').replace('-dup-2','').replace('-dup-3','').replace('-dup-4','').replace('-dup-5','')
-            if (count == 0):
-                saida.write('id')
-            else:    
-                saida.write(str(count))
-            
-            saida.write(',')
+#             if (count == 0):
+#                 saida.write('id')
+#             else:    
+#                 saida.write(str(count))
+#             
+#             saida.write(',')
             
             #self.inv_index_gab[count]= rec[0];   
             rec_id_list = inv_index_gab.get(rec[0].split('-')[0], [])
@@ -350,7 +350,7 @@ class DySimII:
            
 # ===============================================================================================                 
         
-    def Insert_value(self,identifier ,rec_id,rec_val,i):
+    def Insert_value(self,rec_id,rec_val,i):
         ''' Inserts a record value to the inverted indexes RI, SI, and BI
         '''
         # Shorthands to make program faster
@@ -365,66 +365,59 @@ class DySimII:
                                                 # inverted index values
     
         # Insert the record value with qualifier into the inverted index
-    
+        
         rec_id_list = inv_index.get(rec_val_ind, [])
-        this_rec_id = (identifier, rec_id)    # this is a set of -->(rec id, entity id)
+        this_rec_id = (rec_id)    # this is a set of -->(rec id, entity id)
         rec_id_list.append(this_rec_id)
         
         inv_index[rec_val_ind] = rec_id_list
-        
+        print "add %s %s " % (rec_val_ind,this_rec_id)
         
         # Check if this record value has already been processed or not (if it
         # has, then nothing needs to be done)
         #
-        if (rec_val not in sim_dict):  # A new value, have to process it
-            
-            # Compute the encoding of this value and add attribute qualifier
-            #
-          
-            this_code = '%s' % (enco_methods[i](rec_val))
-            
-            # Get the other record values from this attribute in this block
-            #
-            this_block_list = block_dict.get(this_code, [])
-        
-            
-            # The dictionary to be filled with record values (keys) and
-            # similarities (values) of the other records in this block
-            #
-            this_sim_dict = {}  # Other record values with their similarities
-            
-            for other_val in this_block_list:
-                
-                sim_val = comp_methods[i](rec_val, other_val)
-                
-                
-               # if (sim_val >0.9):  # Only if a certain similarity
-                if(rec_val == other_val):
-                    this_sim_dict[other_val] = sim_val
-                    print 'entrou ---> %s ---%s--%f' % (other_val, rec_val, sim_val )
-                    # Also insert this new record value into the similarity set of
-                    # the other record values
-                    #
-                    other_sim_dict = sim_dict[other_val]
-                    other_sim_dict[rec_val] = sim_val
-                    sim_dict[other_val] = other_sim_dict
-            
-            # Add the new similarity set into the similarity dictionary
-            #
-            sim_dict[rec_val] = this_sim_dict
-
-            # Finally insert this record value into this block and put it back
-            #
-            this_block_list.append(rec_val)
-            
-            block_dict[this_code] = this_block_list
-            if( len(this_block_list)> self.maior):
-                self.maior=len(this_block_list);
-               # print this_block_list
-            
-            if len(block_dict)%1000==0: 
-                print "%i %i %i" % (len(block_dict), len (this_block_list) , self.maior)
-                
+#         if (rec_val not in sim_dict):  # A new value, have to process it
+#             
+#             # Compute the encoding of this value and add attribute qualifier
+#             #
+#           
+#             this_code = '%s%d' % (enco_methods[i](rec_val), i)
+#             
+#             # Get the other record values from this attribute in this block
+#             #
+#             this_block_list = block_dict.get(this_code, [])
+#         
+#             
+#             # The dictionary to be filled with record values (keys) and
+#             # similarities (values) of the other records in this block
+#             #
+#             this_sim_dict = {}  # Other record values with their similarities
+#             
+#             for other_val in this_block_list:
+#                 
+#                 sim_val = comp_methods[i](rec_val, other_val)
+#                 
+#                 
+#                 if (sim_val >= min_thres):  # Only if a certain similarity
+#                # if(rec_val ==other_val):
+#                     this_sim_dict[other_val] = sim_val
+#                   #  print 'entrou ---> %s ---%s--%f' % (other_val, rec_val, sim_val )
+#                     # Also insert this new record value into the similarity set of
+#                     # the other record values
+#                     #
+#                     other_sim_dict = sim_dict[other_val]
+#                     other_sim_dict[rec_val] = sim_val
+#                     sim_dict[other_val] = other_sim_dict
+#             
+#             # Add the new similarity set into the similarity dictionary
+#             #
+#             sim_dict[rec_val] = this_sim_dict
+# 
+#             # Finally insert this record value into this block and put it back
+#             #
+#             this_block_list.append(rec_val)
+#             
+#             block_dict[this_code] = this_block_list
             
 # ===============================================================================================        
 
@@ -508,7 +501,7 @@ class DySimII:
          
 # =============================================================================================== 
 
-    def query(self, rec_id, query_rec, optimise=0):
+    def query(self, rec_id,query_rec, optimise=0):
         """ Query the index with the given record. Returns a list with the record
             identifiers that have the largest similarity value with the query
             record, the number of comparisons performed, and an additional value
@@ -548,41 +541,32 @@ class DySimII:
         # to the counter and add the record id of that 
         # query to the associated entity in the entity list. 
         # this counter is used for measuring recall purposes                                     
-        ent_id = query_rec[0]
+        ent_id = rec_id
         ent_rec_list = entity_records.get(ent_id, [])
         if ent_rec_list != []:
             self.count += len(ent_rec_list)
-        ent_rec_list.append(rec_id)
+#         ent_rec_list.append(rec_id)
         entity_records[ent_id] = ent_rec_list
         
         # Process all attribute values started from 1 since the first
         # attribute is the query record is the entity id 
-        for i in range(1, num_attr_without_rec_id ):     
+        
+        rec_id_list=[]
+        for i in range(0, num_attr_without_rec_id ):     
             
-            if ((optimise == 0) or (i < phase_thres)):
-                accu_phase = 1  # Accu can grow with new record identifiers being added
-            else:
-                accu_phase = 2  # No new record identifiers are added (as they would
+#             if ((optimise == 0) or (i < phase_thres)):
+#                 accu_phase = 1  # Accu can grow with new record identifiers being added
+#             else:
+#                 accu_phase = 2  # No new record identifiers are added (as they would
                                 # not reach the minimum threshold)            
             rec_val = query_rec[i]              
            # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
-            if( rec_val == 'norole' or  not rec_val or len(rec_val)<2):
+            if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
                     continue
-                
            # print rec_val
             
             rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
                                                     # index values
-            
-            # Get all records from inverted index with this value 
-            
-            rec_id_list = inv_index.get(rec_val_ind, [])
-            
-                
-            if (not rec_val or len(rec_id_list)>20):
-                #print "%s XXX%sXXX" % (rec_id_list , rec_val)
-                continue; 
-           # print "%s ----%sXXX" % (rec_id_list , rec_val)
             
             # Case 1: A new record value, not stored in the inverted index 
             # (Note that in this case the index is updated and the new record value added to
@@ -596,100 +580,133 @@ class DySimII:
                 start_time = time.time()
                 if(rec_val == 'norole' ):
                     continue     
-                self.Insert_value(rec_id,query_rec[0],rec_val,i)
+                self.Insert_value(rec_id,rec_val,i)
                 #print 'indice len %d %s' % (len(inv_index), rec_val)
             # Case 2: This record value is available in the inverted index
             # in this case the record id will be added to the inverted index (RI)   
             else:
                 
-                num_case_two += 1
-                case_counts[2] = case_counts[2] + 1
-                start_time = time.time()
+#                 num_case_two += 1
+#                 case_counts[2] = case_counts[2] + 1
+              
                              
                 # Add the record id into the inverted index
-                temp_list = inv_index.get(rec_val_ind, [])
-                #print 'indice len %d %s' % (len(inv_index), rec_val)
-                temp_list.append((rec_id,ent_id))
-                inv_index[rec_val_ind]= temp_list 
+#                 temp_list = inv_index.get(rec_val_ind, [])
+#                 #print 'indice len %d %s' % (len(inv_index), rec_val)
+#                 temp_list.append((rec_id,ent_id))
+#                 inv_index[rec_val_ind]= temp_list 
                   
             
-            
-           # if( len(rec_id_list)>50):
-           #     print '%s --%i' % (rec_val_ind,len(rec_id_list))
-          #      continue
-            # Exactly matching other records    
-           
-            for this_rec_id in rec_id_list:  
-                if(accu_phase == 1):  
-                    # Add new record identifier into accu
-                    accu[this_rec_id] = 1.0 + accu.get(this_rec_id, 0.0)
+                rec_id_list=inv_index.get(rec_val_ind, [])                         
+                if(len(rec_id_list)==0):                    
+                    rec_id_list=inv_index.get(rec_val_ind, [])
                 else:
-                    # Only update similarities of existing records
-                    if (this_rec_id in accu): 
-                        accu[this_rec_id] = 1.0 + accu[this_rec_id]
-             
-                         
-            # Next get approximate matches and insert them into accu with their
-            # similarity values
-            #
-            rec_val_sim_dict = sim_dict.get(rec_val,[])
-            
-            # For all other similar records and their similarities
-            #
-            for other_rec_val in rec_val_sim_dict:
-                sim_val = rec_val_sim_dict[other_rec_val]
-                other_rec_val_ind = '%s' % (other_rec_val) # Attribute qualifier
-                    
-                # Get record identifiers of this record value (possibly there are no
-                # such values in the similarity dictionary for this attribute)
-                #
-                if (other_rec_val_ind in inv_index):
-                    other_rec_id_list = inv_index[other_rec_val_ind]
-                
-                    for other_rec_id in other_rec_id_list:  # Insert into accu
-                        if(accu_phase == 1):  # Add new record identifier into accu
-                            accu[other_rec_id] = sim_val + accu.get(other_rec_id, 0.0)
-                        else:
-                            if (other_rec_id in accu):  # Only update
-                                accu[other_rec_id] = sim_val + accu[other_rec_id]
-            
-            end_time = time.time()
-            case_timings[1] = case_timings[1] + (end_time - start_time)
-            case_timings[2] = case_timings[2] + (end_time - start_time)
-                                
-        assert (num_case_two >= 0) and (num_case_two <= num_compared_attr)
-        ##REVER ESSE COMENTARIO DEPOIS
-      #  assert sum(case_counts.values()) == num_compared_attr
-      #  assert num_case_two == case_counts[2]
-        
-        num_comp = len(accu)
-        max_sim_val = -1.0      # Maximum so far calculated similarity value
+                    rec_id_list.append(ent_id);
+                 
+                      
+                     
+#                     temp_id_list=temp_rec_id_list[i];
+#                     if(temp_id_list not in rec_id_list):
+#                         if(len(rec_id_list)>0):
+#                             #if(len(temp_rec_id_list)>0):
+#                           
+#                             rec_id_list=rec_id_list+ temp_id_list;
+#                             print "no loop %s---- %s ----%s" % (rec_id_list,temp_id_list,rec_val)    
+#                         else:
+#                             rec_id_list=temp_id_list;
+#                             print "sem loop %s---- %s ----%s" % (rec_id_list,temp_id_list,rec_val)    
+                            
+         
+        print   (rec_id_list)                                           
         sim_rec_id_list = []    # List with record identifiers of the records that
-                                # have the maximum similarity value
+        for i in range(len(rec_id_list)): 
+            this_rec_id = rec_id_list[i];  
+            if(this_rec_id[0] != str(rec_id)):
+                sim_rec = this_rec_id
+                sim_rec_id_list.append(sim_rec)      # Similarity value
         
-        # Extract the matches with a maximum similarity value
-        #
-        for (this_rec_id, total_sim_val) in accu.iteritems():           
-            
-            if(this_rec_id[0] != rec_id):
-            
-                if ((optimise == 0) or (total_sim_val >= min_tot_thres)):
-        
-                    #if (total_sim_val > max_sim_val):  # A new maximum similarity value
-                        #max_sim_val = total_sim_val
-                        #sim_rec_id_list = [this_rec_id]
-                    #elif (total_sim_val == max_sim_val):  # Same as previous largest
-                    sim_rec = this_rec_id
-                    sim_rec_id_list.append(sim_rec)      # Similarity value
-        del accu
         
         # Similarity aware inverted index specific information: The number of case
         # one (available in the inverted index) of the four query record values
         #
         spec_info = (num_case_two, case_timings, case_counts)
         
-        return (sim_rec_id_list, num_comp, spec_info)    
-
+        return (sim_rec_id_list, 0, spec_info)    
+#rec_id_list = inv_index.get(rec_val_ind, [])
+           # if( len(rec_id_list)>50):
+           #     print '%s --%i' % (rec_val_ind,len(rec_id_list))
+          #      continue
+            # Exactly matching other records                       
+#             for this_rec_id in rec_id_list:  
+#                 if(accu_phase == 1):  
+#                     # Add new record identifier into accu
+#                     accu[this_rec_id] = 1.0 + accu.get(this_rec_id, 0.0)
+#                 else:
+#                     # Only update similarities of existing records
+#                     if (this_rec_id in accu): 
+#                         accu[this_rec_id] = 1.0 + accu[this_rec_id]
+#              
+#                          
+#             # Next get approximate matches and insert them into accu with their
+#             # similarity values
+#             #
+#             rec_val_sim_dict = sim_dict.get(rec_val,[])
+#             
+#             # For all other similar records and their similarities
+#             #
+#             for other_rec_val in rec_val_sim_dict:
+#                 sim_val = rec_val_sim_dict[other_rec_val]
+#                 other_rec_val_ind = '%s%d' % (other_rec_val, i) # Attribute qualifier
+#                     
+#                 # Get record identifiers of this record value (possibly there are no
+#                 # such values in the similarity dictionary for this attribute)
+#                 #
+#                 if (other_rec_val_ind in inv_index):
+#                     other_rec_id_list = inv_index[other_rec_val_ind]
+#                 
+#                     for other_rec_id in other_rec_id_list:  # Insert into accu
+#                         if(accu_phase == 1):  # Add new record identifier into accu
+#                             accu[other_rec_id] = sim_val + accu.get(other_rec_id, 0.0)
+#                         else:
+#                             if (other_rec_id in accu):  # Only update
+#                                 accu[other_rec_id] = sim_val + accu[other_rec_id]
+#             
+#             end_time = time.time()
+#             case_timings[1] = case_timings[1] + (end_time - start_time)
+#             case_timings[2] = case_timings[2] + (end_time - start_time)
+#                                 
+#         assert (num_case_two >= 0) and (num_case_two <= num_compared_attr)
+#         ##REVER ESSE COMENTARIO DEPOIS
+#       #  assert sum(case_counts.values()) == num_compared_attr
+#       #  assert num_case_two == case_counts[2]
+#         
+#         num_comp = len(accu)
+#         max_sim_val = -1.0      # Maximum so far calculated similarity value
+#         sim_rec_id_list = []    # List with record identifiers of the records that
+                                # have the maximum similarity value
+        
+        # Extract the matches with a maximum similarity value
+        #
+        
+#         for (this_rec_id, total_sim_val) in accu.iteritems():           
+#             
+#             if(this_rec_id[0] != rec_id):
+#             
+#                 if ((optimise == 0) or (total_sim_val >= min_tot_thres)):
+#         
+#                     #if (total_sim_val > max_sim_val):  # A new maximum similarity value
+#                         #max_sim_val = total_sim_val
+#                         #sim_rec_id_list = [this_rec_id]
+#                     #elif (total_sim_val == max_sim_val):  # Same as previous largest
+#                     sim_rec = this_rec_id
+#                     sim_rec_id_list.append(sim_rec)      # Similarity value
+#         del accu
+        
+        
+        
+        
+        ###########################################
+      
 # ============================================================================
 
 # Define special functions for post code encoding and comparison
@@ -721,7 +738,7 @@ if __name__ == '__main__':
     
     
     
-    total_num_attr = 19  # Total number of attribute 
+    total_num_attr = 10  # Total number of attribute 
                         # including rec-id, and ent-id
     
     
@@ -808,7 +825,8 @@ if __name__ == '__main__':
        
       
         ent_id = clean_rec[0]
-      
+        if(ent_id== '191'):
+            print "entrou"
         #print '%s ---%s' %   ((rec_id,clean_rec))
         start_time = time.time()
         res_list, num_comp, spec_info = ind.query(rec_id,clean_rec, optimise=optimise_flag)
@@ -833,57 +851,60 @@ if __name__ == '__main__':
                 case_counts[2] = case_counts[2] + 1
     
         
-        if (res_list != []):  # Some results were returned
-
+        if (res_list != [] or len(res_list)>1):  # Some results were returned
+            print ' chegou processamento %s ---%s\n' % (res_list,ent_id)
       
             # Check if the result list contains the correct matching record 
             # identifier
             #
            
-            for i in range(len(res_list)):
-                #print ' %s\n' % res_list[i][0]
-              #  if(res_list[i][1]=='136'):
-              #      print "%s -------%s " % (clean_rec, res_list[i]) 
-                if (ent_id.split('-')[0])== res_list[i][1].split('-')[0] and rec_id != res_list[i][0]:
-                   
-                   
-                    #if (rec_id in ind.inv_index_gab):
-                   
-                    rec_list=ind.inv_index_gab.get((ent_id.split('-')[0]),[])
-                    
-                    
-                    if(len(rec_list)>0):
-                      #  if(ent_id.__contains__("916-") or res_list[i][1].__contains__("916-")):
-                      #         print "xzzzzzzzzzzzzzzzzzzzzzzzzzzzz %s %s" % (clean_rec, res_list)
-                        if(ent_id.__contains__("dup") and res_list[i][1].__contains__("dup")):
-                      #      print "entrou %s %s %s"    % (res_list[i] , rec_list, ent_id)
-                            continue;
-                        if((res_list[i][1].__contains__("dup") or ent_id.__contains__("dup"))  ):
-                            if(ent_id in rec_list and ent_id.__contains__("dup")):
-                                rec_list.remove((ent_id))
-                            else:
-                                if(res_list[i][1] in rec_list and res_list[i][1].__contains__("dup")):
-                                    rec_list.remove((res_list[i][1]))
-                                else:
-                                    print "erro "    
-                            query_acc_res.append('TM') 
-                            
-                           # print "         %s" %rec_list
-                        else:
-                            print "   ja foi removido %s %s %s %s" % (ent_id, res_list[i][1] ,rec_id , res_list[i][0])    
-                    else:
-                        print 'sffsd %s' % ( (res_list[i][1]))
-                    ind.inv_index_gab[(ent_id.split('-')[0])]=rec_list    
-                   # if(len(rec_list)==0):
-                    #    ind.inv_index_gab.pop(ent_id.split('-')[0])        
-                        #else:
-                        #    print 'rec %s' % rec_list
-                        #    ind.inv_index_gab.pop(ent_id)
-                            
-                         #   ind.inv_index_gab.remove(ent_id)
-                else:
-                    if (rec_id in ind.inv_index_gab):
-                        query_acc_res.append('FM')                     
+#             for i in range(len(res_list)):
+#                 
+#               #  if(res_list[i][1]=='136'):
+#               #      print "%s -------%s " % (clean_rec, res_list[i]) 
+#                 try:
+#                     if (ent_id.split('-')[0]== (res_list[i][1]).split('-')[0] and rec_id != res_list[i][0]):
+#                    
+#                    
+#                     #if (rec_id in ind.inv_index_gab):
+#                    
+#                         rec_list=ind.inv_index_gab.get((ent_id.split('-')[0]),[])
+#                         
+#                         
+#                         if(len(rec_list)>0):
+#                           #  if(ent_id.__contains__("916-") or res_list[i][1].__contains__("916-")):
+#                           #         print "xzzzzzzzzzzzzzzzzzzzzzzzzzzzz %s %s" % (clean_rec, res_list)
+#                             if(ent_id.__contains__("dup") and res_list[i][1].__contains__("dup")):
+#                           #      print "entrou %s %s %s"    % (res_list[i] , rec_list, ent_id)
+#                                 continue;
+#                             if((res_list[i][1].__contains__("dup") or ent_id.__contains__("dup"))  ):
+#                                 if(ent_id in rec_list and ent_id.__contains__("dup")):
+#                                     rec_list.remove((ent_id))
+#                                 else:
+#                                     if(res_list[i][1] in rec_list and res_list[i][1].__contains__("dup")):
+#                                         rec_list.remove((res_list[i][1]))
+#                                     else:
+#                                         print "erro "    
+#                                 query_acc_res.append('TM') 
+#                                 
+#                                # print "         %s" %rec_list
+#                             else:
+#                                 print "   ja foi removido %s %s %s %s" % (ent_id, res_list[i][1] ,rec_id , res_list[i][0])    
+#                         else:
+#                             print 'sffsd %s' % ( (res_list[i][1]))
+#                         ind.inv_index_gab[(ent_id.split('-')[0])]=rec_list    
+#                 except IndexError:
+#                     print "Oops!  That was no valid number.  Try again... %s %s" % (ent_id,res_list) 
+#                    # if(len(rec_list)==0):
+#                     #    ind.inv_index_gab.pop(ent_id.split('-')[0])        
+#                         #else:
+#                         #    print 'rec %s' % rec_list
+#                         #    ind.inv_index_gab.pop(ent_id)
+#                             
+#                          #   ind.inv_index_gab.remove(ent_id)
+#                 else:
+#                     if (rec_id in ind.inv_index_gab):
+#                         query_acc_res.append('FM')                     
         
         query_cnt += 1        
     assert (query_cnt - 1) == len(ind.query_records), \
@@ -895,9 +916,9 @@ if __name__ == '__main__':
     for inv_list in ind.inv_index_gab.itervalues():
         if(len(inv_list)>1  ):
             size_gab+=len(inv_list)
-            #print "%s %d " % (inv_list[0],len(inv_list))
+            print "%s %d " % (inv_list[0],len(inv_list))
             #for i in inv_list:
-            print "\n\ngab %s" % inv_list
+            #    print "\n\ngab %i" % inv_list[i]
     print ' TAMANHO GAB %d' % size_gab
 
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -

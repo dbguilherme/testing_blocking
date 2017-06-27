@@ -326,7 +326,7 @@ class DySimII:
         enco_methods = self.enco_methods
         comp_methods = self.comp_methods
       
-        rec_val_ind = '%s%d' % (rec_val, i)     # Add attribute qualifier for the
+        rec_val_ind = '%s' % (rec_val)     # Add attribute qualifier for the
                                                 # inverted index values
     
         # Insert the record value with qualifier into the inverted index
@@ -346,7 +346,7 @@ class DySimII:
             # Compute the encoding of this value and add attribute qualifier
             #
           
-            this_code = '%s%d' % (enco_methods[i](rec_val), i)
+            this_code = '%s' % (enco_methods[i](rec_val))
             
             # Get the other record values from this attribute in this block
             #
@@ -517,7 +517,7 @@ class DySimII:
                                 # not reach the minimum threshold)
                                
             rec_val = query_rec[i]  
-            rec_val_ind = '%s%d' % (rec_val, i)     # Add attribute type for inverted
+            rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
                                                     # index values
                                                     
               
@@ -571,7 +571,7 @@ class DySimII:
             #
             for other_rec_val in rec_val_sim_dict:
                 sim_val = rec_val_sim_dict[other_rec_val]
-                other_rec_val_ind = '%s%d' % (other_rec_val, i) # Attribute qualifier
+                other_rec_val_ind = '%s' % (other_rec_val) # Attribute qualifier
                     
                 # Get record identifiers of this record value (possibly there are no
                 # such values in the similarity dictionary for this attribute)

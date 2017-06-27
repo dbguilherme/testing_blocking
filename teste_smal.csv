@@ -1,7 +1,3 @@
 rec_id,culture,sex,age,date_of_birth,title,given_name,surname,state,suburb,postcode,street_number,address_1,address_2,phone_number,soc_sec_id,blocking_number,family_role
 rec-95-org,rom,f,26,19910809,ms,andrew,beklea,nsw,middlecamp,2423,14,,hilltoprmb487a,237926701,6183236,7,NoRole
-rec-49-org,,m,10,20070410,ms,david,dreckow,vic,lerderderg,3977,120,summervillecrescent,coralyn,61807283074,9723553,6,NoRole
-rec-33-org,fin,f,25,19920629,ms,joshua,kikkunen,sa,clearview,2142,147,hainesstreet,,709101554,5472582,2,NoRole
-rec-3-org,  ira,f,,19211203,,chloe,khosravi,vic,toorak,4152,101,lefroystreet,schoolhouse,879150270,2688055,6,NoRole
-rec-62-dup-0,tha,f,31,19860325,,jacob,samk,sa,lochiel,5290,125,aspinalstreet,,61777851376,4307052,0,NoRole
-rec-62-org,tha,f,31,19860325,,jacob,samk,sa,lochiel,5290,125,aspinalstreet,,61777851376,4307052,0,NoRole
+rec-49-org,rom,m,10,20070410,ms,david,dreckow,vic,lerderderg,3977,120,summervillecrescent,coralyn,61807283074,9723553,6,NoRole

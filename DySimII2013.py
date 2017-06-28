@@ -587,11 +587,7 @@ def remove_query(self, rec_id,query_rec, optimise=0):
      rec_id_list=[]
      for i in range(0, num_attr_without_rec_id ):     
             
-#             if ((optimise == 0) or (i < phase_thres)):
-#                 accu_phase = 1  # Accu can grow with new record identifiers being added
-#             else:
-#                 accu_phase = 2  # No new record identifiers are added (as they would
-                                # not reach the minimum threshold)            
+   
            rec_val = query_rec[i]   
             
             
@@ -765,7 +761,17 @@ if __name__ == '__main__':
                                        
                     if(ent_id==res_list[i]):
                         continue
-                     
+                    
+                    
+                    ########teste
+                    #print "%s %s " % (ind.query_records[ent_id], ind.query_records[res_list[i]])
+                    valueA=ind.query_records[ent_id]
+                    valueB=ind.query_records[res_list[i]]
+                    sim=[]
+                    for j in range(0,len(valueA)):
+                        sim.append(ind.comp_methods[1](valueA[j], valueB[j]))
+                    print len(sim)
+                       
                     
                     if(("dup") not in ent_id and  ("dup") not in res_list[i]):
                     #    print "false match 1"
@@ -808,57 +814,10 @@ if __name__ == '__main__':
                             query_acc_res.append('FM')
                             
                         
-                            
-                    #    if(
-                        
-                    #if (ent_id.split('-')[0]== (res_list[i][1]).split('-')[0] ):
-                        
-                    
-#                    
-#                    
-#                     #if (rec_id in ind.inv_index_gab):
-#                    
-#                         rec_list=ind.inv_index_gab.get((ent_id.split('-')[0]),[])
-#                         
-#                         
-#                         if(len(rec_list)>0):
-#                           #  if(ent_id.__contains__("916-") or res_list[i][1].__contains__("916-")):
-#                           #         print "xzzzzzzzzzzzzzzzzzzzzzzzzzzzz %s %s" % (clean_rec, res_list)
-#                             if(ent_id.__contains__("dup") and res_list[i][1].__contains__("dup")):
-#                           #      print "entrou %s %s %s"    % (res_list[i] , rec_list, ent_id)
-#                                 continue;
-#                             if((res_list[i][1].__contains__("dup") or ent_id.__contains__("dup"))  ):
-#                                 if(ent_id in rec_list and ent_id.__contains__("dup")):
-#                                     rec_list.remove((ent_id))
-#                                 else:
-#                                     if(res_list[i][1] in rec_list and res_list[i][1].__contains__("dup")):
-#                                         rec_list.remove((res_list[i][1]))
-#                                     else:
-#                                         print "erro "    
-#                                 query_acc_res.append('TM') 
-#                                 
-#                                # print "         %s" %rec_list
-#                             else:
-#                                 print "   ja foi removido %s %s %s %s" % (ent_id, res_list[i][1] ,rec_id , res_list[i][0])    
-#                         else:
-#                             print 'sffsd %s' % ( (res_list[i][1]))
-#                         ind.inv_index_gab[(ent_id.split('-')[0])]=rec_list    
+                   
                  except IndexError:
                         print "Oops!  That was no valid number.  Try again... %s %s" % (ent_id,res_list) 
-#                    # if(len(rec_list)==0):
-#                     #    ind.inv_index_gab.pop(ent_id.split('-')[0])        
-#                         #else:
-#                         #    print 'rec %s' % rec_list
-#                         #    ind.inv_index_gab.pop(ent_id)
-#                             
-#                          #   ind.inv_index_gab.remove(ent_id)
-#                 else:
-#                     if (rec_id in ind.inv_index_gab):
-#                         query_acc_res.append('FM')                     
-        
- ##       query_cnt += 1        
- #   assert (query_cnt - 1) == len(ind.query_records), \
- #              (query_cnt, len(ind.query_records))
+
         
     query_memo_str = auxiliary.get_memory_usage()
     print "COUNTTTTT %s" % count;    

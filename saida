@@ -3,498 +3,2507 @@ Testing method: Dynamic Similarity Aware Indexing Technique
 ===========================================================
 
  Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
+ TAMANHO GAB 1000
+10999
+	 Loaded file:                /tmp/teste
+	 Total number of records: 10999
 
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
+	 (0.0%) of the total records are used to build the index
+	 Query records are 10999:
 
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
+	 Number of records in rec_dict is 10999
+	 Number of records in build_records is 0
+	 Number of records in query_records is 10999
+	 Total number of records for build + query is 10999
 
 
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
+ Loading time: 0.2 sec
+     Memory usage: 21 MB (resident: 16 MB)
 
  Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
 	    Maximum number of records in a similarity set:    0
 	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
 
   Finished building the index. 
   Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
+     Memory usage: 21 MB (resident: 16 MB)
 
  Processing Query records ...
 
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
+	 Processed 1000 records in the query phase
+inverted inde size 828
+	 Processed 2000 records in the query phase
+inverted inde size 1235
+	 Processed 3000 records in the query phase
+inverted inde size 1567
+	 Processed 4000 records in the query phase
+inverted inde size 2201
+	 Processed 5000 records in the query phase
+inverted inde size 2636
+	 Processed 6000 records in the query phase
+inverted inde size 2636
+	 Processed 7000 records in the query phase
+inverted inde size 2636
+	 Processed 8000 records in the query phase
+inverted inde size 2636
+	 Processed 9000 records in the query phase
+inverted inde size 2636
+	 Processed 10000 records in the query phase
+inverted inde size 2636
+COUNTTTTT 909
+6793 2 
+2515-dup-2 2 
+2515-dup-2 2 
+6819-dup-1 2 
+837 3 
+6149 2 
+3094-dup-1 2 
+9452 2 
+2515-dup-2 2 
+3105-dup-2 2 
+3105-dup-2 2 
+3105-dup-2 2 
+9327 2 
+9384-dup-1 3 
+9452 2 
+3645 2 
+911 2 
+4919 2 
+6314 2 
+3063 2 
+7292-dup-0 2 
+9136-dup-0 2 
+8020-dup-2 2 
+957 2 
+7271 2 
+5416 2 
+6149 2 
+4189-dup-1 2 
+906 2 
+906 2 
+837 3 
+6314 2 
+4808-dup-0 2 
+9467 2 
+7330-dup-0 2 
+8207 2 
+710 2 
+710 2 
+9327 2 
+6572 2 
+6149 2 
+8657-dup-0 3 
+1812 2 
+3817-dup-2 2 
+2541 2 
+7300-dup-1 2 
+2247 2 
+7040 2 
+4352 3 
+5700 2 
+957 2 
+957 2 
+3249-dup-0 3 
+6819-dup-1 2 
+5697-dup-0 3 
+4189-dup-1 2 
+4189-dup-1 2 
+8410 2 
+4779-dup-0 2 
+1183 2 
+1183 2 
+1183 2 
+8434-dup-0 2 
+911 2 
+3735-dup-1 2 
+9467 2 
+9467 2 
+3094-dup-1 2 
+3063 2 
+6615 2 
+6615 2 
+6615 2 
+6615 2 
+9032 2 
+9032 2 
+8210-dup-1 3 
+8210-dup-1 3 
+7652 2 
+5876-dup-0 2 
+8002 2 
+9749-dup-1 4 
+5628-dup-1 3 
+5999-dup-1 2 
+9327 2 
+1812 2 
+1812 2 
+8020-dup-2 2 
+5876-dup-0 2 
+5279-dup-2 2 
+5735 2 
+3817-dup-2 2 
+9975 2 
+911 2 
+4808-dup-0 2 
+4779-dup-0 2 
+4189-dup-1 2 
+9975 2 
+9975 2 
+7040 2 
+6615 2 
+8020-dup-2 2 
+6793 2 
+6793 2 
+4896-dup-2 4 
+3071 2 
+2403 2 
+2541 2 
+906 2 
+3735-dup-1 2 
+9467 2 
+3301-dup-0 2 
+5999-dup-1 2 
+5700 2 
+7623-dup-1 2 
+7623-dup-1 2 
+3071 2 
+1418 3 
+8434-dup-0 2 
+8434-dup-0 2 
+8434-dup-0 2 
+9034-dup-4 2 
+9034-dup-4 2 
+9034-dup-4 2 
+9034-dup-4 2 
+8002 2 
+8002 2 
+8002 2 
+5697-dup-0 3 
+2247 2 
+3408 2 
+8210-dup-1 3 
+1183 2 
+1183 2 
+3817-dup-2 2 
+8410 2 
+8410 2 
+7682-dup-1 2 
+8003-dup-1 2 
+7330-dup-0 2 
+8148 2 
+5416 2 
+7652 2 
+7652 2 
+8460-dup-2 4 
+3301-dup-0 2 
+2403 2 
+8207 2 
+7292-dup-0 2 
+6572 2 
+6572 2 
+9032 2 
+9034-dup-4 2 
+9039 2 
+3105-dup-2 2 
+4090-dup-0 4 
+5735 2 
+5735 2 
+619 2 
+7300-dup-1 2 
+8657-dup-0 3 
+5750-dup-1 3 
+5416 2 
+5876-dup-0 2 
+710 2 
+6615 2 
+4919 2 
+8207 2 
+7623-dup-1 2 
+8410 2 
+5279-dup-2 2 
+5279-dup-2 2 
+7682-dup-1 2 
+7271 2 
+8003-dup-1 2 
+ TAMANHO GAB 371
+cherrybrook 11 
+boat harbour beach 18 
+hmas cerberus 13 
+leitchville 11 
+jarvisfield 11 
+south toowoomba 15 
+sutton forest 13 
+chelsea heights 15 
+zout plantations 16 
+moonan flat 11 
+doncaster east 14 
+the channon 11 
+laurel hill 11 
+lake clar ndon 14 
+north wollongong 16 
+blacksmiths 11 
+choitharamani 13 
+eltham north 12 
+kiels mountain 14 
+panton hill 11 
+guys forest 11 
+runn ym ede 11 
+strathbogie 11 
+mcintosh creek 14 
+doodenanning 12 
+manikmalani 11 
+girilambone 11 
+peats ridge 11 
+ballarat vvest 14 
+blair athol 11 
+east fremantle 14 
+cudlee creek 12 
+beacon hill 11 
+torrensville 12 
+lower hotham 12 
+lower creek 11 
+lake heights 12 
+dandenong north 15 
+kelsey creek 12 
+north epping 12 
+watsonville 11 
+christo pher 12 
+rufus river 11 
+chittaway point 15 
+tanilba bay 11 
+heddon greta 12 
+upper castra 12 
+north moonta 12 
+laidley heights 15 
+kilsyth south 13 
+mount torrens 13 
+berry springs 13 
+blackbutt north 15 
+saarenpÄÄ 11 
+marvel loch 11 
+rankins springs 15 
+south tamworth 14 
+gumly gumly 11 
+hervey range 12 
+long island 11 
+berrys creek 12 
+cabbajy dri izland 18 
+meadow flat 11 
+strathallan 11 
+south yarra 11 
+carrum downs 12 
+burleigh heads 14 
+cookardinia 11 
+bundaberg east 14 
+corny point 11 
+cattle creek 12 
+warracknabeal 13 
+lower marshes 13 
+kangaroo ground 15 
+captain creek 13 
+port hedland 12 
+mansinghani 11 
+outer harbor 12 
+arthurville 11 
+moffat beach 12 
+warwick farm 12 
+russells bridge 15 
+hintermeier 11 
+jonnalagadda 12 
+trinity beach 13 
+bedfo r ale 11 
+caboolture south 16 
+swinger hill 12 
+warrandyte south 16 
+ghinni ghinni 13 
+mont albert north 17 
+muthupalaniappan 16 
+erina heights 13 
+denhams beach 13 
+gipsy point 11 
+oakleigh south 14 
+lolan ke t f at 15 
+cypress g ardens 16 
+movnt o mond 12 
+mikhailopoulos 14 
+dingley village 15 
+pleasant hills 14 
+victoria hill 13 
+abbondandola 12 
+casuarina (po boxes) 20 
+bardwell valley 15 
+springva e south 16 
+mullengudgery 13 
+marracoonda 11 
+chandlers hill 14 
+clarence park 13 
+upper flagstone 15 
+numbla vale 11 
+brownsville 11 
+campbells bridge 16 
+fairy selcdows 14 
+finch hatton 12 
+salisbury heights 17 
+hallara  west 13 
+ballengarra 11 
+glenelg south 13 
+greenfields 11 
+korweinguboora 14 
+piesseville 11 
+devon north 11 
+landsborough 12 
+willows gemfields 17 
+macclesfield 12 
+pox hil noaht 13 
+ferny hills 11 
+doubdful creek 14 
+lalor parck 11 
+fitzroy falls 13 
+east sale raaf 14 
+daadenning creek 16 
+frenchs forest 14 
+north nowra 11 
+heatherbrae 11 
+rdzsavolgygi 12 
+quelagetting 12 
+strathkellar 12 
+greenfield park 15 
+merricks north 14 
+capalaba west 13 
+jacobs well 11 
+rottnest island 15 
+beulah park 11 
+portarlington 13 
+middle camp 11 
+stua rt ivll 12 
+lake argyle 11 
+waddy forest 12 
+mount o mo nd 13 
+miriam vale 11 
+braithwaite 11 
+north wahroonga 15 
+rosebud west 12 
+mullion creek 13 
+whyalla jenkins 15 
+laanecoorie 11 
+wengenville 11 
+speers point 12 
+sandy pocket 12 
+three springs 13 
+buckenbowra 11 
+wagga wagga south 17 
+springlands 11 
+mottershead 11 
+waldenmaier 11 
+orfanopoulou 12 
+west wallsend 13 
+carranballac 12 
+kobalavithanage 15 
+jean-claude 11 
+laloah paahck 13 
+canley vale 11 
+karamchandani 13 
+lake carnegie 13 
+kingsthorpe 11 
+tighes hill 11 
+donnelly river 14 
+stanw e l l  ark 16 
+yarrawarrah 11 
+scolastikue 11 
+jerdacuttup 11 
+brighton road 13 
+narre warren east 17 
+redbank plains 14 
+new gisborne 12 
+lefthand branch 15 
+spring bluff 12 
+arana hills 11 
+ramingining 11 
+upper sturt 11 
+liberty grove 13 
+mount abundance 15 
+north manly 11 
+sellicks hill 13 
+hackham west 12 
+tsiolakoudi 11 
+ballarat north 14 
+doolandella 11 
+rangarathnam 12 
+hornet bank 11 
+woodhouselee 12 
+inman valley 12 
+currency creek 14 
+greenethorpe 12 
+roger river 11 
+upper orara 11 
+bentley park 12 
+weldborough 11 
+cape woolamai 13 
+shorncliffe 11 
+silver ridge 12 
+mooney mooney 13 
+mount rascal 12 
+wendouree village 17 
+miner s rest 12 
+maribyrnong 11 
+alice river 11 
+gerangamete 11 
+bandon grove 12 
+warrumbungle 12 
+murrumbateman 13 
+seaford meadows 15 
+heathcote junction 18 
+diamond creek 13 
+towers hill 11 
+tallebudgera valley 19 
+buffalo river 13 
+broken head 11 
+oaklands junction 17 
+mount perry 11 
+north boyanup 13 
+middle swan 11 
+wavell heights north 20 
+blackal l s park 16 
+bonnyrigg heights 17 
+barwon downs 12 
+torrumbarry 11 
+easttrinity 11 
+fig tree pocket 15 
+st jo h   park 14 
+mount tamborine 15 
+eidsvold east 13 
+twelve mile 11 
+elong elong 11 
+bonniefield 11 
+kapioldassis 12 
+blanket flat 12 
+lakes entrance 14 
+happy valley 12 
+forest reefs 12 
+sunnycliffs 11 
+erskine park 12 
+wyche p r of 12 
+dlugopolski 11 
+banora point 12 
+lockwood south 14 
+north turramurra 16 
+coomberdale 11 
+boonooroo plains 16 
+mermaid beach 13 
+thiagarajan 11 
+coburg north 12 
+umina beach 11 
+hurlstone park 14 
+south bunbury 13 
+wattamondara 12 
+stanweil park 13 
+prighton road 13 
+lake proserpine 15 
+caloundra west 14 
+barragga bay 12 
+hillsborough 12 
+meerschaum vale 15 
+deebing heights 15 
+lake cla  ndon 14 
+silver spur 11 
+wolfensberger 13 
+strathdownie 12 
+bugle ranges 12 
+diamond beach 13 
+raaf base tindal 16 
+rochedale south 15 
+castle creek 12 
+marrangaroo 11 
+bandartilleke 13 
+lake bathurst 13 
+norton-baker 12 
+port clinton 12 
+green island 12 
+jpeerzt point 13 
+cooleys creek 13 
+pillalamarri 12 
+souther n cross 15 
+castle forbes bay 17 
+singleton heights 17 
+port vincent 12 
+grahams creek 13 
+cross roads 11 
+balmoral village 16 
+william bay 11 
+auchenflower 12 
+lillian rock 12 
+vinegar hill 12 
+north coogee 12 
+gascoyne river 14 
+rock valley 11 
+kangaroo creek 14 
+goorganga creek 15 
+campbellfield 13 
+bundalaguah 11 
+bend of islands 15 
+skjÖlsvold 11 
+university of wollongong 24 
+andstelkovic 12 
+suryadevara 11 
+macquarie university 20 
+pillar valley 13 
+upper bowman 12 
+christopherson 14 
+forestville 11 
+lake cathie 11 
+mundingburra 12 
+muthukumarasamy 15 
+bowen mountain 14 
+heron island 12 
+stuarts point 13 
+tobtful crik 12 
+isabella plains 15 
+ranjitsinhji 12 
+bowen montain 13 
+moruya heads 12 
+windsor gardens 15 
+sisterscreek 12 
+mannering park 14 
+brighton east 13 
+bacchus marsh 13 
+peaceful bay 12 
+camberwell west 15 
+laverton north 14 
+dicky beach 11 
+smith brook 11 
+hallegraeff 11 
+scrubby creek 13 
+lalce al ert 12 
+torrens park 12 
+stony creek 11 
+hoddys well 11 
+forrestdale 11 
+mallanganee 11 
+astapkovich 11 
+diffenderffer 13 
+terry hie hie 13 
+harrietville 12 
+sandy hollow 12 
+highgate hill 13 
+coutts crossing 15 
+keilor downs 12 
+hoxton park 11 
+eastern heights 15 
+fredricsson 11 
+konstantinos 12 
+kurri kurri 11 
+barrack point 13 
+helensvale town centre 22 
+asta p k  ich 13 
+eungai rail 11 
+west haldon 11 
+karramindie 11 
+pistohlkors 11 
+marmong point 13 
+roste vally 11 
+rockhampton 11 
+alessa ndra 11 
+ripplebrook 11 
+wellington forest 17 
+mountlouisa 11 
+golden square 13 
+new brighton 12 
+nityasundara 12 
+dutton park 11 
+hinchinbrook 12 
+sandy gully 11 
+holland park 12 
+black snake 11 
+knox city centre 16 
+sarangarajan 12 
+gerang gerung 13 
+lockyer waters 14 
+cairns orchid plaza 19 
+spirs point 11 
+leydens hill 12 
+mount nelson 12 
+south too oomba 15 
+tysons reef 11 
+tannum sands 12 
+grahamstown 11 
+burns beach 11 
+bells creek 11 
+tullibigeal 11 
+vassiliadis 11 
+farrell flat 12 
+cambrian hill 13 
+crossingham 11 
+bischoffshausen 15 
+prentice nort 13 
+bridgeman downs 15 
+prentice nord 13 
+nambucca heads 14 
+causeway lake 13 
+silver creek 12 
+langley vale 12 
+templestowe 11 
+warners bay 11 
+seppeltsfield 13 
+birmingham gardens 18 
+mulgrave east 13 
+mount gravatt 13 
+springbrook 11 
+mooral creek 12 
+rosebud south 13 
+kambalda west 13 
+picton east 11 
+sawyers valley 14 
+hampton east 12 
+endeavour hills 15 
+renown park 11 
+klinpraneet 11 
+narellanvale 12 
+south trees 11 
+nethe rcote 11 
+derwent park 12 
+hawkesbury heights 18 
+salisbury downs 15 
+port welshpool 14 
+dalrymple heights 17 
+arrawarra headland 18 
+canberra business centre 24 
+kembla grange 13 
+brunswick heads 15 
+wallangarra 11 
+old noarlunga 13 
+gunawardena 11 
+denisto ne east 15 
+godwin beach 12 
+doupdvul crik 13 
+elanora heights 15 
+stanhopegardens 15 
+williamtown 11 
+gawler river 12 
+the gardens 11 
+upper yarraman 14 
+ringtail creek 14 
+christophers 12 
+crescent head 13 
+yarramalong 11 
+drummond north 14 
+hobbys yards 12 
+lake alb rt 11 
+toorak gardens 14 
+ckelzy creek 12 
+peel island 11 
+mahogany creek 14 
+sunrise beach 13 
+jollys lookout 14 
+kondapaneni 11 
+bishopsbourne 13 
+mount annan 11 
+mount austin 12 
+middle beach 12 
+boonoo boonoo 13 
+kialla east 11 
+christmas hills 15 
+cameron park 12 
+menghrajani 11 
+arndell park 12 
+wellers hill 12 
+mitchells flat 14 
+point lonsdale 14 
+keysborough 11 
+ringwood east 13 
+north yunderup 14 
+bondi junction 14 
+barca l  ine 12 
+shorewell park 14 
+thabchumpon 11 
+1979 0 3 15 11 
+midway point 12 
+lake clarendon 14 
+darbys falls 12 
+north sydney 12 
+mission beach 13 
+south golden beach 18 
+blackmans point 15 
+raghavendra 11 
+orangeville 11 
+willoughby east 15 
+freemans waterhole 18 
+bundaberg south 15 
+mount osmond 12 
+mitchell park 13 
+cootamundra 11 
+mangrove mountain 17 
+forezt hill 11 
+lake conjola 12 
+east maitland 13 
+murrumburrah 12 
+ballarat  est 13 
+wickrema inghe 14 
+laguna quays 12 
+queanbeyamn east 16 
+caroline springs 16 
+risdon vale 11 
+redhill farms 13 
+modbury north 13 
+hermit park 11 
+christie downs 14 
+mavrokordatos 13 
+churchlands 11 
+pelbird parck 13 
+leslie vale 11 
+koolyanobbing 13 
+billa billa 11 
+little sandy desert 19 
+salzenstein 11 
+orange grove 12 
+st lawrence 11 
+makhanj peach 13 
+wamenusking 11 
+south melbourne 15 
+running stream 14 
+agnes water 11 
+bhattacharya 12 
+wandin north 12 
+mount clear 11 
+glendalough 11 
+baudendistel 12 
+christianson 12 
+brandy creek 12 
+mount macedon 13 
+pearl beach 11 
+goldenberger 12 
+port noarlunga south 20 
+cabbage tree creek 18 
+grassy head 11 
+haasts bluff 12 
+bossley  ark 12 
+upper lansdowne 15 
+port kembla 11 
+sanigepalli 11 
+moombooldool 12 
+cheltenham east 15 
+kaurismÄki 11 
+wombeyan caves 14 
+elizabeth bay 13 
+meadow heights 14 
+badu island 11 
+andjelkofic 11 
+kensington grove 16 
+kangaroo point 14 
+subramaniam 11 
+kings creek 11 
+bishops bridge 14 
+daroobalgie 11 
+northland centre 16 
+kabbake tree island 19 
+alabama hill 12 
+willung tsouth 14 
+thompson point 14 
+pelpiaht parck 14 
+szuhonkobecker 14 
+czwisnjowski 12 
+seshadrinathan 14 
+halls creek 11 
+niagara park 12 
+vanschalkwyk 12 
+boolambayte 11 
+wangi wangi 11 
+noble park north 16 
+beaumont hills 14 
+stanhope9 rdens 15 
+homebush west 13 
+dark corner 11 
+baffle west 11 
+arthur river 12 
+paynesville 11 
+black springs 13 
+moonee ponds 12 
+melton south 12 
+sarina beach 12 
+coolangatta 11 
+south   owoomba 15 
+vergopoulos 11 
+copmanhurst 11 
+venkateswarn 12 
+colac colac 11 
+caulfield south 15 
+isle of capri 13 
+connewirricoo 13 
+australian national university 30 
+collins street west 19 
+black mountain 14 
+preston west 12 
+deua river valley 17 
+tarachandany 12 
+winterhalter 12 
+tarachandani 12 
+zcolastikue 11 
+ztrecckfujs 11 
+doncastter heights 18 
+east cooyar 11 
+duckinwilla 11 
+bolwarra heights 16 
+narellan vale 13 
+clovelly park 13 
+rosslyn park 12 
+warner glen 11 
+allambie heights 16 
+ocean shores 12 
+west pennant hills 18 
+elermore vale 13 
+freshwater creek 16 
+wandiligong 11 
+lane cove west 14 
+paynes crossing 15 
+creek junction 14 
+coconut grove 13 
+gligorijevic 12 
+east seaham 11 
+alice springs (po boxes) 24 
+barongarook 11 
+hidden valley 13 
+thuringowa central 18 
+kelzy creek 11 
+glendenning 11 
+victory heights 15 
+daydream island 15 
+mount gardiner 14 
+lynchs creek 12 
+chri5t pher 11 
+waurn ponds 11 
+randjeiovic 11 
+mildura centre plaza 20 
+ravmond terrace 15 
+mount louisa 12 
+liverpool south 15 
+kotara s o uth 14 
+mount barker 12 
+g1en a r ry 11 
+sanctuary point 15 
+carlisle river 14 
+browns plains 13 
+normanville 11 
+prentice north 14 
+forest range 12 
+qaymayriyah 11 
+barkers creek 13 
+conjola park 12 
+foresd hill 11 
+broken hill 11 
+port hughes 11 
+horsley park 12 
+west prairie 12 
+seaford heights 15 
+dlugosielski 12 
+mount gelson 12 
+vaidheeswarran 14 
+fingal head 11 
+paynes find 11 
+sandringham 11 
+wilson beach 12 
+vandriessche 12 
+wentwort valls 14 
+vanderweken 11 
+polychroniadis 14 
+austins ferry 13 
+south brisbane 14 
+peregian beach 14 
+tooraweenah 11 
+narayanswami 12 
+alfords point 13 
+horningsea park 15 
+binna burra 11 
+mount david 11 
+meadow springs 14 
+kyriakopoulos 13 
+cecil plains 12 
+broadmeadow 11 
+herons creek 12 
+hmas albatross 14 
+tennant creek 13 
+ope istdland 12 
+yallourn north 14 
+curramb ine 11 
+north balgowlah 15 
+grasstree beach 15 
+croydon south 13 
+lankatilleke? 13 
+shoal point 11 
+wolli creek 11 
+castle cove 11 
+cypressgardens 14 
+seven mile beach 16 
+come by chance 14 
+francheschini 13 
+gjrilambone 11 
+burrell creek 13 
+cullulleraine 13 
+wattle park 11 
+widgiemooltha 13 
+nhulunbuy (po boxes) 20 
+murrayville 11 
+st helens park 14 
+costerfield 11 
+haze l  ove 11 
+valley view 11 
+port flinders 13 
+adjungbilly 11 
+nerrigundah 11 
+daleys point 12 
+robertstown 11 
+bonnells bay 12 
+gundamaraju 11 
+marrickville 12 
+bundaberg north 15 
+sheidow park 12 
+port douglas 12 
+holmesville 11 
+castuarina (po boxes) 21 
+mount sheridan 14 
+blackburn south 15 
+queanbeyan west 15 
+narre warren north 18 
+three bridges 13 
+bowmans forest 14 
+st georges basin 16 
+geelong east 12 
+north strathfield 17 
+lake cargelligo 15 
+fennell bay 11 
+pierces creek 13 
+new auckland 12 
+lake wyangan 12 
+crystal brook 13 
+grabben gullen 14 
+muthukaruppan 13 
+douglas park 12 
+hotham hill 11 
+collanilling 12 
+chirathivat 11 
+bentleigh east 14 
+blackmans bay 13 
+mount peter 11 
+heidelberg rgh 14 
+victoria point 14 
+woodstock west 14 
+mcmahons point 14 
+north haven 11 
+condamine plains 16 
+north aramara 13 
+golden fleece 13 
+bell post hill 14 
+stanwe ll park 14 
+rainbow beach 13 
+sisters creek 13 
+flinders lane 13 
+fishing point 13 
+pioneers rest 13 
+quakers hill 12 
+koo wee rup 11 
+browns creek 12 
+east gresford 13 
+palmerston (po boxes) 21 
+hordern vale 12 
+alexander heights 17 
+basin pocket 12 
+innot hot springs 17 
+winston hills 13 
+north tamborine 15 
+lovely banks 12 
+saddleworth 11 
+howes valley 12 
+beaconsfield 12 
+girila bone 11 
+limestone creek 15 
+thumb creek 11 
+lake cla endon 14 
+friedensburg 12 
+port macquarie 14 
+denistone east 14 
+royston park 12 
+eight mile creek 16 
+surfers paradise 16 
+upper ferntree gully 20 
+waterford west 14 
+spring creek 12 
+bartle frere 12 
+guildford west 14 
+sunrise b each 14 
+kewarra beach 13 
+long b e ach 12 
+londonderry 11 
+archies creek 13 
+clarkefield 11 
+christinson 11 
+north richmond 14 
+chain valley bay 16 
+tenterfield 11 
+port albert 11 
+safety beach 12 
+birch9 rove 11 
+stokers siding 14 
+quarry hill 11 
+abbonda ndola 13 
+sandhurst east 14 
+binginwarri 11 
+barnawartha 11 
+morphettville 13 
+green point 11 
+willawarrin 11 
+yerong creek 12 
+drillham south 14 
+hamilton north 14 
+acdon paahck 12 
+st albans park 14 
+burwood heights 15 
+booralaming 11 
+paendike nort 13 
+couts crossing 14 
+mount lewis 11 
+yarrawonga park 15 
+brighton-le-sands 17 
+olympic dam 11 
+bondi beach 11 
+jerrabomberra 13 
+bossley park 12 
+chester hill 12 
+yuleba north 12 
+wynnum north 12 
+lower longley 13 
+kkanapadhiraman 15 
+christies beach 15 
+nar nar goon 12 
+lower tenthill 14 
+dirranbandi 11 
+huntingdale 11 
+green hills 11 
+west hindmarsh 14 
+wentworthville 14 
+lilli pilli 11 
+cape burney 11 
+mount lofty 11 
+beverly hills 13 
+bellevue heights 16 
+little river 12 
+guildenstern 12 
+port gawler 11 
+lucas heights 13 
+langhorne creek 15 
+yuleba south 12 
+samataweera 11 
+landon-lane 11 
+north parramatta 16 
+twelve mile creek 17 
+wonboyn lake 12 
+sttepastopol 12 
+williamstown 12 
+stokers si ding 15 
+frome downs 11 
+frankenstein 12 
+oaklands park 13 
+dulwich hill 12 
+ramsinghani 11 
+darlinghurst 12 
+port hacking 12 
+byrrill creek 13 
+cooroo lands 12 
+lysterfield 11 
+newlands arm 12 
+strawbridge 11 
+wherrol flat 12 
+coochin creek 13 
+bream creek 11 
+cudgera creek 13 
+stepastopol 11 
+springhurst 11 
+leederville 11 
+kawrungruang 12 
+mount buller 12 
+lake deborah 12 
+forrestania 11 
+mount horeb 11 
+maroochy river 14 
+victor harbor 13 
+lysteahvield south 18 
+callala beach 13 
+east brisbane 13 
+highpoint city 14 
+alexandra bridge 16 
+mooroolbark 11 
+newcastlewest 13 
+castellanos 11 
+mannisenmaki 12 
+east russell 12 
+meringandan west 16 
+wallaroo mines 14 
+bellbird park 13 
+coonabidgee 11 
+kurralta park 13 
+kanimbla valley 15 
+llangothlin 11 
+north bungunya 14 
+greensborough 13 
+fifteen mile 12 
+banksiadale 11 
+suriyaprakash 13 
+sreevijayan 11 
+campbells forest 16 
+old toongabbie 14 
+stirling north 14 
+dolphin heads 13 
+bawley point 12 
+camp mountain 13 
+perseverance 12 
+machans beach 13 
+jackson north 13 
+morinish south 14 
+dampier archipelago 19 
+tinana south 12 
+cypress gardens 15 
+doctor george mountain 22 
+sophonpanich 12 
+rankin park 11 
+katherine (po boxes) 20 
+montmorency 11 
+karana downs 12 
+blankenship 11 
+seddon west 11 
+schwetschenau 13 
+camberwell north 16 
+walkerville 11 
+guerilla bay 12 
+taren point 11 
+papageorgiou 12 
+bahrs scrub 11 
+queanbeyan east 15 
+bullengarook 12 
+stuart town 11 
+catherine hill bay 18 
+mount ousley 12 
+darwin mail centre 18 
+blenheim road 13 
+belmont south 13 
+bribie island 13 
+pitts w  rth 12 
+maslin beach 12 
+ckeltsy creek 13 
+west bathurst 13 
+lalchandani 11 
+upper horton 12 
+pyramid hill 12 
+mount victoria 14 
+king cre ek 11 
+avondale heights 16 
+hergenrther 11 
+preston settlement 18 
+horsle p rk 11 
+weldbo rough 12 
+whyte yarcowie 14 
+blacks beach 12 
+rokewood junction 17 
+invergordon south 17 
+foresthi ll 11 
+gulargambone 12 
+everton hills 13 
+morganville 11 
+graceville east 15 
+north arm cove 14 
+hallidays point 15 
+parafield gardens 17 
+macquarie fields 16 
+modbury heights 15 
+terip terip 11 
+kemblawarra 11 
+panyarachun 11 
+tolmans hill 12 
+denis 0n east 13 
+potts point 11 
+hindmarsh west 14 
+mount vincent 13 
+winterbottom 12 
+larroquette 11 
+wejdmeadowz 11 
+peterborough 12 
+boat harbour 12 
+davis creek 11 
+corobimilla 11 
+alligator creek 15 
+chandrasekharan 15 
+diddillibah 11 
+leschenault 11 
+abratkiewicz 12 
+brooklyn park 13 
+clarckes hill 13 
+blessington 11 
+south johnstone 15 
+mahomets flats 14 
+north gosford 13 
+old guildford 13 
+lyzterfield south 17 
+wagga wagga 11 
+surfersparadise 15 
+tawonga south 13 
+dandongadale 12 
+rushcutters bay 15 
+onkaparinga hills 17 
+constit ut i on hill 20 
+eschol park 11 
+blue mountain 13 
+railway estate 14 
+natte yallock 13 
+curdie vale 11 
+trinity gardens 15 
+fortitude valley 16 
+holloways beach 15 
+glaziers bay 12 
+hallett cove 12 
+forestt hil 11 
+surry hills 11 
+keljty crik 11 
+venkataramanan 14 
+pelican waters 14 
+englorie park 13 
+padstow heights 15 
+barden ridge 12 
+homebush bay 12 
+horsley  ark 12 
+dyers crossing 14 
+upper capel 11 
+lavender bay 12 
+st kilda road central 21 
+milsons passage 15 
+glenmore park 13 
+mount warrigal 14 
+north gregory 13 
+east mackay 11 
+kilaben bay 11 
+murray bridge 13 
+nariel valley 13 
+park avenue 11 
+white hills 11 
+westmeatows 11 
+upper kedron 12 
+taylors arm 11 
+healesville 11 
+whyalla stuart 14 
+baulkham hills 14 
+farasiewicz 11 
+guthalungra 11 
+daryapurkar 11 
+popanyinning 12 
+jerdacuwttup 12 
+calvocoressi 12 
+merewether heights 18 
+gwambegwine 11 
+glennies creek 14 
+darling point 13 
+suriyaprakax 12 
+millers point 13 
+darkes forest 13 
+blackalls park 14 
+the entrance 12 
+teksinghani 11 
+silverleigh 11 
+siurulainen 11 
+paentike noaht 14 
+hamlyn terrace 14 
+green valley 12 
+whittington 11 
+indent ed head 14 
+bakers hill 11 
+hithergreen 11 
+clarendon vale 14 
+goulburn weir 13 
+indented head 13 
+jamison centre 14 
+karragullen 11 
+west ipswich 12 
+toowoomba east 14 
+morphetgmjvale 14 
+queens beach 12 
+mueller ranges 14 
+salisbury south 15 
+wylie creek 11 
+east geelong 12 
+west wyalong 12 
+north lakes 11 
+armadale north 14 
+mount eliza 11 
+callala bay 11 
+mullumbimby 11 
+smiths lake 11 
+waterloo corner 15 
+eden valley 11 
+forest lodge 12 
+cabramatta west 15 
+crabbes creek 13 
+dalebudjyra valey 17 
+croker island 13 
+river ranch 11 
+menzies creek 13 
+bakers swamp 12 
+commissioners flat 18 
+altona noaht 12 
+mount morgan 12 
+forestt hill 12 
+mount riverview 15 
+mount druitt 12 
+mount compass 13 
+south mount cameron 19 
+carey gully 11 
+hornsby heights 15 
+heidelb   g west 16 
+midgeree bar 12 
+chatswood west 14 
+gnowangerup 11 
+hazelwood north 15 
+sunshine beach 14 
+glen alpine 11 
+tamborine mountain 18 
+dumpy creek 11 
+balwyn north 12 
+lake margarette 15 
+south townsville 16 
+wongaling beach 15 
+koorainghat 11 
+mount o smond 13 
+settlemeyer 11 
+mount lonarch 13 
+north lambton 13 
+innisfail estate 16 
+sunny corner 12 
+lake a b ert 12 
+ivanhoe east 12 
+barcal dine 11 
+mount kuring-gai 16 
+westminster 11 
+killarney heights 17 
+east gosford 12 
+macmasters beach 16 
+northbridge 11 
+uppeah lansdowne 16 
+constitution hill 17 
+west melbourne 14 
+foresttt ill 12 
+taylors lakes 13 
+dzielwialtowski 15 
+gulfview heights 16 
+hawthorn east 13 
+scotts head 11 
+macleay island 14 
+kellyville ridge 16 
+clifton grove 13 
+st0kerssiding 13 
+wellington point 16 
+johnsonville 12 
+tuggeranong 11 
+lake munmorah 13 
+salmon gums 11 
+east killara 12 
+stanwell park 13 
+warathwgest 11 
+port adelaide 13 
+svetlichnyi 11 
+north geelong 13 
+bandy creek 11 
+thomson brook 13 
+bella vista 11 
+franklinford 12 
+abduvaliyev 11 
+norfolk island 14 
+smoky creek 11 
+paudendistel 12 
+semaphore park 14 
+felton south 12 
+stanvv e l park 15 
+south gladstone 15 
+dacunhalisboa 13 
+muktheswara 11 
+christinsen 11 
+sunshine plaza 14 
+bellbird parck 14 
+west hoxton 11 
+south kingsville 16 
+hopetoun gardens 16 
+kairnj north 12 
+warrawarrup 11 
+woodanilling 12 
+college grove 13 
+werri beach 11 
+harrisville 11 
+subramanien 11 
+forest grove 12 
+nichols point 13 
+sovereign hill 14 
+north narrabeen 15 
+limeburners creek 17 
+clemton park 12 
+caulfield north 15 
+scottjackson 12 
+mount glorious 14 
+shenton park 12 
+owwmond glen 12 
+aldinga beach 13 
+east trinity 12 
+delissaville 12 
+christopher 11 
+zilberschlag 12 
+upeah landjdone 15 
+little hartley 14 
+beech forest 12 
+belgian gardens 15 
+wallerawang 11 
+lamb island 11 
+opossum creek 13 
+albion park rail 16 
+roxburgh park 13 
+lysterfield south 17 
+koutttst crojsink 17 
+mansfield park 14 
+grays point 11 
+strathmerton 12 
+mackay south 12 
+taylor-aige 11 
+notley hills 12 
+meringandan 11 
+streaky bay 11 
+dargal road 11 
+gillieston heights 18 
+north hobart 12 
+tallangatta 11 
+mount hampton 13 
+regency park 12 
+bond university 15 
+summer hill 11 
+yarra junction 14 
+west kalgoorlie 15 
+russell island 14 
+surfers pa radise 17 
+mackenzie river 15 
+coleambally 11 
+mount stuart 12 
+coopers plains 14 
+strathgordon 12 
+watsons creek 13 
+subramanyan 11 
+terrey  i ls 12 
+kaluantharana 13 
+north albury 12 
+white cliffs 12 
+edmondson park 14 
+mount hardey 12 
+north beach 11 
+chermside west 14 
+paradise beach 14 
+park orchards 13 
+lake illawarra 14 
+macquarie links 15 
+tranmere north 14 
+boyne island 12 
+carrajung south 15 
+tweed heads 11 
+north fremantle 15 
+california gully 16 
+hamley bridge 13 
+acacia ridge 12 
+isis central 12 
+newport beach 13 
+st huberts island 17 
+rollingstone 12 
+pendle hill 11 
+mount taylor 12 
+barrow island 13 
+raviprakash 11 
+lake tyers beach 16 
+western gardens 15 
+university of canberra 22 
+tenby point 11 
+telangatuk east 15 
+mount stromlo 13 
+wyalkatchem 11 
+mooliabeenee 12 
+norman park 11 
+caldermeade 11 
+mourilyan harbour 17 
+korkiakangas 12 
+swifts creek 12 
+vishnuraman 11 
+violet town 11 
+university of newcastle 23 
+cajuarina (po boecses) 22 
+trinerstahc 11 
+croppa c eek 12 
+gwynneville 11 
+doubtful creek 14 
+st kilda road 13 
+toowoon bay 11 
+canton beach 12 
+blacka l  park 14 
+sippy downs 11 
+green fields 12 
+miners rest 11 
+carlton north 13 
+north rockj 11 
+hamilton island 15 
+point mcleay 12 
+north rocks 11 
+new lambton heights 19 
+moorabbin airport 17 
+gowrie park 11 
+runaway bay 11 
+muswellbrook 12 
+bayswater north 15 
+brampton island 15 
+north curl curl 15 
+konnongorring 13 
+murgheboluc 11 
+penwhaupell 11 
+neutral bay 11 
+toowoomba south 15 
+mantzavinos 11 
+woolloomooloo 13 
+battery point 13 
+essendon west 13 
+str eho ski 11 
+lemon tree passage 18 
+delaneys creek 14 
+hope valley 11 
+johns river 11 
+city centre 11 
+lower plenty 12 
+university of sydney 20 
+lake clifton 12 
+lake toolbrunup 15 
+trungley hall 13 
+georges plains 14 
+moonee beach 12 
+verona sands 12 
+mullengandra 12 
+kings langley 13 
+darling heights 15 
+mount caroline 14 
+carpenter rocks 15 
+erindale centre 15 
+currumbin valley 16 
+old koreelah 12 
+st leonards 11 
+hyams beach 11 
+launching place 15 
+wildes meadow 13 
+club terrace 12 
+oyster cove 11 
+cabarita beach 14 
+macquarie park 14 
+neerim north 12 
+belmo tnorth 12 
+queenscliff 11 
+flinders park 13 
+townsendale 11 
+falls creek 11 
+solomontown 11 
+edensor park 12 
+captains mountain 17 
+mailer flat 11 
+postmans ridge 14 
+hurstbridge 11 
+cottles bridge 14 
+shoalhaven heads 16 
+yatala vale 11 
+mount evelyn 12 
+westmeadows 11 
+milsons point 13 
+cranbourne east 15 
+east albury 11 
+prince regent river 19 
+fores t h ll 12 
+hectorville 11 
+carrowbrook 11 
+machanj beach 13 
+ewlyamartup 11 
+klarkes hill 12 
+hamelin bay 11 
+orphanopoulos 13 
+allans flat 11 
+scotland island 15 
+boundary bend 13 
+robina town centre 18 
+alstonville 11 
+macks creek 11 
+the keppels 11 
+chippendale 11 
+hampton park 12 
+dizdar evic 11 
+pheasant creek 14 
+staughton vale 14 
+golden beach 12 
+diggers rest 12 
+coquette point 14 
+camberwell east 15 
+mersey forest 13 
+hawkins creek 13 
+helidon spa 11 
+bindoon training area 21 
+lcotarasouth 12 
+thevenard island 16 
+leawood gardens 15 
+denham court 12 
+wesley vale 11 
+maloneys beach 14 
+williamtown raaf 16 
+buaraba south 13 
+talebugera vally 16 
+silverwater 11 
+nelsons plains 14 
+ashtonfield 11 
+hasseroeder 11 
+mount horner 12 
+bridgewater on loddon 21 
+barramornie 11 
+wembley downs 13 
+tillekaratne 12 
+loxton north 12 
+curranshill 11 
+marys creek 11 
+lake albert 11 
+clear island waters 19 
+mechitbayeva 12 
+risdon park south 17 
+melbourne airport 17 
+mckees hill 11 
+north    long 13 
+centenary heights 17 
+wrattens forest 15 
+skeleton rock 13 
+wilsonton heights 17 
+mayfield north 14 
+oaks estate 11 
+camden head 11 
+henley beach 12 
+vanchinathan 12 
+mossy point 11 
+moonies hill 12 
+curdies river 13 
+moonah west 11 
+woodville gardens 17 
+abbond  ndola 13 
+maiden gully 12 
+mount st john 13 
+boulder creek 13 
+victoria rock 13 
+upper rouchel 13 
+glen osmond 11 
+cranbourne north 16 
+golden valley 13 
+lennox head 11 
+terreyhills 11 
+whitsundays 11 
+yourdamung lake 15 
+dandenong south 15 
+kodandarami 11 
+elizabeth grove 15 
+seven hills 11 
+the monument 12 
+bungeworgorai 13 
+novar gardens 13 
+the gurdies 11 
+smithfield heights 18 
+stuart mill 11 
+world trade centre 18 
+mount colah 11 
+the percy group 15 
+glenning valley 15 
+mount dandenong 15 
+balmain east 12 
+karamc andani 13 
+boondandilla 12 
+point clare 11 
+coghills creek 14 
+o'briens hill 13 
+berowra waters 14 
+dhurringile 11 
+tantasatityanon 15 
+witherspoon 11 
+boree creek 11 
+belmont north 13 
+bonnie doon 11 
+townsville milpo 16 
+bardwell park 13 
+wagga wagga raaf 16 
+salter point 12 
+nelson-field 12 
+hatherleigh 11 
+lightning ridge 15 
+minnamoolka 11 
+red hill south 14 
+alexandra hills 15 
+greenmount east 15 
+upper daradgee 14 
+point piper 11 
+moggs creek 11 
+wollstonecraft 14 
+karragarra island 17 
+ferntree gully 14 
+mount rowan 11 
+port melbourne 14 
+st kilda east 13 
+dernancourt 11 
+monash university 17 
+seville grove 13 
+jayawarrene 11 
+south plantations 17 
+holden hill 11 
+wedge island 12 
+ellenborough 12 
+north ahroonga 14 
+woronora heights 16 
+baddaginnie 11 
+castlereagh 11 
+dundas valley 13 
+aless andra 11 
+heidelberg heights 18 
+donkastea heights 17 
+north batemans bay 18 
+alessandria 11 
+notting hill 12 
+west lakes shore 16 
+meroo meadow 12 
+castlemaine 11 
+ball ar at west 15 
+bowen moundain 14 
+narre warren 12 
+pelican point 13 
+mackay north 12 
+para hills west 15 
+bindi bindi 11 
+thowgla valley 14 
+somerton park 13 
+croydon north 13 
+darraweit guim 14 
+banksia park 12 
+garners beach 13 
+bennetts green 14 
+mount kembla 12 
+greenwell point 15 
+wattle flat 11 
+blanket  lat 12 
+bandaranaike 12 
+manifold heights 16 
+salisbury plain 15 
+canning creek 13 
+bannockburn 11 
+altinkaynak 11 
+mundinkbuahra 13 
+mirboo north 12 
+dunsborough 11 
+fairy meadow 12 
+kialla west 11 
+watercarrin 11 
+pascoe vale south 17 
+cartmeticup 11 
+stroud road 11 
+stotts creek 12 
+preston south 13 
+exmouth gulf 12 
+toolern vale 12 
+keilor east 11 
+baulkham hills west 19 
+anglers paradise 16 
+tamleugh west 13 
+southland centre 16 
+kangaroo valley 15 
+vannieuwkirk 12 
+maryborough 11 
+port lincoln 12 
+alexandra headland 18 
+killarney vale 14 
+mincha west 11 
+north plympton 14 
+freemans reach 14 
+largs north 11 
+dautzenberg 11 
+heatheahbrae 12 
+essendon north 14 
+dautzenburg 11 
+queens park 11 
+elsternwick 11 
+springvale south 16 
+cumberland park 15 
+chirnside park 14 
+o'halloran hill 15 
+woy woy bay 11 
+wamuran basin 13 
+dick y  e ach 13 
+avoca beach 11 
+mount beauty 12 
+gatton college 14 
+donnell yriver 14 
+chapple vale 12 
+koothrappally 13 
+cells river 11 
+yongchaiyudh 12 
+junction view 13 
+ginninderra village 19 
+comoon loop 11 
+vermont south 13 
+badgerys creek 14 
+entwort fallj 13 
+darlington point 16 
+garden island 13 
+shannon brook 13 
+west croydon 12 
+kotara south 12 
+stanhope gardens 16 
+coromandel east 15 
+ganapathiraman 14 
+mcmahons creek 14 
+charlestown 11 
+voyager point 13 
+rocky point 11 
+st andrews beach 16 
+albany creek 12 
+forresters beach 16 
+spring beach 12 
+collingwood park 16 
+pappinbarra 11 
+culburra beach 14 
+gooseberry hill 15 
+dobies bight 12 
+east corrimal 13 
+glenthompson 12 
+bungowannah 11 
+geelong west 12 
+surrey hills 12 
+greigs flat 11 
+no 6 branch 11 
+boljcckovac 11 
+marcus hill 11 
+heidelberg west 15 
+east preston 12 
+stkolastique 12 
+tarbuck bay 11 
+paulls valley 13 
+garden city 11 
+university of new england 25 
+beaufort river 14 
+nicholls rivulet 16 
+strathblane 11 
+westbourne park 15 
+south turramurra 16 
+augustine heights 17 
+wentworth falls 15 
+everton park 12 
+vladimirescu 12 
+cecil hills 11 
+fairview park 13 
+upper wilsons creek 19 
+kanchelskis 11 
+middle camberwell 17 
+no 5 branch 11 
+frederickton 12 
+gladesville 11 
+wattle glen 11 
+caulfield east 14 
+monsilnuwle 11 
+tuggeranong distribution centre 31 
+east carnarvon 14 
+brookhampton 12 
+burleigh waters 15 
+berowra heights 15 
+south perth 11 
+whian whian 11 
+laber t uche 12 
+gowangardie 11 
+junction hill 13 
+cristianson 11 
+jerrys plains 13 
+wentworth falst 15 
+shepparton east 15 
+coonabidkee 11 
+laidley creek west 18 
+chrisyanson 11 
+zagorodniuk 11 
+coochiernudl  island 20 
+brocklehurst 12 
+huntin dale 11 
+chittaway bay 13 
+bensvi l le 11 
+frenchville 11 
+east augusta 12 
+beverley park 13 
+baerami creek 13 
+bandaratileke 13 
+crowdy head 11 
+arcadia vale 12 
+aberfoyle park 14 
+kelvinhaugh 11 
+johnsons hill 13 
+sutherlands 11 
+east toowoomba 14 
+hurstville grove 16 
+bielenstein 11 
+hassall grove 13 
+summerfield 11 
+woodville north 15 
+east palmerston 15 
+harris park 11 
+gunningbland 12 
+brightwaters 12 
+ferny creek 11 
+yarraville west 15 
+murray upper 12 
+point turton 12 
+salamander bay 14 
+oxford falls 12 
+east barron 11 
+trinity park 12 
+mount surround 14 
+mount warren park 17 
+north avoca 11 
+canley heights 14 
+bridgetown north 16 
+sutton grange 13 
+mount samson 12 
+malvern east 12 
+hickeys creek 13 
+burwood east 12 
+argents hill 12 
+yellow rock 11 
+lower m arshes 14 
+stjohns park 12 
+bishops britk 13 
+beelbangera 11 
+eastgardens 11 
+mount wallace 13 
+werris creek 12 
+mackherdhuj 11 
+east moonta 11 
+raisinghani 11 
+mount l ouisa 13 
+hope island 11 
+cannons creek 13 
+rose valley 11 
+lower sandy bay 15 
+waterview heights 17 
+crooked corner 14 
+natural bridge 14 
+wickremasinghe 14 
+noahth wahroonka 16 
+eatons hill 11 
+schuhmacher 11 
+maroochydore 12 
+coonabarabran 13 
+west footscray 14 
+cristiansen 11 
+goldsborough 12 
+silverstein 11 
+whitebridge 11 
+stockinbingal 13 
+scolastique 11 
+dignams creek 13 
+faulconbridge 13 
+amphitheatre 12 
+scotts creek 12 
+bonny hills 11 
+richmond hill 13 
+currumbin waters 16 
+dangar island 13 
+nyffenegger? 12 
+mount anketell 14 
+mount maria 11 
+noosa heads 11 
+yackandandah 12 
+crystal  reelc 14 
+mas l a nka 11 
+balmoral ridge 14 
+gulbrandsen 11 
+lake macdonald 14 
+wights mountain 15 
+hoppers crossing 16 
+thuvaradran 11 
+clarkes hill 12 
+queanbeyaan east 16 
+wongrutiyan 11 
+ballarat west 13 
+trotter creek 13 
+hamersley range 15 
+croydon hills 13 
+skenes creek 12 
+northern gully 14 
+south grafton 13 
+spicers creek 13 
+fulham gardens 14 
+suffolk park 12 
+koivurinnen 11 
+berkshire park 14 
+huntleys point 14 
+abhichandani 12 
+narella vale 12 
+ckoorainghat 12 
+north tivoli 12 
+carrandotta 11 
+tennyson point 14 
+sophonpa ich 12 
+hmerjly ranke 13 
+osborne park 12 
+parliament house 16 
+nords wharf 11 
+bellimbopinni 13 
+elizabeth vale 14 
+kenmore hills 13 
+wodonga plaza 13 
+morton vale 11 
+south ripley 12 
+bella creek 11 
+colbinabbin 11 
+pines forest 12 
+gordonbrook 11 
+old cooranga 12 
+gosford east 12 
+willung south 13 
+laughtondale 12 
+henley beach south 18 
+woogenellup 11 
+catherine field 15 
+boreen point 12 
+belmore river 13 
+waterfall gully 15 
+eungella hinterland 19 
+cape moreton 12 
+mount duneed 12 
+cookamidgera 12 
+invergowrie 11 
+fullerton cove 14 
+port augusta 12 
+cambridge gardens 17 
+geilston bay 12 
+dover heights 13 
+constit uti n hill 18 
+souther cross 13 
+berringer lake 14 
+morphett vale 13 
+east keilor 11 
+knorrit flat 12 
+shelly beach 12 
+old erowal bay 14 
+telegraph point 15 
+neerim junction 15 
+wrights creek 13 
+ettingshausen 13 
+blackal l   park 16 
+baskerville 11 
+andjelkovic 11 
+christenson 11 
+north willoughby 16 
+lindeman island 15 
+grindelwald 11 
+step h anie 11 
+scotts brook 12 
+carlingford 11 
+collarenebri 12 
+mount egerton 13 
+barwon heads 12 
+cremorne point 14 
+ozenkadnook 11 
+clarke creek 12 
+north melbourne 15 
+jackson south 13 
+carlton south 13 
+dinner plain 12 
+south maitland 14 
+millaa millaa 13 
+rowland flat 12 
+narre warren south 18 
+springfield 11 
+ejlersgaard 11 
+south to woomba 15 
+woodville south 15 
+mount moriah 12 
+altona meadows 14 
+hannam vale 11 
+vassilopoulou 13 
+altona north 12 
+callemondah 11 
+garden suburb 13 
+dundurrabin 11 
+terrey hills 12 
+minnie downs 12 
+lonesome creek 14 
+wynnum west 11 
+yatte yattah 12 
+upper lanstdowne 16 
+varsity lakes 13 
+hamilton east 13 
+south granville 15 
+palm island 11 
+sophonpnich 11 
+nort wahroonga 14 
+cooroy mountain 15 
+mount martha 12 
+taylor-saige 12 
+somasundara 11 
+wendoree park 13 
+st0ker s s i ing 16 
+scarborough 11 
+judds creek 11 
+burnett heads 13 
+muthu swami 11 
+breakfast point 15 
+mount helen 11 
+bamboo creek 12 
+west armidale 13 
+clifton springs 15 
+walla walla 11 
+labertouche 11 
+cabbage tree island 19 
+cunjurong point 15 
+mount emlyn 11 
+sinnamon park 13 
+sandy point 11 
+currans hill 12 
+st johns park 13 
+rawdon vale 11 
+launceston south 16 
+condell park 12 
+smythes creek 13 
+avalon beach 12 
+white patch 11 
+south albury 12 
+forestd ill 11 
+indente  head 13 
+goonellabah 11 
+sefton park 11 
+old bonalbo 11 
+georges hall 12 
+royal brisbane hospital 23 
+jayawardene 11 
+wongan hills 12 
+cape portland 13 
+bakers creek 12 
+sara-louise 11 
+hansonville 11 
+benjaberring 12 
+lavers hill 11 
+schellenberg 12 
+channarayapatra 15 
+reedy creek 11 
+northcliffe 11 
+zoth plympton 13 
+smythesdale 11 
+roseville chase 15 
+cowan cowan 11 
+mulga downs 11 
+tilba tilba 11 
+pippingarra 11 
+alice springs 13 
+west wollongong 15 
+tidal river 11 
+boronia heights 15 
+saint helena 12 
+goondiwindi 11 
+alfred cove 11 
+coffs harbour 13 
+central tilba 13 
+port broughton 14 
+kolehmainen 11 
+elizabeth north 15 
+jalbarragup 11 
+turvey park 11 
+mountain creek 14 
+weatherboard 12 
+mount martin 12 
+nomans lake 11 
+gidgegannup 11 
+clayton south 13 
+carbunup river 14 
+urangeline east 15 
+west mackay 11 
+south west rocks 16 
+fairfield west 14 
+central park 12 
+the sisters 11 
+patterson lakes 15 
+st kilda west 13 
+stl c : d a 11 
+lindenow south 14 
+terwilleger 11 
+ringwood north 14 
+huntleys cove 13 
+croppa creek 12 
+upper barron 12 
+south durras 12 
+berriwillock 12 
+stewarts brook 14 
+weld borough 12 
+kratochvilova 13 
+griendstrom 11 
+mount coolum 12 
+kemps creek 11 
+north talwood 13 
+jtod hedland 12 
+jaaskelainen 12 
+orchard hills 13 
+linley point 12 
+hastings point 14 
+goorganga plains 16 
+capodistria 11 
+bossl e park 12 
+jamboree heights 16 
+cairns north 12 
+mountain gate 13 
+marsden park 12 
+bayview heights 15 
+central macdonald 17 
+adamstown heights 17 
+pakenham upper 14 
+mounto  ond 11 
+parramatta park 15 
+durham lead 11 
+campbells creek 15 
+french park 11 
+chillingham 11 
+middle park 11 
+concord west 12 
+elizabeth park 14 
+rollands plains 15 
+invergordon 11 
+derrinallum 11 
+black duck creek 16 
+verges creek 12 
+doncaster heights 17 
+handunpurage 12 
+karjalainen 11 
+kaimkillenbun 13 
+vÄÄrÄniemi 13 
+smiths gully 12 
+ellen grove 11 
+millchester 11 
+mount pleasant 14 
+middleton beach 15 
+rocky gully 11 
+stavropoulos 12 
+mont albert 11 
+port macdonnell 15 
+east lindfield 14 
+coochiemudlo island 19 
+crystal creek 13 
+dookie college 14 
+tambar springs 14 
+edwardstown 11 
+goondi bend 11 
+lindeman iland 14 
+fairfield heights 17 
+st al b ans 11 
+lindeman ilant 14 
+jaspers brush 13 
+durong south 12 
+wantirna south 14 
+broadmeadows 12 
+port elliot 11 
+howard springs 14 
+keilor park 11 
+guschlbauer 11 
+neerim south 12 
+watsons bay 11 
+port botany 11 
+tin can bay 11 
+castle hill 11 
+rules beach 11 
+willow vale 11 
+schulhauser 11 
+mayfield west 13 
+fishery falls 13 
+lane cove north 15 
+cooeeimbardi 12 
+manning point 13 
+codjatotine 11 
+thursday island 15 
+benjaminson 11 
+edward river 12 
+bexley north 12 
+grong grong 11 
+helensburgh 11 
+lennard brook 13 
+mount nasura 12 
+ledge point 11 
+stenhouse bay 13 
+varahabhotla 12 
+willbriggie 11 
+snake valley 12 
+volosheninov 12 
+centennial park 15 
+biggera waters 14 
+huntfield heights 17 
+boorhaman north 15 
+har r i son 11 
+greenbushes 11 
+chichlowski 11 
+north lismore 13 
+sarina range 12 
+phillip bay 11 
+bendick murrell 15 
+eight mile plains 17 
+gawler east 11 
+medlow bath 11 
+llang othlin 12 
+black forest 12 
+redwood park 12 
+paahck holme 12 
+jembaicumbene 13 
+berkeley vale 13 
+glazie r  bay 13 
+watsons crossing 16 
+subramanium 11 
+arthurs creek 13 
+highland plains 15 
+cundare north 13 
+yashovarman 11 
+klarkes hil 11 
+revesby heights 15 
+munna creek 11 
+costopoulou 11 
+north bendigo 13 
+kippax centre 13 
+svensson heights 16 
+deakin university 17 
+bennettswood 12 
+angelomatis 11 
+slade point 11 
+south stradbroke 16 
+martinsville 12 
+cundle flat 11 
+richmond raaf 13 
+darweshkhel 11 
+wallaga lake 12 
+sunshine bay 12 
+slacks creek 12 
+kinglake west 13 
+eumemmerring 12 
+home island (cocos (keeling) islands) 37 
+logan h lme 11 
+campbelltown 12 
+aberglasslyn 12 
+hollow tree 11 
+waratah west 12 
+white mountain 14 
+burrill lake 12 
+karageorgiou 12 
+craigieburn 11 
+mount hutton 12 
+forest hill 11 
+vanmechelen 11 
+flagstaff hill 14 
+civic square 12 
+caves beach 11 
+duffys forest 13 
+kaluwitharana 13 
+gavrielides 11 
+newcastle west 14 
+muthukrishn 11 
+west pymble 11 
+chipping norton 15 
+kobble creek 12 
+south mackay 12 
+risdon park 11 
+st john   park 14 
+fitzpatrick 11 
+box hill north 14 
+south hedland 13 
+clarence gardens 16 
+coronet bay 11 
+enoggera reservoir 18 
+mount buffalo 13 
+wetherill park 14 
+broadbeach waters 17 
+lake  l bert 12 
+the narrows 11 
+noarlunga downs 15 
+stoianovich 11 
+west tamworth 13 
+bellevue hill 13 
+moorabbin east 14 
+south plympton 14 
+blind bight 11 
+raymond terrace 15 
+forest ridge 12 
+spring hill 11 
+regents park 12 
+wintergarden 12 
+beelbi creek 12 
+salisbury east 14 
+mermaid waters 14 
+lower ma shes 13 
+delaiglesia 11 
+gopalakrishnan 14 
+tanjil south 12 
+wheelers hill 13 
+mount gravatt east 18 
+pennant hills 13 
+kanapathiraman 14 
+northge |ong 12 
+zahrebelnyj 11 
+widgee crossing south 21 
+deniston east 13 
+wattle grove 12 
+noosa north shore 17 
+booleroo centre 15 
+upper coomera 13 
+newcast1ewest 13 
+ravensworth 11 
+little plain 12 
+vonettingshausen 16 
+warrachuppin 12 
+glen huntly 11 
+tweed heads west 16 
+coochiem  lo island 19 
+bunya creek 11 
+yelsangikar 11 
+albion park 11 
+strathmore heights 18 
+sister s creek 14 
+plympton south 14 
+lower templestowe 17 
+hoddles creek 13 
+acacia plateau 14 
+yabba north 11 
+wattle camp 11 
+wallumbilla north 17 
+box hill south 14 
+southern cross 14 
+coromandel valley 17 
+kelvin grove 12 
+south kilkerran 15 
+mambray creek 13 
+southern river 14 
+bedford park 12 
+frankston north 15 
+springfield lakes 17 
+creek lonesomr 14 
+hamlyn heights 14 
+brunswick west 14 
+hazelwood park 14 
+khuntilanont 12 
+mount molloy 12 
+mount mceuen 12 
+hammondville 12 
+woori yallock 13 
+kidman park 11 
+murray town 11 
+nerrin nerrin 13 
+greenwoods valley 17 
+glazie sbay 11 
+stoters hill 12 
 
  Query summary results for index: Dynamic Similarity Aware Indexing Technique
 ----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.10; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 96.774194 
- revocacao 100.000000 numero falso match 30 1
-  Query timing (min / max / avrg): 0.000 / 0.007 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 122 / 54
-  Memory usage: 40 MB (resident: 15 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.20; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 96.774194 
- revocacao 100.000000 numero falso match 30 1
-  Query timing (min / max / avrg): 0.000 / 0.007 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 122 / 54
-  Memory usage: 40 MB (resident: 14 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.30; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 96.774194 
- revocacao 100.000000 numero falso match 30 1
-  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 122 / 54
-  Memory usage: 40 MB (resident: 14 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.40; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 96.774194 
- revocacao 100.000000 numero falso match 30 1
-  Query timing (min / max / avrg): 0.000 / 0.007 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 122 / 54
-  Memory usage: 40 MB (resident: 14 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.50; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 96.774194 
- revocacao 100.000000 numero falso match 30 1
-  Query timing (min / max / avrg): 0.000 / 0.007 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 122 / 54
-  Memory usage: 39 MB (resident: 13 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.60; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 100.000000 
- revocacao 100.000000 numero falso match 30 0
-  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 122 / 53
-  Memory usage: 38 MB (resident: 12 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.70; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 100.000000 
- revocacao 100.000000 numero falso match 30 0
-  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 118 / 51
-  Memory usage: 37 MB (resident: 11 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.80; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 100.000000 
- revocacao 100.000000 numero falso match 30 0
-  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 118 / 51
-  Memory usage: 37 MB (resident: 11 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 100.000000 
- revocacao 100.000000 numero falso match 30 0
-  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 118 / 51
-  Memory usage: 37 MB (resident: 11 MB)
-
-Testing method: Dynamic Similarity Aware Indexing Technique
-===========================================================
-
- Loading data file...
-130
-	 Loaded file:                teste2.txt
-	 Total number of records: 130
-
-	 (1.0%) of the total records are used to build the index
-	 Query records are 129:
-
-	 Number of records in rec_dict is 130
-	 Number of records in build_records is 1
-	 Number of records in query_records is 129
-	 Total number of records for build + query is 130
-
-
- Loading time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Building the index is starting ... 
-	 Number of unique record values (inverted index keys):  16
-	    Maximum number of records in an inverted index list: 1
-	    Sum of lengths of all inverted index lists:          16
-	  Number of unique values in similarity dictionary:   16
-	    Maximum number of records in a similarity set:    0
-	    Sum of lengths of all similarity dictionary sets: 0
-	  Number of unique values in block dictionary:    16
-	    Maximum number of records in a block list:    1
-	    Sum of lengths of all block dictionary lists: 16
-
-  Finished building the index. 
-  Building time: 0.0 sec
-     Memory usage: 36 MB (resident: 10 MB)
-
- Processing Query records ...
-
-	 Processed 100 records in the query phase
- TAMANHO GAB 0
-
- Query summary results for index: Dynamic Similarity Aware Indexing Technique
-----------------------------------------------------------------------------
-  Optimisation: 1; minimum threshold: 1.00; minimum total threshold: 8.00
-  Matching accuracy: 30/30 true matches (100.00%)
- precisao 100.000000 
- revocacao 100.000000 numero falso match 30 0
-  Query timing (min / max / avrg): 0.000 / 0.006 / 0.002 sec
-  Number of comparisons (min / max / avrg): 2 / 118 / 51
-  Memory usage: 37 MB (resident: 11 MB)
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 12.00
+ precisao 0.022959  revo 71.015625
+ true pos 909  false posit 3958408
+  Query timing (min / max / avrg): 0.000 / 0.044 / 0.001 sec
+  Number of comparisons (min / max / avrg): 0 / 0 / 0
+  Memory usage: 45 MB (resident: 41 MB)

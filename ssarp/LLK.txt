@@ -556,6 +556,7 @@ Loglikeli Estimator. Counts =  999  (Total = 999 / 1 bins). LLK= NaN
 java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
 Loglikeli Estimator. Counts =  999  (Total = 999 / 1 bins). LLK= NaN
 java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+<<<<<<< HEAD
 Loglikeli Estimator. Counts =  207618  (Total = 207618 / 1 bins). LLK= NaN
 java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
 Loglikeli Estimator. Counts =  115914 0 91705  (Total = 207619 / 3 bins). LLK= 8.523997329191923
@@ -574,3 +575,5 @@ Loglikeli Estimator. Counts =  21920 0 637 3690 2017 3974 0 2194 913 2431 0 4632
 Loglikeli Estimator. Counts =  9980 0 11055 0 90 0 44605 0 332 1 1661 0 12 0 21091 0 62307 0 152 0 464 0 1598 0 14 0 2108 0 32271 0 8 0 10045 0 406 0 56 0 684 2 523 0 6023 0 3 0 20 0 1301 0 31 0 41 0 5 0 61 0 405 0 18 0 32 1 16 0 6 0 191  (Total = 207619 / 69 bins). LLK= 6.520563638748183
 Loglikeli Estimator. Counts =  186457 0 21162  (Total = 207619 / 3 bins). LLK= 8.881034151960083
 Loglikeli Estimator. Counts =  207618  (Total = 207618 / 1 bins). LLK= NaN
+=======
+>>>>>>> e4b72f1db3d5da0574673d22d5491b89ddfceba7

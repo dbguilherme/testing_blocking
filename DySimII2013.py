@@ -663,11 +663,19 @@ class ANOB:
     
     
     def allac (self, file):
+<<<<<<< HEAD
         os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
         os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt")
          
         os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal.txt 1")
         os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done > /tmp/final_treina.arff;")
+=======
+#         os.system("cd ssarp && ./gera_bins_TUBE.sh "+ file +"  16")
+#         os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt")
+#         
+#         os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal.txt 1")
+#         os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done > /tmp/final_treina.arff;")
+>>>>>>> e4b72f1db3d5da0574673d22d5491b89ddfceba7
         file="/tmp/final_treina.arff"
         f = open("/tmp/temp", 'w')
         f.write("@relation TrainingInstances\n")
@@ -750,7 +758,15 @@ if __name__ == '__main__':
     
     
     
+<<<<<<< HEAD
    
+=======
+    file="/tmp/arff_out"
+    f = open(file, 'a')
+    ind.allac(file)
+    if (1==1):
+        exit()
+>>>>>>> e4b72f1db3d5da0574673d22d5491b89ddfceba7
     
     
     print
@@ -861,11 +877,15 @@ if __name__ == '__main__':
     query_memo_str = auxiliary.get_memory_usage()
     print "COUNTTTTT %s" % count;  
     
+<<<<<<< HEAD
     file="/tmp/arff_out"
     f = open(file, 'a')
     ind.allac(file)
     #if (1==1):
         #exit()
+=======
+    
+>>>>>>> e4b72f1db3d5da0574673d22d5491b89ddfceba7
     
     #####################
     f.close()

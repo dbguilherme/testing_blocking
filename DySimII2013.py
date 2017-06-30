@@ -28,7 +28,7 @@
 import string
 import sys
 import time
-import re
+import os
 
 
 # From Febrl  http://sourceforge.net/projects/febrl/
@@ -511,7 +511,7 @@ class ANOB:
 #                 num_case_two += 1
 #                 case_counts[2] = case_counts[2] + 1
               
-                if(self.count> 500 and len(inv_index[rec_val_ind])>self.count*0.8):
+                if(self.count> 500 and len(inv_index[rec_val_ind])>self.count*0.5):
                     continue
               
                              
@@ -526,7 +526,7 @@ class ANOB:
                   
                 if(len(inv_index[rec_val_ind])>self.count):
                     self.count=len(inv_index[rec_val_ind])
-                    print "xxxxxxx %i %s" % (self.count,rec_val_ind)
+                    #print "xxxxxxx %i %s" % (self.count,rec_val_ind)
                 
             
                 rec_id_list_temp=inv_index.get(rec_val_ind, [])                 
@@ -574,37 +574,113 @@ class ANOB:
         
         ###########################################
       
-def remove_query(self, rec_id,query_rec, optimise=0):
+    def remove_query(self, rec_id,query_rec, optimise=0):
     
     
-     inv_index = self.inv_index  # Shorthands to make program faster
+         inv_index = self.inv_index  # Shorthands to make program faster
+            
+         num_attr_without_rec_id = self.num_attr_without_rec_id
+         
+         entity_records = self.entity_records
+         num_compared_attr = self.num_compared_attr
+            
+         rec_id_list=[]
+         for i in range(0, num_attr_without_rec_id ):     
+                
+       
+               rec_val = query_rec[i]   
+                
+                
+              #  print "     performing att rec_val %s \n" % rec_val
+               # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
+               if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<3):
+                   continue
+               # print rec_val
+                
+               rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
+                                                        # index values
+            
+    def create_output_file(self, ent_id,res_list,f):
         
-     num_attr_without_rec_id = self.num_attr_without_rec_id
-     
-     entity_records = self.entity_records
-     num_compared_attr = self.num_compared_attr
+         if (res_list != [] and len(res_list)>1):  # Some results were returned
+            for i in range(len(res_list)):
+                 try:
+                    #cado sejam iguais                   
+                    if(ent_id==res_list[i]):
+                        continue
+                    
+                    
+                    valueA=ind.query_records[ent_id]
+                    valueB=ind.query_records[res_list[i]]
+                    sim=[]
+                    for j in range(1,len(valueA)):
+                        #sim.append(ind.comp_methods[1](valueA[j], valueB[j]))
+                        f.write(str(ind.comp_methods[1](valueA[j], valueB[j]))+", ")
+                              
+                   #false match 
+                    if(("dup") not in ent_id and  ("dup") not in res_list[i]):
+                    #    print "false match 1"
+                        query_acc_res.append('FM')
+                        f.write("0")
+                    else:
+                       
+                        #last case:
+                        if(("dup") in ent_id):
+                            ent_clean=ent_id.split("-")[0]
+                            dirty=ent_id
+                        else:
+                            ent_clean=ent_id
+                            #print "ent clean %s" % ent_clean
+                        if(("dup") in res_list[i]):
+                            res_clean=res_list[i].split("-")[0]
+                            dirty=res_list[i]
+                        else:
+                            res_clean=res_list[i]                        
+                        #if("507-" in ent_id):
+                        #        print "chegouuuuuuuuuuuuuuuuuuuuuuuuuuuu %s  %s" % (res_clean, res_list );  
+                        if(res_clean==ent_clean):
+                            gab_list=ind.inv_index_gab.get(res_clean,[])
+                           
+                            if(dirty in gab_list or res_list[i] in gab_list):                             
+                                gab_list.remove(dirty)
+                                query_acc_res.append('TM')
+                                ind.inv_index_gab[dirty]=gab_list
+                                f.write("0")
+                            #else:
+                                #print "XXXXXres clean %s %s" % (res_clean,gab_list)
+                        else:
+                           # print "false match 2"
+                            query_acc_res.append('FM')
+                            f.write("0")
+                            
+                    f.write("\n")
+                   
+                 except IndexError:
+                        print "Oops!  That was no valid number.  Try again... %s %s" % (ent_id,res_list) 
         
-     rec_id_list=[]
-     for i in range(0, num_attr_without_rec_id ):     
-            
-   
-           rec_val = query_rec[i]   
-            
-            
-          #  print "     performing att rec_val %s \n" % rec_val
-           # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
-           if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<3):
-               continue
-           # print rec_val
-            
-           rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
-                                                    # index values
-            
-          
+        
+       
     
     
-      
+    def allac (self, file):
+        os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
+        os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt")
+         
+        os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal.txt 1")
+        os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done > /tmp/final_treina.arff;")
+        file="/tmp/final_treina.arff"
+        f = open("/tmp/temp", 'w')
+        f.write("@relation TrainingInstances\n")
+        for i in range(0,16):
+            f.write("@attribute att"+str(i) +" numeric\n")
+        f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
+        
+        os.system("cd ssarp && cat "+file+" > /tmp/temp " )
+        
+        
 # ============================================================================
+
+
 
 # Define special functions for post code encoding and comparison
 # Any other function can be used 
@@ -635,7 +711,7 @@ if __name__ == '__main__':
     
     
     
-    total_num_attr = 17  # Total number of attribute 
+    total_num_attr = 10  # Total number of attribute 
                         # including rec-id, and ent-id
     
     
@@ -665,8 +741,17 @@ if __name__ == '__main__':
     comp_methods = [None, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro , stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro]
     
     
+    
+    
+    
+    
     ind = ANOB(total_num_attr,enco_methods, comp_methods, 
                   min_threshold, min_total_threshold)
+    
+    
+    
+   
+    
     
     print
     print('Testing method: {0}'.format(index_name))
@@ -695,10 +780,14 @@ if __name__ == '__main__':
     print '    ', build_memo_str
     print
     
+    
+    ##
+    file="/tmp/arff_out"
+    f = open(file, 'w')
    
     # Match query records - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     #
-  
+    
     
     query_time_res = []  # Collect results for each of query record
     query_acc_res = []
@@ -715,6 +804,7 @@ if __name__ == '__main__':
     print ' Processing Query records ...'
     print
 
+   
     # Go through query records and try to find a match for each query 
     
     count = 0 # count of true duplicates 
@@ -732,10 +822,27 @@ if __name__ == '__main__':
         num_rec += 1
         if (num_rec % 1000 == 0):
             print '\t Processed %d records in the query phase' % (num_rec)
-            print "inverted inde size %i" % ((ind.count))
+            #print "inverted inde size %i" % ((ind.count))
             
         query_time_res.append(query_time)
         num_comp_res.append(num_comp)
+            
+            
+            
+            
+        ##############################################################
+        
+        
+        ind.create_output_file(ent_id, res_list,f)
+        
+        
+        
+        
+        
+        
+        
+        
+        
             
         # Process index specific special information returned
         #        
@@ -748,79 +855,22 @@ if __name__ == '__main__':
                 #case_counts[2] = case_counts[2] + 1
     
         
-        if (res_list != [] and len(res_list)>1):  # Some results were returned
-            
-      
-            
-            # Check if the result list contains the correct matching record 
-            # identifier
-            #
-            #print ind.inv_index_gab 
-            for i in range(len(res_list)):
-                 try:
-                                       
-                    if(ent_id==res_list[i]):
-                        continue
-                    
-                    
-                    ########teste
-                    #print "%s %s " % (ind.query_records[ent_id], ind.query_records[res_list[i]])
-                    valueA=ind.query_records[ent_id]
-                    valueB=ind.query_records[res_list[i]]
-                    sim=[]
-                    for j in range(0,len(valueA)):
-                        sim.append(ind.comp_methods[1](valueA[j], valueB[j]))
-                    print len(sim)
-                       
-                    
-                    if(("dup") not in ent_id and  ("dup") not in res_list[i]):
-                    #    print "false match 1"
-                        query_acc_res.append('FM')
-                        continue;
-                    else:
-                        
-                        if(("dup") in ent_id and  ("dup") in res_list[i]):
-                            continue;
-                        
-                        
-                        #last case:
-                        if(("dup") in ent_id):
-                            ent_clean=ent_id.split("-")[0]
-                            dirty=ent_id
-                        else:
-                            ent_clean=ent_id
-                            #print "ent clean %s" % ent_clean
-                        if(("dup") in res_list[i]):
-                            res_clean=res_list[i].split("-")[0]
-                            dirty=res_list[i]
-                        else:
-                            res_clean=res_list[i]                        
-                        #if("507-" in ent_id):
-                        #        print "chegouuuuuuuuuuuuuuuuuuuuuuuuuuuu %s  %s" % (res_clean, res_list );  
-                        if(res_clean==ent_clean):
-                            
-                            gab_list=ind.inv_index_gab.get(res_clean,[])
-                            count+=1
-                            if(dirty in gab_list or res_list[i] in gab_list):                             
-                                
-                                gab_list.remove(dirty)
-                                query_acc_res.append('TM')
-                                ind.inv_index_gab[dirty]=gab_list
-                                
-                            else:
-                                print "XXXXXres clean %s %s" % (res_clean,gab_list)
-                        else:
-                           # print "false match 2"
-                            query_acc_res.append('FM')
-                            
-                        
-                   
-                 except IndexError:
-                        print "Oops!  That was no valid number.  Try again... %s %s" % (ent_id,res_list) 
+       
 
         
     query_memo_str = auxiliary.get_memory_usage()
-    print "COUNTTTTT %s" % count;    
+    print "COUNTTTTT %s" % count;  
+    
+    file="/tmp/arff_out"
+    f = open(file, 'a')
+    ind.allac(file)
+    #if (1==1):
+        #exit()
+    
+    #####################
+    f.close()
+    
+      
     size_gab=0   
     for inv_list in ind.inv_index_gab.itervalues():
         if(len(inv_list)>1  ):
@@ -830,11 +880,6 @@ if __name__ == '__main__':
             #    print "\n\ngab %i" % inv_list[i]
     print ' TAMANHO GAB %d' % size_gab
 
-  #  values=[]
-    for x in ind.inv_index:
-  #      values.append(len(x));
-        if(len(ind.inv_index[x])>500):
-            print "%s %i " % (x, len(ind.inv_index[x]));
    # values.sort()
     #print ind.inv_index
     

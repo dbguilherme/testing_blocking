@@ -12,7 +12,7 @@ import encode
 import stringcmp
 import random
 from collections import OrderedDict
-
+from svmutil import *
 
 class ActiveOnlineBlocking:
     def __init__(self, total_num_attr, encoding_methods, comparison_methods, 
@@ -377,9 +377,9 @@ class ActiveOnlineBlocking:
                 inv_index[rec_val_ind]= temp_list 
                   
                   
-                if(len(inv_index[rec_val_ind])>self.count):
-                    self.count=len(inv_index[rec_val_ind])
-                    #print "xxxxxxx %i %s" % (self.count,rec_val_ind)
+                #if(len(inv_index[rec_val_ind])>self.count):
+                    #self.count=len(inv_index[rec_val_ind])
+                    ##print "xxxxxxx %i %s" % (self.count,rec_val_ind)
                 
             
                 rec_id_list_temp=inv_index.get(rec_val_ind, [])                 
@@ -440,7 +440,7 @@ class ActiveOnlineBlocking:
                     valueB=ind.query_records[res_list[i]]
                     sim=[]
                     for j in range(1,len(valueA)):
-                        print ("%s   %s   %f") % (valueA[j],valueB[j], stringcmp.jaro(valueA[j], valueB[j]))
+                       # print ("%s   %s   %f") % (valueA[j],valueB[j], stringcmp.jaro(valueA[j], valueB[j]))
                         f.write(str(ind.comp_methods[1](valueA[j], valueB[j])) + ", ")
                        #((stringcmp.jaro(valueA[j], valueB[j])))
                               
@@ -472,7 +472,7 @@ class ActiveOnlineBlocking:
                                 gab_list.remove(dirty)
                                 query_acc_res.append('TM')
                                 ind.inv_index_gab[dirty]=gab_list
-                                f.write("0")
+                                f.write("1")
                             #else:
                                 #print "XXXXXres clean %s %s" % (res_clean,gab_list)
                         else:
@@ -489,18 +489,30 @@ class ActiveOnlineBlocking:
        
     
     
-    def allac (self, file):
-        os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
-        os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt")
-         
-        os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal.txt 1")
-        os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done > /tmp/final_treina.arff;")
-        file="/tmp/final_treina.arff"
-        f = open("/tmp/temp", 'w')
-        f.write("@relation TrainingInstances\n")
-        for i in range(0,16):
-            f.write("@attribute att"+str(i) +" numeric\n")
-        f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
+    def allac (self, file, flag):
+        self.count+=100;
+        if(flag==1):
+            os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
+            os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
+            os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
+            os.system("cd ssarp && rm alac_lac_train_TUBEfinal.txt && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+            
+            os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done > /tmp/final_treina.arff;")
+            file="/tmp/final_treina.arff"
+            f = open("/tmp/temp", 'w')
+            f.write("@relation TrainingInstances\n")
+            for i in range(0,16):
+                f.write("@attribute att"+str(i) +" numeric\n")
+            f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
+        else:
+           # os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
+            os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
+            os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
+            
+            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+            
+            os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+        
         
         os.system("cd ssarp && cat "+file+" > /tmp/temp " )
         
@@ -538,7 +550,7 @@ if __name__ == '__main__':
     
     
     
-    total_num_attr = 17  # Total number of attribute 
+    total_num_attr = 16  # Total number of attribute 
                         # including rec-id, and ent-id
     
     
@@ -552,29 +564,16 @@ if __name__ == '__main__':
     
     index_name = 'Active Online Blocking'
                                 
-    
-    
-        
-    
-    
+     
     # Define encoding and comparison methods to be used for attributes
     # Note: first element in the list should always be None. 
     enco_methods = [None, encode.dmetaphone, encode.dmetaphone, 
                     encode.dmetaphone, __get_substr__,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,]
     comp_methods = [None, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro , stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro]
     
-    
-    
-    
-    
-    
     ind = ActiveOnlineBlocking(total_num_attr,enco_methods, comp_methods, 
                   min_threshold, min_total_threshold)
-    
-    
-    
-   
-    
+     
     
     print
     print('Testing method: {0}'.format(index_name))
@@ -597,7 +596,7 @@ if __name__ == '__main__':
     
     ##
     file="/tmp/arff_out"
-    f = open(file, 'w',10)
+    f = open(file, 'w',100)
    
     # Match query records - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     #
@@ -609,22 +608,19 @@ if __name__ == '__main__':
     
     query_cnt = 1
     
-    # Count of record values found in index in querying
-    case_two_sum = 0  
-    case_timing = {1:0.0, 2:0.0}
-    case_counts = {1:0, 2:0}
-    
+       
     num_rec = 0
     print ' Processing Query records ...'
     print
 
    
     # Go through query records and try to find a match for each query 
-    
+    tuples_count=0
     count = 0 # count of true duplicates 
+    flag=1;
     for rec_id, clean_rec in ind.query_records.iteritems():
        
-      
+       
         ent_id = rec_id
         
         #print 'PERFOMING RECORD %s \n\n' %   ((rec_id))
@@ -644,40 +640,36 @@ if __name__ == '__main__':
             
             
             
-        ##############################################################
         
         
+        tuples_count+=len(res_list);
         ind.create_output_file(ent_id, res_list,f)
         
+        if(tuples_count>100):             
+             f.flush()
+             ind.allac(file, flag)
+             f.close
+             open(file, 'w').close()
+             tuples_count=0
+             
+            # if(flag==0):
+            #    break;
+             flag=0;   
+             #time.sleep(10)
         
         
         
         
-        
-        
-        
-        
-            
-        # Process index specific special information returned
-        #        
-        #case_two_sum += spec_info[0]        
-        #if (spec_info[2][1] > 0):  # There were case 1
-                #case_timing[1] = case_timing[1] + (spec_info[1][1] / spec_info[2][1])
-                #case_counts[1] = case_counts[1] + 1
-        #if (spec_info[2][2] > 0):  # There were case 2
-                #case_timing[2] = case_timing[2] + (spec_info[1][2] / spec_info[2][2])
-                #case_counts[2] = case_counts[2] + 1
-    
-        
+       ##############################################################     
        
 
         
-    query_memo_str = auxiliary.get_memory_usage()
-    print "COUNTTTTT %s" % count;  
+   # query_memo_str = auxiliary.get_memory_usage()
+   # print "COUNTTTTT %s" % count;  
     
-    file="/tmp/arff_out"
-    f = open(file, 'a')
-   # ind.allac(file)
+    
+    
+   
     #if (1==1):
         #exit()
     
@@ -726,20 +718,8 @@ if __name__ == '__main__':
     print '  Number of comparisons (min / max / avrg): %d / %d / %d' % \
               (min(num_comp_res), max(num_comp_res), \
                int(round(sum(num_comp_res) / len(ind.query_records))))
-    print '  %s' % (query_memo_str)
-    
-    #print '  Average ratio of case 2 : case 1 query matching: %.2f' % \
-                #((0.25 * case_two_sum) / len(ind.query_records))
-    #if (case_counts[1] != 0):
-            #print '    Case 1 average time: %.2f (ms)' % \
-                    #(1000.0 * (case_timing[1] / case_counts[1]))
-            #print '                 count: {0} (number of all new attributes) '.format(case_counts[1])
-    #if (case_counts[2] != 0):
-            #print '    Case 2 average time: %.2f (ms)' % \
-                    #(1000.0 * (case_timing[2] / case_counts[2]))
-            #print '                 count: {0} (number of all attributes that are indexed before)'.format(case_counts[2])
-    #print
-
+  
+   
 
 
     

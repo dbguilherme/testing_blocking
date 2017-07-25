@@ -4,13 +4,17 @@ my $infile = $ARGV[0];
 my $train_file = $ARGV[1];
 my $featnum = $ARGV[2];
 my $outfile = $ARGV[3];
-
+my $flag = $ARGV[4];
 my @bins;
 my @vals;
 my $linecount = 1;
 print "dddddddddddddd  $infile $train_file **** $ARGV[3]*** \n";
 open (F1, $train_file) || die ("Could not open $file!");
-open (F3, ">$outfile") || die ("Could not open $file!");
+if($flag==1){
+    open (F3, ">$outfile") || die ("Could not open $file!");}
+else{
+    open (F3, ">>$outfile") || die ("Could not open $file!");
+}
 #open (F4, ">>$outfile.weka") || die ("Could not open $file!");
 $maxbins=0;
 
@@ -34,7 +38,7 @@ for ($i=1; $i<=$featnum; $i++) {
 	}
     }
     else {
-	print "ERROOO $infile-$i-0LL.hist \n";
+	print "ERROOOxxxx $infile-$i-0LL.hist \n";
 	$bins[$i][0]=-1;
     }
     close(F2);

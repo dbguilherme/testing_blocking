@@ -20,14 +20,8 @@ fi
 while [ $i -le $f ]; do
 		suffix="B$2"
 		j=1
-<<<<<<< HEAD
-
 		while [ $j -le $numfeatures ]; do 
 #		  echo "entrou $j"
-=======
-		
-		while [ $j -le $numfeatures ]; do 
->>>>>>> e4b72f1db3d5da0574673d22d5491b89ddfceba7
 		  if [ ! -f train-$suffix-$j-0LL.hist ]; then
 		    echo "Creating TUBE file train-$suffix-$j-0LL.hist..."
 		    echo "@relation documents" > attr$j.arff 
@@ -36,14 +30,8 @@ while [ $i -le $f ]; do
 		    echo "" >> attr$j.arff
 		    echo "@data" >> attr$j.arff
 		    grep -v @ $trainfile | grep -v ^$ | awk -F "," '{ print $'"$j"' }' | sed 's/\,//' >> attr$j.arff
-<<<<<<< HEAD
-		    
-		    java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr$j.arff -V 8  -B $i -X train-$suffix-$j >> LLK$i.txt
-#		    echo java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr$j.arff -V 8  -B $i -X train-$suffix-$j 
-=======
 		    java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr$j.arff -V 8  -B $i -X train-$suffix-$j >> LLK$i.txt
 		    echo java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr$j.arff -V 8  -B $i -X train-$suffix-$j >> LLK$i.txt
->>>>>>> e4b72f1db3d5da0574673d22d5491b89ddfceba7
   		    rm -f attr$j.arff
 		  fi
 		  j=$(($j+1))

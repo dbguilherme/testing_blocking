@@ -318,101 +318,12 @@ class ActiveOnlineBlocking:
        return rec_sorted   
                 
                 
-# ===============================================================================================        
 
-    def build(self):
-        """Build a similarity aware inverted index using the data set in memory.
-        """
-    
-        #inv_index = self.inv_index  # Shorthands to make program faster
-        #sim_dict = self.sim_dict
-        #block_dict = self.block_dict
-        #build_records = self.build_records
-        #num_attr_without_rec_id = self.num_attr_without_rec_id
-          
-       
-        #num_rec = 0 # counter to be used to check the number of processed records
-        #for (rec_id, rec_values) in build_records.iteritems():
-            ## note: rec_values is the list of all attributes including ent-id
-            ## i.e [ent-id,attr-1,...,attr-n]
-            
-            ## Process all attributes in the rec_values but not
-            ## including the first element as it is the ent-id           
-            #for i in range(1,num_attr_without_rec_id):   
-                #rec_val = rec_values[i]
-                #ent_id = rec_values[0]
-               ## if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
-                ##    continue
-                #if(rec_val == 'norole' ):
-                    #continue
-                #self.Insert_value(rec_id,ent_id, rec_val, i)
-                ##print '%s %s %s ' % (rec_id, ent_id, rec_val)
-            #num_rec += 1
-          
-            #if (num_rec % 100 == 0):
-                #print '\t Processed %d records in the build phase' % (num_rec)        
-        
-     
-        
-        #max_inv_list_len = 0
-        #sum_inv_list_len = 0
-        
-        #for inv_list in inv_index.itervalues():
-            #max_inv_list_len = max(max_inv_list_len, len(inv_list))
-            #sum_inv_list_len += len(inv_list)
-        #print '\t Number of unique record values (inverted index keys):  %d' % \
-              #(len(inv_index))
-       
-        #print '\t    Maximum number of records in an inverted index list: %d' % \
-              #(max_inv_list_len)
-        #print '\t    Sum of lengths of all inverted index lists:          %d' % \
-              #(sum_inv_list_len)
-    
-        #max_sim_dict_len = 0
-        #sum_sim_dict_len = 0
-        #for this_sim_dict in sim_dict.itervalues():
-            #max_sim_dict_len = max(max_sim_dict_len, len(this_sim_dict))
-            #sum_sim_dict_len += len(this_sim_dict)
-        #print '\t  Number of unique values in similarity dictionary:   %d' % \
-              #(len(sim_dict))
-        #print '\t    Maximum number of records in a similarity set:    %d' % \
-              #(max_sim_dict_len)
-        #print '\t    Sum of lengths of all similarity dictionary sets: %d' % \
-              #(sum_sim_dict_len)
-    
-        #max_block_list_len = 0
-        #sum_block_list_len = 0
-        
-        #for block_list in block_dict.itervalues():
-            #max_block_list_len = max(max_block_list_len, len(block_list))
-            #sum_block_list_len += len(block_list)
-        #print '\t  Number of unique values in block dictionary:    %d' % \
-              #(len(block_dict))
-        #print '\t    Maximum number of records in a block list:    %d' % \
-              #(max_block_list_len)
-        #print '\t    Sum of lengths of all block dictionary lists: %d' % \
-              #(sum_block_list_len)
-    
-        #assert sum_block_list_len == len(sim_dict)
-        
-        print
-        
          
 # =============================================================================================== 
 
-    def query(self, rec_id,query_rec, optimise=0):
-        """ Query the index with the given record. Returns a list with the record
-            identifiers that have the largest similarity value with the query
-            record, the number of comparisons performed, and an additional value
-            that is index type specific.
-    
-            It is assumed a data set has been loaded and an index has been built
-            previously.
-    
-            The argument 'optimize' sets certain levels of optimization in the
-            query process. Default is 0, i.e. no optimization.
-        """
-        #print 'staring query phare\n'
+    def query(self, rec_id,query_rec):
+           #print 'staring query phare\n'
         inv_index = self.inv_index  # Shorthands to make program faster
         min_tot_thres = self.min_tot_thres
         num_attr_without_rec_id = self.num_attr_without_rec_id
@@ -420,11 +331,7 @@ class ActiveOnlineBlocking:
         entity_records = self.entity_records
         num_compared_attr = self.num_compared_attr
              
-       
-       
-       
-        
-        # Calculate when to switch the accu building phase
+           # Calculate when to switch the accu building phase
         #
         phase_thres = num_compared_attr - min_tot_thres 
         
@@ -440,9 +347,9 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.iteritems():     
-            if(i > num_compared_attr/2):
+            if(i > num_compared_attr/4):
                break;
-            
+            i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
                     continue
@@ -458,17 +365,8 @@ class ActiveOnlineBlocking:
                     continue  
                 #print "             insert att into index"
                 self.Insert_value(rec_id,rec_val,i)
-                #print 'indice len %d %s' % (len(inv_index), rec_val)
-            # Case 2: This record value is available in the inverted index
-            # in this case the record id will be added to the inverted index (RI)   
+               
             else:
-                
-#                 num_case_two += 1
-#                 case_counts[2] = case_counts[2] + 1
-              
-                if(self.count> 500 and len(inv_index[rec_val_ind])>self.count*0.5):
-                    continue
-              
                              
                 # Add the record id into the inverted index
                 temp_list = inv_index.get(rec_val_ind, [])
@@ -501,7 +399,7 @@ class ActiveOnlineBlocking:
         
         ###########################################
       
-    def remove_query(self, rec_id,query_rec, optimise=0):
+    def remove_query(self, rec_id,query_rec):
     
     
          inv_index = self.inv_index  # Shorthands to make program faster
@@ -535,14 +433,15 @@ class ActiveOnlineBlocking:
                     #cado sejam iguais                   
                     if(ent_id==res_list[i]):
                         continue
-                    if (i > 100):
-                        break
+                    #if (i > 100):
+                        #break
                     
                     valueA=ind.query_records[ent_id]
                     valueB=ind.query_records[res_list[i]]
                     sim=[]
                     for j in range(1,len(valueA)):
-                        sim.append(ind.comp_methods[1](valueA[j], valueB[j]))
+                        print ("%s   %s   %f") % (valueA[j],valueB[j], stringcmp.jaro(valueA[j], valueB[j]))
+                        f.write(str(ind.comp_methods[1](valueA[j], valueB[j])) + ", ")
                        #((stringcmp.jaro(valueA[j], valueB[j])))
                               
                    #false match 
@@ -639,11 +538,11 @@ if __name__ == '__main__':
     
     
     
-    total_num_attr = 10  # Total number of attribute 
+    total_num_attr = 17  # Total number of attribute 
                         # including rec-id, and ent-id
     
     
-    optimise_flag_str = sys.argv[1]             # optimization flag
+   
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold
     build_percentage = float(sys.argv[4])       # Percentage of records used to
@@ -654,11 +553,7 @@ if __name__ == '__main__':
     index_name = 'Active Online Blocking'
                                 
     
-    if (optimise_flag_str.lower()[0] == 't'):
-        optimise_flag = 1  # Optimisation level to be used in query() method
-    else:
-        optimise_flag = 0
- 
+    
         
     
     
@@ -698,16 +593,7 @@ if __name__ == '__main__':
     print  
           
     
-    print(' Building the index is starting ... ')
-    start_time = time.time()  # Build the index from data set in memory 
-    ind.build()
-    build_time = time.time() - start_time
-    print('  Finished building the index. ' )
-    print '  Building time: %.1f sec' % (build_time)
-    build_memo_str = auxiliary.get_memory_usage()
-    print '    ', build_memo_str
-    print
-    
+  
     
     ##
     file="/tmp/arff_out"
@@ -743,7 +629,7 @@ if __name__ == '__main__':
         
         #print 'PERFOMING RECORD %s \n\n' %   ((rec_id))
         start_time = time.time()
-        res_list, num_comp = ind.query(rec_id,clean_rec, optimise=optimise_flag)
+        res_list, num_comp = ind.query(rec_id,clean_rec)
         query_time = time.time() - start_time
         #print ind.count
         
@@ -820,8 +706,8 @@ if __name__ == '__main__':
     print ' Query summary results for index: %s' % (index_name)
     print '-' * (33 + len(index_name))
     
-    print '  Optimisation: %d; minimum threshold: %.2f;' % \
-              (optimise_flag, min_threshold) + ' minimum total threshold: %.2f' % \
+    print '  minimum threshold: %.2f;' % \
+              ( min_threshold) + ' minimum total threshold: %.2f' % \
               (min_total_threshold)
     #if ind.count > 0:
         #print '  Matching accuracy: %d/%d true matches (%.2f%%)' % \

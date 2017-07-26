@@ -1,5 +1,5 @@
-.pyc
-.hist
-.txt
-.exe
-.png
+*.pyc
+*.hist
+*.txt
+*.exe
+*.png

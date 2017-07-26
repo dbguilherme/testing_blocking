@@ -1,0 +1,595 @@
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste8
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 0
+counter 331561 dup counter 1244
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 1.00
+ precisao 0.151370  revo 100.000000 threshold 1.000000
+ true pos 500  false posit 329817
+  Query timing (min / max / avrg): 0.000 / 0.007 / 0.001 sec
+  Number of comparisons (min / max / avrg): 1 / 838 / 330
+  Memory usage: 42 MB (resident: 16 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste97
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 0
+counter 187536 dup counter 1243
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 2.00
+ precisao 0.268394  revo 100.000000 threshold 2.000000
+ true pos 500  false posit 185793
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.001 sec
+  Number of comparisons (min / max / avrg): 1 / 838 / 330
+  Memory usage: 41 MB (resident: 14 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste88
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 4
+counter 47255 dup counter 1231
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 3.00
+ precisao 1.082044  revo 99.203187 threshold 3.000000
+ true pos 498  false posit 45526
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.001 sec
+  Number of comparisons (min / max / avrg): 1 / 838 / 330
+  Memory usage: 40 MB (resident: 13 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste94
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 31
+counter 4775 dup counter 1119
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 4.00
+ precisao 13.238512  revo 93.980583 threshold 4.000000
+ true pos 484  false posit 3172
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.001 sec
+  Number of comparisons (min / max / avrg): 1 / 674 / 234
+  Memory usage: 39 MB (resident: 13 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste84
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 151
+counter 1250 dup counter 764
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 5.00
+ precisao 83.333333  revo 72.841727 threshold 5.000000
+ true pos 405  false posit 81
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.001 sec
+  Number of comparisons (min / max / avrg): 1 / 598 / 216
+  Memory usage: 39 MB (resident: 13 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste65
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 604
+counter 0 dup counter 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 6.00
+true matching equal zero
+  Query timing (min / max / avrg): 0.000 / 0.013 / 0.001 sec
+  Number of comparisons (min / max / avrg): 0 / 0 / 0
+  Memory usage: 39 MB (resident: 13 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste5
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 604
+counter 0 dup counter 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 7.00
+true matching equal zero
+  Query timing (min / max / avrg): 0.000 / 0.009 / 0.001 sec
+  Number of comparisons (min / max / avrg): 0 / 0 / 0
+  Memory usage: 39 MB (resident: 13 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste25
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 604
+counter 0 dup counter 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 8.00
+true matching equal zero
+  Query timing (min / max / avrg): 0.000 / 0.015 / 0.001 sec
+  Number of comparisons (min / max / avrg): 0 / 0 / 0
+  Memory usage: 39 MB (resident: 13 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste40
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 604
+counter 0 dup counter 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 9.00
+true matching equal zero
+  Query timing (min / max / avrg): 0.000 / 0.006 / 0.001 sec
+  Number of comparisons (min / max / avrg): 0 / 0 / 0
+  Memory usage: 39 MB (resident: 13 MB)
+
+Testing method: Dynamic Similarity Aware Indexing Technique
+===========================================================
+
+ Loading data file...
+ TAMANHO GAB 500
+1005
+	 Loaded file:                /tmp/teste89
+	 Total number of records: 1005
+
+	 (0.0%) of the total records are used to build the index
+	 Query records are 1005:
+
+	 Number of records in rec_dict is 1005
+	 Number of records in build_records is 0
+	 Number of records in query_records is 1005
+	 Total number of records for build + query is 1005
+
+
+ Loading time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Building the index is starting ... 
+	 Number of unique record values (inverted index keys):  0
+	    Maximum number of records in an inverted index list: 0
+	    Sum of lengths of all inverted index lists:          0
+	  Number of unique values in similarity dictionary:   0
+	    Maximum number of records in a similarity set:    0
+	    Sum of lengths of all similarity dictionary sets: 0
+	  Number of unique values in block dictionary:    0
+	    Maximum number of records in a block list:    0
+	    Sum of lengths of all block dictionary lists: 0
+
+  Finished building the index. 
+  Building time: 0.0 sec
+     Memory usage: 37 MB (resident: 11 MB)
+
+ Processing Query records ...
+
+	 Processed 100 records in the query phase
+	 Processed 200 records in the query phase
+	 Processed 300 records in the query phase
+	 Processed 400 records in the query phase
+	 Processed 500 records in the query phase
+	 Processed 600 records in the query phase
+	 Processed 700 records in the query phase
+	 Processed 800 records in the query phase
+	 Processed 900 records in the query phase
+	 Processed 1000 records in the query phase
+ TAMANHO GAB 604
+counter 0 dup counter 0
+
+ Query summary results for index: Dynamic Similarity Aware Indexing Technique
+----------------------------------------------------------------------------
+  Optimisation: 1; minimum threshold: 0.90; minimum total threshold: 10.00
+true matching equal zero
+  Query timing (min / max / avrg): 0.000 / 0.011 / 0.001 sec
+  Number of comparisons (min / max / avrg): 0 / 0 / 0
+  Memory usage: 39 MB (resident: 13 MB)

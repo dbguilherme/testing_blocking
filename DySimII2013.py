@@ -571,10 +571,11 @@ class ActiveOnlineBlocking:
         print "xxxxxxxxxxxxxxxxxx %s" % param.get('c')
         p='-c '+ str(param.get('c')) +' -g ' + str(param.get('g'))
         m = svm_train(y, x, p) 
+        return m 
          
          
-         
-   # def test_svm(self):    
+    def test_svm(self, model):  
+        
          
 # ============================================================================
 
@@ -706,7 +707,8 @@ if __name__ == '__main__':
     
     
     ind.arfftoSVM(arff_file, svm_file);
-    ind.train_svm(svm_file)   
+    model= ind.train_svm(svm_file)   
+    ind.test_svm(m);
     #if (1==1):
         #exit()
     

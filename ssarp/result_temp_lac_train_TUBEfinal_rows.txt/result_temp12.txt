@@ -6,19 +6,19 @@ total_occurs 263 n_rules 97 diff 97
 TRAIN_EMPTY=0 
 OCCURS_CMP=1 
 inserting instance 124 0
-time: classify 0.045482
-time: create_itemset 0.005990
-time: get_THE_intersection 0.002946
-time: get_THE_score 0.000028
-time: get_THE_union 0.000824
-time: get_TOTAL_score 0.000085
-time: get_from_cache 0.023343
-time: induce_rules 0.042605
-time: insert_into_cache 0.004617
-time: lazy_active_classification 0.043683
-time: project_training 0.000027
-time: read_test_set 0.001299
-time: read_training_set 0.000485
-time: release_itemset 0.000377
+time: classify 0.048997
+time: create_itemset 0.006722
+time: get_THE_intersection 0.003423
+time: get_THE_score 0.000041
+time: get_THE_union 0.000952
+time: get_TOTAL_score 0.000082
+time: get_from_cache 0.024816
+time: induce_rules 0.046159
+time: insert_into_cache 0.004988
+time: lazy_active_classification 0.047243
+time: project_training 0.000034
+time: read_test_set 0.001268
+time: read_training_set 0.000472
+time: release_itemset 0.000428
 time: reset_rules 0.000001
 

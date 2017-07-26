@@ -2,7 +2,7 @@ import string
 import sys
 import time
 import os
-
+sys.path.append("/home/guilherme/git/testing_blocking/libsvm/tools/")
 import distance
 
 
@@ -13,6 +13,9 @@ import stringcmp
 import random
 from collections import OrderedDict
 from svmutil import *
+from grid import *
+
+
 
 class ActiveOnlineBlocking:
     def __init__(self, total_num_attr, encoding_methods, comparison_methods, 
@@ -487,37 +490,94 @@ class ActiveOnlineBlocking:
         
         
        
-    
-    
+    def header(self,file):
+        #file_out="/tmp/final_treina.arff"
+        f = open(file, 'w')
+        f.write("@relation TrainingInstances\n")
+        for i in range(0,16):
+            f.write("@attribute att"+str(i) +" numeric\n")
+        f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
+        f.flush();
+        f.close();
+        
+        
+        
+        
+    ##############encontrar bug aqui!!!!!!!!!!!!!!!!!!!!!!!!!
     def allac (self, file, flag):
         self.count+=100;
         if(flag==1):
-            os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
+            os.system("cd ssarp &&  rm train-B16-* ")
+            os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  16")
             os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
-            os.system("cd ssarp && rm alac_lac_train_TUBEfinal.txt && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
-            
-            os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done > /tmp/final_treina.arff;")
-            file="/tmp/final_treina.arff"
-            f = open("/tmp/temp", 'w')
-            f.write("@relation TrainingInstances\n")
-            for i in range(0,16):
-                f.write("@attribute att"+str(i) +" numeric\n")
-            f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
+            os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+            os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
+            os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
         else:
            # os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
-            os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
-            os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
+            #os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
+            #os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
             
-            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
-            
-            os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+            #os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+            #os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
+            #os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+            #os.system("cd ssarp && wc -l alac_lac_train_TUBEfinal.txt")  
+            print ("erro ")
+        #os.system("cd ssarp && cat "+file+" > /tmp/temp " )
         
         
-        os.system("cd ssarp && cat "+file+" > /tmp/temp " )
+        
+    def arfftoSVM(self, inputfilename,outfile):
+        print "gerando arquivo svm"
+        fin = open(inputfilename,'r')
+        lines = fin.readlines()
+        #fin.close()
+        outputfilename = outfile
+        fout = open(outputfilename,'w')
+        
+        beginToRead = False
+        for line in lines:
+            flag =0
+            if beginToRead == True:
+                if len(line) > 1:# not an empty line
+                    #read this line
+                    dataList = line.split(',')
+                    resultLine =''
+                    resultLine += dataList[-1].strip()
+                    if (flag==0):
+                        resultLine += ' '
+                        flag=1
+                        
+                    for i in range(1,len(dataList)-1):
+                        resultLine += str(i)
+                        resultLine += (":"+dataList[i].strip()+" ")
+                    print(resultLine)
+                    fout.write(resultLine+"\n")
+
+            if line[0:6] == ' @DATA':
+                beginToRead = True
+
+        fout.close()
         
         
+        
+        
+    def train_svm(self,svm_file):
+        os.system("export PYTHONPATH=//home/guilherme/git/testing_blocking/libsvm/tools/:$PYTHONPATH")
+        y, x = svm_read_problem(svm_file)
+        
+        rate, param = find_parameters(svm_file, '-log2c -1,1,1 -log2g -1,1,1')
+        print "xxxxxxxxxxxxxxxxxx %s" % param.get('c')
+        p='-c '+ str(param.get('c')) +' -g ' + str(param.get('g'))
+        m = svm_train(y, x, p) 
+         
+         
+         
+   # def test_svm(self):    
+         
 # ============================================================================
+
 
 
 
@@ -548,23 +608,18 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    
-    
     total_num_attr = 16  # Total number of attribute 
                         # including rec-id, and ent-id
-    
-    
-   
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold
     build_percentage = float(sys.argv[4])       # Percentage of records used to
                                                 # build the index
-     
     file_name = sys.argv[5]             # optimization flag
+    arff_file="/tmp/final_treina.arff"
+    svm_file="/tmp/final_treina.svm"
+    
     
     index_name = 'Active Online Blocking'
-                                
-     
     # Define encoding and comparison methods to be used for attributes
     # Note: first element in the list should always be None. 
     enco_methods = [None, encode.dmetaphone, encode.dmetaphone, 
@@ -590,39 +645,28 @@ if __name__ == '__main__':
     load_memo_str = auxiliary.get_memory_usage()
     print '    ', load_memo_str
     print  
-          
-    
-  
-    
     ##
     file="/tmp/arff_out"
-    f = open(file, 'w',100)
+   
    
     # Match query records - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     #
-    
-    
     query_time_res = []  # Collect results for each of query record
     query_acc_res = []
     num_comp_res = []
     
     query_cnt = 1
-    
-       
     num_rec = 0
     print ' Processing Query records ...'
-    print
-
    
     # Go through query records and try to find a match for each query 
     tuples_count=0
     count = 0 # count of true duplicates 
     flag=1;
+    f = open(file, 'w',100)
     for rec_id, clean_rec in ind.query_records.iteritems():
-       
-       
-        ent_id = rec_id
         
+        ent_id = rec_id
         #print 'PERFOMING RECORD %s \n\n' %   ((rec_id))
         start_time = time.time()
         res_list, num_comp = ind.query(rec_id,clean_rec)
@@ -637,30 +681,23 @@ if __name__ == '__main__':
         query_time_res.append(query_time)
         num_comp_res.append(num_comp)
             
-            
-            
-            
-        
-        
         tuples_count+=len(res_list);
         ind.create_output_file(ent_id, res_list,f)
-        
+        ind.header(arff_file)
         if(tuples_count>100):             
              f.flush()
              ind.allac(file, flag)
+             
              f.close
              open(file, 'w').close()
-             tuples_count=0
-             
+             f = open(file, 'w',100)
+             tuples_count=0             
             # if(flag==0):
-            #    break;
+             break;
              flag=0;   
-             #time.sleep(10)
-        
-        
-        
-        
-       ##############################################################     
+             time.sleep(10)
+       
+     #############################################################     
        
 
         
@@ -668,13 +705,13 @@ if __name__ == '__main__':
    # print "COUNTTTTT %s" % count;  
     
     
-    
-   
+    ind.arfftoSVM(arff_file, svm_file);
+    ind.train_svm(svm_file)   
     #if (1==1):
         #exit()
     
     #####################
-    f.close()
+    #f.close()
     
       
     size_gab=0   
@@ -712,12 +749,7 @@ if __name__ == '__main__':
     else:
         print 'true matching equal zero'
         
-    print '  Query timing (min / max / avrg): %.3f / %.3f / %.3f sec' % \
-              (min(query_time_res), max(query_time_res), \
-               sum(query_time_res) / len(ind.query_records))
-    print '  Number of comparisons (min / max / avrg): %d / %d / %d' % \
-              (min(num_comp_res), max(num_comp_res), \
-               int(round(sum(num_comp_res) / len(ind.query_records))))
+   
   
    
 

@@ -552,10 +552,10 @@ class ActiveOnlineBlocking:
                     for i in range(1,len(dataList)-1):
                         resultLine += str(i)
                         resultLine += (":"+dataList[i].strip()+" ")
-                    print(resultLine)
+                   # print(resultLine)
                     fout.write(resultLine+"\n")
 
-            if line[0:6] == ' @DATA':
+            if line[0:6] == ' @DATA' or len([pos for pos, char in enumerate(line) if char == ','])>5:
                 beginToRead = True
 
         fout.close()
@@ -574,8 +574,21 @@ class ActiveOnlineBlocking:
         return m 
          
          
-    def test_svm(self, model):  
+    def test_svm(self, model, file_full):  
+        y, x = svm_read_problem(file_full)
         
+       # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
+        _labs, p_acc, p_vals = svm_predict(y, x, model)
+        
+       # print "saida...."
+       # print _labs
+       # print y
+        false=0;
+        for i in xrange(len(y)):
+            if(y[i] != _labs[i]):
+                false+=1;
+                   
+        print "fasle %i " % (false)
          
 # ============================================================================
 
@@ -618,7 +631,7 @@ if __name__ == '__main__':
     file_name = sys.argv[5]             # optimization flag
     arff_file="/tmp/final_treina.arff"
     svm_file="/tmp/final_treina.svm"
-    
+    svm_file_full="/tmp/svm_full.svm"
     
     index_name = 'Active Online Blocking'
     # Define encoding and comparison methods to be used for attributes
@@ -675,7 +688,7 @@ if __name__ == '__main__':
         #print ind.count
         
         num_rec += 1
-        if (num_rec % 1000 == 0):
+        if (num_rec % 100 == 0):
             print '\t Processed %d records in the query phase' % (num_rec)
             #print "inverted inde size %i" % ((ind.count))
             
@@ -690,8 +703,8 @@ if __name__ == '__main__':
              ind.allac(file, flag)
              
              f.close
-             open(file, 'w').close()
-             f = open(file, 'w',100)
+            # open(file, 'w').close()
+            # f = open(file, 'w',100)
              tuples_count=0             
             # if(flag==0):
              break;
@@ -708,7 +721,8 @@ if __name__ == '__main__':
     
     ind.arfftoSVM(arff_file, svm_file);
     model= ind.train_svm(svm_file)   
-    ind.test_svm(m);
+    ind.arfftoSVM(file, svm_file_full);
+    ind.test_svm(model,svm_file_full);
     #if (1==1):
         #exit()
     

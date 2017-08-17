@@ -1,0 +1,1232 @@
+Loglikeli Estimator. Counts =  51  (Total = 51 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B 10 -X train-B16-16
+Loglikeli Estimator. Counts =  51  (Total = 51 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B 10 -X train-B16-16
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B 10 -X train-B16-1
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B 10 -X train-B16-2
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B 10 -X train-B16-3
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B 10 -X train-B16-4
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B 10 -X train-B16-5
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B 10 -X train-B16-6
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B 10 -X train-B16-7
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B 10 -X train-B16-8
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B 10 -X train-B16-9
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B 10 -X train-B16-10
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B 10 -X train-B16-11
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B 10 -X train-B16-12
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+
+weka.estimators.TUBEstimator: Not enough training instances (required: 1, provided: 0)!
+Estimator options:
+
+-S <seed>
+	Set seed for cross-validation (Default 0).
+-N
+	Switch off cross-validation to determine the number of splits.
+	(Default is CV is switched on). 
+	Switches on Standard split method. Standard split method means
+	loglikelihood must increase more than -(log(N)+log(2))
+-F
+	Switch on Full split method:
+	The split is accepted as long as the loglikelihood is increased.
+	This is the default setting. Does not affect if CV or not.
+-W
+	Switch on W split method:
+	The split is accepted as long as the loglikelihood is increased by more than
+	-((N * log(sum/N))/10). Sum is number of instances of current range.
+	N is total number of instances. Does not affect if CV or not.
+-Y
+	Disallow empty splits:
+	Disallow splits that result in one of the subranges empty.
+-M
+	Split in the middle:
+	Split always in the middle of two instances.
+-G <num>
+	Choose grid cutting method and set number of grid partitions.
+-L
+	Disallow illegal cuts. Illegal cut is defined that 1 or 2 is true.
+	1. Number of instances below threshhold with threshold is
+	sqrt(10% of total number of instances
+	2. Width is smaller 0.1% of total width.
+-U <num>
+	Switch on other methods to forbid cuts. (only 1 implemented)
+	-U 1 .. density gets higher than 2x the max. density of 10 EqualWidth
+-Q
+	Use Least Squares criterion for CV.
+-O
+	Use Least Squares criterion for cut.
+-C
+	Set the cutting distance (distance cut to next instance)
+	as the 1/2 * minimal distance between two instances.
+-E <value>
+	Extend the border (default 0.0).
+-Z <value>
+	Set the distance to the instance where the cut is set (default 1.0E-4).
+-R
+	Cut at each instance only once with leaving the instance in the right bin.
+-B <num>
+	Set the maximum number of bins. Note: If CV is switched on,
+	the result might have less bins. (default 100)
+-V <option list>
+	Switch on verbose mode and give list of output options.
+	eg: 1,2,11
+-X <file name>
+	Filename for verbose output
+	(Default is up to 20 characters of relation name).
+-A <value>
+	Alpha value, or number of instances uniformly spread over range
+	Default is 1.0."
+-H <num>
+	Minimal number of instances allowed in bin,
+	otherwise cut is avoided.
+
+-D
+	If set, estimator is run in debug mode and
+	may output additional info to the console
+
+General options:
+
+-h
+	Get help on available options.
+-i <file>
+	The name of the file containing input instances.
+	If not supplied then instances will be read from stdin.
+-a <attribute index>
+	The number of the attribute the probability distribution
+	estimation is done for.
+	"first" and "last" are also valid entries.
+	If not supplied then no class is assigned.
+-c <class index>
+	If class value index is set, this attribute is taken as class.
+	"first" and "last" are also valid entries.
+	If not supplied then last is default.
+-v <class value index>
+	If value is different to -1, select instances of this class value.
+	"first" and "last" are also valid entries.
+	If not supplied then all instances are taken.
+
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B 10 -X train-B16-13
+Loglikeli Estimator. Counts =  21 0 31  (Total = 52 / 3 bins). LLK= 8.47958061068572
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B 10 -X train-B16-1
+Loglikeli Estimator. Counts =  23 0 4 0 25  (Total = 52 / 5 bins). LLK= 8.196236666464404
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B 10 -X train-B16-2
+Loglikeli Estimator. Counts =  13 0 12 27  (Total = 52 / 4 bins). LLK= 6.129485353464494
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B 10 -X train-B16-3
+Loglikeli Estimator. Counts =  30 1 21  (Total = 52 / 3 bins). LLK= 8.22723070664026
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B 10 -X train-B16-4
+Loglikeli Estimator. Counts =  3 0 2 3 2 18 24  (Total = 52 / 7 bins). LLK= 4.034717314153079
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B 10 -X train-B16-5
+Loglikeli Estimator. Counts =  1 12 1 1 5 1 31  (Total = 52 / 7 bins). LLK= 5.646263495647493
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B 10 -X train-B16-6
+Loglikeli Estimator. Counts =  14 0 38  (Total = 52 / 3 bins). LLK= 8.605077455648278
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B 10 -X train-B16-7
+Loglikeli Estimator. Counts =  20 32  (Total = 52 / 2 bins). LLK= 5.029972341055866
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B 10 -X train-B16-8
+Loglikeli Estimator. Counts =  6 0 6 0 5 1 34  (Total = 52 / 7 bins). LLK= 7.749890845449575
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B 10 -X train-B16-9
+Loglikeli Estimator. Counts =  14 0 1 0 5 0 2 0 30  (Total = 52 / 9 bins). LLK= 7.7616882268979
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B 10 -X train-B16-10
+Loglikeli Estimator. Counts =  5 0 1 15 0 6 25  (Total = 52 / 7 bins). LLK= 4.444525554028749
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B 10 -X train-B16-11
+Loglikeli Estimator. Counts =  37 3 12  (Total = 52 / 3 bins). LLK= 7.894398529787762
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B 10 -X train-B16-12
+Loglikeli Estimator. Counts =  8 0 2 12 0 30  (Total = 52 / 6 bins). LLK= 6.122952268361468
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B 10 -X train-B16-13
+Loglikeli Estimator. Counts =  2 4 10 5 2 29  (Total = 52 / 6 bins). LLK= 5.148320688922455
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B 10 -X train-B16-14
+Loglikeli Estimator. Counts =  19 0 33  (Total = 52 / 3 bins). LLK= 8.521518497319544
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B 10 -X train-B16-15
+Loglikeli Estimator. Counts =  51  (Total = 51 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B 10 -X train-B16-16

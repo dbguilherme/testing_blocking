@@ -83,6 +83,9 @@ class ActiveOnlineBlocking:
         # Number of actual attributes in the data set 
         # i.e. without the rec-id and ent-id
         self.num_compared_attr = self.total_num_attr - 2  
+        
+        self.true_positive=0;
+        self.false_positive=0;
 
 # ===============================================================================================        
     
@@ -472,9 +475,9 @@ class ActiveOnlineBlocking:
                             gab_list=ind.inv_index_gab.get(res_clean,[])
                            
                             if(dirty in gab_list or res_list[i] in gab_list):                             
-                                gab_list.remove(dirty)
-                                query_acc_res.append('TM')
-                                ind.inv_index_gab[dirty]=gab_list
+                                #gab_list.remove(dirty)
+                                #query_acc_res.append('TM')
+                                #ind.inv_index_gab[dirty]=gab_list
                                 f.write("1")
                             #else:
                                 #print "XXXXXres clean %s %s" % (res_clean,gab_list)
@@ -511,11 +514,12 @@ class ActiveOnlineBlocking:
             os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  16")
             os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
-            os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+            os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt")
+            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
             os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
             os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
         else:
-           # os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
+            #os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
             #os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
             #os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
             
@@ -568,7 +572,7 @@ class ActiveOnlineBlocking:
         y, x = svm_read_problem(svm_file)
         
         rate, param = find_parameters(svm_file, '-log2c -1,1,1 -log2g -1,1,1')
-        print "xxxxxxxxxxxxxxxxxx %s" % param.get('c')
+        print "xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g')))
         p='-c '+ str(param.get('c')) +' -g ' + str(param.get('g'))
         m = svm_train(y, x, p) 
         return m 
@@ -579,16 +583,14 @@ class ActiveOnlineBlocking:
         
        # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
         _labs, p_acc, p_vals = svm_predict(y, x, model)
+      
         
-       # print "saida...."
-       # print _labs
-       # print y
-        false=0;
         for i in xrange(len(y)):
             if(y[i] != _labs[i]):
-                false+=1;
-                   
-        print "fasle %i " % (false)
+                self.false_positive+=1;
+            else:
+                self.true_positive+=1;
+        
          
 # ============================================================================
 
@@ -696,20 +698,30 @@ if __name__ == '__main__':
         num_comp_res.append(num_comp)
             
         tuples_count+=len(res_list);
+        #gera arquivo de saida para avaliacao da tupla
         ind.create_output_file(ent_id, res_list,f)
         ind.header(arff_file)
+       
         if(tuples_count>100):             
              f.flush()
-             ind.allac(file, flag)
+             if(flag==1):
+                ind.allac(file, flag)
+               
+                ########################treinamento do SVM
              
-             f.close
-            # open(file, 'w').close()
-            # f = open(file, 'w',100)
-             tuples_count=0             
-            # if(flag==0):
-             break;
+                ind.arfftoSVM(arff_file, svm_file);
+                model= ind.train_svm(svm_file)  
+             
+             tuples_count=0                      
              flag=0;   
-             time.sleep(10)
+            # if(flag==0):
+             
+             ind.arfftoSVM(file, svm_file_full);
+             ind.test_svm(model,svm_file_full); 
+             f.close
+             open(file, 'w').close()
+             f = open(file, 'w',100)
+            # time.sleep(10)
        
      #############################################################     
        
@@ -718,11 +730,10 @@ if __name__ == '__main__':
    # query_memo_str = auxiliary.get_memory_usage()
    # print "COUNTTTTT %s" % count;  
     
+    print "false positive %i" % ind.false_positive
+    print "true positive %i" % ind.true_positive
+     
     
-    ind.arfftoSVM(arff_file, svm_file);
-    model= ind.train_svm(svm_file)   
-    ind.arfftoSVM(file, svm_file_full);
-    ind.test_svm(model,svm_file_full);
     #if (1==1):
         #exit()
     

@@ -430,68 +430,86 @@ class ActiveOnlineBlocking:
                 
                rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
                                                         # index values
-            
+       
+       ###################################################
+       
     def create_output_file(self, ent_id,res_list,f):
-        
+         
+         list_of_dict_=[]
+         gabarito=[]
+         label=[]
          if (res_list != [] and len(res_list)>1):  # Some results were returned
             for i in range(len(res_list)):
-                 try:
-                    #cado sejam iguais                   
+                
+                    #caso sejam iguais                   
                     if(ent_id==res_list[i]):
                         continue
-                    #if (i > 100):
-                        #break
-                    
+                    if(("dup") in ent_id and  ("dup") in res_list[i]):
+                        continue
+                   
+                   
                     valueA=ind.query_records[ent_id]
                     valueB=ind.query_records[res_list[i]]
-                    sim=[]
+                    dictionary={}
                     for j in range(1,len(valueA)):
-                       # print ("%s   %s   %f") % (valueA[j],valueB[j], stringcmp.jaro(valueA[j], valueB[j]))
+                      
+                        dictionary[j]=ind.comp_methods[1](valueA[j], valueB[j])
                         f.write(str(ind.comp_methods[1](valueA[j], valueB[j])) + ", ")
                        #((stringcmp.jaro(valueA[j], valueB[j])))
-                              
+                    list_of_dict_.append(dictionary)          
                    #false match 
+                   
+                   
+                   
                     if(("dup") not in ent_id and  ("dup") not in res_list[i]):
                     #    print "false match 1"
                         query_acc_res.append('FM')
                         f.write("0")
+                        gabarito.append(0);
+                        label.append(-1)
                     else:
-                       
-                        #last case:
                         if(("dup") in ent_id):
                             ent_clean=ent_id.split("-")[0]
                             dirty=ent_id
                         else:
-                            ent_clean=ent_id
-                            #print "ent clean %s" % ent_clean
+                            ent_clean=ent_id  
+                            
                         if(("dup") in res_list[i]):
                             res_clean=res_list[i].split("-")[0]
                             dirty=res_list[i]
                         else:
-                            res_clean=res_list[i]                        
-                        #if("507-" in ent_id):
-                        #        print "chegouuuuuuuuuuuuuuuuuuuuuuuuuuuu %s  %s" % (res_clean, res_list );  
+                            res_clean=res_list[i] 
+                                
                         if(res_clean==ent_clean):
                             gab_list=ind.inv_index_gab.get(res_clean,[])
-                           
+                            
                             if(dirty in gab_list or res_list[i] in gab_list):                             
+                                if(("dup") not in ent_id):
+                                    label.append(res_list[i])                            
+                                else:
+                                    label.append(dirty)                            
                                 #gab_list.remove(dirty)
                                 #query_acc_res.append('TM')
                                 #ind.inv_index_gab[dirty]=gab_list
                                 f.write("1")
-                            #else:
-                                #print "XXXXXres clean %s %s" % (res_clean,gab_list)
+                                gabarito.append(1) 
+                            else:
+                                if(("dup") not in ent_id):
+                                    label.append(res_list[i])                            
+                                else:
+                                    label.append(dirty)                            
+                                gabarito.append(0) 
                         else:
-                           # print "false match 2"
+                            label.append(-1)
                             query_acc_res.append('FM')
                             f.write("0")
+                            gabarito.append(0);
                             
                     f.write("\n")
                    
-                 except IndexError:
-                        print "Oops!  That was no valid number.  Try again... %s %s" % (ent_id,res_list) 
-        
-        
+         assert (len(gabarito)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
+         print "problem %s %s %s %s %s" %(ent_id,res_list, gabarito, list_of_dict_, label)
+         return (gabarito, list_of_dict_,label)
        
     def header(self,file):
         #file_out="/tmp/final_treina.arff"
@@ -591,7 +609,30 @@ class ActiveOnlineBlocking:
             else:
                 self.true_positive+=1;
         
-         
+    
+    def test_svm_online(self, model, y, x, gabarito ):  
+        #y, x = svm_read_problem(file_full)
+        
+       # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
+        _labs, p_acc, p_vals = svm_predict(y, x, model)
+      
+        #print "gabarito real %s label %s " %(y,gabarito)
+        for i in xrange(len(y)):
+            if(y[i] == _labs[i] and y[i]==1):
+                self.true_positive+=1;
+                print "true positive %s " % _labs[i]                
+            else:
+                if(y[i] != _labs[i]):
+                    self.false_positive+=1;
+        for x in (gabarito):
+            if(x!=-1):
+                try:
+                    res_clean=x.split("-")[0]                
+                    gab_list=ind.inv_index_gab.get(res_clean,[])
+                    gab_list.remove(x)
+                    ind.inv_index_gab[x]=gab_list
+                except ValueError:
+                    print "element not exists"
 # ============================================================================
 
 
@@ -683,11 +724,10 @@ if __name__ == '__main__':
     for rec_id, clean_rec in ind.query_records.iteritems():
         
         ent_id = rec_id
-        #print 'PERFOMING RECORD %s \n\n' %   ((rec_id))
         start_time = time.time()
         res_list, num_comp = ind.query(rec_id,clean_rec)
         query_time = time.time() - start_time
-        #print ind.count
+       # print "query %s pairs %s" % (rec_id, res_list)
         
         num_rec += 1
         if (num_rec % 100 == 0):
@@ -699,48 +739,52 @@ if __name__ == '__main__':
             
         tuples_count+=len(res_list);
         #gera arquivo de saida para avaliacao da tupla
-        ind.create_output_file(ent_id, res_list,f)
+        gabarito=[]
+        list_of_dict=[]
+        #evitar que registros nao formaram pares sejam processados
+        if(len(res_list)==0):
+            continue
+        gabarito, list_of_pairs_, label = ind.create_output_file(ent_id, res_list,f)
         ind.header(arff_file)
        
         if(tuples_count>100):             
              f.flush()
+             
              if(flag==1):
                 ind.allac(file, flag)
                
-                ########################treinamento do SVM
-             
+                #treinamento do SVM
                 ind.arfftoSVM(arff_file, svm_file);
                 model= ind.train_svm(svm_file)  
-             
-             tuples_count=0                      
              flag=0;   
-            # if(flag==0):
              
-             ind.arfftoSVM(file, svm_file_full);
-             ind.test_svm(model,svm_file_full); 
-             f.close
-             open(file, 'w').close()
-             f = open(file, 'w',100)
+             #tuples_count=0                                   
+             if(len(list_of_pairs_)>0):
+                ind.test_svm_online(model,gabarito, list_of_pairs_, label); 
+             
+             
+             
+             #ind.arfftoSVM(file, svm_file_full);
+             #ind.test_svm(model,svm_file_full); 
+             #print "list of pairs %s" % list_of_pairs_
+             
+             
+             #p_label, p_acc, p_val = svm_predict(gabarito, list_of_dict_, model)
+             #print p_label
+             #f.close
+             #open(file, 'w').close()
+             #f = open(file, 'w',100)
             # time.sleep(10)
        
      #############################################################     
        
 
-        
-   # query_memo_str = auxiliary.get_memory_usage()
-   # print "COUNTTTTT %s" % count;  
-    
     print "false positive %i" % ind.false_positive
     print "true positive %i" % ind.true_positive
      
     
-    #if (1==1):
-        #exit()
-    
-    #####################
-    #f.close()
-    
       
+       
     size_gab=0   
     for inv_list in ind.inv_index_gab.itervalues():
         if(len(inv_list)>1  ):
@@ -750,9 +794,7 @@ if __name__ == '__main__':
             #    print "\n\ngab %i" % inv_list[i]
     print ' TAMANHO GAB %d' % size_gab
 
-   # values.sort()
-    #print ind.inv_index
-    
+      
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
     #
     num_tm = query_acc_res.count('TM')

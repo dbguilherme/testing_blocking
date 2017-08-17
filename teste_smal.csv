@@ -1,4 +1,13 @@
-rec_id,culture,sex,age,date_of_birth,title,given_name,surname,state,suburb,postcode,street_number,address_1,address_2,phone_number,soc_sec_id,blocking_number,family_role
-rec-49-org,rom1,m,10,20070410,ms,david,dreckow,vic,lerderderg,3977,120,summervillecrescent,coralyn,61807283074,9723553,6,NoRole
 rec-95-org,rom,f,26,20070410323,ms,andrew,beklea,nsw,middlecamp,2423,14,,hilltoprmb487a,237926701,6183236,7,NoRole
-rec-49-dup-0,romdfsfsdfs,m,10,20070410,ms,david,dreckow,vic,lerderderg,3977,120,summervillecrescent,coralyn,61807283074,9723553,6,NoRole    
+rec-49-org,romdfsfsdfs,m,10,20070410,ms,david,dreckow,vic,lerderderg,3977,120,summervillecrescent,coralyn,61807283074,9723553,6,NoRole
+rec-49-dup-0,romdfsfsdfs,m,10,20070410,ms,david,dreckow,vic,lerderderg,3977,120,summervillecrescent,coralyn,61807283074,9723553,6,NoRole
+rec-49-dup-1,romdfsfsdfs,m,10,20070410,ms,david,dreckow,vic,lerderderg,3977,120,summervillecrescent,coralyn,61807283074,9723553,6,NoRole
+rec-250-org,eng,f,30,19870406,ms,lauren,victor,qld,hollowaysbeach,2160,1,barlowstreet,,388145222,7062059,4,NoRole
+rec-880-org,usa,f,21,,mr,melanie,hardin,vic,ancona,4305,165,millardplace,,883808137,7879429,9,NoRole
+rec-721-org,unk,,22,19950806,ms,liam,scollard,vic,patchewollock,2257,2,ballaratstreet,rosettavillage,0893961217,5594721,3,NoRole
+rec-532-org,unk,m,,19330225,,dakota,abat,nsw,chatswoodwest,4221,7,currongstreet,immanuelgarden,293119216,4372518,7,NoRole
+rec-240-org,chi,m,25,19921218,mr,samantha,yue,qld,gununa,4221,18,groomstreet,ironbarkridge,,1384716,3,NoRole
+rec-133-org,ira,f,32,19850530,,bayley,khosravi,vic,gobur,3156,12,hazelsmithcrescent,,866388538,8066525,3,NoRole
+rec-65-org,eng,f,32,19850630,ms,alexander,victors,nsw,cullenbullen,4510,22,torrensstreet,,0296373718,5258410,8,NoRole
+rec-65-dup-0,eng,f33,332,139850630,ms,alexanderf,victors,nsw,cullenbullen,4510,22,torrensstreet,,0296373718,5258410,8,NoRole
+rec-56-org,eng,f33,332,139850630,ms,alexanderf,victors,nsw,cullenbullen,4510,22,torrensstreet,,0296373718,5258410,8,NoRole

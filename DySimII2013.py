@@ -11,9 +11,10 @@ import auxiliary
 import encode
 import stringcmp
 import random
-from collections import OrderedDict
+from collections import OrderedDict,defaultdict
 from svmutil import *
 from grid import *
+import collections
 
 
 
@@ -357,7 +358,7 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.iteritems():     
-            if(i > num_compared_attr*0.5):
+            if(i > num_compared_attr/4):
                break;
             i=i+1
             #print rec_val
@@ -367,8 +368,7 @@ class ActiveOnlineBlocking:
             rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
                                                     # index values
             
-            if (rec_val_ind not in inv_index):
-                
+            if (rec_val_ind not in inv_index):               
              
                
                 if(rec_val == 'norole' ):
@@ -649,6 +649,101 @@ class ActiveOnlineBlocking:
                 self.false_negative +=1;
             if(_labs[i] ==0 and y[i]==0):
                 self.true_negative +=1;
+    
+    def load_struct_active(self):
+        ###load discretized file
+        lines=0
+        f = open("ssarp/lac_train_TUBEfinal.txt", 'r',100)
+        list_of_pairs=[]
+        gabarito=[]
+        for line in f:
+            splitted=line.strip().split(" ")
+            dict={}
+            for i in xrange(len(splitted)-2):
+                 if(i==1):
+                     gabarito.append(splitted[i].split("=")[1])
+                 dict[i]= (splitted[i+2].split("="))[1]
+                    
+            list_of_pairs.append(dict)
+        print list_of_pairs
+        print gabarito   
+        return list_of_pairs,gabarito 
+    
+  
+
+    def active_learning(self, list_of_pairs, gabarito):
+        list_of_pairs, gabarito= self.load_struct_active()
+        
+        #dicionario de dados
+        c = collections.Counter()
+        for pair in list_of_pairs:
+            for k, v in pair.iteritems():
+                c[v]+=1
+        print c.most_common(5)
+        
+        count=[0] * len(list_of_pairs)
+        ##encontrar elemento mais commun
+        line=0;
+        for pair in list_of_pairs:
+            for k, v in pair.iteritems():
+                for i in xrange(len(list_of_pairs)):  
+                    if list_of_pairs[i][k]==v:
+                        count[line]+=1                        
+                count[line]-=1#reduzir um pq esta comparando com a mesma linha
+                             
+            line+=1
+             
+        print  (count)
+        
+        #traduzir na lista dos pares frequentes
+        most_frequent_pairs=[]
+        for i in xrange(len(count)):
+            if(max(count)==count[i]):
+                most_frequent_pairs.append(list_of_pairs[i])
+        
+               
+        print  most_frequent_pairs 
+        
+        frequency=[0]*len(most_frequent_pairs)
+        line=0
+        #encontrar o 
+        for pair in most_frequent_pairs:
+            for k, v in pair.iteritems():
+                frequency[line]+=c[v]
+            line+=1
+                
+        print frequency
+        line=0;   
+        for i in xrange(len(frequency)):
+            
+            if frequency[i]==max(frequency):
+                line=i
+        
+        #linha mais frequente        
+        print most_frequent_pairs[line], line     
+        
+        training_set={}
+        training_set.update (most_frequent_pairs[line])
+        
+        print  "xxxxxxxxx %s " % training_set
+        n_rule=[0]*len(list_of_pairs)
+        line=0
+        for pair in list_of_pairs:
+            print pair
+            for labeled_pair,v in training_set.iteritems():
+                print v
+                if(pair[i]==v):
+                    n_rule[line]+=1
+                       # print pair[i],i
+                    print n_rule    
+            print             
+            line+=1
+        
+                
+        
+        
+                
+        return 1               
 # ============================================================================
 
 
@@ -661,6 +756,14 @@ def __get_substr__(s):
     # Returns last three digits of post code
     return s[1:]  
     
+     
+    
+        
+        
+        
+        
+        
+        
 
 def __postcode_cmp__(s1, s2): 
     # Function for post code comparison: count
@@ -763,6 +866,11 @@ if __name__ == '__main__':
         gabarito, list_of_pairs_, label = ind.create_output_file(ent_id, res_list,f)
         ind.header(arff_file)
        
+        #test active active_learning
+        if( ind.active_learning(list_of_pairs_,gabarito)==1):
+            break  
+       
+       
         if(tuples_count>100):             
              f.flush()
              
@@ -772,7 +880,7 @@ if __name__ == '__main__':
                 #treinamento do SVM
                 ind.arfftoSVM(arff_file, svm_file);
                 model= ind.train_svm(svm_file)  
-                break
+               # break
              flag=0;   
              
              #tuples_count=0                                   

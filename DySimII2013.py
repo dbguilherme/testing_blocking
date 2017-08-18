@@ -86,6 +86,10 @@ class ActiveOnlineBlocking:
         
         self.true_positive=0;
         self.false_positive=0;
+        self.false_negative=0
+        self.true_negative=0
+        self.compute=0
+
 
 # ===============================================================================================        
     
@@ -353,7 +357,7 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.iteritems():     
-            if(i > num_compared_attr/4):
+            if(i > num_compared_attr*0.5):
                break;
             i=i+1
             #print rec_val
@@ -457,7 +461,7 @@ class ActiveOnlineBlocking:
                         f.write(str(ind.comp_methods[1](valueA[j], valueB[j])) + ", ")
                        #((stringcmp.jaro(valueA[j], valueB[j])))
                     list_of_dict_.append(dictionary)          
-                   #false match 
+                  
                    
                    
                    
@@ -508,14 +512,14 @@ class ActiveOnlineBlocking:
                     f.write("\n")
                    
          assert (len(gabarito)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
-         print "problem %s %s %s %s %s" %(ent_id,res_list, gabarito, list_of_dict_, label)
+         #print "problem %s %s %s %s %s" %(ent_id,res_list, gabarito, list_of_dict_, label)
          return (gabarito, list_of_dict_,label)
        
     def header(self,file):
         #file_out="/tmp/final_treina.arff"
         f = open(file, 'w')
         f.write("@relation TrainingInstances\n")
-        for i in range(0,16):
+        for i in range(0,5):
             f.write("@attribute att"+str(i) +" numeric\n")
         f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
         f.flush();
@@ -528,9 +532,9 @@ class ActiveOnlineBlocking:
     def allac (self, file, flag):
         self.count+=100;
         if(flag==1):
-            os.system("cd ssarp &&  rm train-B16-* ")
-            os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  16")
-            os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
+            os.system("cd ssarp &&  rm train-B5-* ")
+            os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  5")
+            os.system("cd ssarp && ./discretize_TUBE.pl train-B5 "+file+ "  5 lac_train_TUBEfinal.txt 1")
             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
             os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt")
             os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
@@ -614,25 +618,37 @@ class ActiveOnlineBlocking:
         #y, x = svm_read_problem(file_full)
         
        # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
-        _labs, p_acc, p_vals = svm_predict(y, x, model)
-      
-        #print "gabarito real %s label %s " %(y,gabarito)
+        _labs, p_acc, p_vals = svm_predict(y, x, model )
+       
+        
         for i in xrange(len(y)):
-            if(y[i] == _labs[i] and y[i]==1):
+            self.compute+=1;
+            #true positive
+            if( _labs[i]==1 and y[i]==1):
                 self.true_positive+=1;
-                print "true positive %s " % _labs[i]                
-            else:
-                if(y[i] != _labs[i]):
-                    self.false_positive+=1;
-        for x in (gabarito):
-            if(x!=-1):
-                try:
-                    res_clean=x.split("-")[0]                
-                    gab_list=ind.inv_index_gab.get(res_clean,[])
-                    gab_list.remove(x)
-                    ind.inv_index_gab[x]=gab_list
-                except ValueError:
-                    print "element not exists"
+                print "true positive %s " % gabarito[i]                
+                #remove do gabarito as tags reais 
+                for x in (gabarito):
+                    if(x!=-1):
+                        try:
+                            res_clean=x.split("-")[0]  
+                            
+                            gab_list=ind.inv_index_gab.get(res_clean,[])
+                            print "gab_list %s" % gab_list
+                            print "remove  %s" % x
+                            gab_list.remove(x)
+                            ind.inv_index_gab[res_clean]=gab_list
+                            print "gab_list %s" % gab_list
+                        except ValueError:
+                            print "element not exists"
+            #false positive
+            if(_labs[i] ==1 and y[i]==0):
+                self.false_positive+=1;
+            #false negative 
+            if(_labs[i] ==0 and y[i]==1):
+                self.false_negative +=1;
+            if(_labs[i] ==0 and y[i]==0):
+                self.true_negative +=1;
 # ============================================================================
 
 
@@ -665,7 +681,7 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 16  # Total number of attribute 
+    total_num_attr = 5  # Total number of attribute 
                         # including rec-id, and ent-id
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold
@@ -756,6 +772,7 @@ if __name__ == '__main__':
                 #treinamento do SVM
                 ind.arfftoSVM(arff_file, svm_file);
                 model= ind.train_svm(svm_file)  
+                break
              flag=0;   
              
              #tuples_count=0                                   
@@ -778,20 +795,22 @@ if __name__ == '__main__':
        
      #############################################################     
        
-
+    print "####################"
     print "false positive %i" % ind.false_positive
     print "true positive %i" % ind.true_positive
-     
+    print "false_negative %i" % ind.false_negative
+    print "true_negative %i" % ind.true_negative
+    print "full size %i" % ind.compute
     
       
        
     size_gab=0   
     for inv_list in ind.inv_index_gab.itervalues():
         if(len(inv_list)>1  ):
-            size_gab+=len(inv_list)
+            size_gab+=len(inv_list)-1
            # print "%s %d " % (inv_list[0],len(inv_list))
-            #for i in inv_list:
-            #    print "\n\ngab %i" % inv_list[i]
+            #for i in xrange(len(inv_list)):
+                #print "\n\ngab %s" % inv_list[i]
     print ' TAMANHO GAB %d' % size_gab
 
       

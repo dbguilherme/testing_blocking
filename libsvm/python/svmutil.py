@@ -199,7 +199,9 @@ def svm_predict(y, x, m, options=""):
 	predict_probability = 0
 	argv = options.split()
 	i = 0
+	print "arg %s" % argv[i]
 	while i < len(argv):
+                
 		if argv[i] == '-b':
 			i += 1
 			predict_probability = int(argv[i])
@@ -254,8 +256,8 @@ def svm_predict(y, x, m, options=""):
 	if svm_type in [EPSILON_SVR, NU_SVR]:
 		info("Mean squared error = %g (regression)" % MSE)
 		info("Squared correlation coefficient = %g (regression)" % SCC)
-	else:
-		info("Accuracy = %g%% (%d/%d) (classification)" % (ACC, int(l*ACC/100), l))
+	#else:
+		#info("Accuracy = %g%% (%d/%d) (classification)" % (ACC, int(l*ACC/100), l))
 
 	return pred_labels, (ACC, MSE, SCC), pred_values
 

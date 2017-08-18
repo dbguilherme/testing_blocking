@@ -149,9 +149,8 @@ void predict(FILE *input, FILE *output)
 			((total*sumpp-sump*sump)*(total*sumtt-sumt*sumt))
 			);
 	}
-	else
-		info("Accuracy = %g%% (%d/%d) (classification)\n",
-			(double)correct/total*100,correct,total);
+//         else
+//                 #info("Accuracy = %g%% (%d/%d) (classification)\n", (double)correct/total*100,correct,total);
 	if(predict_probability)
 		free(prob_estimates);
 }

@@ -665,8 +665,8 @@ class ActiveOnlineBlocking:
                  dict[i]= (splitted[i+2].split("="))[1]
                     
             list_of_pairs.append(dict)
-        print list_of_pairs
-        print gabarito   
+        #print list_of_pairs
+       # print gabarito   
         return list_of_pairs,gabarito 
     
   
@@ -674,70 +674,169 @@ class ActiveOnlineBlocking:
     def active_learning(self, list_of_pairs, gabarito):
         list_of_pairs, gabarito= self.load_struct_active()
         
-        #dicionario de dados
-        c = collections.Counter()
-        for pair in list_of_pairs:
-            for k, v in pair.iteritems():
-                c[v]+=1
-        print c.most_common(5)
-        
-        count=[0] * len(list_of_pairs)
-        ##encontrar elemento mais commun
-        line=0;
-        for pair in list_of_pairs:
-            for k, v in pair.iteritems():
-                for i in xrange(len(list_of_pairs)):  
-                    if list_of_pairs[i][k]==v:
-                        count[line]+=1                        
-                count[line]-=1#reduzir um pq esta comparando com a mesma linha
-                             
-            line+=1
-             
-        print  (count)
-        
-        #traduzir na lista dos pares frequentes
-        most_frequent_pairs=[]
-        for i in xrange(len(count)):
-            if(max(count)==count[i]):
-                most_frequent_pairs.append(list_of_pairs[i])
-        
-               
-        print  most_frequent_pairs 
-        
-        frequency=[0]*len(most_frequent_pairs)
-        line=0
-        #encontrar o 
-        for pair in most_frequent_pairs:
-            for k, v in pair.iteritems():
-                frequency[line]+=c[v]
-            line+=1
+        #only print value  
+        for s in list_of_pairs:
+            print(s)
                 
-        print frequency
-        line=0;   
-        for i in xrange(len(frequency)):
+        print "\n\n"
+        
+        full_frequency = collections.Counter()
+        collumn_frequency=[]; 
+        temp=collections.Counter()
+        max_value=[]
+        for j in xrange(len(list_of_pairs[0])): # para cada coluna fazer a varedura
+            for i in xrange(len(list_of_pairs)): # varrear as linhas 
+                full_frequency[list_of_pairs[i][j]]+=1
+                temp[list_of_pairs[i][j]]+=1
+            max_value.append(max(temp.iteritems(), key=lambda x: x[1]))                        
+            collumn_frequency.append(temp)            
+            temp= collections.Counter()    
+        matrix = [[0 for x in range(len(list_of_pairs))] for y in range(59)]
+        
+        for i in range(len(list_of_pairs)):
+            for j in range(len(list_of_pairs[i])):
+                matrix[i][j]=collumn_frequency[j][list_of_pairs[i][j]]
+        value=[]        
+        for i in range(len(list_of_pairs)):
+            value.append(sum(matrix[i]));
+
+        print "total de valores por linha %s" % value
+        
+        
+        count_value=[0]*len(list_of_pairs)
+       # top_values= sorted(range(len(value)), key=lambda i: value[i], reverse=True)[:2] #get the top values positions
+        top_values=sorted(enumerate(value), key=lambda x: x[1],reverse=True)                       
+        print "top  valores %s " % top_values
+        
+        memory=top_values[0];
+        for tuple in top_values:
+            if(memory[1]==tuple[1]):
+                memory=tuple
+        print "tuple final %s" % memory[0]
+#         #conta a frquencia dos valores globais
+#         for value in top_values:
+#             count_value[value[0]]=0
+#             for k,v in list_of_pairs[value[0]].items():
+#                 count_value[value[0]]+=full_frequency[v];
+#         
+#         for i in range(len(count_value)):
+#             print "count value %s %i %s" % (count_value[i], i, top_values[i])
+        
+
+        
+        
+        training_set=[]        
+        training_set.append (list_of_pairs[memory[0]])
+        
+       # print "top value %s "% sorted(range(len(count_value)), key=lambda i: count_value[i], reverse=True)[:1]
+        print "gabarito %s" % training_set
+        
+        
+        
+        stored_line=[];
+        
+        while(1):
+            line=0
+            n_rule=[0]*len(list_of_pairs)
+            for pair in list_of_pairs:
+                for gab in training_set:
+                    for i in range(len(gab)):
+                        if(gab[i]==pair[i]):
+                            #print "xxx %s, %i" %  (gab[i],i)
+                            n_rule[line]+=1
+                line+=1
             
-            if frequency[i]==max(frequency):
-                line=i
-        
-        #linha mais frequente        
-        print most_frequent_pairs[line], line     
-        
-        training_set={}
-        training_set.update (most_frequent_pairs[line])
-        
-        print  "xxxxxxxxx %s " % training_set
-        n_rule=[0]*len(list_of_pairs)
-        line=0
-        for pair in list_of_pairs:
-            print pair
-            for labeled_pair,v in training_set.iteritems():
-                print v
-                if(pair[i]==v):
-                    n_rule[line]+=1
-                       # print pair[i],i
-                    print n_rule    
-            print             
-            line+=1
+            sorted_list = sorted(enumerate(n_rule), key=lambda x: x[1])
+            print "numero de rgras %s" % sorted_list     
+            memory=sorted_list[0];
+            equal_elements=[memory[0]]
+            for tuple in sorted_list:
+                if(memory[1]==tuple[1]):
+                    memory=tuple
+                    equal_elements.append(tuple[0])
+                else:
+                    break;
+            print "elementos iguais %i " % len(equal_elements)    
+            #frequencia colunar 
+            print "memory %s " % memory[0]       
+            #actual_line =    list_of_pairs[memory[0]]
+            if(memory[0] not in stored_line):
+                stored_line.append(memory[0])
+                print "a posicao %s gero menos regras " % memory[0]
+                training_set.append(list_of_pairs[memory[0]])   
+                print "novo training set %s " %training_set
+            else:
+                break    
+                               
+        #         n_rule=[0]*len(list_of_pairs)
+#         line=0
+#         for pair in list_of_pairs:
+#             print pair
+#             for labeled_pair,v in training_set.iteritems():
+#                 print v
+#                 if(pair[i]==v):
+#                     n_rule[line]+=1
+#                        # print pair[i],i
+#                     print n_rule    
+#             print             
+#             line+=1 
+                
+        ##encontrar elemento mais commun
+#         line=0;
+#         for pair in list_of_pairs:
+#             for k, v in pair.iteritems():
+#                 for i in xrange(len(list_of_pairs)):  
+#                     if list_of_pairs[i][k]==v:
+#                         count[line]+=1                        
+#                 count[line]-=1#reduzir um pq esta comparando com a mesma linha
+#                              
+#             line+=1
+#              
+#         print  (count)
+#         
+#         #traduzir na lista dos pares frequentes
+#         most_frequent_pairs=[]
+#         for i in xrange(len(count)):
+#             if(max(count)==count[i]):
+#                 most_frequent_pairs.append(list_of_pairs[i])
+#         
+#                
+#         print  most_frequent_pairs 
+#         
+#         frequency=[0]*len(most_frequent_pairs)
+#         line=0
+#         #encontrar o 
+#         for pair in most_frequent_pairs:
+#             for k, v in pair.iteritems():
+#                 frequency[line]+=c[v]
+#             line+=1
+#                 
+#         print frequency
+#         line=0;   
+#         for i in xrange(len(frequency)):
+#             
+#             if frequency[i]==max(frequency):
+#                 line=i
+#         
+#         #linha mais frequente        
+#         print most_frequent_pairs[line], line     
+#         
+#         training_set={}
+#         training_set.update (most_frequent_pairs[line])
+#         
+#         print  "xxxxxxxxx %s " % training_set
+#         n_rule=[0]*len(list_of_pairs)
+#         line=0
+#         for pair in list_of_pairs:
+#             print pair
+#             for labeled_pair,v in training_set.iteritems():
+#                 print v
+#                 if(pair[i]==v):
+#                     n_rule[line]+=1
+#                        # print pair[i],i
+#                     print n_rule    
+#             print             
+#             line+=1
         
                 
         
@@ -784,7 +883,7 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 5  # Total number of attribute 
+    total_num_attr = 3  # Total number of attribute 
                         # including rec-id, and ent-id
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold

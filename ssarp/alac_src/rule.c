@@ -77,7 +77,7 @@ PRINTS A RULE.
 void print_rule(rule_t rule) {
 	__START_TIMER__
 
-	for(int i=0;i<rule.size-1;i++) printf("%s-\n", SYMBOL_TABLE[rule.ant[i]].c_str());
+	for(int i=0;i<rule.size-1;i++) printf("---------%s-\n", SYMBOL_TABLE[rule.ant[i]].c_str());
 	printf("->%s \n", SYMBOL_TABLE[TARGET_ID[rule.label]].c_str());
 	printf("size= %d count= %d supp= %f conf= %f\n", rule.size-1, rule.count, rule.supp, rule.conf);
 	__FINISH_TIMER__
@@ -92,9 +92,9 @@ void print_rules() {
 	  printf("-------------rule %i ----------------\n",i);
 		printf("size= %d count= %d supp= %f conf= %f\n", RULES[i].size-1, RULES[i].count, RULES[i].supp, RULES[i].conf);
 
-	       for(int i=0;i<RULES[i].size-1;i++) printf("%s-\n", SYMBOL_TABLE[RULES[i].ant[i]].c_str());
+	       for(int j=0;i<RULES[i].size-1;j++) printf("\n REGRA%s----------------\n", SYMBOL_TABLE[RULES[i].ant[j]].c_str());
 
-	printf("->%s \n", SYMBOL_TABLE[TARGET_ID[RULES[i].label]].c_str());
+                
 	}
 	__FINISH_TIMER__
 }
@@ -187,6 +187,7 @@ void induce_rules(int* items, int n_items, int* count_target, int level, int pro
 					break;
 				}
 				N_RULES++;
+                                
 			}
 			if(cont.status==0) release_itemset(cons);
 		}
@@ -205,7 +206,7 @@ void induce_rules(int* items, int n_items, int* count_target, int level, int pro
 	free(cb2);
 	qsort((rule_t*) RULES, N_RULES, sizeof(rule_t), rule_cmp);
 	for(int i=0;i<= N_RULES ;i++){
-	  printf("#####################***************************");
+	  printf("#####################*************************** %i %i\n", RULES[i].count, N_RULES );
 	  print_rule(RULES[i]);
 	}
 	__FINISH_TIMER__

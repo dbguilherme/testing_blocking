@@ -750,7 +750,7 @@ class ActiveOnlineBlocking:
             print "numero de rgras %s" % sorted_list     
             memory=sorted_list[0];
             equal_elements=[memory[0]]
-            for tuple in sorted_list:
+            for tuple in sorted_list[1:]:
                 if(memory[1]==tuple[1]):
                     memory=tuple
                     equal_elements.append(tuple[0])
@@ -758,12 +758,33 @@ class ActiveOnlineBlocking:
                     break;
             print "elementos iguais %i " % len(equal_elements)    
             #frequencia colunar 
-            print "memory %s " % memory[0]       
+            matrix_frequency=[0]* (len(equal_elements))
+            if(len(equal_elements)>1):  #tem mais  de um elemento
+                for i in range(len(equal_elements)): #lista de elementos 
+                    for j in range(len(list_of_pairs[0])):  #cada coluna do elemento
+                        matrix_frequency[i]+= collumn_frequency[j][list_of_pairs[equal_elements[i]][j]]
+
+               
+                candidate=sorted(enumerate(matrix_frequency), key=lambda x: x[1])
+                memory=candidate[0]
+                for i in range(len(candidate)):
+                    if(memory[1]==candidate[i][1]):
+                        memory=candidate[i]
+                    else:
+                        break;
+#                 print 
+                candidate_final=equal_elements[memory[0]]    
+                print "memory %s  %s   ---> %s" % (matrix_frequency, equal_elements, candidate_final)   
+                #print "matrix de frequencia %s" % sorted(enumerate(matrix_frequency), key=lambda x: x[1], reverse=True)
+            else:
+                candidate_final=equal_elements[0]
+                
+            print " candidate %s \n\n" % candidate_final    
             #actual_line =    list_of_pairs[memory[0]]
-            if(memory[0] not in stored_line):
-                stored_line.append(memory[0])
-                print "a posicao %s gero menos regras " % memory[0]
-                training_set.append(list_of_pairs[memory[0]])   
+            if(candidate_final not in stored_line):
+                stored_line.append(candidate_final)
+               
+                training_set.append(list_of_pairs[candidate_final])   
                 print "novo training set %s " %training_set
             else:
                 break    

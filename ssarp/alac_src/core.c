@@ -89,6 +89,7 @@ prediction_t get_THE_prediction(int* instance, int instance_size, int true_label
 	
 	for(int i=0;i<instance_size;i++) {
 		if(instance[i]<N_ITEMSETS) items[n_items++]=instance[i];
+                printf("- valor instance %i ---", instance[i]);
 		  
 	}
 	qsort((int*) items, n_items, sizeof(int), item_cmp);
@@ -184,9 +185,12 @@ int lazy_active_classification() {
 		//printf("status[%d-%d]:           ", judgements, MAX_JUDGEMENTS);
 		for(int i=0;i<n_tests;i++) {
 			if(ordered_tests[i].processed==0) {
+                                printf("teste instance %i %s \n", i, ordered_tests[i].test.id);
 				get_THE_prediction(ordered_tests[i].test.instance, ordered_tests[i].test.size, ordered_tests[i].test.label);
+                               
 				ordered_tests[i].diff=N_RULES-ordered_tests[i].n_rules;
 				ordered_tests[i].n_rules=N_RULES;
+                                printf("numero de regras %i ", N_RULES); 
 				ordered_tests[i].total_occurs=0;
 				for(int j=0;j<ordered_tests[i].test.size;j++) 
 				  ordered_tests[i].total_occurs+=occurs[ordered_tests[i].test.instance[j]];
@@ -288,7 +292,7 @@ int lazy_active_classification() {
 	}
 	//lazy_supervised_classification();
 	
-	print_rules();
+	//print_rules();
 	__FINISH_TIMER__
 	return(0);
 }

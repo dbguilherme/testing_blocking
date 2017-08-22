@@ -1788,15 +1788,15 @@ def get_substring(str, start_index, end_index):
 
 if (__name__ == '__main__'):
 
-  print 'Febrl module "encode.py"'
-  print '------------------------'
-  print
-
-  print 'Original names:'
-  print '            Name     Phonex   Soundex  ModSoundex      NYSIIS  ',
-  print '  D-Metaphone   FuzzySoundex   Phonix'
-  print '---------------------------------------------------------------'+ \
-        '--------------------------------------'
+#   print 'Febrl module "encode.py"'
+#   print '------------------------'
+#   print
+# 
+#   print 'Original names:'
+#   print '            Name     Phonex   Soundex  ModSoundex      NYSIIS  ',
+#   print '  D-Metaphone   FuzzySoundex   Phonix'
+#   print '---------------------------------------------------------------'+ \
+        
 
   namelist = ['peter','christen','ole','nielsen','markus','hegland',\
               'stephen','steve','roberts','tim','churches','xiong',\
@@ -1815,16 +1815,16 @@ if (__name__ == '__main__'):
     fuzzysoundex_my = fuzzysoundex(n)
     phonix_my =       phonix(n)
 
-    print '%16s %10s %9s %11s %11s %15s %14s %8s' % (n, phonex_my, \
-          soundex_my, soundex_mod_my, nysiis_my, dmeta_my, fuzzysoundex_my, \
-          phonix_my)
-
-  print
-  print 'Reversed names:'
-  print '            Name     Phonex   Soundex  ModSoundex      NYSIIS  ',
-  print '  D-Metaphone   FuzzySoundex   Phonix'
-  print '---------------------------------------------------------------'+ \
-        '--------------------------------------'
+#     print '%16s %10s %9s %11s %11s %15s %14s %8s' % (n, phonex_my, \
+#           soundex_my, soundex_mod_my, nysiis_my, dmeta_my, fuzzysoundex_my, \
+#           phonix_my)
+# 
+#   print
+#   print 'Reversed names:'
+#   print '            Name     Phonex   Soundex  ModSoundex      NYSIIS  ',
+#   print '  D-Metaphone   FuzzySoundex   Phonix'
+#   print '---------------------------------------------------------------'+ \
+#         '--------------------------------------'
 
   for n in namelist:
     rn = list(n)
@@ -1838,8 +1838,8 @@ if (__name__ == '__main__'):
     fuzzysoundex_my = fuzzysoundex(rn)
     phonix_my =       phonix(rn)
 
-    print '%16s %10s %9s %11s %11s %15s %14s %8s' % (n, phonex_my, \
-          soundex_my, soundex_mod_my, nysiis_my, dmeta_my, fuzzysoundex_my, \
-          phonix_my)
+#     print '%16s %10s %9s %11s %11s %15s %14s %8s' % (n, phonex_my, \
+#           soundex_my, soundex_mod_my, nysiis_my, dmeta_my, fuzzysoundex_my, \
+#           phonix_my)
 
 # =============================================================================

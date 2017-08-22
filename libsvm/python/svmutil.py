@@ -199,7 +199,7 @@ def svm_predict(y, x, m, options=""):
 	predict_probability = 0
 	argv = options.split()
 	i = 0
-	print "arg %s" % argv[i]
+	#print "arg %s" % argv[i]
 	while i < len(argv):
                 
 		if argv[i] == '-b':

@@ -401,32 +401,32 @@ def _gcd(a, b):
 		a = c
 
 def _trim(n, d, max_d):
-	if max_d == 1:
-		return n/d, 1
-	last_n, last_d = 0, 1
-	current_n, current_d = 1, 0
-	while 1:
-		div, mod = divmod(n, d)
-		n, d = d, mod
-		before_last_n, before_last_d = last_n, last_d
-		next_n = last_n + current_n*div
-		next_d = last_d + current_d*div
-		last_n, last_d = current_n, current_d
-		current_n, current_d = next_n, next_d
-		if mod == 0 or current_d>=max_d:
-			break
-	if current_d == max_d:
-		return current_n, current_d
-	i = (max_d-before_last_d)/last_d
-	alternative_n = before_last_n + i*last_n
-	alternative_d = before_last_d + i*last_d
-        alternative = _Rational(alternative_n, alternative_d)
-        last = _Rational(last_n, last_d)
-	num = _Rational(n, d)
-	if abs(alternative-num)<abs(last-num):
-		return alternative_n, alternative_d
-	else:
-		return last_n, last_d
+    print ("teste")
+# 	if max_d == 1:
+# 		return n/d, 1
+# 	last_n, last_d = 0, 1
+# 	current_n, current_d = 1, 0
+# 	while 1:
+# 		div, mod = divmod(n, d)
+# 		n, d = d, mod
+# 		before_last_n, before_last_d = last_n, last_d
+# 		next_n = last_n + current_n*div
+# 		next_d = last_d + current_d*div
+# 		last_n, last_d = current_n, current_d
+# 		current_n, current_d = next_n, next_d
+# 		if mod == 0 or current_d>=max_d:
+# 			break if current_d == max_d:
+#         return current_n, current_d
+#     i = (max_d-before_last_d)/last_d
+#     alternative_n = before_last_n + i*last_n
+#     alternative_d = before_last_d + i*last_d
+#     alternative = _Rational(alternative_n, alternative_d)
+#     last = _Rational(last_n, last_d)
+# 	num = _Rational(n, d)
+# 	if abs(alternative-num)<abs(last-num):
+# 		return alternative_n, alternative_d
+# 	else:
+# 		return last_n, last_d
 
 def _approximate(n, d, err):
 	r = _Rational(n, d)
@@ -522,9 +522,9 @@ class _Rational:
 		return '%(n)s/%(d)s' % self.__dict__
 
 	def __coerce__(self, other):
-		for int in (type(1), type(1L)):
-			if isinstance(other, int):
-				return self, rational(other)
+# 		for int in (type(1), type(1L)):
+# 			if isinstance(other, int):
+# 				return self, rational(other)
 		if type(other) == type(1.0):
 			return float(self), other
 		return NotImplemented
@@ -573,9 +573,9 @@ class _Rational:
 
 	def __float__(self):
 		# Avoid NaNs like the plague
-		if self.d > 1L<<1023:
-			self = self.trim(1L<<1023)
-		return float(self.n)/float(self.d)
+# 		if self.d > 1 <<1023:
+# 			self = self.trim(1L<<1023)
+		return 0
 
 	def __pow__(self, exp, z=None):
 		if z is not None:
@@ -583,10 +583,10 @@ class _Rational:
 		if isinstance(exp, _Rational):
 			if exp.d == 1:
 				exp = exp.n
-		if isinstance(exp, type(1)) or isinstance(exp, type(1L)):
-			if exp < 0:
-				return _Rational(self.d**-exp, self.n**-exp)
-			return _Rational(self.n**exp, self.d**exp)
+# 		if isinstance(exp, type(1)) or isinstance(exp, type(1L)):
+# 			if exp < 0:
+# 				return _Rational(self.d**-exp, self.n**-exp)
+# 			return _Rational(self.n**exp, self.d**exp)
 		return float(self)**exp
 
 	def __cmp__(self, other):
@@ -662,11 +662,11 @@ def _parse_number(num):
 	if '.' in num:
 		i, f = num.split('.', 1)
 		i = long(i)
-		f = rational(long(f), 10L**len(f))
+		f = rational(long(f), 10**len(f))
 		return i+f
 	return rational(long(num))
 
-def rational(n, d=1L):
+def rational(n, d=1):
 	if type(n) in (type(''), type(u'')) :
 		n = _parse_number(n)
 	if type(d) in (type(''), type(u'')) :
@@ -684,8 +684,8 @@ def rational(n, d=1L):
 		return rational(n*d.d, d.n)
 	return _Rational(n, d)
 
-import __builtin__
-__builtin__.rational = rational
+# import __builtin__
+# __builtin__.rational = rational
 
 # =============================================================================
 #
@@ -753,7 +753,7 @@ def arith_coder_encode(text, probs):
     # gives me the minimum number of bits needed to resolve
     # down to the end-of-data character.
     delta = (maxval - minval)/2
-    nbits = 0L
+    nbits = 0
     while delta < 1:
         nbits = nbits + 1
         delta = delta << 1

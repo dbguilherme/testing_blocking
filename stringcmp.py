@@ -1673,8 +1673,8 @@ def compression(str1, str2, compressor='zlib', min_threshold = None):
     #print c1, c2, c12, 1.0 - (c12 - min(c1,c2)) / max(c1,c2)
     #print
 
-    if (c21 != c12):
-      print str1, str2, c12, c21
+#     if (c21 != c12):
+#       print str1, str2, c12, c21
 
   if (c12 == 0.0):
     return 0.0  # Maximal distance
@@ -1682,8 +1682,8 @@ def compression(str1, str2, compressor='zlib', min_threshold = None):
   w = 1.0 - (c12 - min(c1,c2)) / max(c1,c2)
 
   if (w < 0.0):
-    print 'warning:Compression based comparison smaller than 0.0 with ' + \
-          'strings "%s" and "%s": %.3f (cap to 1.0)' % (str1, str2, w)
+    print ('warning:Compression based comparison smaller than 0.0 with ' + \
+          'strings "%s" and "%s": %.3f (cap to 1.0)' % (str1, str2, w))
     w = 0.0
 
   assert (w >= 0.0) and (w <= 1.0), 'Similarity weight outside 0-1: %f' % (w)
@@ -2649,6 +2649,6 @@ if (__name__ == '__main__'):
       msg.append('  Error: EditD > Modified EditD')
 
   for m in msg:
-    print m
+    print (m)
 
 # =============================================================================

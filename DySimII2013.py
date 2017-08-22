@@ -3,6 +3,7 @@ import sys
 import time
 import os
 sys.path.append("/home/guilherme/git/testing_blocking/libsvm/tools/")
+sys.path.append("/home/guilherme/git/testing_blocking/libsvm/python/")
 import distance
 
 
@@ -155,11 +156,11 @@ class ActiveOnlineBlocking:
             
            # print join
         size_gab=0   
-        for inv_list in ind.inv_index_gab.itervalues():
+        for inv_list in ind.inv_index_gab.iteritems():
             if(len(inv_list)>1):
                 size_gab+=len(inv_list)-1 
            # print inv_list[0]
-        print ' TAMANHO GAB %d' % size_gab
+        print (' TAMANHO GAB %d' % size_gab)
         saida.close()
         return file_out
         
@@ -183,7 +184,7 @@ class ActiveOnlineBlocking:
         entity_records = self.entity_records     
         
         
-        print ' Loading data file...'
+        print (' Loading data file...')
         
         #if (file_name.lower().endswith('.csv')):
             #pass  
@@ -199,7 +200,6 @@ class ActiveOnlineBlocking:
          ##############################################
         file_name=self.formatFile(file_name) 
         
-        print num_lines    
         # Calculate the number of records that should be in the build 
         # dictionary based on the percentage provided by user
         build_records_count = int(round(num_lines *
@@ -555,7 +555,7 @@ class ActiveOnlineBlocking:
         
         
     def arfftoSVM(self, inputfilename,outfile):
-        print "gerando arquivo svm"
+        print ("gerando arquivo svm")
         fin = open(inputfilename,'r')
         lines = fin.readlines()
         #fin.close()
@@ -594,7 +594,7 @@ class ActiveOnlineBlocking:
         y, x = svm_read_problem(svm_file)
         
         rate, param = find_parameters(svm_file, '-log2c -1,1,1 -log2g -1,1,1')
-        print "xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g')))
+        print ("xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g'))))
         p='-c '+ str(param.get('c')) +' -g ' + str(param.get('g'))
         m = svm_train(y, x, p) 
         return m 
@@ -626,7 +626,7 @@ class ActiveOnlineBlocking:
             #true positive
             if( _labs[i]==1 and y[i]==1):
                 self.true_positive+=1;
-                print "true positive %s " % gabarito[i]                
+                print ("true positive %s " % gabarito[i])                
                 #remove do gabarito as tags reais 
                 for x in (gabarito):
                     if(x!=-1):
@@ -634,13 +634,13 @@ class ActiveOnlineBlocking:
                             res_clean=x.split("-")[0]  
                             
                             gab_list=ind.inv_index_gab.get(res_clean,[])
-                            print "gab_list %s" % gab_list
-                            print "remove  %s" % x
+                            print ("gab_list %s" % gab_list)
+                            print ("remove  %s" % x)
                             gab_list.remove(x)
                             ind.inv_index_gab[res_clean]=gab_list
-                            print "gab_list %s" % gab_list
+                            print ("gab_list %s" % gab_list)
                         except ValueError:
-                            print "element not exists"
+                            print ("element not exists")
             #false positive
             if(_labs[i] ==1 and y[i]==0):
                 self.false_positive+=1;
@@ -678,7 +678,7 @@ class ActiveOnlineBlocking:
         for s in list_of_pairs:
             print(s)
                 
-        print "\n\n"
+        
         
         full_frequency = collections.Counter()
         collumn_frequency=[]; 
@@ -700,19 +700,19 @@ class ActiveOnlineBlocking:
         for i in range(len(list_of_pairs)):
             value.append(sum(matrix[i]));
 
-        print "total de valores por linha %s" % value
+        print ("total de valores por linha %s" % value)
         
         
         count_value=[0]*len(list_of_pairs)
        # top_values= sorted(range(len(value)), key=lambda i: value[i], reverse=True)[:2] #get the top values positions
         top_values=sorted(enumerate(value), key=lambda x: x[1],reverse=True)                       
-        print "top  valores %s " % top_values
+        print ("top  valores %s " % top_values)
         
         memory=top_values[0];
         for tuple in top_values:
             if(memory[1]==tuple[1]):
                 memory=tuple
-        print "tuple final %s" % memory[0]
+        print ("tuple final %s" % memory[0])
 #         #conta a frquencia dos valores globais
 #         for value in top_values:
 #             count_value[value[0]]=0
@@ -729,7 +729,7 @@ class ActiveOnlineBlocking:
         training_set.append (list_of_pairs[memory[0]])
         
        # print "top value %s "% sorted(range(len(count_value)), key=lambda i: count_value[i], reverse=True)[:1]
-        print "gabarito %s" % training_set
+        print ("gabarito %s" % training_set)
         
         
         
@@ -747,7 +747,7 @@ class ActiveOnlineBlocking:
                 line+=1
             
             sorted_list = sorted(enumerate(n_rule), key=lambda x: x[1])
-            print "numero de rgras %s" % sorted_list     
+            print ("numero de rgras %s" % sorted_list)     
             memory=sorted_list[0];
             equal_elements=[memory[0]]
             for tuple in sorted_list[1:]:
@@ -756,7 +756,7 @@ class ActiveOnlineBlocking:
                     equal_elements.append(tuple[0])
                 else:
                     break;
-            print "elementos iguais %i " % len(equal_elements)    
+            print ("elementos iguais %i " % len(equal_elements))    
             #frequencia colunar 
             matrix_frequency=[0]* (len(equal_elements))
             if(len(equal_elements)>1):  #tem mais  de um elemento
@@ -774,18 +774,18 @@ class ActiveOnlineBlocking:
                         break;
 #                 print 
                 candidate_final=equal_elements[memory[0]]    
-                print "memory %s  %s   ---> %s" % (matrix_frequency, equal_elements, candidate_final)   
+                print ("memory %s  %s   ---> %s" % (matrix_frequency, equal_elements, candidate_final))   
                 #print "matrix de frequencia %s" % sorted(enumerate(matrix_frequency), key=lambda x: x[1], reverse=True)
             else:
                 candidate_final=equal_elements[0]
                 
-            print " candidate %s \n\n" % candidate_final    
+            print (" candidate %s \n\n" % candidate_final)    
             #actual_line =    list_of_pairs[memory[0]]
             if(candidate_final not in stored_line):
                 stored_line.append(candidate_final)
                
                 training_set.append(list_of_pairs[candidate_final])   
-                print "novo training set %s " %training_set
+                print ("novo training set %s " %training_set)
             else:
                 break    
                                
@@ -939,8 +939,8 @@ if __name__ == '__main__':
     
     # Getting memory usage does not work in windows
     load_memo_str = auxiliary.get_memory_usage()
-    print '    ', load_memo_str
-    print  
+    #print ('    ', load_memo_str)
+    #print  
     ##
     file="/tmp/arff_out"
    
@@ -953,7 +953,7 @@ if __name__ == '__main__':
     
     query_cnt = 1
     num_rec = 0
-    print ' Processing Query records ...'
+    print (' Processing Query records ...')
    
     # Go through query records and try to find a match for each query 
     tuples_count=0
@@ -970,7 +970,7 @@ if __name__ == '__main__':
         
         num_rec += 1
         if (num_rec % 100 == 0):
-            print '\t Processed %d records in the query phase' % (num_rec)
+            print ('\t Processed %d records in the query phase' % (num_rec))
             #print "inverted inde size %i" % ((ind.count))
             
         query_time_res.append(query_time)
@@ -1023,12 +1023,12 @@ if __name__ == '__main__':
        
      #############################################################     
        
-    print "####################"
-    print "false positive %i" % ind.false_positive
-    print "true positive %i" % ind.true_positive
-    print "false_negative %i" % ind.false_negative
-    print "true_negative %i" % ind.true_negative
-    print "full size %i" % ind.compute
+    print ("####################")
+    print ("false positive %i" % ind.false_positive)
+    print ("true positive %i" % ind.true_positive)
+    print ("false_negative %i" % ind.false_negative)
+    print ("true_negative %i" % ind.true_negative)
+    print ("full size %i" % ind.compute)
     
       
        
@@ -1039,7 +1039,7 @@ if __name__ == '__main__':
            # print "%s %d " % (inv_list[0],len(inv_list))
             #for i in xrange(len(inv_list)):
                 #print "\n\ngab %s" % inv_list[i]
-    print ' TAMANHO GAB %d' % size_gab
+    print (' TAMANHO GAB %d' % size_gab)
 
       
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1048,22 +1048,22 @@ if __name__ == '__main__':
     num_fm = query_acc_res.count('FM')
     #assert num_tm + num_fm == len(ind.query_records)
     print
-    print ' Query summary results for index: %s' % (index_name)
-    print '-' * (33 + len(index_name))
+    print (' Query summary results for index: %s' % (index_name))
+    print ('-' * (33 + len(index_name)))
     
-    print '  minimum threshold: %.2f;' % \
+    print ('  minimum threshold: %.2f;' % \
               ( min_threshold) + ' minimum total threshold: %.2f' % \
-              (min_total_threshold)
+              (min_total_threshold))
     #if ind.count > 0:
         #print '  Matching accuracy: %d/%d true matches (%.2f%%)' % \
               #(num_tm, ind.count, 100.0 * num_tm / ind.count) 
     #else:
         #print' No duplicates where found' 
     if num_tm>0 :    
-        print ' precisao %f  revo %f' %  ((100.0*num_tm/(num_tm+num_fm)),(100.0*num_tm/(size_gab+num_tm)))
-        print ' true pos %d  false posit %d' %  (num_tm, num_fm)
+        print (' precisao %f  revo %f' %  ((100.0*num_tm/(num_tm+num_fm)),(100.0*num_tm/(size_gab+num_tm))))
+        print (' true pos %d  false posit %d' %  (num_tm, num_fm))
     else:
-        print 'true matching equal zero'
+        print ('true matching equal zero')
         
    
   

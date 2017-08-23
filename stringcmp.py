@@ -46,7 +46,7 @@ approximate string comparisons for various string pairs.
 import bz2
 import difflib
 import logging
-import math
+
 import time
 import zlib
 
@@ -375,7 +375,8 @@ def jaro(str1, str2, min_threshold = None):
   for i in range(len1):
     start = max(0,i-halflen)
     end   = min(i+halflen+1,len2)
-    index = workstr2.find(str1[i],start,end)
+    print ("--------->>>>>>>>.. %i %i" % (int(start),int(end)))
+    index = workstr2.find(str1[i],int(start),int(end))
     if (index > -1):  # Found common character
       common1 += 1
       ass1 = ass1 + str1[i]
@@ -386,7 +387,7 @@ def jaro(str1, str2, min_threshold = None):
   for i in range(len2):
     start = max(0,i-halflen)
     end   = min(i+halflen+1,len1)
-    index = workstr1.find(str2[i],start,end)
+    index = workstr1.find(str2[i],int(start),int(end))
     if (index > -1):  # Found common character
       common2 += 1
       ass2 = ass2 + str2[i]
@@ -404,7 +405,12 @@ def jaro(str1, str2, min_threshold = None):
   # Compute number of transpositions  - - - - - - - - - - - - - - - - - - - - -
   #
   transposition = 0
-  for i in range(len(ass1)):
+  string_len=0;
+  if(len(ass2)>len(ass1)):
+    string_len=len(ass1)
+  else:
+    string_len=len(ass2)
+  for i in range(string_len):
     if (ass1[i] != ass2[i]):
       transposition += 1
   transposition = transposition / 2.0
@@ -1418,12 +1424,12 @@ def syllaligndist(str1, str2, common_divisor = 'average', min_threshold = None,
   elif (str1 == str2):
     return 1.0
 
-  if (do_phonix == True):
-    workstr1 = encode.phonix_transform(str1)
-    workstr2 = encode.phonix_transform(str2)
-  else:
-    workstr1 = str1
-    workstr2 = str2
+#   if (do_phonix == True):
+#     workstr1 = encode.phonix_transform(str1)
+#     workstr2 = encode.phonix_transform(str2)
+#   else:
+  workstr1 = str1
+  workstr2 = str2
 
   # Substitution and gap penalty weights
   #
@@ -2540,8 +2546,8 @@ def charhistogram(str1, str2, min_threshold = None):
     cos_sim = 0.0  # At least one vector is all zeros
 
   else:
-    vec1sum = math.sqrt(vec1sum)
-    vec2sum = math.sqrt(vec2sum)
+#     vec1sum = math.sqrt(vec1sum)
+#     vec2sum = math.sqrt(vec2sum)
 
     cos_sim = vec12sum / (vec1sum * vec2sum)
 

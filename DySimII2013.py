@@ -156,7 +156,7 @@ class ActiveOnlineBlocking:
             
            # print join
         size_gab=0   
-        for inv_list in ind.inv_index_gab.iteritems():
+        for inv_list in ind.inv_index_gab.items():
             if(len(inv_list)>1):
                 size_gab+=len(inv_list)-1 
            # print inv_list[0]
@@ -214,18 +214,19 @@ class ActiveOnlineBlocking:
             
         this_line_num = 0
         for rec in in_file:
-            rec = rec.lower().strip()
+            rec = rec.lower().lstrip()
             rec = rec.split(',')
                 
             # Clean the record and remove all surrounding white-spaces
-            clean_rec = map(string.strip, rec) 
-            
+           # clean_rec = map(string.strip, rec) 
+            clean_rec=[x.strip() for x in rec]
+            print ("xxxxxxxxxxxxxxx %s" % clean_rec)
             #Mmake sure that each record has the same number of attributes
             # which is equal to total_num_attr                    
            # assert len(clean_rec) == total_num_attr, (rec, clean_rec)
             
             # Get the record id of the record
-            rec_id = clean_rec[0].strip()
+            rec_id = clean_rec[0].lstrip()
             
             # Make sure that all rec_ids in the data set are unique
             assert rec_id not in rec_dict, ('Record ID not unique:', 
@@ -357,7 +358,7 @@ class ActiveOnlineBlocking:
         
         rec_id_list=[]
         i=0
-        for rec_val,v in query_sort.iteritems():     
+        for rec_val,v in query_sort.items():     
             if(i > num_compared_attr/4):
                break;
             i=i+1
@@ -607,7 +608,7 @@ class ActiveOnlineBlocking:
         _labs, p_acc, p_vals = svm_predict(y, x, model)
       
         
-        for i in xrange(len(y)):
+        for i in range(len(y)):
             if(y[i] != _labs[i]):
                 self.false_positive+=1;
             else:
@@ -621,7 +622,7 @@ class ActiveOnlineBlocking:
         _labs, p_acc, p_vals = svm_predict(y, x, model )
        
         
-        for i in xrange(len(y)):
+        for i in range(len(y)):
             self.compute+=1;
             #true positive
             if( _labs[i]==1 and y[i]==1):
@@ -659,7 +660,7 @@ class ActiveOnlineBlocking:
         for line in f:
             splitted=line.strip().split(" ")
             dict={}
-            for i in xrange(len(splitted)-2):
+            for i in range(len(splitted)-2):
                  if(i==1):
                      gabarito.append(splitted[i].split("=")[1])
                  dict[i]= (splitted[i+2].split("="))[1]
@@ -684,11 +685,11 @@ class ActiveOnlineBlocking:
         collumn_frequency=[]; 
         temp=collections.Counter()
         max_value=[]
-        for j in xrange(len(list_of_pairs[0])): # para cada coluna fazer a varedura
-            for i in xrange(len(list_of_pairs)): # varrear as linhas 
+        for j in range(len(list_of_pairs[0])): # para cada coluna fazer a varedura
+            for i in range(len(list_of_pairs)): # varrear as linhas 
                 full_frequency[list_of_pairs[i][j]]+=1
                 temp[list_of_pairs[i][j]]+=1
-            max_value.append(max(temp.iteritems(), key=lambda x: x[1]))                        
+            max_value.append(max(temp.items(), key=lambda x: x[1]))                        
             collumn_frequency.append(temp)            
             temp= collections.Counter()    
         matrix = [[0 for x in range(len(list_of_pairs))] for y in range(59)]
@@ -960,7 +961,7 @@ if __name__ == '__main__':
     count = 0 # count of true duplicates 
     flag=1;
     f = open(file, 'w',100)
-    for rec_id, clean_rec in ind.query_records.iteritems():
+    for rec_id, clean_rec in ind.query_records.items():
         
         ent_id = rec_id
         start_time = time.time()
@@ -1033,7 +1034,7 @@ if __name__ == '__main__':
       
        
     size_gab=0   
-    for inv_list in ind.inv_index_gab.itervalues():
+    for inv_list in ind.inv_index_gab.values():
         if(len(inv_list)>1  ):
             size_gab+=len(inv_list)-1
            # print "%s %d " % (inv_list[0],len(inv_list))

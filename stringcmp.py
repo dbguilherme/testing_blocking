@@ -375,7 +375,7 @@ def jaro(str1, str2, min_threshold = None):
   for i in range(len1):
     start = max(0,i-halflen)
     end   = min(i+halflen+1,len2)
-    print ("--------->>>>>>>>.. %i %i" % (int(start),int(end)))
+   # print ("--------->>>>>>>>.. %i %i" % (int(start),int(end)))
     index = workstr2.find(str1[i],int(start),int(end))
     if (index > -1):  # Found common character
       common1 += 1

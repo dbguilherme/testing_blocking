@@ -1,11 +1,12 @@
 rec_id, culture, sex, age, date_of_birth, title, given_name, surname, state, suburb, postcode, street_number, address_1, address_2, phone_number, soc_sec_id, blocking_number, family_role
+rec-64-org,   ara, f, , 19520719, , lachlan, neeya, nsw, greenacre, 2350, 3, , , 612 18746578, 3252608, 4, NoRole
+rec-64-dup-0, ara, f, , 19520719, , lalan, niia, nsw, greenakre, 2350, 3, , , 612 18746578, 3252608, 4, NoRole
 rec-951-org,   ind, f, , 19130116, , jordan, maudgalya, wa, moorabbin, 6008, 66, lawlor place, , 8 91341721, 1196722, 7, NoRole
 rec-505-org,   eng, f, , 19201219, , esther, sharman, nsw, woollahra, 3146, 1, barr-smith avenue, , 02 95993865, 1741413, 0, NoRole
 rec-54-org,   ser, f, 29, 19880217, hon, lucas, marsic, wa, winthrop, 5172, 785, boolimba crescent, rosehill, 8 56602977, 3710158, 2, NoRole
 rec-638-org,   afg, f, 35, , , dimitri, mangal, tas, cape barren island, 3153, 285, parkhill street, , 7 29056148, 9347572, 8, NoRole
 rec-66-org,   unk, f, 32, 19850426, , jacob, sclater, sa, georgetown, 5116, 17, perry drive, , 617 25064194, 3253261, 3, NoRole
 rec-33-org,   ser, m, 35, 19821016, mr, robert, zavrsan, wa, south stirling, 3134, 150, pennefather street, valencia park, 618 43183767, 1281165, 0, NoRole
-rec-64-dup-0, ara, f, , 19520719, , lalan, niia, nsw, greenakre, 2350, 3, , , 612 18746578, 3252608, 4, NoRole
 rec-793-org,   , f, 4, 20130627, ms, matthew, white, , o'connor, 4179, 13, gamban square, , 08 97367164, 6870497, 2, NoRole
 rec-632-org,   usa, f, , 19700715, , madison, carter, vic, wychitella, 5161, 49, cossington smith crescent, , 8 86412361, 7629609, 2, NoRole
 rec-157-org,   eng, f, 30, 19870316, ms, joshua, goode, vic, duverney, 4350, 54, dumas street, , 618 38923439, 8045780, 1, NoRole
@@ -733,7 +734,6 @@ rec-267-dup-0, eng, f, , 19901217, , hay ley, bourke, , plympto n south, 3429, 1
 rec-96-org,   chi, , 30, 19871109, , jade, ssu, wa, codjatotine, 3429, 20, savery street, high valley, 03 41220354, 6163822, 1, NoRole
 rec-655-org,   eng, f, 35, 19820115, , stephanie, edison, nsw, hoxton park, 3074, 145, fox place, apmnt 203, 2 63399168, 9547197, 9, NoRole
 rec-380-org,   unk, f, , 19360909, , riley, aaternir, , park orchards, 6025, 16, mcdermott street, the lodge, 02 98437969, 1917269, 0, NoRole
-rec-64-org,   ara, f, , 19520719, , lachlan, neeya, nsw, greenacre, 2350, 3, , , 612 18746578, 3252608, 4, NoRole
 rec-223-org,   chi, f, 34, 19831115, mr, zack, ye, vic, woori yallock, 3136, 85, farrell place, , 8 61428062, 5441180, 9, NoRole
 rec-362-org,   jap, f, 32, , , jarrod, asuhara, sa, bonython, 2720, 45, arthaldo court, , 08 58441984, 9025586, 4, NoRole
 rec-230-org,   chi, f, 30, , , jasper, ip, vic, rokewood, 5066, 203, reader court, , 8 62148020, 9770671, 0, NoRole

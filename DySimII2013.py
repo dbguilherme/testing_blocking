@@ -362,7 +362,7 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.items():     
-            if(i > num_compared_attr/4):
+            if(i > num_compared_attr/5):
                break;
             i=i+1
             #print rec_val
@@ -452,22 +452,26 @@ class ActiveOnlineBlocking:
                     #caso sejam iguais                   
                     if(ent_id==res_list[i]):
                         continue
-                    if(("dup") in ent_id and  ("dup") in res_list[i]):
-                        continue
+                    #if(("dup") in ent_id and  ("dup") in res_list[i]):
+                    #    continue
                    
                    
                     valueA=ind.query_records[ent_id]
                     valueB=ind.query_records[res_list[i]]
                     dictionary={}
+                    sum=0.0
                     for j in range(1,len(valueA)):
-                      
-                        dictionary[j]=ind.comp_methods[1](valueA[j], valueB[j])
-                        f.write(str(ind.comp_methods[1](valueA[j], valueB[j])) + ", ")
+                        temp=ind.comp_methods[1](valueA[j], valueB[j])
+                        dictionary[j]=temp
+                        f.write(str(temp) + ", ")
+                        sum=temp+sum
                        #((stringcmp.editdist(valueA[j], valueB[j])))
-                    list_of_dict_.append(dictionary)          
-                  
+                    if(sum/len(valueA)>0.3):
+                        list_of_dict_.append(dictionary)          
+                    else:
+                        continue    
                    
-                   
+                   # print ("ent -> %s %s " % (ent_id,res_list[i]))
                    
                     if(("dup") not in ent_id and  ("dup") not in res_list[i]):
                     #    print "false match 1"
@@ -686,7 +690,7 @@ class ActiveOnlineBlocking:
         for s in list_of_pairs:
             print(s)
                 
-        print (id)
+       # print (id)
         
         full_frequency = collections.Counter()
         collumn_frequency=[]; 
@@ -747,7 +751,7 @@ class ActiveOnlineBlocking:
                         if(training_set[line][ele]!=pair[ele]):
                             projection[line][ele]=""
                         
-                #fim da criação da projeção
+                #fim da criacao da projecao
                 #print (projection)
                 endA = time.time()        
                 
@@ -925,6 +929,10 @@ if __name__ == '__main__':
     tuples_count=0
     count = 0 # count of true duplicates 
     flag=1;
+    set_gabarito=[]
+    list_of_dict=[]
+    set_list_of_pairs=[]
+    set_label=[]
     f = open(file, 'w',100)
     for rec_id, clean_rec in ind.query_records.items():
         
@@ -944,8 +952,7 @@ if __name__ == '__main__':
             
         tuples_count+=len(res_list);
         #gera arquivo de saida para avaliacao da tupla
-        gabarito=[]
-        list_of_dict=[]
+        
         #evitar que registros nao formaram pares sejam processados
         if(len(res_list)==0):
             continue
@@ -955,26 +962,37 @@ if __name__ == '__main__':
         #test active active_learning
         #if( ind.active_learning(list_of_pairs_,gabarito)==1):
         #    break  
-        
+        if(len(list_of_pairs)==0):
+            continue;
        
-        if(tuples_count>100):             
+        if(len(set_list_of_pairs)<50):
+            
+            set_gabarito=set_gabarito+gabarito
+            set_list_of_pairs=set_list_of_pairs+list_of_pairs
+            set_label=label+set_label
+        else:
+                     
              f.flush()
              
              if(flag==1):
-                training_set, training_gabarito= ind.active_learning(list_of_pairs,gabarito)
+                training_set, training_gabarito= ind.active_learning(set_list_of_pairs,set_gabarito)
                 #ind.allac(file, flag)
-                
+                print (training_set)
+                print (training_gabarito)
                 #treinamento do SVM
                 #ind.arfftoSVM(arff_file, svm_file);
                 model= ind.train_svm(svm_file,training_set, training_gabarito)  
                # break
-            # flag=0;   
+             flag=0;   
              
              #tuples_count=0                                   
              if(len(list_of_pairs)>0):
                 ind.test_svm_online(model,gabarito, list_of_pairs, label); 
              
-             
+             set_gabarito=[]
+             list_of_dict=[]
+             set_list_of_pairs=[]
+             set_label=[]
              
              #ind.arfftoSVM(file, svm_file_full);
              #ind.test_svm(model,svm_file_full); 

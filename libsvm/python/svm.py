@@ -68,6 +68,7 @@ def gen_svm_nodearray(xi, feature_max=None, isKernel=None):
 			xi = [0] + xi  # idx should start from 1
 		index_range = range(len(xi))
 	else:
+		print ("value %s" % xi )
 		raise TypeError('xi should be a dictionary, list or tuple')
 
 	if feature_max:
@@ -106,6 +107,7 @@ class svm_problem(Structure):
 		self.n = max_idx
 
 		self.y = (c_double * l)()
+		
 		for i, yi in enumerate(y): self.y[i] = yi
 
 		self.x = (POINTER(svm_node) * l)()

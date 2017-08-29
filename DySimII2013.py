@@ -94,6 +94,8 @@ class ActiveOnlineBlocking:
         self.false_negative=0
         self.true_negative=0
         self.compute=0
+        
+        self.first_time_active=1
 
 
 # ===============================================================================================        
@@ -603,9 +605,11 @@ class ActiveOnlineBlocking:
         y, x = svm_read_problem(svm_file)
         
         rate, param = find_parameters(svm_file, '-log2c -1,1,1 -log2g -1,1,1 -gnuplot null')
-        print ("xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g'))))
+        #print ("xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g'))))
+        #w=[{1: 1.0, 2: 0.0, 3: 0.0, 4: 0.518518518519, 5: 0.447619047619, 6: 0.0, 7: 0.402777777778, 8: 0.666666666667, 9: 0.0, 10: 0.564957264957, 11: 0.0, 12: 0.0, 13: 0.714285714286, 14: 0.0, 15: 1.0}, {1: 0.0, 2: 1.0, 3: 1.0, 4: 0.888888888889, 5: 1.0, 6: 1.0, 7: 1.0, 8: 1.0, 9: 1.0, 10: 0.944444444444, 11: 0.866666666667, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0}, {1: 0.666666666667, 2: 1.0, 3: 0.0, 4: 1.0, 5: 0.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 1.0, 10: 1.0, 11: 0.0, 12: 0.0, 13: 1.0, 14: 1.0, 15: 1.0}, {1: 0.666666666667, 2: 0.0, 3: 1.0, 4: 0.0, 5: 0.425925925926, 6: 0.0, 7: 0.467948717949, 8: 0.0, 9: 0.0, 10: 0.487719298246, 11: 0.0, 12: 0.0, 13: 0.619047619048, 14: 1.0, 15: 1.0}, {1: 1.0, 2: 1.0, 3: 1.0, 4: 0.430555555556, 5: 1.0, 6: 1.0, 7: 1.0, 8: 1.0, 9: 1.0, 10: 0.919841269841, 11: 0.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0}]
         p='-c '+ str(param.get('c')) +' -g ' + str(param.get('g'))
-        m = svm_train(y, x, p) 
+        gabarito=[float(i) for i in gabarito]
+        m = svm_train(gabarito, pairs, p) 
         return m         
          
     def test_svm(self, model, file_full):  
@@ -662,10 +666,7 @@ class ActiveOnlineBlocking:
         file="/tmp/arff_discretizar"
         self.header(file)
         f = open(file, 'w')
-        for i in range(len(list_of_pairs)):
-            for elemento in list_of_pairs[i]:
-                print ("--- %s " % list_of_pairs[i][elemento])
-        
+               
         ###load discretized file
         
         
@@ -692,7 +693,7 @@ class ActiveOnlineBlocking:
     
   
 
-    def active_learning(self, list_of_pairs, gabarito):
+    def active_learning(self, list_of_pairs, gabarito,training_set,training_gabarito, list_of_pais_selection):
         list_of_pairs_discrete, gabarito, id= self.load_struct_active(list_of_pairs,gabarito)
         
         start = time.time()
@@ -702,51 +703,56 @@ class ActiveOnlineBlocking:
        #     print(s)
                 
        # print (id)
+        if(self.first_time_active==1):
+            full_frequency = collections.Counter()
+            collumn_frequency=[]; 
+            temp=collections.Counter()
+            max_value=[]
+            training_set_gabarito=[]
+            for j in range(len(list_of_pairs_discrete[0])): # para cada coluna fazer a varedura
+                for i in range(len(list_of_pairs_discrete)): # varrear as linhas 
+                    full_frequency[list_of_pairs_discrete[i][j]]+=1
+                    temp[list_of_pairs_discrete[i][j]]+=1
+                max_value.append(max(temp.items(), key=lambda x: x[1]))                        
+                collumn_frequency.append(temp)            
+                temp= collections.Counter()    
+            matrix = np.zeros((len(list_of_pairs_discrete),len(list_of_pairs_discrete[0])))   #[[0 for x in range(len(list_of_pairs))] for y in range(59)]
+            
+            for i in range(len(list_of_pairs_discrete)):
+                for j in range(len(list_of_pairs_discrete[i])):
+                    matrix[i][j]=collumn_frequency[j][list_of_pairs_discrete[i][j]]
+            value=[]        
+            for i in range(len(list_of_pairs_discrete)):
+                value.append(sum(matrix[i]));
+    
+            print ("total de valores por linha %s" % value)
+            
+            
+            count_value=[0]*len(list_of_pairs_discrete)
+           # top_values= sorted(range(len(value)), key=lambda i: value[i], reverse=True)[:2] #get the top values positions
+            top_values=sorted(enumerate(value), key=lambda x: x[1],reverse=True)                       
+            print ("top  valores %s " % top_values)
+            
+            memory=top_values[0];
+            for tuple in top_values:
+                if(memory[1]==tuple[1]):
+                    memory=tuple
+            print ("tuple final %s" % memory[0])
+    
+            end = time.time()        
+            print("time to select first element %f " % (end - start))
         
-        full_frequency = collections.Counter()
-        collumn_frequency=[]; 
-        temp=collections.Counter()
-        max_value=[]
-        training_set_gabarito=[]
-        for j in range(len(list_of_pairs_discrete[0])): # para cada coluna fazer a varedura
-            for i in range(len(list_of_pairs_discrete)): # varrear as linhas 
-                full_frequency[list_of_pairs_discrete[i][j]]+=1
-                temp[list_of_pairs_discrete[i][j]]+=1
-            max_value.append(max(temp.items(), key=lambda x: x[1]))                        
-            collumn_frequency.append(temp)            
-            temp= collections.Counter()    
-        matrix = np.zeros((len(list_of_pairs_discrete),len(list_of_pairs_discrete[0])))   #[[0 for x in range(len(list_of_pairs))] for y in range(59)]
         
-        for i in range(len(list_of_pairs_discrete)):
-            for j in range(len(list_of_pairs_discrete[i])):
-                matrix[i][j]=collumn_frequency[j][list_of_pairs_discrete[i][j]]
-        value=[]        
-        for i in range(len(list_of_pairs_discrete)):
-            value.append(sum(matrix[i]));
-
-        print ("total de valores por linha %s" % value)
-        
-        
-        count_value=[0]*len(list_of_pairs_discrete)
-       # top_values= sorted(range(len(value)), key=lambda i: value[i], reverse=True)[:2] #get the top values positions
-        top_values=sorted(enumerate(value), key=lambda x: x[1],reverse=True)                       
-        print ("top  valores %s " % top_values)
-        
-        memory=top_values[0];
-        for tuple in top_values:
-            if(memory[1]==tuple[1]):
-                memory=tuple
-        print ("tuple final %s" % memory[0])
-
-        end = time.time()        
-        print("time to select first element %f " % (end - start))
-        
-        
-        training_set=[]        
-        training_set.append (list_of_pairs_discrete[memory[0]])
-        training_set_gabarito.append(gabarito[memory[0]])     
-        training_set_id=[memory[0]]
+            training_set=[]        
+            training_set.append (list_of_pairs_discrete[memory[0]])                      
+            training_set_gabarito.append(gabarito[memory[0]])           
+            list_of_pais_selection.append(list_of_pairs[memory[0]]) 
+            training_set_id=[memory[0]]
+            #add a positive pair
+            
+            
         stored_line=[];
+       
        # print "top value %s "% sorted(range(len(count_value)), key=lambda i: count_value[i], reverse=True)[:1]
         
         #encontra o resto 
@@ -761,7 +767,7 @@ class ActiveOnlineBlocking:
                     for ele in range(len(pair)):
                         if(training_set[line][ele]!=pair[ele]):
                             projection[line][ele]=""
-                        
+                #print ("projetion %s " % projection)       
                 #fim da criacao da projecao
                 #print (projection)
                 endA = time.time()        
@@ -782,7 +788,7 @@ class ActiveOnlineBlocking:
 #                                 
                         
                     id_projection+=1;
-                #print ("numero de rules %i " % len(rules))
+               # print ("numero de rules %i " % len(rules))
                 n_rule[contador]=len(rules)                
                 contador+=1
                 
@@ -790,7 +796,7 @@ class ActiveOnlineBlocking:
            # print("            time to create rules %f  regras %i " % ((endB - end), len(training_set)))
            
             sorted_list = sorted(enumerate(n_rule), key=lambda x: x[1])
-            #print ("numero de rgras %s" % (sorted_list))     
+            print ("numero de rgras %s" % (sorted_list))     
             memory=sorted_list[0];
             equal_elements=[memory[0]]
             for tuple in sorted_list[1:]:
@@ -799,15 +805,16 @@ class ActiveOnlineBlocking:
                     equal_elements.append(tuple[0])
                 else:
                     break;
-            #print ("elementos iguais %i " % len(equal_elements))    
+            print ("elementos iguais %i " % len(equal_elements))    
             #frequencia colunar 
-            matrix_frequency=[0]* (len(equal_elements))
+            matrix_frequency=collections.Counter()
+            
             if(len(equal_elements)>1):  #tem mais  de um elemento
                 for i in (equal_elements): #lista de elementos
-                    for j in range(1,len(list_of_pairs[0])):
+                    for j in range(1,len(list_of_pairs_discrete[0])):
                         x=list_of_pairs[i][j]
-                        f=collumn_frequency[j][list_of_pairs[i][j]]
-                        matrix_frequency[i]+= collumn_frequency[j][list_of_pairs[i][j]]
+                        f=collumn_frequency[j][list_of_pairs_discrete[i][j]]
+                        matrix_frequency[i]+=  collumn_frequency[j][list_of_pairs_discrete[i][j]]
 #                 for i in range(len(equal_elements)): #lista de elementos 
 #                     for j in range(1,len(list_of_pairs[0])):  #cada coluna do elemento
 #                         try:
@@ -815,8 +822,8 @@ class ActiveOnlineBlocking:
 #                         except KeyError:
 #                             print ("element not exists %s %s %s " % (i, j, [equal_elements[i]][j]))
 #                 
-                
-                
+                print ("matrix %s " % matrix_frequency)
+                print ("fist element is %s " % next(iter(matrix_frequency)))
                 candidate=sorted(enumerate(matrix_frequency), key=lambda x: x[1])
                 memory=candidate[0]
                 for i in range(len(candidate)):
@@ -831,15 +838,16 @@ class ActiveOnlineBlocking:
             else:
                 candidate_final=equal_elements[0]
             end2 = time.time()        
-            #print("            time to compute de rules %f  regras %i " % ((end2 - end), len(training_set)))   
-            #print (" candidate %s \n\n" % id[candidate_final])              
+            print("            time to compute de rules %f  regras %i " % ((end2 - end), len(training_set)))   
+            print (" candidate final %s \n\n" % candidate_final)              
             #actual_line =    list_of_pairs[memory[0]]
             if(candidate_final not in stored_line):
                 stored_line.append(candidate_final)               
-                training_set.append(list_of_pairs[candidate_final])
+                training_set.append(list_of_pairs_discrete[candidate_final])
                 training_set_id.append(candidate_final)
-                training_set_gabarito.append(gabarito[candidate_final])     
-                #print ("novo training set %s " %training_set)
+                training_set_gabarito.append(gabarito[candidate_final])  
+                list_of_pais_selection.append(list_of_pairs[candidate_final])   
+                print ("************************novo training set %s " % list_of_pais_selection)
                 end = time.time()
         
                 print("time to select %f" %(end - start))
@@ -854,7 +862,7 @@ class ActiveOnlineBlocking:
         
         
                 
-        return training_set, training_set_gabarito            
+        return training_set, training_set_gabarito,list_of_pais_selection            
 # ============================================================================
 
 
@@ -952,7 +960,10 @@ if __name__ == '__main__':
     flag=1;
     set_gabarito=[]
     list_of_dict=[]
+    training_set=[]
+    training_gabarito=[]
     set_list_of_pairs=[]
+    list_of_pais_selection=[]
     set_label=[]
     f = open(file, 'w',100)
     for rec_id, clean_rec in ind.query_records.items():        
@@ -991,12 +1002,12 @@ if __name__ == '__main__':
         else:                     
              f.flush()             
              if(flag==1):
-                training_set, training_gabarito= ind.active_learning(set_list_of_pairs,set_gabarito)
+                training_set, training_gabarito, list_of_pais_selection= ind.active_learning(set_list_of_pairs,set_gabarito,training_set, training_gabarito,list_of_pais_selection)
                 print ("selected groundthrout %s" % training_gabarito)
                 #ind.allac(file, flag)
                 #treinamento do SVM
                 #ind.arfftoSVM(arff_file, svm_file);
-                model= ind.train_svm(svm_file,training_set, training_gabarito)  
+                model= ind.train_svm(svm_file,list_of_pais_selection, training_gabarito)  
                # break
              flag=0;   
              

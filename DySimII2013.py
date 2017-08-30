@@ -3,12 +3,11 @@ import sys
 import time
 import os
 from numpy.matlib import rand
-sys.path.append("/home/guilherme/git/testing_blocking/libsvm/tools/")
-sys.path.append("/home/guilherme/git/testing_blocking/libsvm/python/")
+sys.path.append("./libsvm/tools/")
+sys.path.append("./libsvm/python/")
 import distance
 
 
-# From Febrl  http://sourceforge.net/projects/febrl/
 import auxiliary  
 import encode
 import stringcmp
@@ -462,16 +461,16 @@ class ActiveOnlineBlocking:
                     valueB=ind.query_records[res_list[i]]
                     dictionary={}
                     sum=0.0
-                    for j in range(1,len(valueA)):
+                    for j in range(1,len(valueA)-10):
                         temp=ind.comp_methods[1](valueA[j], valueB[j])
                         dictionary[j]=temp
                         f.write(str(temp) + ", ")
                         sum=temp+sum
                        #((stringcmp.editdist(valueA[j], valueB[j])))
-                    if(sum/len(valueA)>0.1):
-                        list_of_dict_.append(dictionary)          
-                    else:
-                        continue    
+                    #if(sum/len(valueA)>0.1):
+                    list_of_dict_.append(dictionary)          
+                    #else:
+                    #    continue    
                    
                    # print ("ent -> %s %s " % (ent_id,res_list[i]))
                    
@@ -522,7 +521,7 @@ class ActiveOnlineBlocking:
                     f.write("\n")
                    
          assert (len(gabarito)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
-         #print "problem %s %s %s %s %s" %(ent_id,res_list, gabarito, list_of_dict_, label)
+         #print ("problem %s %s %s %i %s" % (ent_id,res_list, gabarito, len(list_of_dict_), label))
          return (gabarito, list_of_dict_,label)
        
     def header(self,file):
@@ -545,11 +544,11 @@ class ActiveOnlineBlocking:
             os.system("cd ssarp &&  rm train-B5-* ")
             os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  5")
             os.system("cd ssarp && ./discretize_TUBE.pl train-B5 "+file+ "  5 lac_train_TUBEfinal.txt 1")
-            os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
-            os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt")
-            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
-            os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
-            os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+#             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
+#             os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt")
+#             os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+#             os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
+#             os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
         else:
             #os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
             #os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
@@ -609,6 +608,8 @@ class ActiveOnlineBlocking:
         #w=[{1: 1.0, 2: 0.0, 3: 0.0, 4: 0.518518518519, 5: 0.447619047619, 6: 0.0, 7: 0.402777777778, 8: 0.666666666667, 9: 0.0, 10: 0.564957264957, 11: 0.0, 12: 0.0, 13: 0.714285714286, 14: 0.0, 15: 1.0}, {1: 0.0, 2: 1.0, 3: 1.0, 4: 0.888888888889, 5: 1.0, 6: 1.0, 7: 1.0, 8: 1.0, 9: 1.0, 10: 0.944444444444, 11: 0.866666666667, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0}, {1: 0.666666666667, 2: 1.0, 3: 0.0, 4: 1.0, 5: 0.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 1.0, 10: 1.0, 11: 0.0, 12: 0.0, 13: 1.0, 14: 1.0, 15: 1.0}, {1: 0.666666666667, 2: 0.0, 3: 1.0, 4: 0.0, 5: 0.425925925926, 6: 0.0, 7: 0.467948717949, 8: 0.0, 9: 0.0, 10: 0.487719298246, 11: 0.0, 12: 0.0, 13: 0.619047619048, 14: 1.0, 15: 1.0}, {1: 1.0, 2: 1.0, 3: 1.0, 4: 0.430555555556, 5: 1.0, 6: 1.0, 7: 1.0, 8: 1.0, 9: 1.0, 10: 0.919841269841, 11: 0.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0}]
         p='-c '+ str(param.get('c')) +' -g ' + str(param.get('g'))
         gabarito=[float(i) for i in gabarito]
+        print ("treinamento %s %i " % (pairs, len(pairs)))
+        print ("gabarito %s %i" % (gabarito, len(gabarito)))
         m = svm_train(gabarito, pairs, p) 
         return m         
          
@@ -673,7 +674,7 @@ class ActiveOnlineBlocking:
         
         lines=0
         f = open("ssarp/lac_train_TUBEfinal.txt", 'r',100)
-        list_of_pairs=[]
+        list_of_pairs_discrete=[]
         gabarito=[]
         id=[]
         for line in f:
@@ -686,17 +687,21 @@ class ActiveOnlineBlocking:
                      id.append(splitted[0])
                  dict[i]= (splitted[i+2].split("="))[1]
                     
-            list_of_pairs.append(dict)
+            list_of_pairs_discrete.append(dict)
+            lines+=1
+        print ("lista of pairs %i %i", (len(list_of_pairs), len(list_of_pairs_discrete)))
+        assert (len(list_of_pairs)==lines),"problema com tamanho da struct"
+        
+        
         #print list_of_pairs
        # print gabarito   
-        return list_of_pairs,gabarito,id 
+        return list_of_pairs_discrete,gabarito,id 
     
   
 
     def active_learning(self, list_of_pairs, gabarito,training_set,training_gabarito, list_of_pais_selection):
         list_of_pairs_discrete, gabarito, id= self.load_struct_active(list_of_pairs,gabarito)
         
-        start = time.time()
         #encontrar a primeira linha
         #only print value  
        # for s in list_of_pairs:
@@ -740,7 +745,7 @@ class ActiveOnlineBlocking:
             print ("tuple final %s" % memory[0])
     
             end = time.time()        
-            print("time to select first element %f " % (end - start))
+           # print("time to select first element %f " % (end - start))
         
         
             training_set=[]        
@@ -812,15 +817,7 @@ class ActiveOnlineBlocking:
             if(len(equal_elements)>1):  #tem mais  de um elemento
                 for i in (equal_elements): #lista de elementos
                     for j in range(1,len(list_of_pairs_discrete[0])):
-                        x=list_of_pairs[i][j]
-                        f=collumn_frequency[j][list_of_pairs_discrete[i][j]]
                         matrix_frequency[i]+=  collumn_frequency[j][list_of_pairs_discrete[i][j]]
-#                 for i in range(len(equal_elements)): #lista de elementos 
-#                     for j in range(1,len(list_of_pairs[0])):  #cada coluna do elemento
-#                         try:
-#                             matrix_frequency[i]+= collumn_frequency[j][list_of_pairs[equal_elements[i]][j]]
-#                         except KeyError:
-#                             print ("element not exists %s %s %s " % (i, j, [equal_elements[i]][j]))
 #                 
                 print ("matrix %s " % matrix_frequency)
                 print ("fist element is %s " % next(iter(matrix_frequency)))
@@ -878,7 +875,7 @@ def __get_substr__(s):
      
     
         
-        
+       
         
         
         
@@ -937,7 +934,7 @@ if __name__ == '__main__':
     print(' Loading time: %.1f sec' % (load_time))
     
     # Getting memory usage does not work in windows
-    load_memo_str = auxiliary.get_memory_usage()
+    #load_memo_str = auxiliary.get_memory_usage()
     #print ('    ', load_memo_str)
     #print  
     ##
@@ -985,31 +982,36 @@ if __name__ == '__main__':
         #gera arquivo de saida para avaliacao da tupla
         
         #evitar que registros nao formaram pares sejam processados
-        if(len(res_list)==0):
-            continue
+        
         gabarito, list_of_pairs, label = ind.create_output_file(ent_id, res_list,f)
+       
         #ind.header(arff_file)       
         #test active active_learning
         #if( ind.active_learning(list_of_pairs_,gabarito)==1):
         #    break  
         if(len(list_of_pairs)==0):
             continue;
-       
-        if(len(set_list_of_pairs)<50):            
-            set_gabarito=set_gabarito+gabarito
-            set_list_of_pairs=set_list_of_pairs+list_of_pairs
-            set_label=label+set_label
-        else:                     
+                    
+        set_gabarito=set_gabarito+gabarito
+        set_list_of_pairs=set_list_of_pairs+list_of_pairs
+        set_label=label+set_label
+        
+        if(len(set_list_of_pairs)>10):
+            
+             print ("lista basica de pares %i" % (len(set_list_of_pairs)))
              f.flush()             
              if(flag==1):
-                training_set, training_gabarito, list_of_pais_selection= ind.active_learning(set_list_of_pairs,set_gabarito,training_set, training_gabarito,list_of_pais_selection)
-                print ("selected groundthrout %s" % training_gabarito)
+                ind.allac(file, flag)
+                flag=0
+                
+             training_set, training_gabarito, list_of_pais_selection= ind.active_learning(set_list_of_pairs,set_gabarito,training_set, training_gabarito,list_of_pais_selection)
+             print ("selected groundthrout %s" % training_gabarito)
                 #ind.allac(file, flag)
                 #treinamento do SVM
                 #ind.arfftoSVM(arff_file, svm_file);
-                model= ind.train_svm(svm_file,list_of_pais_selection, training_gabarito)  
+             model= ind.train_svm(svm_file,list_of_pais_selection, training_gabarito)  
                # break
-             flag=0;   
+            # flag=0;   
              
              #tuples_count=0                                   
              if(len(list_of_pairs)>0):

@@ -764,7 +764,7 @@ if __name__ == '__main__':
         gabarito, list_of_pairs_, label = ind.create_output_file(ent_id, res_list,f)
         ind.header(arff_file)
        
-        if(tuples_count>100):             
+        if(tuples_count>1):             
              f.flush()
              
              if(flag==1):

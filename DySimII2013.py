@@ -6,10 +6,11 @@ from numpy.matlib import rand
 #from compiler.ast import Assert
 sys.path.append("./libsvm/tools/")
 sys.path.append("./libsvm/python/")
+sys.path.append("./auxiliar/")
 import distance
 
 
-import auxiliary  
+import auxiliary
 import encode
 import stringcmp
 import random

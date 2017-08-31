@@ -3,7 +3,7 @@ import sys
 import time
 import os
 from numpy.matlib import rand
-from compiler.ast import Assert
+#from compiler.ast import Assert
 sys.path.append("./libsvm/tools/")
 sys.path.append("./libsvm/python/")
 import distance
@@ -365,8 +365,8 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.items():     
-            if(i > num_compared_attr/5):
-               break;
+#             if(i > num_compared_attr/2):
+#                break;
             i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
@@ -463,7 +463,7 @@ class ActiveOnlineBlocking:
                     valueB=ind.query_records[res_list[i]]
                     dictionary={}
                     sum=0.0
-                    for j in range(1,len(valueA)-10):
+                    for j in range(len(valueA)-10):
                         temp=ind.comp_methods[1](valueA[j], valueB[j])
                         dictionary[j]=temp
                         f.write(str(temp) + ", ")
@@ -612,7 +612,7 @@ class ActiveOnlineBlocking:
         gabarito=[float(i) for i in gabarito]
         print ("treinamento  %i " % ( len(pairs)))
         print ("gabarito  %i" % (len(gabarito)))
-        Assert (len(pairs)==(len(gabarito)),"tamanhos diferentes do treinamento e gabarito")
+       
         m = svm_train(gabarito, pairs, '-c 4') 
         return m         
          
@@ -667,13 +667,10 @@ class ActiveOnlineBlocking:
     
     def load_struct_active(self,list_of_pairs,gabarito):
         #save dict to file arff
-        file="/tmp/arff_discretizar"
-        self.header(file)
-        f = open(file, 'w')
-               
+                     
         ###load discretized file
         
-        
+        os.system("cd ssarp && ./discretize_TUBE.pl train-B5 /tmp/arff_out  5 lac_train_TUBEfinal.txt 1")
         
         lines=0
         f = open("ssarp/lac_train_TUBEfinal.txt", 'r',100)
@@ -711,6 +708,9 @@ class ActiveOnlineBlocking:
         
         
         print("pares a serem processador %i %i " % (len(list_of_pairs), len(list_of_pairs_discrete)))
+        
+        
+        
         #encontrar a primeira linha
         collumn_frequency=[]; 
         full_frequency = collections.Counter()
@@ -752,6 +752,7 @@ class ActiveOnlineBlocking:
                 if(memory[1]==tuple[1]):
                     memory=tuple
             print ("tuple final %s" % memory[0])
+            print (list_of_pairs_discrete )
     
             end = time.time()        
            # print("time to select first element %f " % (end - start))
@@ -768,8 +769,14 @@ class ActiveOnlineBlocking:
             #add a positive pair
             self.first_time_active=0
             
-        
-       
+            #add a  positive pair 
+#             temp_ele={}
+#             for i in range (len(list_of_pairs[memory[0]])):
+#                 temp_ele[i]=1.0
+#             self.training_set_final.append(temp_ele)
+#             self.gabarito_set_final.append('1')
+#             training_set.append(temp_ele)
+#             training_set_gabarito.append('1')      
        # print "top value %s "% sorted(range(len(count_value)), key=lambda i: count_value[i], reverse=True)[:1]
         
         #encontra o resto 
@@ -830,8 +837,6 @@ class ActiveOnlineBlocking:
                     for j in range(1,len(list_of_pairs_discrete[0])):
                         matrix_frequency[i]+=  collumn_frequency[j][list_of_pairs_discrete[i][j]]
 #                 
-                print ("matrix %s " % matrix_frequency)
-                print ("fist element is %s " % next(iter(matrix_frequency)))
                 candidate=sorted(enumerate(matrix_frequency), key=lambda x: x[1])
                 memory=candidate[0]
                 for i in range(len(candidate)):
@@ -857,13 +862,16 @@ class ActiveOnlineBlocking:
                 training_gabarito.append(gabarito[candidate_final])
                 self.training_set_final.append(list_of_pairs[candidate_final])
                 self.gabarito_set_final.append(gabarito[candidate_final])   
-                print ("************************novo training set size %i " % len(self.training_set_final))
+                if(gabarito[candidate_final]==1):
+                    print ("************************novo training set size %i " % len(self.training_set_final))
+                    print ("**********************************")
                 end = time.time()        
                 print("time to select %f" %(end - start))
                 
             else:
                 print ("convergiu com a linha %i" % contador)
                 print ("tamanho do treinamento %i " % len(training_set))
+                print ("Gabarito do treinamento %s" % self.gabarito_set_final)
                 break    
                                
          
@@ -912,7 +920,7 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 3  # Total number of attribute 
+    total_num_attr = 10  # Total number of attribute 
                         # including rec-id, and ent-id
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold
@@ -997,7 +1005,7 @@ if __name__ == '__main__':
         #gera arquivo de saida para avaliacao da tupla
         
         #evitar que registros nao formaram pares sejam processados
-        
+        print ("file size ---->  %i " % len(res_list) )
         gabarito, list_of_pairs, label = ind.create_output_file(ent_id, res_list,f)
        
         #ind.header(arff_file)       
@@ -1010,9 +1018,9 @@ if __name__ == '__main__':
         set_gabarito=set_gabarito+gabarito
         set_list_of_pairs=set_list_of_pairs+list_of_pairs
         set_label=label+set_label
-        
-        if(len(set_list_of_pairs)>10):
-            
+        count+=len(list_of_pairs)
+        if(count>10):
+             count=0 
              print ("lista basica de pares %i" % (len(set_list_of_pairs)))
              f.flush()             
              if(flag==1):
@@ -1065,9 +1073,9 @@ if __name__ == '__main__':
     for inv_list in ind.inv_index_gab.values():
         if(len(inv_list)>1  ):
             size_gab+=len(inv_list)-1
-           # print "%s %d " % (inv_list[0],len(inv_list))
-            #for i in xrange(len(inv_list)):
-                #print "\n\ngab %s" % inv_list[i]
+            print ("%s %d " % (inv_list[0],len(inv_list)))
+            for i in range(len(inv_list)):
+                print ("\n\ngab %s" % inv_list[i])
     print (' TAMANHO GAB %d' % size_gab)
 
       

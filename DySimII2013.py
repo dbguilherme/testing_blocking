@@ -464,7 +464,7 @@ class ActiveOnlineBlocking:
                     valueB=ind.query_records[res_list[i]]
                     dictionary={}
                     sum=0.0
-                    for j in range(len(valueA)):
+                    for j in range(self.total_num_attr):
                         temp=ind.comp_methods[1](valueA[j], valueB[j])
                         dictionary[j]=temp
                         #f.write(str(temp) + ", ")
@@ -631,7 +631,7 @@ class ActiveOnlineBlocking:
         
     def test_svm_online(self, model, y, x, gabarito ):  
         #y, x = svm_read_problem(file_full)
-        
+        print ("labellll-> " +str(y))
        # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
         _labs, p_acc, p_vals = svm_predict(y, x, model )
         #print _labs
@@ -640,7 +640,7 @@ class ActiveOnlineBlocking:
             #true positive
             if( _labs[i]==1 and y[i]==1):
                 self.true_positive+=1;
-                print ("true positive %s " % gabarito[i])                
+               # print ("true positive %s " % gabarito[i])                
                 #remove do gabarito as tags reais 
                 for x in (gabarito):
                     if(x!=-1):
@@ -943,7 +943,7 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 15  # Total number of attribute 
+    total_num_attr = 10  # Total number of attribute 
                         # including rec-id, and ent-id
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold
@@ -1004,11 +1004,13 @@ if __name__ == '__main__':
     training_set_discreto=[]
     training_gabarito_discreto=[]
     set_list_of_pairs=[]
+    set_list_of_pairs_to_process=[]
+    set_gabarito_to_process=[]
     list_of_pais_selection=[]
     set_label=[]
+    set_label_to_process=[]
     n_rule=[]       
     stored_ids=[];
-    
     f = open(file, 'w',100)
     for rec_id, clean_rec in ind.query_records.items():        
         ent_id = rec_id
@@ -1041,33 +1043,36 @@ if __name__ == '__main__':
                     
         set_gabarito=set_gabarito+gabarito
         set_list_of_pairs=set_list_of_pairs+list_of_pairs
+        set_list_of_pairs_to_process=set_list_of_pairs_to_process+list_of_pairs
+        set_gabarito_to_process=set_gabarito_to_process+gabarito
         set_label=label+set_label
+        set_label_to_process=set_label_to_process+label
         n_rule=n_rule+[0]*len(gabarito)
         count+=len(list_of_pairs)
-        if(count>10):
-             count=0 
-             print ("lista basica de pares %i" % (len(set_list_of_pairs)))
-#              f.flush()             
-                           
-             training_set_discreto, training_gabarito_discreto, stored_ids= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
-             #set_list_of_pairs=ind.training_set_final
-             #set_gabarito=ind.gabarito_set_final
-             #n_rule=n_rule+[0]*len(set_gabarito)
-             #print ("selected groundthrout %s" % training_gabarito)
-                #ind.allac(file, flag)
-                #treinamento do SVM
-                #ind.arfftoSVM(arff_file, svm_file);
+        if(count>10 ):
              
+             count=0 
+             print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
+#              f.flush()             
+             print ("\n ############################starting active  \n\n")             
+             training_set_discreto, training_gabarito_discreto, stored_ids= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
+           #  set_list_of_pairs=ind.training_set_final
+            # set_gabarito=ind.gabarito_set_final
+            # n_rule=n_rule+[0]*len(set_gabarito)
+             
+             print ("\n ############################starting training \n\n")
              model= ind.train_svm(svm_file,ind.training_set_final, ind.gabarito_set_final)  
                # break
             # flag=0;   
              
              #tuples_count=0                                   
-             if(len(list_of_pairs)>0):
-                ind.test_svm_online(model,gabarito, list_of_pairs, label); 
-             print ("fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+            # if(len(list_of_pairs)>0):
+             print ("\n #############################starting testing \n\n")
+             ind.test_svm_online(model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process); 
+             set_list_of_pairs_to_process=[]
+             set_gabarito_to_process=[]
+             set_label_to_process=[]
              #set_gabarito=[]
-             list_of_dict=[]
              #set_list_of_pairs=[]
              #set_label=[]
              
@@ -1084,7 +1089,8 @@ if __name__ == '__main__':
             # time.sleep(10)
        
      #############################################################     
-       
+    if(len(set_gabarito_to_process)>0):
+        ind.test_svm_online(model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
     print ("####################")
     print ("false positive %i" % ind.false_positive)
     print ("true positive %i" % ind.true_positive)

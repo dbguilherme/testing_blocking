@@ -1,6 +1,5 @@
 rec_id,culture,sex,age,date_of_birth,title,given_name,surname,state,suburb,postcode,street_number,address_1,address_2,phone_number,soc_sec_id,blocking_number,family_role
 rec-409-org,ind,f,29,19881031,,benjamin,gunwani,,surryhills,4157,4,pullarplace,,0454377794,9712911,0,NoRole
-rec-141-dup-0,chi,f,23,,pfc,charlotte,chukot,kwld,dululu,2390,1,solanderplace,,0353414640,3433315,6,NoRole
 rec-588-org,eng,f,,19470108,ms,ellie,abramson,vic,paradisebeach,2753,274,hamletplace,,839956530,8024696,1,NoRole
 rec-645-org,chi,f,23,19941021,,samantha,guan,wa,booragoon,3977,41,ormerodplace,,0882307965,2518060,7,NoRole
 rec-863-org,,m,20,19970224,ms,daniel,vanhees,nsw,tuggerawong,6155,23,britten-jonesdrive,,61290571385,7765754,4,NoRole
@@ -9,3 +8,4 @@ rec-110-org,ger,m,,19900921,,hannah,seidel,sa,tarcowie,3169,30,fairweathercircui
 rec-443-org,ger,m,21,19960525,hon,alexander,zoeller,nsw,tottenham,2147,3,hicksstreet,,0294705408,6006310,8,NoRole
 rec-110-dup,ger,m,,19900921,,hannah,seidel,sa,tarcowie,3169,30,fairweathercircuit,cranleigh,61784136823,2343241,0,NoRole
 rec-443-dup,ger,m,21,19960525,hon,alexander,zoeller,nsw,tottenham,2147,3,hicksstreet,,0294705408,6006310,8,NoRole
+rec-218-dup,un3k,3,333,1984044521,mr,hamgish,aafgkre,n4sw,carin4da,4152,13,war4renplace,brentwood4vlge,2940708683,25894378,7,NoRole

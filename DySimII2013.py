@@ -640,7 +640,7 @@ class ActiveOnlineBlocking:
             #true positive
             if( _labs[i]==1 and y[i]==1):
                 self.true_positive+=1;
-               # print ("true positive %s " % gabarito[i])                
+                print ("------------------------------------------------------------true positive pair " +str(x))                
                 #remove do gabarito as tags reais 
                 for x in (gabarito):
                     if(x!=-1):
@@ -730,7 +730,14 @@ class ActiveOnlineBlocking:
         
         print("pares a serem processador %i %i " % (len(list_of_pairs), len(list_of_pairs_discrete)))
         
-        
+        if(self.first_time_active==0):
+            join_pairs=' '.join('{}'.format(value) for key, value in list_of_pairs_discrete[0].items())
+            teste_soma=0
+            for i in range(len(training_set)):
+                join_gab=' '.join('{}'.format(value) for key, value in training_set[i].items())
+                teste_soma+=sum(1 for a, b in zip(join_pairs, join_gab) if a != b)
+                print ("string " + str(join_pairs)+str(join_gab))
+            print ("summm _> "+str(teste_soma))
         
         #encontrar a primeira linha
         collumn_frequency=[]; 
@@ -788,12 +795,10 @@ class ActiveOnlineBlocking:
             temp_ele={}
             temp_ele_d={}
             for i in range (len(list_of_pairs[memory[0]])):
-                temp_ele[i]=9
-                temp_ele_d[i]="9"
+                temp_ele[i]=0.9
+                temp_ele_d[i]="0.9"
             self.training_set_final.append(temp_ele)
             self.gabarito_set_final.append(1)
-            
-            
             
             training_set.append(temp_ele_d)
             training_set_gabarito.append('1')
@@ -835,13 +840,13 @@ class ActiveOnlineBlocking:
                                rules.add(str(i)+"-"+(pair[i]) +"#"+str(j)+"-"+(pair[j])+"->"+str(training_gabarito[id_projection]))    
                         
                     id_projection+=1;
-               # print ("numero de rules %i " % len(rules))
+                
                 n_rule[contador]=len(rules)                
                 contador+=1
                 
            # endB = time.time()        
            # print("            time to create rules %f  regras %i " % ((endB - end), len(training_set)))
-           
+            print ("numero de rules  " +str(n_rule))
             sorted_list = sorted(enumerate(n_rule), key=lambda x: x[1])
             memory=sorted_list[0];
             equal_elements=[memory[0]]
@@ -857,7 +862,7 @@ class ActiveOnlineBlocking:
             
             if(len(equal_elements)>1):  #tem mais  de um elemento
                 for i in (equal_elements): #lista de elementos
-                    for j in range(1,len(list_of_pairs_discrete[0])):
+                    for j in range(0,len(list_of_pairs_discrete[0])):
                         matrix_frequency[i]+=  collumn_frequency[j][list_of_pairs_discrete[i][j]]
 #                 
                 candidate=sorted(enumerate(matrix_frequency), key=lambda x: x[1])
@@ -1056,9 +1061,9 @@ if __name__ == '__main__':
 #              f.flush()             
              print ("\n ############################starting active  \n\n")             
              training_set_discreto, training_gabarito_discreto, stored_ids= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
-           #  set_list_of_pairs=ind.training_set_final
-            # set_gabarito=ind.gabarito_set_final
-            # n_rule=n_rule+[0]*len(set_gabarito)
+             set_list_of_pairs=ind.training_set_final
+             set_gabarito=ind.gabarito_set_final
+             n_rule=[0]*len(set_gabarito)
              
              print ("\n ############################starting training \n\n")
              model= ind.train_svm(svm_file,ind.training_set_final, ind.gabarito_set_final)  

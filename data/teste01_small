@@ -15,3 +15,15 @@ rec-9434-org,   chi, , 29, 19870830, , zachary, tseon, nsw, kiora, 2903, 5, dave
 rec-7209-org,   usa, m, 34, 19820816, dr, elisha, alford, sa, agery, 2323, 15, vasey crescent, , 7 97358917, 7446247, 6, NoRole
 rec-9946-org,   dut, f, 34, 19821023, sgt, luke, degoey, wa, lake clifton, 4012, 10, herron crescent, , 08 72335404, 4271690, 0, NoRole
 rec-426-org,   usa, f, 26, 19900226, , melissa, hamilton, wa, barrow island, 2145, 61, sturt avenue, , 8 24888230, 3024965, 7, NoRole
+rec-426-dup,   usa1, f1, 261, 19900226, , melissa, 1hamilton, , 1island, 2145, 61, sturt avenue, , 8 24888230, 3024965, 7, NoRole
+rec-74-org,   unk, f, 11, , , jesse, stranger, nsw, port broughton, 2212, 20, parkin street, newville cottage park, 02 47152224, 3110521, 3, NoRole
+rec-55-org,   usa, f, 36, 19810131, ms, carly, barker, act, annandale, 2540, 41, loftus street, , 02 65812971, 1533400, 6, NoRole
+rec-41-org,   usa, , , 19370407, , jonathon, sanchez, sa, prospect, 3249, 1, ern florence crescent, the mall, 617 54970634, 6388736, 3, NoRole
+rec-14-org,   nor, , , , ms, talia, malmros, , box hill south, 4121, 19, james smith circuit, , 04 88606204, 1358033, 6, NoRole
+rec-82-org,   eng, , 26, 19910101, , emma, lund, nsw, girilambone, 5038, 92, rosella street, wooloondool farm, 2 92071098, 6515820, 4, NoRole
+rec-44-org,   unk, f, 27, 19901103, mr, jamie, strehovski, nsw, sans souci, 2487, 18, , springdale, 02 13437674, 4263988, 8, NoRole
+rec-53-org,   usa, , 20, 19970904, , callum, delacruz, qld, cooloola, 2747, 4, heagney crescent, , 3 01547814, 9782783, 5, NoRole
+rec-63-org,   usa, m, 27, 19900929, , thomas, dale, wa, lake brown, 6064, 1, pearson street, , 8 89592066, 9679382, 9, NoRole
+rec-38-org,   rus, f, 33, 19840920, , matthew, , , west wollongong, 4700, 12, nimbin street, , 07 40985726, 8009804, 2, NoRole
+rec-78-org,   ara, f, 29, 19880618, ms, patrick, nurah, qld, crestmead, 6111, 124, olympus way, , , 3872569, 0, NoRole
+rec-29-org,   dut, f, 39, 19780501, , jacinta, goossens, nsw, carlton, 3041, 7, leahy close, , 2 41831158, 7025131, 8, NoRole

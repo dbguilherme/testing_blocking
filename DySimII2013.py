@@ -469,6 +469,9 @@ class ActiveOnlineBlocking:
                         dictionary[j]=temp
                         #f.write(str(temp) + ", ")
                         sum=temp+sum
+                   # print ("summ -> " +str(sum/len(valueA)))
+                    if(sum/self.total_num_attr<0.5):
+                        continue;
                        #((stringcmp.editdist(valueA[j], valueB[j])))
                     #if(sum/len(valueA)>0.1):
                     list_of_dict_.append(dictionary)          
@@ -508,6 +511,8 @@ class ActiveOnlineBlocking:
                                 #query_acc_res.append('TM')
                                 #ind.inv_index_gab[dirty]=gab_list
                         #        f.write("1")
+                                print ("summ -> " +str(sum/len(valueA)) + "  "+ str(list_of_dict_))
+                                print ("######################----------------------------dupppp")
                                 gabarito.append(1) 
                             else:
                                 if(("dup") not in ent_id):
@@ -786,17 +791,9 @@ class ActiveOnlineBlocking:
         
         
         print("pares a serem processador %i %i " % (len(list_of_pairs), len(list_of_pairs_discrete)))
-        
+        flag_train=0
             
-            
-            
-#         if(self.first_time_active==0):      
-#             stored_ids=[]
-#             for i in range(len(training_set)):
-#                 stored_ids.append(str(i))
-        
-        
-        
+          
        
         #encontrar a primeira linha
         collumn_frequency=[]; 
@@ -827,14 +824,14 @@ class ActiveOnlineBlocking:
                 teste_soma=0                
                 for i in range(len(training_set)):
                     join_gab=' '.join('{}'.format(value) for key,value in training_set[i].items())
-                   # print ((sum(1 for a, b in zip(join_pairs, join_gab) if a == b)))
-                    teste_soma+=(2**(sum(1 for a, b in zip(join_pairs, join_gab) if a == b)-3))-1
+                    #print ((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-3)
+                    teste_soma+=(2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1
                     
                     #print (str(j)+ "---string ---" + str(join_pairs)+"---"+str(join_gab)+"---"+str(teste_soma))
                 if(teste_soma<=lowest_rule):
                     lowest_rule=teste_soma
                     lowest_id=j
-                print ("summm _> "+str(lowest_id) +"   "+str(lowest_rule))    
+               #print ("summm _> "+str(lowest_id) +"   "+str(lowest_rule))    
                 
             
             
@@ -845,7 +842,8 @@ class ActiveOnlineBlocking:
                 training_set_gabarito.append(gabarito[lowest_id])  
                 training_gabarito.append(gabarito[lowest_id])
                 self.training_set_final.append(list_of_pairs[lowest_id])
-                self.gabarito_set_final.append(gabarito[lowest_id])   
+                self.gabarito_set_final.append(gabarito[lowest_id])  
+                flag_train=1 
                 print ("************************novo training set size %i " % len(self.training_set_final))
                 print ("**********************************")
                 end = time.time()      
@@ -956,7 +954,7 @@ class ActiveOnlineBlocking:
         
         
                 
-        return training_set, training_gabarito ,stored_ids           
+        return training_set, training_gabarito ,stored_ids,flag_train       
 # ============================================================================
 
 
@@ -1109,13 +1107,14 @@ if __name__ == '__main__':
              print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
 #              f.flush()             
              print ("\n ############################starting active  \n\n")             
-             training_set_discreto, training_gabarito_discreto, stored_ids= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
+             training_set_discreto, training_gabarito_discreto, stored_ids,flag_train= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
             # set_list_of_pairs=ind.training_set_final
             # set_gabarito=ind.gabarito_set_final
              n_rule=[0]*len(set_gabarito)
              
              print ("\n ############################starting training \n\n")
-             model= ind.train_svm(svm_file,ind.training_set_final, ind.gabarito_set_final)  
+             if(flag_train==1):
+                 model= ind.train_svm(svm_file,ind.training_set_final, ind.gabarito_set_final)  
                # break
             # flag=0;   
              

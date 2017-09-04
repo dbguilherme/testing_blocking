@@ -470,7 +470,7 @@ class ActiveOnlineBlocking:
                         #f.write(str(temp) + ", ")
                         sum=temp+sum
                    # print ("summ -> " +str(sum/len(valueA)))
-                    if(sum/self.total_num_attr<0.5):
+                    if(sum/self.total_num_attr<0.1):
                         continue;
                        #((stringcmp.editdist(valueA[j], valueB[j])))
                     #if(sum/len(valueA)>0.1):
@@ -668,7 +668,7 @@ class ActiveOnlineBlocking:
                 self.false_negative +=1;
             if(_labs[i] ==0 and y[i]==0):
                 self.true_negative +=1;    
-    
+        print ("#####################fim do teste")
     
     def load_struct_active(self,list_of_pairs,gabarito):
         
@@ -824,18 +824,17 @@ class ActiveOnlineBlocking:
                 teste_soma=0                
                 for i in range(len(training_set)):
                     join_gab=' '.join('{}'.format(value) for key,value in training_set[i].items())
-                    #print ((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-3)
                     teste_soma+=(2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1
                     
-                    #print (str(j)+ "---string ---" + str(join_pairs)+"---"+str(join_gab)+"---"+str(teste_soma))
+                   # print (str(j)+ "---string ---" + str(join_pairs)+"---"+str(join_gab)+"---"+str(teste_soma))
                 if(teste_soma<=lowest_rule):
                     lowest_rule=teste_soma
                     lowest_id=j
-               #print ("summm _> "+str(lowest_id) +"   "+str(lowest_rule))    
+                #print ("summm _> "+str(lowest_id) +"   "+str(lowest_rule))    
                 
             
             
-            if(lowest_id not in stored_ids):
+            if(list_of_pairs_discrete[lowest_id] not in training_set):
                 n_rule=[0]*len(n_rule)
                 stored_ids.append(lowest_id)               
                 training_set.append(list_of_pairs_discrete[lowest_id])
@@ -844,8 +843,8 @@ class ActiveOnlineBlocking:
                 self.training_set_final.append(list_of_pairs[lowest_id])
                 self.gabarito_set_final.append(gabarito[lowest_id])  
                 flag_train=1 
-                print ("************************novo training set size %i " % len(self.training_set_final))
-                print ("**********************************")
+                print ("************************novo training set size  "+str(len(self.training_set_final)) + "   "+ str(self.training_set_final))
+                print ("**********************************"+ str(self.gabarito_set_final))
                 end = time.time()      
                 print("time to select %f" %(end - start))
                 
@@ -995,7 +994,7 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 4  # Total number of attribute 
+    total_num_attr = 10 # Total number of attribute 
                         # including rec-id, and ent-id
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold
@@ -1062,6 +1061,7 @@ if __name__ == '__main__':
     set_label=[]
     set_label_to_process=[]
     n_rule=[]       
+    
     stored_ids=[];
     f = open(file, 'w',100)
     for rec_id, clean_rec in ind.query_records.items():        
@@ -1083,7 +1083,7 @@ if __name__ == '__main__':
         #gera arquivo de saida para avaliacao da tupla
         
         #evitar que registros nao formaram pares sejam processados
-        print ("file size ---->  %i " % len(res_list) )
+        print ("tuplas para processamento ---->  %i " % len(res_list) )
         gabarito, list_of_pairs, label = ind.create_output_file(ent_id, res_list,f)
        
         #ind.header(arff_file)       
@@ -1101,20 +1101,24 @@ if __name__ == '__main__':
         set_label_to_process=set_label_to_process+label
         n_rule=n_rule+[0]*len(gabarito)
         count+=len(list_of_pairs)
-        if(count>10 ):
+        if(count>10):
              
              count=0 
              print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
-#              f.flush()             
-             print ("\n ############################starting active  \n\n")             
-             training_set_discreto, training_gabarito_discreto, stored_ids,flag_train= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
-            # set_list_of_pairs=ind.training_set_final
-            # set_gabarito=ind.gabarito_set_final
-             n_rule=[0]*len(set_gabarito)
+#            
+             #f.flush()
+             if(len(set_gabarito)<50):             
+                 print ("\n ############################starting active  \n\n")             
+                 training_set_discreto, training_gabarito_discreto, stored_ids,flag_train= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
+                 set_list_of_pairs=ind.training_set_final
+                 set_gabarito=ind.gabarito_set_final
+                 n_rule=[0]*len(set_gabarito)
              
-             print ("\n ############################starting training \n\n")
-             if(flag_train==1):
-                 model= ind.train_svm(svm_file,ind.training_set_final, ind.gabarito_set_final)  
+            
+             if(flag_train==1 and len(set_gabarito)<50):
+                 print ("\n ############################starting training \n\n")
+                 model= ind.train_svm(svm_file,ind.training_set_final, ind.gabarito_set_final) 
+                
                # break
             # flag=0;   
              

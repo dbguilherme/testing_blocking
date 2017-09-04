@@ -718,7 +718,7 @@ class ActiveOnlineBlocking:
        # print gabarito   
         return list_of_pairs_discrete,id 
     
-    def active_select_first_pair(self,list_of_pairs_discrete,collumn_frequency,training_set,training_gabarito,training_set_gabarito):
+    def active_select_first_pair(self,list_of_pairs, list_of_pairs_discrete,gabarito, collumn_frequency,training_set,training_gabarito,training_set_gabarito):
         
             matrix = np.zeros((len(list_of_pairs_discrete),len(list_of_pairs_discrete[0])))   #[[0 for x in range(len(list_of_pairs))] for y in range(59)]
             
@@ -810,8 +810,8 @@ class ActiveOnlineBlocking:
             temp= collections.Counter()    
        
         if(self.first_time_active==1):      
-           training_set, training_gabarito ,stored_ids =self.active_select_first_pair(list_of_pairs_discrete,collumn_frequency,training_set,training_gabarito,training_set_gabarito)
-           
+           training_set, training_gabarito ,stored_ids =self.active_select_first_pair(list_of_pairs,list_of_pairs_discrete,gabarito, collumn_frequency,training_set,training_gabarito,training_set_gabarito)
+           self.first_time_active=0
            
        # print "top value %s "% sorted(range(len(count_value)), key=lambda i: count_value[i], reverse=True)[:1]
         
@@ -827,13 +827,14 @@ class ActiveOnlineBlocking:
                 teste_soma=0                
                 for i in range(len(training_set)):
                     join_gab=' '.join('{}'.format(value) for key,value in training_set[i].items())
-                    teste_soma+=2**(sum(1 for a, b in zip(join_pairs, join_gab) if a == b)-9)-1
+                   # print ((sum(1 for a, b in zip(join_pairs, join_gab) if a == b)))
+                    teste_soma+=(2**(sum(1 for a, b in zip(join_pairs, join_gab) if a == b)-3))-1
                     
-                  #  print (str(j)+ "---string ---" + str(join_pairs)+"--- "+str(join_gab)+" --- "+str(teste_soma))
-                if(teste_soma<lowest_rule):
+                    #print (str(j)+ "---string ---" + str(join_pairs)+"---"+str(join_gab)+"---"+str(teste_soma))
+                if(teste_soma<=lowest_rule):
                     lowest_rule=teste_soma
                     lowest_id=j
-                #print ("summm _> "+str(lowest_id) +"   "+str(lowest_rule))    
+                print ("summm _> "+str(lowest_id) +"   "+str(lowest_rule))    
                 
             
             
@@ -996,7 +997,7 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 10  # Total number of attribute 
+    total_num_attr = 4  # Total number of attribute 
                         # including rec-id, and ent-id
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold

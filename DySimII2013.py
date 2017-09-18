@@ -511,8 +511,8 @@ class ActiveOnlineBlocking:
                                 #query_acc_res.append('TM')
                                 #ind.inv_index_gab[dirty]=gab_list
                         #        f.write("1")
-                                print ("summ -> " +str(sum/len(valueA)) + "  "+ str(list_of_dict_))
-                                print ("######################----------------------------dupppp")
+                               # print ("summ -> " +str(sum/len(valueA)) + "  "+ str(list_of_dict_))
+                               # print ("######################----------------------------dupppp")
                                 gabarito.append(1) 
                             else:
                                 if(("dup") not in ent_id):
@@ -636,7 +636,7 @@ class ActiveOnlineBlocking:
         
     def test_svm_online(self, model, y, x, gabarito ):  
         #y, x = svm_read_problem(file_full)
-        print ("labellll-> " +str(y))
+       # print ("labellll-> " +str(y))
        # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
         _labs, p_acc, p_vals = svm_predict(y, x, model )
         #print _labs
@@ -645,7 +645,7 @@ class ActiveOnlineBlocking:
             #true positive
             if( _labs[i]==1 and y[i]==1):
                 self.true_positive+=1;
-                print ("------------------------------------------------------------true positive pair " +str(x))                
+               # print ("------------------------------------------------------------true positive pair " +str(x))                
                 #remove do gabarito as tags reais 
                 for x in (gabarito):
                     if(x!=-1):
@@ -655,11 +655,11 @@ class ActiveOnlineBlocking:
                             gab_list=ind.inv_index_gab.get(res_clean,[])
                             #print "gab_list %s" % gab_list
                             #print "remove  %s" % x
-                            gab_list.remove(x)
+                            #gab_list.remove(x)
                             ind.inv_index_gab[res_clean]=gab_list
                             #print "gab_list %s" % gab_list
                         except ValueError:
-                            print ("element not exists")
+                            print ("element not exists" + str(x))
             #false positive
             if(_labs[i] ==1 and y[i]==0):
                 self.false_positive+=1;
@@ -668,7 +668,7 @@ class ActiveOnlineBlocking:
                 self.false_negative +=1;
             if(_labs[i] ==0 and y[i]==0):
                 self.true_negative +=1;    
-        print ("#####################fim do teste")
+      #  print ("#####################fim do teste")
     
     def load_struct_active(self,list_of_pairs,gabarito):
         
@@ -790,7 +790,7 @@ class ActiveOnlineBlocking:
         list_of_pairs_discrete,  id= self.load_struct_active(list_of_pairs,gabarito)
         
         
-        print("pares a serem processador %i %i " % (len(list_of_pairs), len(list_of_pairs_discrete)))
+        #print("pares a serem processador %i %i " % (len(list_of_pairs), len(list_of_pairs_discrete)))
         flag_train=0
             
           
@@ -824,8 +824,10 @@ class ActiveOnlineBlocking:
                 teste_soma=0                
                 for i in range(len(training_set)):
                     join_gab=' '.join('{}'.format(value) for key,value in training_set[i].items())
-                    teste_soma+=(2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1
-                    
+                    if(training_gabarito[i]==0):
+                        teste_soma+=((2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1)
+                    else:
+                        teste_soma+=(2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1
                    # print (str(j)+ "---string ---" + str(join_pairs)+"---"+str(join_gab)+"---"+str(teste_soma))
                 if(teste_soma<=lowest_rule):
                     lowest_rule=teste_soma
@@ -849,9 +851,9 @@ class ActiveOnlineBlocking:
                 print("time to select %f" %(end - start))
                 
             else:
-                print ("convergiu com a linha %i" % lowest_id)
-                print ("tamanho do treinamento %i " % len(training_set))
-                print ("Gabarito do treinamento %s" % self.gabarito_set_final)
+               # print ("convergiu com a linha %i" % lowest_id)
+               # print ("tamanho do treinamento %i " % len(training_set))
+               # print ("Gabarito do treinamento %s" % self.gabarito_set_final)
                 break    
             
             
@@ -1083,7 +1085,7 @@ if __name__ == '__main__':
         #gera arquivo de saida para avaliacao da tupla
         
         #evitar que registros nao formaram pares sejam processados
-        print ("tuplas para processamento ---->  %i " % len(res_list) )
+        #print ("tuplas para processamento ---->  %i " % len(res_list) )
         gabarito, list_of_pairs, label = ind.create_output_file(ent_id, res_list,f)
        
         #ind.header(arff_file)       
@@ -1104,11 +1106,11 @@ if __name__ == '__main__':
         if(count>10):
              
              count=0 
-             print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
+             #print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
 #            
              #f.flush()
-             if(len(set_gabarito)<50):             
-                 print ("\n ############################starting active  \n\n")             
+             if(len(set_gabarito)<50000):             
+                # print ("\n ############################starting active  \n\n")             
                  training_set_discreto, training_gabarito_discreto, stored_ids,flag_train= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
                  set_list_of_pairs=ind.training_set_final
                  set_gabarito=ind.gabarito_set_final
@@ -1116,7 +1118,7 @@ if __name__ == '__main__':
              
             
              if(flag_train==1 and len(set_gabarito)<50):
-                 print ("\n ############################starting training \n\n")
+             #    print ("\n ############################starting training \n\n")
                  model= ind.train_svm(svm_file,ind.training_set_final, ind.gabarito_set_final) 
                 
                # break
@@ -1124,7 +1126,7 @@ if __name__ == '__main__':
              
              #tuples_count=0                                   
             # if(len(list_of_pairs)>0):
-             print ("\n #############################starting testing \n\n")
+            # print ("\n #############################starting testing \n\n")
              ind.test_svm_online(model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process); 
              set_list_of_pairs_to_process=[]
              set_gabarito_to_process=[]

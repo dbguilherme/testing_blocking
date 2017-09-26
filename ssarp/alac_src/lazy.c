@@ -42,79 +42,103 @@ map<string, long long> PROOF;
 list_t *TEST, *UNLABELED;
 
 
-int classify(char* training, char* test, char* unlabeled, int mode) {
-	__START_TIMER__
-	read_training_set(training);
-	read_test_set(test);
-	if(mode==LAZY_SUPERVISED_CLASSIFICATION) lazy_supervised_classification();
-	else if(mode==LAZY_SEMISUPERVISED_CLASSIFICATION) {
-		read_unlabeled_set(unlabeled);
-		lazy_semisupervised_classification();
-		lazy_supervised_classification();
-	}
-	else if(mode==LAZY_TRANSDUCTIVE_CLASSIFICATION) lazy_transductive_classification();
-	else if(mode==LAZY_ACTIVE_CLASSIFICATION) lazy_active_classification();
-	for(int i=0;i<N_ITEMSETS;i++) {
-		free(ITEMSETS[i].layout);
-		free(ITEMSETS[i].list);
-	}
-	//print_rules();	
-	__FINISH_TIMER__
-	return(0);
+int classify(char* training, char* test, char* unlabeled, int mode)
+{
+    __START_TIMER__
+    read_training_set(training);
+    read_test_set(test);
+    if(mode==LAZY_SUPERVISED_CLASSIFICATION) lazy_supervised_classification();
+    else if(mode==LAZY_SEMISUPERVISED_CLASSIFICATION)
+    {
+        read_unlabeled_set(unlabeled);
+        lazy_semisupervised_classification();
+        lazy_supervised_classification();
+    }
+    else if(mode==LAZY_TRANSDUCTIVE_CLASSIFICATION) lazy_transductive_classification();
+    else if(mode==LAZY_ACTIVE_CLASSIFICATION) lazy_active_classification();
+    for(int i=0; i<N_ITEMSETS; i++)
+    {
+        free(ITEMSETS[i].layout);
+        free(ITEMSETS[i].list);
+    }
+    //print_rules();
+    __FINISH_TIMER__
+    return(0);
 }
 
 
-int main(int argc, char** argv) {
-	int c, mode=LAZY_SUPERVISED_CLASSIFICATION;
-	char *file_in=NULL, *file_test=NULL, *file_unlabeled=NULL;
-	CACHE.max_size=CACHE.hits=CACHE.misses=0;
-	CACHE.factor=0.8;
-	CACHE.locked=0;
-	while((c=getopt(argc,argv,"k:f:i:l:g:j:p:a:c:d:s:x:u:t:n:m:e:r:o:h"))!=-1) {
-		switch(c) {
-			case 'i': file_in=strdup(optarg);
-				  break;
-			case 't': file_test=strdup(optarg);
-				  break;
-			case 'u': file_unlabeled=strdup(optarg);
-				  break;
-			case 'c': MIN_CONF=atof(optarg);
-				  break;
-			case 'l': MIN_LEVEL=atof(optarg);
-				  break;
-			case 'e': CACHE.max_size=atoi(optarg);
-				  break;
-			case 'j': MAX_JUDGEMENTS=atoi(optarg);
-				  break;
-			case 'g': RELATIVE=1;
-				  MIN_SUPP=atof(optarg);
-				  break;
-			case 's': MIN_COUNT=atoi(optarg);
-				  break;
-			case 'd': mode=atoi(optarg);
-				  break;
-			case 'n': MIN_RULES=atoi(optarg);
-				  break;
-			case 'm': MAX_SIZE=atoi(optarg);
-				  if(MAX_SIZE>MAX_RULE_SIZE) MAX_SIZE=MAX_RULE_SIZE;
-				  break;
-			case 'p': MIN_SIZE=atoi(optarg);
-				  if(MAX_SIZE<1) MIN_SIZE=1;
-				  break;
-			case 'f': FACTOR=atof(optarg);
-				  break;
-			case 'k': DELIM=strdup(optarg);
-				  break;
-            case 'r': CHECK_REPEATED=1;
-				  break;
-            case 'o': OCCURS_CMP=atoi(optarg);
-				  break;
-			default:  exit(1);
-		}
-	}
-	classify(file_in, file_test, file_unlabeled, mode);
-	//print_rules();
-	for(map<string, long long>::iterator it=PROOF.begin();it!=PROOF.end();it++) printf("time: %s %lf\n", (*it).first.c_str(), (*it).second/(double)1000000);
-	printf("\n");
-	return(0);
+int main(int argc, char** argv)
+{
+    int c, mode=LAZY_SUPERVISED_CLASSIFICATION;
+    char *file_in=NULL, *file_test=NULL, *file_unlabeled=NULL;
+    CACHE.max_size=CACHE.hits=CACHE.misses=0;
+    CACHE.factor=0.8;
+    CACHE.locked=0;
+    while((c=getopt(argc,argv,"k:f:i:l:g:j:p:a:c:d:s:x:u:t:n:m:e:r:o:h"))!=-1)
+    {
+        switch(c)
+        {
+        case 'i':
+            file_in=strdup(optarg);
+            break;
+        case 't':
+            file_test=strdup(optarg);
+            break;
+        case 'u':
+            file_unlabeled=strdup(optarg);
+            break;
+        case 'c':
+            MIN_CONF=atof(optarg);
+            break;
+        case 'l':
+            MIN_LEVEL=atof(optarg);
+            break;
+        case 'e':
+            CACHE.max_size=atoi(optarg);
+            break;
+        case 'j':
+            MAX_JUDGEMENTS=atoi(optarg);
+            break;
+        case 'g':
+            RELATIVE=1;
+            MIN_SUPP=atof(optarg);
+            break;
+        case 's':
+            MIN_COUNT=atoi(optarg);
+            break;
+        case 'd':
+            mode=atoi(optarg);
+            break;
+        case 'n':
+            MIN_RULES=atoi(optarg);
+            break;
+        case 'm':
+            MAX_SIZE=atoi(optarg);
+            if(MAX_SIZE>MAX_RULE_SIZE) MAX_SIZE=MAX_RULE_SIZE;
+            break;
+        case 'p':
+            MIN_SIZE=atoi(optarg);
+            if(MAX_SIZE<1) MIN_SIZE=1;
+            break;
+        case 'f':
+            FACTOR=atof(optarg);
+            break;
+        case 'k':
+            DELIM=strdup(optarg);
+            break;
+        case 'r':
+            CHECK_REPEATED=1;
+            break;
+        case 'o':
+            OCCURS_CMP=atoi(optarg);
+            break;
+        default:
+            exit(1);
+        }
+    }
+    classify(file_in, file_test, file_unlabeled, mode);
+    //print_rules();
+    for(map<string, long long>::iterator it=PROOF.begin(); it!=PROOF.end(); it++) printf("time: %s %lf\n", (*it).first.c_str(), (*it).second/(double)1000000);
+    printf("\n");
+    return(0);
 }

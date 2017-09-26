@@ -90,6 +90,7 @@ prediction_t get_THE_prediction(int* instance, int instance_size, int true_label
 	for(int i=0;i<instance_size;i++) {
 		if(instance[i]<N_ITEMSETS) items[n_items++]=instance[i];
                 printf("- valor instance %i ---", instance[i]);
+                fflush(stdout);
 		  
 	}
 	qsort((int*) items, n_items, sizeof(int), item_cmp);
@@ -106,6 +107,7 @@ prediction_t get_THE_prediction(int* instance, int instance_size, int true_label
 		}
 		if(RELATIVE) min_count=(int)(MIN_SUPP*projection_size);
 		induce_rules(items, n_items, count_target, size, projection_size, min_count);
+                printf("number of rules %i  %i \n", n_rules[1],N_RULES);
 		n_rules[0]=n_rules[1];
 		n_rules[1]=N_RULES;
 		size++;
@@ -211,7 +213,7 @@ int lazy_active_classification() {
 		printf("TRAIN_EMPTY=%d \n", TRAIN_EMPTY);
 		printf("OCCURS_CMP=%d \n", OCCURS_CMP);
 		for(int i=0;i<n_tests;i++) {
-		  printf("\n %i--------------------------- %s size %i total_occurs %d n_rules %d diff %d \n", i, ordered_tests[i].test.id,n_tests, ordered_tests[i].total_occurs, ordered_tests[i].n_rules, ordered_tests[i].diff);
+		  printf("\n %i--------------------------- label %i %s size %i total_occurs %d n_rules %d diff %d \n", i, ordered_tests[i].test.label, ordered_tests[i].test.id,n_tests, ordered_tests[i].total_occurs, ordered_tests[i].n_rules, ordered_tests[i].diff);
 		}
 		for(int i=0;i<ordered_tests[0].test.size;i++) occurs[ordered_tests[0].test.instance[i]]=0;
 

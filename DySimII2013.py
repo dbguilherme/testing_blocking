@@ -8,8 +8,8 @@ sys.path.append("./libsvm/tools/")
 sys.path.append("./libsvm/python/")
 sys.path.append("./auxiliar/")
 import distance
-
-
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
 import auxiliary
 import encode
 import stringcmp
@@ -21,18 +21,15 @@ import collections
 import copy
 import numpy as np
 from timeit import default_timer as timer
-
+from treeinterpreter import treeinterpreter as ti
 
 class ActiveOnlineBlocking:
-    def __init__(self, total_num_attr, encoding_methods, comparison_methods, 
-                 min_threshold, min_total_threshold):
+    def __init__(self, total_num_attr, encoding_methods, comparison_methods):
               
         self.total_num_attr = total_num_attr
         self.enco_methods = encoding_methods
         self.comp_methods = comparison_methods
-        self.min_thres = min_threshold
-        self.min_tot_thres = min_total_threshold
-        
+              
         
         self.rec_dict = {}  # To hold the data set loaded from a file. Keys in
                             # this dictionary are the record identifiers, 
@@ -298,11 +295,11 @@ class ActiveOnlineBlocking:
         '''
         # Shorthands to make program faster
         inv_index = self.inv_index  
-        sim_dict = self.sim_dict
-        block_dict = self.block_dict
-        min_thres = self.min_thres
-        enco_methods = self.enco_methods
-        comp_methods = self.comp_methods
+        #sim_dict = self.sim_dict
+        #block_dict = self.block_dict
+        
+        #enco_methods = self.enco_methods
+       # comp_methods = self.comp_methods
         
         rec_val_ind = '%s' % (rec_val)     # Add attribute qualifier for the
                                                 # inverted index values
@@ -342,20 +339,9 @@ class ActiveOnlineBlocking:
 # =============================================================================================== 
 
     def query(self, rec_id,query_rec):
-           #print 'staring query phare\n'
+       
         inv_index = self.inv_index  # Shorthands to make program faster
-        min_tot_thres = self.min_tot_thres
-        num_attr_without_rec_id = self.num_attr_without_rec_id
-        sim_dict = self.sim_dict
-        entity_records = self.entity_records
-        num_compared_attr = self.num_compared_attr
-             
-           # Calculate when to switch the accu building phase
-        #
-        phase_thres = num_compared_attr - min_tot_thres 
-        
-                             
-        ent_id = rec_id
+        #ent_id = rec_id
        
         query_sort= self.resort_record(query_rec)  
         #print "rec_values %s" % query_rec[3]
@@ -474,7 +460,9 @@ class ActiveOnlineBlocking:
                         continue;
                        #((stringcmp.editdist(valueA[j], valueB[j])))
                     #if(sum/len(valueA)>0.1):
-                    list_of_dict_.append(dictionary)          
+                    list_of_dict_.append(dictionary)  
+                    print (dictionary)   
+                         
                     #else:
                     #    continue    
                    
@@ -527,7 +515,8 @@ class ActiveOnlineBlocking:
                             gabarito.append(0);
                             
                     #f.write("\n")
-                   
+         print (gabarito)      
+         print (label)    
          assert (len(gabarito)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
          #print ("problem %s %s %s %i %s" % (ent_id,res_list, gabarito, len(list_of_dict_), label))
          return (gabarito, list_of_dict_,label)
@@ -606,7 +595,7 @@ class ActiveOnlineBlocking:
         
         
         
-    def train_svm(self,svm_file, pairs, gabarito):
+    def train_svm(self,rf, svm_file, pairs, gabarito):
   
         #os.system("export PYTHONPATH=//home/guilherme/git/testing_blocking/libsvm/tools/:$PYTHONPATH")
         #y, x = svm_read_problem(svm_file)
@@ -617,8 +606,21 @@ class ActiveOnlineBlocking:
         gabarito=[float(i) for i in gabarito]
         print ("treinamento  %i " % ( len(pairs)))
         print ("gabarito  %i" % (len(gabarito)))
-       
-        m = svm_train(gabarito, pairs, '-c 4') 
+        x=np.array([])
+        #array=np.array(pairs)
+        for w in pairs:
+             for key, value in w.items():
+                 #print (value)
+                 x=np.append(x, value);
+       # print (x)
+       # print (len(pairs))
+        x=x.reshape(len(pairs),len(pairs[0]))
+       # y=np.array(gabarito);
+        #print(y.astype(int))
+        
+        
+        
+        m = rf.fit(x,gabarito ) #svm_train(gabarito, pairs, '-c 4') 
         return m         
          
     def test_svm(self, model, file_full):  
@@ -634,11 +636,50 @@ class ActiveOnlineBlocking:
             else:
                 self.true_positive+=1;
         
-    def test_svm_online(self, model, y, x, gabarito ):  
+    def test_svm_online(self,rf ,model, y, x, gabarito ):  
         #y, x = svm_read_problem(file_full)
        # print ("labellll-> " +str(y))
        # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
-        _labs, p_acc, p_vals = svm_predict(y, x, model )
+        np_array=np.array([])
+        #array=np.array(pairs)
+        for w in x:
+             for key, value in w.items():
+                 #print (value)
+                 np_array=np.append(np_array, value);
+       # print (x)
+        print (len(x[0]))
+        np_array=np_array.reshape(len(x),len(x[0]))
+        
+        
+        _labs = model.predict_proba(np_array) #svm_predict(y, x, model )
+#         print (_labs)
+#         print ()
+#         print (y)
+        for i in range(len(_labs)):
+            if(_labs[i][0]>0.1 and _labs[i][0]<0.9):
+                print ("---------------" + str(_labs[i]))
+                
+        
+#         training_set_discreto, training_gabarito_discreto, stored_ids, flag_train = ind.active_learning(set_list_of_pairs, set_gabarito, training_set_discreto, training_gabarito_discreto, stored_ids)
+#         set_list_of_pairs = ind.training_set_final
+#         set_gabarito = ind.gabarito_set_final
+#         n_rule = [0] * len(set_gabarito)
+
+
+        _labs = model.predict(np_array) #svm_predict(y, x, model )
+        
+       # print(np_array.reshape(len(x),10))
+        #print(np_array[1][5])
+        #prediction, bias, contributions = ti.predict(rf, np_array)
+       # pred, bias, contributions =ti.predict(rf, np_array)
+        
+        
+        #if(prediction[0][0]>0.2 and  prediction[0][0]<0.8):
+            #print (prediction)
+        #    count+=1
+            #print (count)   
+        
+        
         #print _labs
         for i in range(len(y)):
             self.compute+=1;
@@ -1015,8 +1056,7 @@ if __name__ == '__main__':
                     encode.dmetaphone, __get_substr__,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,]
     comp_methods = [None, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist , stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist]
     
-    ind = ActiveOnlineBlocking(total_num_attr,enco_methods, comp_methods, 
-                  min_threshold, min_total_threshold)
+    ind = ActiveOnlineBlocking(total_num_attr,enco_methods, comp_methods)
      
     
     print
@@ -1064,6 +1104,12 @@ if __name__ == '__main__':
     set_label_to_process=[]
     n_rule=[]       
     
+    
+    rf = ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+#     model = clf2.fit( iris_X_train, iris_y_train)
+
+    
+    
     stored_ids=[];
     f = open(file, 'w',100)
     for rec_id, clean_rec in ind.query_records.items():        
@@ -1095,6 +1141,8 @@ if __name__ == '__main__':
         if(len(list_of_pairs)==0):
             continue;
                     
+                    
+                    
         set_gabarito=set_gabarito+gabarito
         set_list_of_pairs=set_list_of_pairs+list_of_pairs
         set_list_of_pairs_to_process=set_list_of_pairs_to_process+list_of_pairs
@@ -1103,23 +1151,23 @@ if __name__ == '__main__':
         set_label_to_process=set_label_to_process+label
         n_rule=n_rule+[0]*len(gabarito)
         count+=len(list_of_pairs)
-        if(count>10):
+        if(count>30):
              
-             count=0 
-             #print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
+            count = 0 
+             # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
 #            
-             #f.flush()
-             if(len(set_gabarito)<50000):             
+             # f.flush()
+            if(len(set_gabarito) < 50000):             
                 # print ("\n ############################starting active  \n\n")             
-                 training_set_discreto, training_gabarito_discreto, stored_ids,flag_train= ind.active_learning(set_list_of_pairs,set_gabarito,training_set_discreto, training_gabarito_discreto,stored_ids)
-                 set_list_of_pairs=ind.training_set_final
-                 set_gabarito=ind.gabarito_set_final
-                 n_rule=[0]*len(set_gabarito)
+                training_set_discreto, training_gabarito_discreto, stored_ids, flag_train = ind.active_learning(set_list_of_pairs, set_gabarito, training_set_discreto, training_gabarito_discreto, stored_ids)
+                set_list_of_pairs = ind.training_set_final
+                set_gabarito = ind.gabarito_set_final
+                n_rule = [0] * len(set_gabarito)
              
             
-             if(flag_train==1 and len(set_gabarito)<50):
+            if(flag_train == 1 and len(set_gabarito) < 50):
              #    print ("\n ############################starting training \n\n")
-                 model= ind.train_svm(svm_file,ind.training_set_final, ind.gabarito_set_final) 
+                model = ind.train_svm(rf, svm_file, ind.training_set_final, ind.gabarito_set_final) 
                 
                # break
             # flag=0;   
@@ -1127,10 +1175,10 @@ if __name__ == '__main__':
              #tuples_count=0                                   
             # if(len(list_of_pairs)>0):
             # print ("\n #############################starting testing \n\n")
-             ind.test_svm_online(model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process); 
-             set_list_of_pairs_to_process=[]
-             set_gabarito_to_process=[]
-             set_label_to_process=[]
+            ind.test_svm_online(rf,model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process); 
+            set_list_of_pairs_to_process=[]
+            set_gabarito_to_process=[]
+            set_label_to_process=[]
              #set_gabarito=[]
              #set_list_of_pairs=[]
              #set_label=[]
@@ -1149,7 +1197,7 @@ if __name__ == '__main__':
        
      #############################################################     
     if(len(set_gabarito_to_process)>0):
-        ind.test_svm_online(model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
+        ind.test_svm_online(rf,model, set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
     print ("####################")
     print ("false positive %i" % ind.false_positive)
     print ("true positive %i" % ind.true_positive)

@@ -78,8 +78,9 @@ void print_rule(rule_t rule) {
 	__START_TIMER__
 
 	for(int i=0;i<rule.size-1;i++) printf("---------%s-\n", SYMBOL_TABLE[rule.ant[i]].c_str());
-	printf("->%s \n", SYMBOL_TABLE[TARGET_ID[rule.label]].c_str());
+	printf("->%s %i \n \n", SYMBOL_TABLE[TARGET_ID[rule.label]].c_str(), rule.label);
 	printf("size= %d count= %d supp= %f conf= %f\n", rule.size-1, rule.count, rule.supp, rule.conf);
+       
 	__FINISH_TIMER__
 }
 
@@ -92,7 +93,8 @@ void print_rules() {
 	  printf("-------------rule %i ----------------\n",i);
 		printf("size= %d count= %d supp= %f conf= %f\n", RULES[i].size-1, RULES[i].count, RULES[i].supp, RULES[i].conf);
 
-	       for(int j=0;i<RULES[i].size-1;j++) printf("\n REGRA%s----------------\n", SYMBOL_TABLE[RULES[i].ant[j]].c_str());
+	       for(int j=0;i<RULES[i].size-1;j++) 
+                   printf("\n XXXXXXXXXXXXXXXXXXXXXXXX    %s----------------\n", SYMBOL_TABLE[RULES[i].ant[j]].c_str());
 
                 
 	}
@@ -173,22 +175,42 @@ void induce_rules(int* items, int n_items, int* count_target, int level, int pro
 			rule.count=cont.cons_count[i];
 			rule.conf=COMPUTE_CONFIDENCE;
 			rule.supp=COMPUTE_SUPPORT;
-			if(rule.count>=min_count && rule.conf>=MIN_CONF) {
-				RULES[N_RULES].count=rule.count;
-				RULES[N_RULES].supp=rule.supp;
-				RULES[N_RULES].conf=rule.conf;
-				RULES[N_RULES].id=N_RULES;
-				RULES[N_RULES].evidence=cont.evidence;
-				RULES[N_RULES].size=level+1;
-				RULES[N_RULES].label=i;
-				for(int j=0;j<level;j++) RULES[N_RULES].ant[j]=cb1[j];
-				if(N_RULES>=MAX_RULES-1) {
-					release_itemset(cons);
-					break;
-				}
-				N_RULES++;
-                                
-			}
+                        if(i==0)
+                            for(int w=0;w<3;w++){
+                                if(rule.count>=min_count && rule.conf>=MIN_CONF) {
+                                        RULES[N_RULES].count=rule.count;
+                                        RULES[N_RULES].supp=rule.supp;
+                                        RULES[N_RULES].conf=rule.conf;
+                                        RULES[N_RULES].id=N_RULES;
+                                        RULES[N_RULES].evidence=cont.evidence;
+                                        RULES[N_RULES].size=level+1;
+                                        RULES[N_RULES].label=i;
+                                        for(int j=0;j<level;j++) RULES[N_RULES].ant[j]=cb1[j];
+                                        if(N_RULES>=MAX_RULES-1) {
+                                                release_itemset(cons);
+                                                break;
+                                        }
+                                        N_RULES++;
+//printf("rule %i count %i " , i, rule.count);
+                                }
+                            }
+                        else    
+                            if(rule.count>=min_count && rule.conf>=MIN_CONF) {
+                                        RULES[N_RULES].count=rule.count;
+                                        RULES[N_RULES].supp=rule.supp;
+                                        RULES[N_RULES].conf=rule.conf;
+                                        RULES[N_RULES].id=N_RULES;
+                                        RULES[N_RULES].evidence=cont.evidence;
+                                        RULES[N_RULES].size=level+1;
+                                        RULES[N_RULES].label=i;
+                                        for(int j=0;j<level;j++) RULES[N_RULES].ant[j]=cb1[j];
+                                        if(N_RULES>=MAX_RULES-1) {
+                                                release_itemset(cons);
+                                                break;
+                                        }
+                                        N_RULES++;
+                                     // printf("rule %i count %i " , i, rule.count);
+                                }
 			if(cont.status==0) release_itemset(cons);
 		}
 		if(cont.status==0) {
@@ -205,9 +227,22 @@ void induce_rules(int* items, int n_items, int* count_target, int level, int pro
 	free(cb1);
 	free(cb2);
 	qsort((rule_t*) RULES, N_RULES, sizeof(rule_t), rule_cmp);
-	for(int i=0;i<= N_RULES ;i++){
-	  printf("#####################*************************** %i %i\n", RULES[i].count, N_RULES );
-	  print_rule(RULES[i]);
-	}
+	//for(int i=0;i<= N_RULES ;i++){
+// printf("#####################*************************** %i %i\n", RULES[i].count, N_RULES );
+	 //  print_rule(RULES[i]);
+          
+        //}
+        
+       
+//           if(RULES[i].label==0){
+//               
+// //RULES[i].count=RULES[i].count*2;
+//   //              printf("novo numero de regras %i \n", RULES[i].count);
+//   //        }
+//      
+// 	}
+	
+	 
+	
 	__FINISH_TIMER__
 }

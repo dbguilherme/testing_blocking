@@ -22,6 +22,7 @@ import copy
 import numpy as np
 from timeit import default_timer as timer
 from treeinterpreter import treeinterpreter as ti
+import pandas as pd
 
 class ActiveOnlineBlocking:
     def __init__(self, total_num_attr, encoding_methods, comparison_methods):
@@ -431,7 +432,7 @@ class ActiveOnlineBlocking:
        
        ###################################################
        
-    def create_output_file(self, ent_id,res_list,f):
+    def create_data_file(self, ent_id,res_list,f):
          
          list_of_dict_=[]
          gabarito=[]
@@ -460,8 +461,9 @@ class ActiveOnlineBlocking:
                         continue;
                        #((stringcmp.editdist(valueA[j], valueB[j])))
                     #if(sum/len(valueA)>0.1):
+                    
                     list_of_dict_.append(dictionary)  
-                    print (dictionary)   
+                    #print (dictionary)   
                          
                     #else:
                     #    continue    
@@ -515,11 +517,19 @@ class ActiveOnlineBlocking:
                             gabarito.append(0);
                             
                     #f.write("\n")
-         print (gabarito)      
-         print (label)    
+         
+         
+         
+         dt=pd.DataFrame(list_of_dict_)
+         if(len(dt)>0):
+             dt['label']=label
+             dt['rotulo']=label
+         #print (dt)
+#          print (gabarito)      
+#          print (label)    
          assert (len(gabarito)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
          #print ("problem %s %s %s %i %s" % (ent_id,res_list, gabarito, len(list_of_dict_), label))
-         return (gabarito, list_of_dict_,label)
+         return (dt)
        
     def header(self,file):
         #file_out="/tmp/final_treina.arff"
@@ -821,17 +831,25 @@ class ActiveOnlineBlocking:
             return training_set, training_gabarito ,stored_ids 
     
     
-    def active_learning(self, list_of_pairs, gabarito,training_set,training_gabarito,stored_ids):
+    def active_learning(self, df_test, df_train):
         
         global n_rule
         #e preciso mapear o atributos continuos para valores discreto 
         #   list_of_pairs--> list_of_pairs_discreto
         #
         
-        list_of_pairs_discrete,  id= self.load_struct_active(list_of_pairs,gabarito)
-        
-        
+        #list_of_pairs_discrete,  id= self.load_struct_active(list_of_pairs,gabarito)
+        print (df_test)
+        df_test_discrete= df_test.iloc[:,:10].apply(lambda x: ((x*10)))
+        df_test_discrete=df_test_discrete.iloc[:,:10].astype(int)
+
+        df_test_discrete=df_test_discrete.replace([10,'k'],'k')
+        df_test_discrete=df_test_discrete.astype(str)
+        df_test_discrete['label']=df_test['label']
+        df_test_discrete['rotulo']=df_test['rotulo']
         #print("pares a serem processador %i %i " % (len(list_of_pairs), len(list_of_pairs_discrete)))
+       
+        #print(df_test_discrete)
         flag_train=0
             
           
@@ -841,61 +859,65 @@ class ActiveOnlineBlocking:
         training_set_gabarito=[]   
         temp=collections.Counter()
        # max_value=[]
-        for j in range(len(list_of_pairs_discrete[0])): # para cada coluna fazer a varedura
-            for i in range(len(list_of_pairs_discrete)): # varrear as linhas 
-                temp[list_of_pairs_discrete[i][j]]+=1
-            collumn_frequency.append(temp)            
-            temp= collections.Counter()    
+#         for j in range(len(list_of_pairs_discrete[0])): # para cada coluna fazer a varedura
+#             for i in range(len(list_of_pairs_discrete)): # varrear as linhas 
+#                 temp[list_of_pairs_discrete[i][j]]+=1
+#             collumn_frequency.append(temp)            
+#             temp= collections.Counter()    
+        for i in range(len(df.columns)-2):
+            print (i)
+            df_test_discrete[i*100] = df_test_discrete.groupby([i])[i].transform('count')
+       # print (df_test_discrete)
        
         if(self.first_time_active==1):      
-           training_set, training_gabarito ,stored_ids =self.active_select_first_pair(list_of_pairs,list_of_pairs_discrete,gabarito, collumn_frequency,training_set,training_gabarito,training_set_gabarito)
+           df_train.append(self.active_select_first_pair(df_test,df_train,df_test_discrete))
            self.first_time_active=0
-           
-       # print "top value %s "% sorted(range(len(count_value)), key=lambda i: count_value[i], reverse=True)[:1]
-        
-        #encontra o resto 
-        
-        while(1):
-            contador=0
-            start = time.time()   
-            lowest_rule=sys.maxsize
-            lowest_id=0
-            for j in range(len(list_of_pairs_discrete)):
-                join_pairs=' '.join('{}'.format(value) for key, value in list_of_pairs_discrete[j].items())
-                teste_soma=0                
-                for i in range(len(training_set)):
-                    join_gab=' '.join('{}'.format(value) for key,value in training_set[i].items())
-                    if(training_gabarito[i]==0):
-                        teste_soma+=((2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1)
-                    else:
-                        teste_soma+=(2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1
-                   # print (str(j)+ "---string ---" + str(join_pairs)+"---"+str(join_gab)+"---"+str(teste_soma))
-                if(teste_soma<=lowest_rule):
-                    lowest_rule=teste_soma
-                    lowest_id=j
-                #print ("summm _> "+str(lowest_id) +"   "+str(lowest_rule))    
-                
-            
-            
-            if(list_of_pairs_discrete[lowest_id] not in training_set):
-                n_rule=[0]*len(n_rule)
-                stored_ids.append(lowest_id)               
-                training_set.append(list_of_pairs_discrete[lowest_id])
-                training_set_gabarito.append(gabarito[lowest_id])  
-                training_gabarito.append(gabarito[lowest_id])
-                self.training_set_final.append(list_of_pairs[lowest_id])
-                self.gabarito_set_final.append(gabarito[lowest_id])  
-                flag_train=1 
-                print ("************************novo training set size  "+str(len(self.training_set_final)) + "   "+ str(self.training_set_final))
-                print ("**********************************"+ str(self.gabarito_set_final))
-                end = time.time()      
-                print("time to select %f" %(end - start))
-                
-            else:
-               # print ("convergiu com a linha %i" % lowest_id)
-               # print ("tamanho do treinamento %i " % len(training_set))
-               # print ("Gabarito do treinamento %s" % self.gabarito_set_final)
-                break    
+#            
+#        # print "top value %s "% sorted(range(len(count_value)), key=lambda i: count_value[i], reverse=True)[:1]
+#         
+#         #encontra o resto 
+#         
+#         while(1):
+#             contador=0
+#             start = time.time()   
+#             lowest_rule=sys.maxsize
+#             lowest_id=0
+#             for j in range(len(list_of_pairs_discrete)):
+#                 join_pairs=' '.join('{}'.format(value) for key, value in list_of_pairs_discrete[j].items())
+#                 teste_soma=0                
+#                 for i in range(len(training_set)):
+#                     join_gab=' '.join('{}'.format(value) for key,value in training_set[i].items())
+#                     if(training_gabarito[i]==0):
+#                         teste_soma+=((2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1)
+#                     else:
+#                         teste_soma+=(2**((sum(1 for a, b in zip(join_pairs, join_gab) if a == b))-(self.total_num_attr-1)))-1
+#                    # print (str(j)+ "---string ---" + str(join_pairs)+"---"+str(join_gab)+"---"+str(teste_soma))
+#                 if(teste_soma<=lowest_rule):
+#                     lowest_rule=teste_soma
+#                     lowest_id=j
+#                 #print ("summm _> "+str(lowest_id) +"   "+str(lowest_rule))    
+#                 
+#             
+#             
+#             if(list_of_pairs_discrete[lowest_id] not in training_set):
+#                 n_rule=[0]*len(n_rule)
+#                 stored_ids.append(lowest_id)               
+#                 training_set.append(list_of_pairs_discrete[lowest_id])
+#                 training_set_gabarito.append(gabarito[lowest_id])  
+#                 training_gabarito.append(gabarito[lowest_id])
+#                 self.training_set_final.append(list_of_pairs[lowest_id])
+#                 self.gabarito_set_final.append(gabarito[lowest_id])  
+#                 flag_train=1 
+#                 print ("************************novo training set size  "+str(len(self.training_set_final)) + "   "+ str(self.training_set_final))
+#                 print ("**********************************"+ str(self.gabarito_set_final))
+#                 end = time.time()      
+#                 print("time to select %f" %(end - start))
+#                 
+#             else:
+#                # print ("convergiu com a linha %i" % lowest_id)
+#                # print ("tamanho do treinamento %i " % len(training_set))
+#                # print ("Gabarito do treinamento %s" % self.gabarito_set_final)
+#                 break    
             
             
                      
@@ -996,7 +1018,7 @@ class ActiveOnlineBlocking:
         
         
                 
-        return training_set, training_gabarito ,stored_ids,flag_train       
+        #return training_set, training_gabarito ,stored_ids,flag_train       
 # ============================================================================
 
 
@@ -1091,26 +1113,29 @@ if __name__ == '__main__':
     # Go through query records and try to find a match for each query 
     tuples_count=0
     count = 0 # count of true duplicates 
-    flag=1;
-    set_gabarito=[]
-    list_of_dict=[]
-    training_set_discreto=[]
-    training_gabarito_discreto=[]
-    set_list_of_pairs=[]
-    set_list_of_pairs_to_process=[]
-    set_gabarito_to_process=[]
-    list_of_pais_selection=[]
-    set_label=[]
-    set_label_to_process=[]
-    n_rule=[]       
+    
+#     set_gabarito=[]
+#     list_of_dict=[]
+#     training_set_discreto=[]
+#     training_gabarito_discreto=[]
+#     set_list_of_pairs=[]
+#     set_list_of_pairs_to_process=[]
+#     set_gabarito_to_process=[]
+#     list_of_pais_selection=[]
+#     set_label=[]
+#     set_label_to_process=[]
+#    n_rule=[]       
     
     
     rf = ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
 #     model = clf2.fit( iris_X_train, iris_y_train)
 
     
+    df=pd.DataFrame()
+    df_train=pd.DataFrame()
+    flag_active=1;
     
-    stored_ids=[];
+    #stored_ids=[];
     f = open(file, 'w',100)
     for rec_id, clean_rec in ind.query_records.items():        
         ent_id = rec_id
@@ -1132,42 +1157,43 @@ if __name__ == '__main__':
         
         #evitar que registros nao formaram pares sejam processados
         #print ("tuplas para processamento ---->  %i " % len(res_list) )
-        gabarito, list_of_pairs, label = ind.create_output_file(ent_id, res_list,f)
+        df =df.append(ind.create_data_file(ent_id, res_list,f))
        
         #ind.header(arff_file)       
         #test active active_learning
         #if( ind.active_learning(list_of_pairs_,gabarito)==1):
         #    break  
-        if(len(list_of_pairs)==0):
+        if(len(df)==0):
             continue;
                     
                     
                     
-        set_gabarito=set_gabarito+gabarito
-        set_list_of_pairs=set_list_of_pairs+list_of_pairs
-        set_list_of_pairs_to_process=set_list_of_pairs_to_process+list_of_pairs
-        set_gabarito_to_process=set_gabarito_to_process+gabarito
-        set_label=label+set_label
-        set_label_to_process=set_label_to_process+label
-        n_rule=n_rule+[0]*len(gabarito)
-        count+=len(list_of_pairs)
-        if(count>30):
+#         set_gabarito=set_gabarito+gabarito
+#         set_list_of_pairs=set_list_of_pairs+list_of_pairs
+#         set_list_of_pairs_to_process=set_list_of_pairs_to_process+list_of_pairs
+#         set_gabarito_to_process=set_gabarito_to_process+gabarito
+#         set_label=label+set_label
+#         set_label_to_process=set_label_to_process+label
+        #n_rule=n_rule+[0]*len(df)
+        
+        if(len(df)>30):
              
             count = 0 
              # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
 #            
              # f.flush()
-            if(len(set_gabarito) < 50000):             
+            if(flag_active==1):             
                 # print ("\n ############################starting active  \n\n")             
-                training_set_discreto, training_gabarito_discreto, stored_ids, flag_train = ind.active_learning(set_list_of_pairs, set_gabarito, training_set_discreto, training_gabarito_discreto, stored_ids)
-                set_list_of_pairs = ind.training_set_final
-                set_gabarito = ind.gabarito_set_final
-                n_rule = [0] * len(set_gabarito)
+                df_train.append(ind.active_learning(df,df_train))
+                flag_active=0 
+#                 set_list_of_pairs = ind.training_set_final
+#                 set_gabarito = ind.gabarito_set_final
+#                 n_rule = [0] * len(set_gabarito)
              
             
-            if(flag_train == 1 and len(set_gabarito) < 50):
+            #if(flag_train == 1 and len(set_gabarito) < 50):
              #    print ("\n ############################starting training \n\n")
-                model = ind.train_svm(rf, svm_file, ind.training_set_final, ind.gabarito_set_final) 
+           # model = ind.train_svm(rf, svm_file, ind.training_set_final, ind.gabarito_set_final) 
                 
                # break
             # flag=0;   
@@ -1175,10 +1201,10 @@ if __name__ == '__main__':
              #tuples_count=0                                   
             # if(len(list_of_pairs)>0):
             # print ("\n #############################starting testing \n\n")
-            ind.test_svm_online(rf,model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process); 
-            set_list_of_pairs_to_process=[]
-            set_gabarito_to_process=[]
-            set_label_to_process=[]
+            #ind.test_svm_online(rf,model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process); 
+            df=pd.DataFrame()
+            
+            
              #set_gabarito=[]
              #set_list_of_pairs=[]
              #set_label=[]
@@ -1196,8 +1222,8 @@ if __name__ == '__main__':
             # time.sleep(10)
        
      #############################################################     
-    if(len(set_gabarito_to_process)>0):
-        ind.test_svm_online(rf,model, set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
+   # if(len(set_gabarito_to_process)>0):
+   #     ind.test_svm_online(rf,model, set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
     print ("####################")
     print ("false positive %i" % ind.false_positive)
     print ("true positive %i" % ind.true_positive)

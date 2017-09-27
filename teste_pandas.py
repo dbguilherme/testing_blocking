@@ -63,17 +63,30 @@ for i in range(1,10):
 ele=x2[lista].sum(axis=1)
 
 top_values=sorted(enumerate(ele), key=lambda x: x[1], reverse=True)  
-print ((top_values))
+#print ((top_values))
 
 memory = top_values[0];
 for tuple in top_values:
     if(memory[1] == tuple[1]):
          memory = tuple
-print ("tuple final " + str(memory))
+#print ("tuple final " + str(memory))
 
-print (x2.iloc([memory[0]]))
+#print (x2.iloc[memory[0]])
+
+print (len(x2))
+x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x2, ignore_index=True)
+x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
+x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
+x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
+
+print()
+#df.at['C', 'x']
+x3.at[0, 9]=-10000
+
+
+
 #Wprint(x2[lista].sum(axis=1)   )
-#print(x2)
+print(len(x3))
     
 #print (lista)
 
@@ -88,4 +101,39 @@ print (x2.iloc([memory[0]]))
 #print (x2.sum(axis=1))
 
 
+
+df1 = pd.DataFrame(np.random.rand(5,4))
+
+
+
+
+
+df2 = df1.ix[3:4]
+
+df2.reset_index(drop=True,inplace=True)
+df2.at[0,0]=1
+df2.at[0,2]=1
+print ("DF 2 ")
+print (df2)
+print (df1)
+print ("DF 2 ")
+
+som=0
+
+for i in range(len(df1)):
+   for j in range(len(df1.columns)):
+       #print (str(df1[j][i]) + "  " + str(df2[j][w]) + "  " + str(j) +"  "+ str(i) +" " + str(w))
+       for w in range(len (df2)):
+           if (df1[j][i]==df2[j][w]):
+               som+=1;
+   print (som)
+   som=0
+
+#print (df1)
+#df1 = pd.DataFrame({"A":['AA','AD','AD'], "B":['BA','BD','BF']})
+#df2 = pd.DataFrame({"A":['AA','AD'], 'B':['BA','BF']})
+#df1['compressed']=df1.apply(lambda x:'%s%s' % (x['A'],x['B']),axis=1)
+#df2['compressed']=df2.apply(lambda x:'%s%s' % (x['A'],x['B']),axis=1)
+#df1['Success'] = df1['compressed'].isin(df2['compressed']).astype(int)
+#print (df1)
 

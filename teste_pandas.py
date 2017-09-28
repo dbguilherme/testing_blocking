@@ -39,22 +39,31 @@ index=range(10,len(x)+10)
 
 dt=pd.DataFrame(x,index=index)
 
-print(dt)
+#print(dt)
 
-#dt['label']=y
-#dt['rotulo']=lista
+#print () 
+#print(dt.iloc[0].index)
+#print () 
+#print (dt.iloc[0].index.isin(dt.index))
+dt['label']=y
+dt['rotulo']=lista
+
+
+#print (dt.index.tolist())
+#print (df.index.isin(df.iloc[0].index.values))
 
 
 
+df_test_discrete= dt.iloc[:,:10].apply(lambda x: ((x*10)))
+df_test_discrete=df_test_discrete.iloc[:,:10].astype(int)
+df_test_discrete=df_test_discrete.replace([10,'k'],'k')
+df_test_discrete['label']=y
+df_test_discrete['rotulo']=lista
 
 
-#df_test_discrete= dt.iloc[:,:10].apply(lambda x: ((x*10)))
-#df_test_discrete=df_test_discrete.iloc[:,:10].astype(int)
-#df_test_discrete=df_test_discrete.replace([10,'k'],'k')
-#df_test_discrete['label']=y
-#df_test_discrete['rotulo']=lista
-##df_test_discrete.reset_index()
-##df_test_discrete=df_test_discrete.reindex(index=range(0,11))
+X=df_test_discrete[0:9].values
+print (X)
+
 
 
 ##(df_test_discrete == df_test_discrete.iloc[0]).all(1).any()

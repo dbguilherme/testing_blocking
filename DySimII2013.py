@@ -93,8 +93,9 @@ class ActiveOnlineBlocking:
         self.compute=0
         
         self.first_time_active=1
-        self.training_set_final=[]
-        self.gabarito_set_final=[]
+#         self.training_set_final=[]
+#         self.gabarito_set_final=[]
+        self.numberOfPairs=0;
 
 # ===============================================================================================        
     
@@ -434,11 +435,15 @@ class ActiveOnlineBlocking:
          
          
          
-         dt=pd.DataFrame(list_of_dict_)
+         index=range(self.numberOfPairs,len(list_of_dict_)+self.numberOfPairs)
+         dt=pd.DataFrame(list_of_dict_, index=index)
+         self.numberOfPairs+=len(list_of_dict_)
+         
          if(len(dt)>0):
              dt['label']=gabarito
              dt['rotulo']=label
-         #print (dt)
+             #print( "size -->>>")
+             #print (dt)
 #          print (gabarito)      
 #          print (label)    
          assert (len(gabarito)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
@@ -582,7 +587,7 @@ if __name__ == '__main__':
         #evitar que registros nao formaram pares sejam processados
         #print ("tuplas para processamento ---->  %i " % len(res_list) )
         df =df.append(ind.create_data_file(ent_id, res_list,f))
-        df.index = range(len(df))
+        #df.index = range(len(df))
         #print (type(df))
         #ind.header(arff_file)       
         #test active active_learning
@@ -591,7 +596,7 @@ if __name__ == '__main__':
         if(len(df)==0):
             continue;
                     
-                    
+        #print(df)           
                     
 #         set_gabarito=set_gabarito+gabarito
 #         set_list_of_pairs=set_list_of_pairs+list_of_pairs
@@ -609,8 +614,9 @@ if __name__ == '__main__':
              # f.flush()
             if(flag_active==1):             
                 # print ("\n ############################starting active  \n\n")             
-                df_train.append(active_learning.active_learning(df,df_train,first_time_active))
-                flag_active=0 
+                df_train =(active_learning.active_learning(df,df_train,first_time_active))
+                first_time_active=0
+                #flag_active=0 
 #                 set_list_of_pairs = ind.training_set_final
 #                 set_gabarito = ind.gabarito_set_final
 #                 n_rule = [0] * len(set_gabarito)
@@ -618,7 +624,7 @@ if __name__ == '__main__':
             
             #if(flag_train == 1 and len(set_gabarito) < 50):
              #    print ("\n ############################starting training \n\n")
-           # model = ind.train_svm(rf, svm_file, ind.training_set_final, ind.gabarito_set_final) 
+            model = classifier.train_svm(rf, df_train) 
                 
                # break
             # flag=0;   
@@ -645,7 +651,7 @@ if __name__ == '__main__':
              #open(file, 'w').close()
              #f = open(file, 'w',100)
             # time.sleep(10)
-       
+    df=pd.DataFrame()   
      #############################################################     
    # if(len(set_gabarito_to_process)>0):
    #     ind.test_svm_online(rf,model, set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
@@ -677,9 +683,7 @@ if __name__ == '__main__':
     print (' Query summary results for index: %s' % (index_name))
     print ('-' * (33 + len(index_name)))
     
-    print ('  minimum threshold: %.2f;' % \
-              ( min_threshold) + ' minimum total threshold: %.2f' % \
-              (min_total_threshold))
+ 
     #if ind.count > 0:
         #print '  Matching accuracy: %d/%d true matches (%.2f%%)' % \
               #(num_tm, ind.count, 100.0 * num_tm / ind.count) 

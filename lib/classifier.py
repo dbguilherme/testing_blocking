@@ -9,7 +9,7 @@ import numpy as np
 
 
 
-def train_svm(self,rf, svm_file, pairs, gabarito):
+def train_svm(rf,df_train):
 
     #os.system("export PYTHONPATH=//home/guilherme/git/testing_blocking/libsvm/tools/:$PYTHONPATH")
     #y, x = svm_read_problem(svm_file)
@@ -17,24 +17,33 @@ def train_svm(self,rf, svm_file, pairs, gabarito):
     #rate, param = find_parameters(svm_file, '-log2c -1,1,1 -log2g -1,1,1 -gnuplot null')
     #print ("xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g'))))
     #p='-c '+ str(param.get('c')) +' -g ' + str(param.get('g'))
-    gabarito=[float(i) for i in gabarito]
-    print ("treinamento  %i " % ( len(pairs)))
-    print ("gabarito  %i" % (len(gabarito)))
-    x=np.array([])
+    #gabarito=[float(i) for i in gabarito]
+    print ("treinamento  %i " % ( len(df_train)))
+    
+    #x=np.array([])
     #array=np.array(pairs)
-    for w in pairs:
-         for key, value in w.items():
-             #print (value)
-             x=np.append(x, value);
-   # print (x)
-   # print (len(pairs))
-    x=x.reshape(len(pairs),len(pairs[0]))
-   # y=np.array(gabarito);
-    #print(y.astype(int))
+#     for w in pairs:
+#          for key, value in w.items():
+#              #print (value)
+#              x=np.append(x, value);
+#    # print (x)
+#    # print (len(pairs))
+#     x=x.reshape(len(pairs),len(pairs[0]))
+#    # y=np.array(gabarito);
+#     #print(y.astype(int))
+#     
+#     
     
+    X=df_train[0:9].values
+   # X=X.istype(int)
+    print (X)
+    #inds = np.where(np.isnan(X))
+    #X[inds]=0.0
+    import numpy.ma as ma
+    np.where(np.isnan(X), ma.array(X, mask=np.isnan(X)).mean(axis=0), X)
+    Y=df_train['label'].values
     
-    
-    m = rf.fit(x,gabarito ) #svm_train(gabarito, pairs, '-c 4') 
+    m = rf.fit(X.astype(int),Y ) #svm_train(gabarito, pairs, '-c 4') 
     return m         
      
 def test_svm(self, model, file_full):  

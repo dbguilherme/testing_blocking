@@ -62,7 +62,7 @@ def active_select_first_pair(df_test,df_train,df_test_discrete):
     
         #matrix = np.zeros((len(list_of_pairs_discrete),len(list_of_pairs_discrete[0])))   #[[0 for x in range(len(list_of_pairs))] for y in range(59)]
      
-    print (df_test) 
+   # print (df_test) 
     lista=[]
     for i in range(1,10):
         lista.append((i*100))
@@ -70,15 +70,15 @@ def active_select_first_pair(df_test,df_train,df_test_discrete):
     ele=df_test_discrete[lista].sum(axis=1)
     
     top_values=sorted(enumerate(ele), key=lambda x: x[1], reverse=True)
-    print ((top_values))
+    #print ((top_values))
 # 
     memory = top_values[0];
     for tuple in top_values:
         if(memory[1] == tuple[1]):
             memory = tuple
-    print ("tuple final " + str(memory))  
+    #print ("tuple final " + str(memory))  
     #print (df_test) 
-    print (df_test_discrete.iloc[memory[0]])
+    #print (df_test_discrete.iloc[memory[0]])
     df_train=df_train.append(df_test_discrete.iloc[memory[0]])
     
     #add positive pair 
@@ -88,16 +88,7 @@ def active_select_first_pair(df_test,df_train,df_test_discrete):
     df_train= pd.DataFrame(np.array([[9,9,9,9,9,9,9,9,9,9]])).append(df_train, ignore_index=True)
     df_train.at[0, 'label']=1
     #df_train[9][0]=1
-    #print(df_train) 
-    som=0
-    for i in range(len(df_test_discrete)):
-        for j in range(10):
-            print (str(df_train[j][i]) + "  " + str(df_test_discrete[j][i]) + "  " + str(j) +"  "+ str(i) +" " )
-            for w in range(len (df_train)):
-                if (df_test_discrete[j][i]==df_train[j][w]):
-                    som+=1;
-        print (som)
-        som=0
+    
 #     temp_ele = {}
 #     temp_ele_d = {}
 #     for i in range (10):
@@ -177,12 +168,13 @@ def active_learning(df_test, df_train,first_time_active):
     df_test_discrete=df_test_discrete.astype(str)
     df_test_discrete['label']=df_test['label']
     df_test_discrete['rotulo']=df_test['rotulo']
+   
     #print("pares a serem processador %i %i " % (len(list_of_pairs), len(list_of_pairs_discrete)))
    
     #print(df_test_discrete)
     #flag_train=0
-        
-      
+    print()
+    print("serie "+ str(type(df_test_discrete[0][0])))  
    
     #encontrar a primeira linha
     #collumn_frequency=[]; 
@@ -208,15 +200,56 @@ def active_learning(df_test, df_train,first_time_active):
         lowest_id=0
         #for j in range(len(df_test_discrete)):
         som=0
-        for i in range(len(df_test_discrete)):
-            for j in range(len(df_test_discrete.columns)):
-       #print (str(df1[j][i]) + "  " + str(df2[j][w]) + "  " + str(j) +"  "+ str(i) +" " + str(w))
+        
+        print(df_train.ix[:,0:10])
+        print(df_train['label'])
+        print ()
+    
+        print(df_test_discrete.ix[:,0:11])  
+    
+        print(len(df_test_discrete))
+        som=0
+        rules=[]
+        for i in range((len(df_test_discrete))):        
+            for j in range(10):            
                 for w in range(len (df_train)):
-                    print (type(df_test_discrete[j][i]))
-                    if (df_test_discrete[j][i]==df_train[j][w]):
+                    #print (str(df_test_discrete.iat[i,j]) + "  " + "  " + str(j) +"  "+ str(i) +" " )
+                    if (df_test_discrete.iat[i,j]==df_train.iat[ w,j]):
                         som+=1;
-            print (som)
-            som=0   
+                        if(df_train.loc[w,'label']==0):
+                            som+=1
+                            
+            print (str(i) + " valor da soma " + str(som))
+            #if()
+            rules.append(2**som)
+            som=0
+        print (rules)
+        memory=(sorted(range(len(rules)), key=lambda i: rules[i], reverse=False)[:1])[0]
+        #print ("top value %s "% sorted(range(len(rules)), key=lambda i: rules[i], reverse=False)[:1])
+        rules=[]
+        
+        #print(df_train)
+        (df_test_discrete.iloc[memory] == df_train.iloc[0]).all(1).any()
+        x=pd.concat([df_test_discrete.iloc[memory],df_train]).drop_duplicates().reset_index(drop=True)
+        print()
+        print((df_test_discrete == df_train).all(1).any())
+        #merge=pd.merge(df_test_discrete.iloc[memory, 0:10],df_train.iloc[:, 0:10],  how='inner')
+#         if(len(merge)==0):
+#             df_train= df_train.append(df_test_discrete[memory, 0:10])
+#             df_train.loc[len(df_train)-1,'label']=df_test_discrete.loc[memory, 'label']
+#         print(df_train)
+        break;
+#        if(list_of_pairs_discrete[lowest_id] not in training_set):
+#         for i in range(len(df_test_discrete)):
+#             for j in range(len(df_test_discrete.columns)):
+#        #print (str(df1[j][i]) + "  " + str(df2[j][w]) + "  " + str(j) +"  "+ str(i) +" " + str(w))
+#                 for w in range(len (df_train)):
+#                     print ("xxxxxxxxxxxx")
+#                     print (df_test_discrete.iat[j, i])
+#                     if (df_test_discrete.iat[j, i]==df_train.iat[j, w]):
+#                         som+=1;
+#             print (som)
+#             som=0   
 #            
 #        # print "top value %s "% sorted(range(len(count_value)), key=lambda i: count_value[i], reverse=True)[:1]
 #         

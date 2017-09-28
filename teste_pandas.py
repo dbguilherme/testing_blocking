@@ -41,52 +41,81 @@ dt=pd.DataFrame(x)
 dt['label']=y
 dt['rotulo']=lista
 
-#print(dt.iloc[:,:10])
 
 
 
 
-xx= dt.iloc[:,:10].apply(lambda x: ((x*10)))
+df_test_discrete= dt.iloc[:,:10].apply(lambda x: ((x*10)))
+df_test_discrete=df_test_discrete.iloc[:,:10].astype(int)
+df_test_discrete=df_test_discrete.replace([10,'k'],'k')
+df_test_discrete['label']=y
+df_test_discrete['rotulo']=lista
+#df_test_discrete.reset_index()
+#df_test_discrete=df_test_discrete.reindex(index=range(0,11))
 
 
-x2=xx.iloc[:,:10].astype(int)
+#(df_test_discrete == df_test_discrete.iloc[0]).all(1).any()
 
-x2=x2.replace([10,'k'],'k')
-x2=x2.astype(str)
-for i in range(10):
-    x2[i*100] = x2.groupby([i])[i].transform('count')
+print(pd.merge(df_test_discrete.iloc[0], df_test_discrete, on=[1], how='left', indicator='Exist'))
 
-lista=[]
-for i in range(1,10):
-    lista.append((i*100))
+
+#x=pd.concat([df_test_discrete,df_test_discrete]).drop_duplicates().reset_index(drop=True)
+##print((df_test_discrete))
+
+
+#print (len(df_test_discrete))
+
+#print ((x))
+
+#if(df_test_discrete.iat[0, 0]!=df_test_discrete.iat[1, 0]):
+    #print("OK")
+
+##print(dt.iloc[:,:10])
+
+
+
+
+#xx= dt.iloc[:,:10].apply(lambda x: ((x*10)))
+
+
+#x2=xx.iloc[:,:10].astype(int)
+
+#x2=x2.replace([10,'k'],'k')
+#x2=x2.astype(str)
+#for i in range(10):
+    #x2[i*100] = x2.groupby([i])[i].transform('count')
+
+#lista=[]
+#for i in range(1,10):
+    #lista.append((i*100))
     
-ele=x2[lista].sum(axis=1)
+#ele=x2[lista].sum(axis=1)
 
-top_values=sorted(enumerate(ele), key=lambda x: x[1], reverse=True)  
-#print ((top_values))
+#top_values=sorted(enumerate(ele), key=lambda x: x[1], reverse=True)  
+##print ((top_values))
 
-memory = top_values[0];
-for tuple in top_values:
-    if(memory[1] == tuple[1]):
-         memory = tuple
-#print ("tuple final " + str(memory))
+#memory = top_values[0];
+#for tuple in top_values:
+    #if(memory[1] == tuple[1]):
+         #memory = tuple
+##print ("tuple final " + str(memory))
 
-#print (x2.iloc[memory[0]])
+##print (x2.iloc[memory[0]])
 
-print (len(x2))
-x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x2, ignore_index=True)
-x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
-x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
-x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
+#print (len(x2))
+#x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x2, ignore_index=True)
+#x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
+#x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
+#x3= pd.DataFrame(np.array([[2, 3, 4,5,6,7,8,8,8,8]])).append(x3, ignore_index=True)
 
-print()
-#df.at['C', 'x']
-x3.at[0, 9]=-10000
+#print()
+##df.at['C', 'x']
+#x3.at[0, 9]=-10000
 
 
 
-#Wprint(x2[lista].sum(axis=1)   )
-print(len(x3))
+##Wprint(x2[lista].sum(axis=1)   )
+#print(len(x3))
     
 #print (lista)
 
@@ -102,32 +131,32 @@ print(len(x3))
 
 
 
-df1 = pd.DataFrame(np.random.rand(5,4))
+#df1 = pd.DataFrame(np.random.rand(5,4))
 
 
 
 
 
-df2 = df1.ix[3:4]
+#df2 = df1.ix[3:4]
 
-df2.reset_index(drop=True,inplace=True)
-df2.at[0,0]=1
-df2.at[0,2]=1
-print ("DF 2 ")
-print (df2)
-print (df1)
-print ("DF 2 ")
+#df2.reset_index(drop=True,inplace=True)
+#df2.at[0,0]=1
+#df2.at[0,2]=1
+#print ("DF 2 ")
+#print (df2)
+#print (df1)
+#print ("DF 2 ")
 
-som=0
+#som=0
 
-for i in range(len(df1)):
-   for j in range(len(df1.columns)):
-       #print (str(df1[j][i]) + "  " + str(df2[j][w]) + "  " + str(j) +"  "+ str(i) +" " + str(w))
-       for w in range(len (df2)):
-           if (df1[j][i]==df2[j][w]):
-               som+=1;
-   print (som)
-   som=0
+#for i in range(len(df1)):
+   #for j in range(len(df1.columns)):
+       ##print (str(df1[j][i]) + "  " + str(df2[j][w]) + "  " + str(j) +"  "+ str(i) +" " + str(w))
+       #for w in range(len (df2)):
+           #if (df1[j][i]==df2[j][w]):
+               #som+=1;
+   #print (som)
+   #som=0
 
 #print (df1)
 #df1 = pd.DataFrame({"A":['AA','AD','AD'], "B":['BA','BD','BF']})

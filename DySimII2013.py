@@ -582,7 +582,8 @@ if __name__ == '__main__':
         #evitar que registros nao formaram pares sejam processados
         #print ("tuplas para processamento ---->  %i " % len(res_list) )
         df =df.append(ind.create_data_file(ent_id, res_list,f))
-       
+        df.index = range(len(df))
+        #print (type(df))
         #ind.header(arff_file)       
         #test active active_learning
         #if( ind.active_learning(list_of_pairs_,gabarito)==1):

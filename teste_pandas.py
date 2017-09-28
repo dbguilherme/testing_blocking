@@ -34,29 +34,32 @@ lista= ['365-dup-5', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 
 
 
+index=range(10,len(x)+10)
+
+
+dt=pd.DataFrame(x,index=index)
+
+print(dt)
+
+#dt['label']=y
+#dt['rotulo']=lista
 
 
 
-dt=pd.DataFrame(x)
-dt['label']=y
-dt['rotulo']=lista
 
 
+#df_test_discrete= dt.iloc[:,:10].apply(lambda x: ((x*10)))
+#df_test_discrete=df_test_discrete.iloc[:,:10].astype(int)
+#df_test_discrete=df_test_discrete.replace([10,'k'],'k')
+#df_test_discrete['label']=y
+#df_test_discrete['rotulo']=lista
+##df_test_discrete.reset_index()
+##df_test_discrete=df_test_discrete.reindex(index=range(0,11))
 
 
+##(df_test_discrete == df_test_discrete.iloc[0]).all(1).any()
 
-df_test_discrete= dt.iloc[:,:10].apply(lambda x: ((x*10)))
-df_test_discrete=df_test_discrete.iloc[:,:10].astype(int)
-df_test_discrete=df_test_discrete.replace([10,'k'],'k')
-df_test_discrete['label']=y
-df_test_discrete['rotulo']=lista
-#df_test_discrete.reset_index()
-#df_test_discrete=df_test_discrete.reindex(index=range(0,11))
-
-
-#(df_test_discrete == df_test_discrete.iloc[0]).all(1).any()
-
-print(pd.merge(df_test_discrete.iloc[0], df_test_discrete, on=[1], how='left', indicator='Exist'))
+#print(pd.merge(df_test_discrete.iloc[0], df_test_discrete, on=[1], how='left', indicator='Exist'))
 
 
 #x=pd.concat([df_test_discrete,df_test_discrete]).drop_duplicates().reset_index(drop=True)

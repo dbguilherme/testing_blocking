@@ -94,7 +94,7 @@ class ActiveOnlineBlocking:
         
         self.first_time_active=1
 #         self.training_set_final=[]
-#         self.gabarito_set_final=[]
+        self.gabarito=[]
         self.numberOfPairs=0;
 
 # ===============================================================================================        
@@ -347,108 +347,105 @@ class ActiveOnlineBlocking:
        
        ###################################################
        
-    def create_data_file(self, ent_id,res_list,f):
+    def create_data_file(self, ent_id,res_list):
          
-         list_of_dict_=[]
-         gabarito=[]
-         label=[]
-         if (res_list != [] and len(res_list)>1):  # Some results were returned
+        list_of_dict_=[]
+        gabarito=[]
+        label=[]
+        if (res_list != [] and len(res_list)>1):  # Some results were returned
             for i in range(len(res_list)):
+               
+               #caso sejam iguais                   
+                if(ent_id==res_list[i]):
+                    continue
+                #if(("dup") in ent_id and  ("dup") in res_list[i]):
+                #    continue
                 
-                    #caso sejam iguais                   
-                    if(ent_id==res_list[i]):
-                        continue
-                    #if(("dup") in ent_id and  ("dup") in res_list[i]):
-                    #    continue
-                   
-                   
-                    valueA=ind.query_records[ent_id]
-                    valueB=ind.query_records[res_list[i]]
-                    dictionary={}
-                    sum=0.0
-                    for j in range(self.total_num_attr):
-                        temp=ind.comp_methods[1](valueA[j], valueB[j])
-                        dictionary[j]=temp
-                        #f.write(str(temp) + ", ")
-                        sum=temp+sum
-                   # print ("summ -> " +str(sum/len(valueA)))
-                    if(sum/self.total_num_attr<0.1):
-                        continue;
-                       #((stringcmp.editdist(valueA[j], valueB[j])))
-                    #if(sum/len(valueA)>0.1):
-                    
-                    list_of_dict_.append(dictionary)  
-                    #print (dictionary)   
-                         
-                    #else:
-                    #    continue    
-                   
-                   # print ("ent -> %s %s " % (ent_id,res_list[i]))
-                   
-                    if(("dup") not in ent_id and  ("dup") not in res_list[i]):
-                    #    print "false match 1"
-                        query_acc_res.append('FM')
-                       # f.write("0")
-                        gabarito.append(0);
-                        label.append(-1)
+                
+                valueA=ind.query_records[ent_id]
+                valueB=ind.query_records[res_list[i]]
+                dictionary={}
+                sum=0.0
+                for j in range(self.total_num_attr):
+                    temp=ind.comp_methods[1](valueA[j], valueB[j])
+                    dictionary[j]=temp
+                    #f.write(str(temp) + ", ")
+                    sum=temp+sum
+                # print ("summ -> " +str(sum/len(valueA)))
+                if(sum/self.total_num_attr<0.1):
+                    continue;
+                   #((stringcmp.editdist(valueA[j], valueB[j])))
+                #if(sum/len(valueA)>0.1):
+                
+                list_of_dict_.append(dictionary)  
+                #print (dictionary)   
+                     
+                #else:
+                #    continue    
+                
+                # print ("ent -> %s %s " % (ent_id,res_list[i]))
+                
+                if(("dup") not in ent_id and  ("dup") not in res_list[i]):
+                #    print "false match 1"
+                    query_acc_res.append('FM')
+                   # f.write("0")
+                    gabarito.append(0);
+                    label.append(-1)
+                else:
+                    if(("dup") in ent_id):
+                        ent_clean=ent_id.split("-")[0]
+                        dirty=ent_id
                     else:
-                        if(("dup") in ent_id):
-                            ent_clean=ent_id.split("-")[0]
-                            dirty=ent_id
-                        else:
-                            ent_clean=ent_id  
+                        ent_clean=ent_id  
+                        
+                    if(("dup") in res_list[i]):
+                        res_clean=res_list[i].split("-")[0]
+                        dirty=res_list[i]
+                    else:
+                        res_clean=res_list[i] 
                             
-                        if(("dup") in res_list[i]):
-                            res_clean=res_list[i].split("-")[0]
-                            dirty=res_list[i]
-                        else:
-                            res_clean=res_list[i] 
-                                
-                        if(res_clean==ent_clean):
-                            gab_list=ind.inv_index_gab.get(res_clean,[])
-                            
-                            if(dirty in gab_list or res_list[i] in gab_list):                             
-                                if(("dup") not in ent_id):
-                                    label.append(res_list[i])                            
-                                else:
-                                    label.append(dirty)                            
-                                #gab_list.remove(dirty)
-                                #query_acc_res.append('TM')
-                                #ind.inv_index_gab[dirty]=gab_list
-                        #        f.write("1")
-                               # print ("summ -> " +str(sum/len(valueA)) + "  "+ str(list_of_dict_))
-                               # print ("######################----------------------------dupppp")
-                                gabarito.append(1) 
+                    if(res_clean==ent_clean):
+                        gab_list=ind.inv_index_gab.get(res_clean,[])
+                        
+                        if(dirty in gab_list or res_list[i] in gab_list):                             
+                            if(("dup") not in ent_id):
+                                label.append(res_list[i])                            
                             else:
-                                if(("dup") not in ent_id):
-                                    label.append(res_list[i])                            
-                                else:
-                                    label.append(dirty)                            
-                                gabarito.append(0) 
+                                label.append(dirty)                            
+                            #gab_list.remove(dirty)
+                            #query_acc_res.append('TM')
+                            #ind.inv_index_gab[dirty]=gab_list
+                    #        f.write("1")
+                           # print ("summ -> " +str(sum/len(valueA)) + "  "+ str(list_of_dict_))
+                           # print ("######################----------------------------dupppp")
+                            gabarito.append(1) 
                         else:
-                            label.append(-1)
-                            query_acc_res.append('FM')
-                         #   f.write("0")
-                            gabarito.append(0);
-                            
-                    #f.write("\n")
-         
-         
-         
-         index=range(self.numberOfPairs,len(list_of_dict_)+self.numberOfPairs)
-         dt=pd.DataFrame(list_of_dict_, index=index)
-         self.numberOfPairs+=len(list_of_dict_)
-         
-         if(len(dt)>0):
-             dt['label']=gabarito
-             dt['rotulo']=label
-             #print( "size -->>>")
-             #print (dt)
-#          print (gabarito)      
-#          print (label)    
-         assert (len(gabarito)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
-         #print ("problem %s %s %s %i %s" % (ent_id,res_list, gabarito, len(list_of_dict_), label))
-         return (dt)
+                            if(("dup") not in ent_id):
+                                label.append(res_list[i])                            
+                            else:
+                                label.append(dirty)                            
+                            gabarito.append(0) 
+                    else:
+                        label.append(-1)
+                        query_acc_res.append('FM')
+                     #   f.write("0")
+                        gabarito.append(0);
+                           
+                   #f.write("\n")   
+        index=range(self.numberOfPairs,len(list_of_dict_)+self.numberOfPairs)
+        dt=pd.DataFrame(list_of_dict_, index=index)
+        self.numberOfPairs+=len(list_of_dict_)
+        
+        if(len(dt)>0):
+            dt['label']=gabarito
+            dt['rotulo']=label
+            #print( "size -->>>")
+            #print (dt)
+        #          print (gabarito)      
+        #          print (label)    
+        assert (len(dt)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
+        #print ("problem %s %s %s %i %s" % (ent_id,res_list, gabarito, len(list_of_dict_), label))
+        return (dt)
        
     def header(self,file):
         #file_out="/tmp/final_treina.arff"
@@ -565,7 +562,7 @@ if __name__ == '__main__':
     flag_active=1;
     first_time_active=1
     #stored_ids=[];
-    f = open(file, 'w',100)
+   # f = open(file, 'w',100)
     for rec_id, clean_rec in ind.query_records.items():        
         ent_id = rec_id
         start_time = time.time()
@@ -586,7 +583,7 @@ if __name__ == '__main__':
         
         #evitar que registros nao formaram pares sejam processados
         #print ("tuplas para processamento ---->  %i " % len(res_list) )
-        df =df.append(ind.create_data_file(ent_id, res_list,f))
+        df =df.append(ind.create_data_file(ent_id, res_list))
         #df.index = range(len(df))
         #print (type(df))
         #ind.header(arff_file)       
@@ -614,8 +611,11 @@ if __name__ == '__main__':
              # f.flush()
             if(flag_active==1):             
                 # print ("\n ############################starting active  \n\n")             
-                df_train =(active_learning.active_learning(df,df_train,first_time_active))
+                df_train ,flag =(active_learning.active_learning(df,df_train,first_time_active,total_num_attr))
                 first_time_active=0
+                flag_active=0
+                model = classifier.train_svm(rf, df_train,total_num_attr)
+            classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr) 
                 #flag_active=0 
 #                 set_list_of_pairs = ind.training_set_final
 #                 set_gabarito = ind.gabarito_set_final
@@ -624,8 +624,10 @@ if __name__ == '__main__':
             
             #if(flag_train == 1 and len(set_gabarito) < 50):
              #    print ("\n ############################starting training \n\n")
-            model = classifier.train_svm(rf, df_train) 
+            
                 
+            
+            
                # break
             # flag=0;   
              
@@ -651,8 +653,10 @@ if __name__ == '__main__':
              #open(file, 'w').close()
              #f = open(file, 'w',100)
             # time.sleep(10)
-    df=pd.DataFrame()   
-     #############################################################     
+       
+     #############################################################
+    if(len(df)!=0):
+         classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr) 
    # if(len(set_gabarito_to_process)>0):
    #     ind.test_svm_online(rf,model, set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
     print ("####################")

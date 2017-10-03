@@ -574,7 +574,7 @@ if __name__ == '__main__':
             continue;
                     
            
-        if(len(df)>30):
+        if(len(df)>10):
              
             count = 0 
              # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
@@ -631,8 +631,8 @@ if __name__ == '__main__':
             # time.sleep(10)
        
      #############################################################
-    if(len(df)!=0):
-         classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr) 
+    #if(len(df)!=0):
+    #     classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr) 
    # if(len(set_gabarito_to_process)>0):
    #     ind.test_svm_online(rf,model, set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
     print ("####################")

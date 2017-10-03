@@ -49,9 +49,9 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 # 			df2.columns=values
 			
 			
-			df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9]);
+			df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9, 100, 1001]);
 			
-			df2.loc[dt_test.index[4]] = dt.iloc[4]
+			df2.loc[df_test.index[i]] = df_test.iloc[i]
 			
 			
 			#df1.loc[df2.index[0]] = df2.iloc[0]

@@ -158,7 +158,7 @@ class Active_learning:
              
             for index, row in self.df_train_d.iterrows():
                 for j in range(total_num_attr-1):  
-                    if (df_test_discrete.iat[j,0]==self.df_train_d.loc[index,j]):
+                    if (df_test_discrete.iat[0,j]==self.df_train_d.loc[index,j]):
                         som+=1;
                         if(df_train.loc[index,100]==0):
                             som+=3
@@ -184,7 +184,7 @@ class Active_learning:
        # print (index_test_discrete[memory[0]])
         if(memory[0]!=0):        
             print ("**************add the following pair "+  "  with " + str(df_test.iloc[0].index.values[0]) )
-            df_train=df_train.append((df_test.iloc[0].index.values[0]))
+            df_train=df_train.append((df_test.iloc[0]))
             #self.df_train=self.df_train.append(df_test_discrete.iloc[memory[0]])
             #for i in range(total_num_attr,total_num_attr+total_num_attr):
              #   df_train.iat[len(df_train)-1, i]=df_test.iloc[memory[0],(i-total_num_attr)]  

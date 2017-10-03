@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append("./libsvm/tools/")
 sys.path.append("./libsvm/python/")
 sys.path.append("./auxiliar/")
@@ -16,42 +17,52 @@ def train_svm(rf,df_train,total_num_attr):
 	print ("treinamento  %i " % ( len(df_train)))
 	print (df_train.iloc[:,total_num_attr:total_num_attr+total_num_attr].values)
 	   
-	X=df_train.iloc[:,total_num_attr:total_num_attr+total_num_attr].values
+	X=df_train.iloc[:,0:total_num_attr].values
 	import numpy.ma as ma
 	np.where(np.isnan(X), ma.array(X, mask=np.isnan(X)).mean(axis=0), X)
-	Y=df_train['label'].values
+	Y=df_train[100].values
 	print (df_train)
 	print (Y)
 	m = rf.fit(X.astype(int),Y ) #svm_train(gabarito, pairs, '-c 4') 
 	return m		 
  
 	
-def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr):  
+def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):  
 	
 	X=df_test.iloc[:,0:total_num_attr]
-	Y=df_test['label'].values
+	Y=df_test[100].values
 	_labs = model.predict_proba(X) #svm_predict(y, x, model )
 	#print(df_test)   
 #		 print ()
 #		 print (y)
 	for i in range(len(_labs)):
-		if(_labs[i][0]>0.2 and _labs[i][0]<0.8):
+		if(_labs[i][0]>0.0 and _labs[i][0]<1):
 			
 			#print (pd.DataFrame(X.iat[i], index=index))
 			#print ("---------------" + str(_labs[i]) + "  "+str(index[i]))
 			
-			index=range(5)    
+			#index=range(5)    
 			
-			df2=df_train.iloc[:,total_num_attr:len(df_train.columns)]
-			values=df2.columns.values
-			values[0:10]=range(0,10)
-			df2.columns=values
-			df2 = df2.append(df_test.iloc[i], ignore_index=True)
+			#df2=df_train.iloc[:,0:total_num_attr]
+# 			values=df2.columns.values
+# 			values[0:10]=range(0,10)
+# 			df2.columns=values
+			
+			
+			df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9]);
+			
+			df2.loc[dt_test.index[4]] = dt.iloc[4]
+			
+			
+			#df1.loc[df2.index[0]] = df2.iloc[0]
+			##temp = (df_test.loc[i])
+			#df2=pd.DataFrame(temp) 
+			
 			#df2.columns = df_train.index.values
 			#df2.columns.values[2] = 'new_name'
-			print("print df " + str(df2))
+			#print("print df " + str(df2))
 			
-			df_train, flag= active_learning.active_learning(df2, df_train,0,total_num_attr)
+			df_train, flag= active.partial_active_learning(df2, df_train,0,total_num_attr)
 			if(flag==True):
 				model=train_svm(rf,df_train,total_num_attr)
 #		 training_set_discreto, training_gabarito_discreto, stored_ids, flag_train = ind.active_learning(set_list_of_pairs, set_gabarito, training_set_discreto, training_gabarito_discreto, stored_ids)
@@ -61,7 +72,7 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr):
 
 
 	_labs = model.predict(X) #svm_predict(y, x, model )
-	print (_labs)
+	#print (_labs)
    # print(np_array.reshape(len(x),10))
 	#print(np_array[1][5])
 	#prediction, bias, contributions = ti.predict(rf, np_array)
@@ -80,15 +91,15 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr):
 		#true positive
 		if( _labs[i]==1 and Y[i]==1):
 			ind.true_positive+=1;
-			print ("------------------------------------------------------------true positive pair " +str(df_test.iloc[i]))				
+			#print ("------------------------------------------------------------true positive pair " +str(df_test.iloc[i]))				
 			#remove do gabarito as tags reais 
-			for x in (df_test['rotulo']):
+			for x in (df_test[1001]):
 				if(x!=-1):
 					try:
 						res_clean=x.split("-")[0]  
 						
 						gab_list=ind.inv_index_gab.get(res_clean,[])
-						print ("gab_list %s" % gab_list)
+						#print ("gab_list %s" % gab_list)
 						#print "remove  %s" % x
 						gab_list.remove(x)
 						ind.inv_index_gab[res_clean]=gab_list
@@ -105,7 +116,7 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr):
 			ind.true_negative +=1;	
   #  print ("#####################fim do teste")
 
-
+	return df_train
 
 # def arfftoSVM(self, inputfilename,outfile):
 # 	print ("gerando arquivo svm")

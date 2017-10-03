@@ -11,8 +11,11 @@ import distance
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 
-from lib import auxiliary,active_learning,classifier,blocking, encode,stringcmp
-import random
+from lib import auxiliary,classifier,blocking, encode,stringcmp
+from lib.active_learning import Active_learning
+
+#import Active_learning from active_learning
+#import random
 from collections import OrderedDict,defaultdict
 import collections
 import copy
@@ -35,9 +38,7 @@ class ActiveOnlineBlocking:
                             # values are the cleaned records(attributes
                             # without the record identifier)
                             
-        self.top_x_rec = {} # A Dictionary of lists that holds the top X 
-                            # percent Of all attributes most frequent values  
-                            
+                                    
         self.build_records = {} # A dictionary of the records that are used 
                                 # in the build phase, keys are rec-id, and value
                                 # is all other attributes
@@ -61,7 +62,7 @@ class ActiveOnlineBlocking:
                             # for a which attribute  
                             
                                    
-        self.sim_dict = {}  # (SI)The similarity values, with keys being record
+        #self.sim_dict = {}  # (SI)The similarity values, with keys being record
                             # values, and values being sets of tuples with
                             # other (similar) record values and their actual
                             # similarity value. Note the values in this
@@ -437,8 +438,8 @@ class ActiveOnlineBlocking:
         self.numberOfPairs+=len(list_of_dict_)
         
         if(len(dt)>0):
-            dt['label']=gabarito
-            dt['rotulo']=label
+            dt[100]=gabarito
+            dt[1001]=label
             #print( "size -->>>")
             #print (dt)
         #          print (gabarito)      
@@ -505,27 +506,21 @@ if __name__ == '__main__':
     comp_methods = [None, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist , stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist]
     
     ind = ActiveOnlineBlocking(total_num_attr,enco_methods, comp_methods)
-     
+    active = Active_learning(0)
     
     print
     print('Testing method: {0}'.format(index_name))
     print('================' + '=' * len(index_name))
     print       
+    start_time = time.time() 
     
-    start_time = time.time()  # Load data set from file(s)
+    
     ind.load(file_name,build_percentage)
     load_time = time.time() - start_time
     
-    print(' Loading time: %.1f sec' % (load_time))
-    
-    # Getting memory usage does not work in windows
-    #load_memo_str = auxiliary.get_memory_usage()
-    #print ('    ', load_memo_str)
-    #print  
-    ##
-    file="/tmp/arff_out"
-   
-   
+    build_time = time.time() - start_time
+    print('  Finished loading the index.')    
+    print ('  Loading time: %.1f sec' % (build_time))
     # Match query records - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     #
     query_time_res = []  # Collect results for each of query record
@@ -539,70 +534,46 @@ if __name__ == '__main__':
     # Go through query records and try to find a match for each query 
     tuples_count=0
     count = 0 # count of true duplicates 
-    
-#     set_gabarito=[]
-#     list_of_dict=[]
-#     training_set_discreto=[]
-#     training_gabarito_discreto=[]
-#     set_list_of_pairs=[]
-#     set_list_of_pairs_to_process=[]
-#     set_gabarito_to_process=[]
-#     list_of_pais_selection=[]
-#     set_label=[]
-#     set_label_to_process=[]
-#    n_rule=[]       
+   
     
     
     rf = ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
-#     model = clf2.fit( iris_X_train, iris_y_train)
-
+    query_time_res = []  # Collect results for each of query record
+    class_time = []
+    process_time = []
     
     df=pd.DataFrame()
     df_train=pd.DataFrame()
     flag_active=1;
     first_time_active=1
-    #stored_ids=[];
-   # f = open(file, 'w',100)
+    
     for rec_id, clean_rec in ind.query_records.items():        
         ent_id = rec_id
         start_time = time.time()
         res_list, num_comp = ind.query(rec_id,clean_rec)
-        query_time = time.time() - start_time
-       # print "query %s pairs %s" % (rec_id, res_list)
         
+       # print "query %s pairs %s" % (rec_id, res_list)
+        query_time = time.time() - start_time
+        query_time_res.append(query_time)
         num_rec += 1
         if (num_rec % 100 == 0):
+            
+           
             print ('\t Processed %d records in the query phase' % (num_rec))
             #print "inverted inde size %i" % ((ind.count))
             
-        query_time_res.append(query_time)
-        num_comp_res.append(num_comp)
+       # query_time_res.append(query_time)
+        #num_comp_res.append(num_comp)
             
-        tuples_count+=len(res_list);
-        #gera arquivo de saida para avaliacao da tupla
-        
-        #evitar que registros nao formaram pares sejam processados
-        #print ("tuplas para processamento ---->  %i " % len(res_list) )
+        start_time = time.time()
         df =df.append(ind.create_data_file(ent_id, res_list))
-        #df.index = range(len(df))
-        #print (type(df))
-        #ind.header(arff_file)       
-        #test active active_learning
-        #if( ind.active_learning(list_of_pairs_,gabarito)==1):
-        #    break  
+        timecreate = time.time() - start_time
+        process_time.append(timecreate)
+        
         if(len(df)==0):
             continue;
                     
-        #print(df)           
-                    
-#         set_gabarito=set_gabarito+gabarito
-#         set_list_of_pairs=set_list_of_pairs+list_of_pairs
-#         set_list_of_pairs_to_process=set_list_of_pairs_to_process+list_of_pairs
-#         set_gabarito_to_process=set_gabarito_to_process+gabarito
-#         set_label=label+set_label
-#         set_label_to_process=set_label_to_process+label
-        #n_rule=n_rule+[0]*len(df)
-        
+           
         if(len(df)>30):
              
             count = 0 
@@ -611,11 +582,16 @@ if __name__ == '__main__':
              # f.flush()
             if(flag_active==1):             
                 # print ("\n ############################starting active  \n\n")             
-                df_train ,flag =(active_learning.active_learning(df,df_train,first_time_active,total_num_attr))
+                df_train ,flag =(active.active_learning(df,df_train,first_time_active,total_num_attr))
                 first_time_active=0
                 flag_active=0
                 model = classifier.train_svm(rf, df_train,total_num_attr)
-            classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr) 
+                
+            start_time = time.time()    
+            df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active) 
+            timeclass = time.time() - start_time
+            class_time.append(timeclass)
+            
                 #flag_active=0 
 #                 set_list_of_pairs = ind.training_set_final
 #                 set_gabarito = ind.gabarito_set_final
@@ -666,7 +642,11 @@ if __name__ == '__main__':
     print ("true_negative %i" % ind.true_negative)
     print ("full size %i" % ind.compute)
     
-      
+    print ('  Query timing %.3f sec' %             (sum(query_time_res) / len(query_time_res))) 
+    print ('  class_time timing %.3f sec' %             (sum(class_time) / len(class_time)))
+    print ('  process_time timing %.3f sec' %            ( sum(process_time) / len(process_time)))
+     
+     
        
     size_gab=0   
     for inv_list in ind.inv_index_gab.values():

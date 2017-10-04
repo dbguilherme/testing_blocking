@@ -168,9 +168,10 @@ class ActiveOnlineBlocking:
                 
                 #print 'indice len %d %s' % (len(inv_index), rec_val)
                 temp_list.append((rec_id))
-                inv_index[rec_val_ind]= temp_list 
-                  
-                  
+                
+                if(len(temp_list)>20):
+                    temp_list=[]
+                inv_index[rec_val_ind]= temp_list   
                 #if(len(inv_index[rec_val_ind])>self.count):
                     #self.count=len(inv_index[rec_val_ind])
                     ##print "xxxxxxx %i %s" % (self.count,rec_val_ind)
@@ -537,7 +538,7 @@ if __name__ == '__main__':
    
     
     
-    rf = ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+    rf =RandomForestClassifier(n_estimators=10) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
     query_time_res = []  # Collect results for each of query record
     class_time = []
     process_time = []
@@ -574,7 +575,7 @@ if __name__ == '__main__':
             continue;
                     
            
-        if(len(df)>10):
+        if(len(df)>200):
              
             count = 0 
              # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
@@ -582,7 +583,7 @@ if __name__ == '__main__':
              # f.flush()
             if(flag_active==1):             
                 # print ("\n ############################starting active  \n\n")             
-                df_train ,flag =(active.active_learning(df,df_train,first_time_active,total_num_attr))
+                df_train ,flag =(active.active_learning(df,df_train,1,total_num_attr))
                 first_time_active=0
                 flag_active=0
                 model = classifier.train_svm(rf, df_train,total_num_attr)
@@ -642,19 +643,19 @@ if __name__ == '__main__':
     print ("true_negative %i" % ind.true_negative)
     print ("full size %i" % ind.compute)
     
-    print ('  Query timing %.3f sec' %             (sum(query_time_res) / len(query_time_res))) 
-    print ('  class_time timing %.3f sec' %             (sum(class_time) / len(class_time)))
-    print ('  process_time timing %.3f sec' %            ( sum(process_time) / len(process_time)))
+    print ('  Query timing %.3f sec' %             (sum(query_time_res))) 
+    print ('  class_time timing %.3f sec' %             (sum(class_time) ))
+    print ('  process_time timing %.3f sec' %            ( sum(process_time)))
      
      
        
     size_gab=0   
-    for inv_list in ind.inv_index_gab.values():
-        if(len(inv_list)>1  ):
-            size_gab+=len(inv_list)-1
-            print ("%s %d " % (inv_list[0],len(inv_list)))
-            for i in range(len(inv_list)):
-                print ("\n\ngab %s" % inv_list[i])
+#     for inv_list in ind.inv_index_gab.values():
+#         if(len(inv_list)>1  ):
+#             size_gab+=len(inv_list)-1
+#             print ("%s %d " % (inv_list[0],len(inv_list)))
+#             for i in range(len(inv_list)):
+#                 print ("\n\ngab %s" % inv_list[i])
     print (' TAMANHO GAB %d' % size_gab)
 
       

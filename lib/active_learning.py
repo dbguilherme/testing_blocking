@@ -58,7 +58,7 @@ class Active_learning:
         
         
         
-        df_train= pd.DataFrame(np.array([[0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9]])).append(df_train, ignore_index=False)
+        df_train= pd.DataFrame(np.array([[1,1,1,1,1,1,1,1,1,1]])).append(df_train, ignore_index=False)
         df_train.at[0, 100]=1
         df_train.at[0, 1001]=-1
         #df_train[9][0]=1
@@ -85,7 +85,7 @@ class Active_learning:
             df_train=(self.active_select_first_pair(df_test,df_train,df_test_discrete,total_num_attr))
             first_time_active=0
         #print(df_train)  
-        self.df_train_d=((df_train.loc[:,0:total_num_attr])*10)
+        self.df_train_d=((df_train.loc[:,0:total_num_attr])*10).astype(int)
         while(1):
             som=0
             #print(("starting selection"))
@@ -98,14 +98,14 @@ class Active_learning:
                             if (df_test_discrete.iat[i,j]==self.df_train_d.loc[index,j]):
                                 som+=1;
                                 if(df_train.loc[index,100]==0):
-                                    som+=3
-                        parcial+=(som)
+                                    som+=1
+                        parcial+=2**(som)
                         som=0;
                     #print (str(i) + " valor da soma " + str(parcial) +"  "+ str(som))
                     rules.append(parcial)
                     parcial=0
             except  ValueError as e:
-                print (str(e.strerror))
+                #print (str(e.strerror))
                 print ("exception .............")
                 print (self.df_train_d)
                 raise
@@ -123,22 +123,18 @@ class Active_learning:
                 #for i in range(total_num_attr,total_num_attr+total_num_attr):
                  #   df_train.iat[len(df_train)-1, i]=df_test.iloc[memory[0],(i-total_num_attr)]  
                 flag=True
-                self.df_train_d=((df_train.loc[:,0:total_num_attr])*10)
+                self.df_train_d=((df_train.loc[:,0:total_num_attr])*10).astype(int)
                 self.least_frequent_rule_value=rules[memory[0]]
                 #print(df_train)
+                print ("less frequent rule value " + str(self.least_frequent_rule_value))
             else:
                 break;    
        
             rules=[]
         return df_train,flag
     
-    
-    
-    def partial_active_learning(self, df_test, df_train,first_time_active,total_num_attr):
+    def rule_calculation(self, df_test, df_train,total_num_attr,rule_number):
         
-        #print(type(df_test))
-        #df_test_discrete= df_test.iloc[:,:total_num_attr].apply(lambda x: ((x*10)))
-        #df_test_discrete=df_test_discrete.iloc[:,:total_num_attr].astype(int)
         try:
             df_test_discrete=(df_test.iloc[:,0:total_num_attr-1]*10).astype(int)
         except:
@@ -152,21 +148,27 @@ class Active_learning:
             print ("Dataframe  EMPTY")
             print((df_test.iloc[:,0:total_num_attr]*10))
             return df_train,flag
-        rules=[self.least_frequent_rule_value]
+        inicial_positin=1
+        if(rule_number!=0):
+            rules=[rule_number]
+            inicial_positin=0
+        else:
+            rules=[]
+            inicial_positin=1
         parcial=0
         try:
-             
-            for index, row in self.df_train_d.iterrows():
-                for j in range(total_num_attr-1):  
-                    if (df_test_discrete.iat[0,j]==self.df_train_d.loc[index,j]):
-                        som+=1;
-                        if(df_train.loc[index,100]==0):
-                            som+=3
-                parcial+=(som)
-                som=0;
+            for i in range(inicial_positin,(len(df_test_discrete))): 
+                for index, row in self.df_train_d.iterrows():
+                    for j in range(total_num_attr-1):  
+                        if (df_test_discrete.iat[i,j]==self.df_train_d.loc[index,j]):
+                            som+=1;
+                            if(df_train.loc[index,100]==0):
+                                som+=1
+                    parcial+=2**(som)
+                    som=0;
             #print (str(i) + " valor da soma " + str(parcial) +"  "+ str(som))
-            rules.append(parcial)
-            parcial=0
+                rules.append(parcial)
+                parcial=0
         except  ValueError as e:
             print (str(e.strerror))
             print ("exception .............")
@@ -176,12 +178,17 @@ class Active_learning:
             print ("posiçaõ invalida ")
         #print (rules)
        #print((sorted(range(len(rules)), key=lambda i: rules[i], reverse=False)))
-        memory=(sorted(range(len(rules)), key=lambda i: rules[i], reverse=False)[:1])
-       # print ("top value %s "% memory)
+        memory=(sorted(range(len(rules)), key=lambda i: rules[i], reverse=False))
         
-        index_training= (df_train.index.tolist())
-        index_test_discrete=df_test_discrete.index.tolist()
-       # print (index_test_discrete[memory[0]])
+        return rules, memory    
+    
+    def partial_active_learning(self, df_test, df_train,total_num_attr):
+        
+        if(df_test.loc[df_test.index[0],100]==1):
+            print("entrou " + str(self.least_frequent_rule_value))
+        flag=False
+        rules,memory = self.rule_calculation(df_test, df_train, total_num_attr,self.least_frequent_rule_value)
+        
         if(memory[0]!=0):        
             print ("**************add the following pair "+  "  with " + str(df_test.iloc[0].index.values[0]) )
             df_train=df_train.append((df_test.iloc[0]))
@@ -189,7 +196,9 @@ class Active_learning:
             #for i in range(total_num_attr,total_num_attr+total_num_attr):
              #   df_train.iat[len(df_train)-1, i]=df_test.iloc[memory[0],(i-total_num_attr)]  
             
-            self.df_train_d=((df_train.iloc[:,0:total_num_attr-1])*10)
+            rules,memory = self.rule_calculation(df_train, df_train, total_num_attr,0)
+            
+            self.df_train_d=((df_train.iloc[:,0:total_num_attr-1])*10).astype(int)
             self.least_frequent_rule_value=rules[memory[0]]
             #print(df_train)
             flag=True

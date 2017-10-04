@@ -31,61 +31,30 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 	
 	X=df_test.iloc[:,0:total_num_attr]
 	Y=df_test[100].values
+	
 	_labs = model.predict_proba(X) #svm_predict(y, x, model )
 	#print(df_test)   
 #		 print ()
-#		 print (y)
+#		 print (y
+
 	for i in range(len(_labs)):
-		if(_labs[i][0]>0.0 and _labs[i][0]<1):
-			
-			#print (pd.DataFrame(X.iat[i], index=index))
-			#print ("---------------" + str(_labs[i]) + "  "+str(index[i]))
-			
-			#index=range(5)    
-			
-			#df2=df_train.iloc[:,0:total_num_attr]
-# 			values=df2.columns.values
-# 			values[0:10]=range(0,10)
-# 			df2.columns=values
+		if(df_test.index[10]==10):
+			break;
+		if (1 in Y):
+			#print(_labs)	
+		
 			
 			
 			df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9, 100, 1001]);
 			
 			df2.loc[df_test.index[i]] = df_test.iloc[i]
-			
-			
-			#df1.loc[df2.index[0]] = df2.iloc[0]
-			##temp = (df_test.loc[i])
-			#df2=pd.DataFrame(temp) 
-			
-			#df2.columns = df_train.index.values
-			#df2.columns.values[2] = 'new_name'
-			#print("print df " + str(df2))
-			
-			df_train, flag= active.partial_active_learning(df2, df_train,0,total_num_attr)
+		
+			df_train, flag= active.partial_active_learning(df2, df_train,total_num_attr)
 			if(flag==True):
 				model=train_svm(rf,df_train,total_num_attr)
-#		 training_set_discreto, training_gabarito_discreto, stored_ids, flag_train = ind.active_learning(set_list_of_pairs, set_gabarito, training_set_discreto, training_gabarito_discreto, stored_ids)
-#		 set_list_of_pairs = ind.training_set_final
-#		 set_gabarito = ind.gabarito_set_final
-#		 n_rule = [0] * len(set_gabarito)
-
-
+	
 	_labs = model.predict(X) #svm_predict(y, x, model )
-	#print (_labs)
-   # print(np_array.reshape(len(x),10))
-	#print(np_array[1][5])
-	#prediction, bias, contributions = ti.predict(rf, np_array)
-   # pred, bias, contributions =ti.predict(rf, np_array)
 	
-	
-	#if(prediction[0][0]>0.2 and  prediction[0][0]<0.8):
-		#print (prediction)
-	#	count+=1
-		#print (count)   
-	
-	
-	#print _labs
 	for i in range(len(Y)):
 		#self.compute+=1;
 		#true positive
@@ -106,9 +75,11 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 						#print "gab_list %s" % gab_list
 					except ValueError:
 						print ("element not exists" + str(x))
+						continue
 		#false positive
 		if(_labs[i] ==1 and Y[i]==0):
 			ind.false_positive+=1;
+			print( " false positive " + str(i) + "  ") )
 		#false negative 
 		if(_labs[i] ==0 and Y[i]==1):
 			ind.false_negative +=1;

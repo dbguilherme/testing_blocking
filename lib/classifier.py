@@ -40,7 +40,7 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 	for i in range(len(_labs)):
 		if(df_test.index[10]==10):
 			break;
-		if (1 in Y):
+		if (1):
 			#print(_labs)	
 		
 			
@@ -79,7 +79,7 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 		#false positive
 		if(_labs[i] ==1 and Y[i]==0):
 			ind.false_positive+=1;
-			print( " false positive " + str(i) + "  ") )
+			print( " false positive " + str(i) + "  ")
 		#false negative 
 		if(_labs[i] ==0 and Y[i]==1):
 			ind.false_negative +=1;

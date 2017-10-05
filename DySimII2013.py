@@ -170,7 +170,7 @@ class ActiveOnlineBlocking:
                 #print 'indice len %d %s' % (len(inv_index), rec_val)
                 temp_list.append((rec_id))
                 
-                if(len(temp_list)>50):
+                if(len(temp_list)>150):
                     temp_list=[]
                 inv_index[rec_val_ind]= temp_list   
                 #if(len(inv_index[rec_val_ind])>self.count):

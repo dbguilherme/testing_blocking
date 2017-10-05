@@ -87,7 +87,7 @@ class Active_learning:
                             if (df_test_discrete.iat[i,j]==self.df_train_d.loc[index,j]):
                                 som+=1;
                                 if(df_train.loc[index,100]==0):
-                                    som+=1
+                                    som+=2
                         parcial+=2**(som)
                         som=0;
                     #print (str(i) + " valor da soma " + str(parcial) +"  "+ str(som))
@@ -131,8 +131,8 @@ class Active_learning:
             print("exception ")
             return 
         
-        if(df_test.loc[:,100].any()==1 and rule_number!=0):
-            print("entrou " + str(self.least_frequent_rule_value))
+        #if(df_test.loc[:,100].any()==1 and rule_number!=0):
+        #    print("entrou " + str(self.least_frequent_rule_value))
         
         assert (len(df_test_discrete)==len(df_test)), "problem with active learning  %s %s " %(df_test,df_test_discrete)                  
         flag=False
@@ -157,7 +157,7 @@ class Active_learning:
                         if (df_test_discrete.iat[i,j]==self.df_train_d.loc[index,j]):
                             som+=1;
                             if(df_train.loc[index,100]==0):
-                                som+=1
+                                som+=2
                     parcial+=2**(som)
                     som=0;
             #print (str(i) + " valor da soma " + str(parcial) +"  "+ str(som))

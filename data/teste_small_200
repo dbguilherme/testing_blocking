@@ -1,5 +1,10 @@
 rec_id, culture, sex, age, date_of_birth, title, given_name, surname, state, suburb, postcode, street_number, address_1, address_2, phone_number, soc_sec_id, blocking_number, family_role
 rec-68-org,   unk, m, 24, 19930415, ms, keegan, abat, wa, peron, 2216, 25, church lane, , 8 08875226, 9926372, 2, NoRole
+rec-186-org,   usa, f, , 19330623, , alana, mcfadden, nsw, chifley, , 5, bissenberger crescent, south melbourne market, 04 33849945, 3034992, 2, NoRole
+rec-103-org,   , m, , 19680825, , angelica, tribbeck, nsw, londonderry, 2560, 1, couchman crescent, , 2 06280937, 4406684, 4, NoRole
+rec-174-org,   fin, f, 32, 19850607, ms, , turtola, vic, lysterfield south, 3501, 2, maribyrnong avenue, , 8 10558027, 6662514, 4, NoRole
+rec-165-org,   ind, f, 31, 19860429, pfc, joseph, jeswani, nsw, bungendore, 4869, 131, hodgson crescent, murrong, 612 76196677, 5980517, 8, NoRole
+rec-133-org,   tur, f, 13, 20040504, , hamish, , vic, ruffy, 4178, 7, delegate street, , 08 04687818, 8104434, 6, NoRole
 rec-32-org,   unk, , 26, 19911214, , emma, sckel, sa, blair athol, 3931, 34, mather street, clydeview, 07 17160799, 8364937, 6, NoRole
 rec-57-dup-0, eng, f, , 192 5 429, mr, etban, nast erson, nsw, app n, 2902, 35, mcmillan cr escent, , 2 027g 751, 8803844, 9, NoRole
 rec-51-org,   eng, m, 29, 19880621, ms, jaxson, wakefield, wa, boodarie, 2576, 64, wynn street, tiberoo, 618 65646655, 4345500, 2, NoRole
@@ -11,11 +16,6 @@ rec-105-dup-0, jap, m, 26, 19910622, dr, isapela, mazawa, vic, kalimna, 4217, 35
 rec-170-org,   eng, f, 19, 19980424, , bridget, hume, , longreach, 5173, 33, brigalow street, , 08 03411505, 9688916, 2, NoRole
 rec-115-org,   fin, , 29, 19880811, ms, jack, kantee, sa, alford, 4560, 3, ridley street, , 617 77411381, 4616566, 4, NoRole
 rec-106-dup-0, rus, v, 10, 20070321, , jacob, mikhaylichengo, nt, oodlikh kaahdens, 5093, 14, antis street, matlockk, 03 44846113, 7378712, 8, NoRole
-rec-186-org,   usa, f, , 19330623, , alana, mcfadden, nsw, chifley, , 5, bissenberger crescent, south melbourne market, 04 33849945, 3034992, 2, NoRole
-rec-103-org,   , m, , 19680825, , angelica, tribbeck, nsw, londonderry, 2560, 1, couchman crescent, , 2 06280937, 4406684, 4, NoRole
-rec-174-org,   fin, f, 32, 19850607, ms, , turtola, vic, lysterfield south, 3501, 2, maribyrnong avenue, , 8 10558027, 6662514, 4, NoRole
-rec-165-org,   ind, f, 31, 19860429, pfc, joseph, jeswani, nsw, bungendore, 4869, 131, hodgson crescent, murrong, 612 76196677, 5980517, 8, NoRole
-rec-133-org,   tur, f, 13, 20040504, , hamish, , vic, ruffy, 4178, 7, delegate street, , 08 04687818, 8104434, 6, NoRole
 rec-118-dup-0, unk, m, , , , harry, aarnoudse, , mortlake, 3355, 710, mcinnes street, , 612 88250728, 4691498, 9, NoRole
 rec-3-dup-0, eng, , 3 , 19810927, mr, breeanne, badco cke, v c, cres sy, 3  5, 3 3, freda bennett circuit, , 618 40435596, 9&1o051, 0, NoRole
 rec-47-dup-0, usa, f, 35, 1q820601, , ambrosia, rnatthe s, ns , carabo t, 4053, 1 2, dexter street, , 02 3814  97, 475 367, 7, NoRole

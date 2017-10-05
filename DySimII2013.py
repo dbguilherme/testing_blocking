@@ -10,6 +10,7 @@ sys.path.append("./auxiliar/")
 import distance
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
+from sklearn import svm
 
 from lib import auxiliary,classifier,blocking, encode,stringcmp
 from lib.active_learning import Active_learning
@@ -169,7 +170,7 @@ class ActiveOnlineBlocking:
                 #print 'indice len %d %s' % (len(inv_index), rec_val)
                 temp_list.append((rec_id))
                 
-                if(len(temp_list)>20):
+                if(len(temp_list)>50):
                     temp_list=[]
                 inv_index[rec_val_ind]= temp_list   
                 #if(len(inv_index[rec_val_ind])>self.count):
@@ -374,7 +375,7 @@ class ActiveOnlineBlocking:
                     #f.write(str(temp) + ", ")
                     sum=temp+sum
                 # print ("summ -> " +str(sum/len(valueA)))
-                if(sum/self.total_num_attr<0.1):
+                if(sum/self.total_num_attr<0.05):
                     continue;
                    #((stringcmp.editdist(valueA[j], valueB[j])))
                 #if(sum/len(valueA)>0.1):
@@ -445,7 +446,17 @@ class ActiveOnlineBlocking:
             #print (dt)
         #          print (gabarito)      
         #          print (label)    
-        assert (len(dt)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)                   
+        assert (len(dt)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)   
+        
+        
+#         size_gab=0   
+#         for inv_list in ind.inv_index_gab.values():
+#             if(len(inv_list)>1  ):
+#                 size_gab+=len(inv_list)-1
+#             #print ("%s %d " % (inv_list[0],len(inv_list)))
+#             #for i in range(len(inv_list)):
+#             #    print ("\n\ngab %s" % inv_list[i])
+#         print (' TAMANHO GAB %d' % size_gab)                
         #print ("problem %s %s %s %i %s" % (ent_id,res_list, gabarito, len(list_of_dict_), label))
         return (dt)
        
@@ -538,7 +549,7 @@ if __name__ == '__main__':
    
     
     
-    rf =RandomForestClassifier(n_estimators=10) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+    rf = svm.SVC();#RandomForestClassifier(n_estimators=10) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
     query_time_res = []  # Collect results for each of query record
     class_time = []
     process_time = []
@@ -562,10 +573,7 @@ if __name__ == '__main__':
            
             print ('\t Processed %d records in the query phase' % (num_rec))
             #print "inverted inde size %i" % ((ind.count))
-            
-       # query_time_res.append(query_time)
-        #num_comp_res.append(num_comp)
-            
+    
         start_time = time.time()
         df =df.append(ind.create_data_file(ent_id, res_list))
         timecreate = time.time() - start_time
@@ -575,7 +583,7 @@ if __name__ == '__main__':
             continue;
                     
            
-        if(len(df)>200):
+        if(len(df)>10):
              
             count = 0 
              # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
@@ -592,56 +600,21 @@ if __name__ == '__main__':
             df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active) 
             timeclass = time.time() - start_time
             class_time.append(timeclass)
-            
-                #flag_active=0 
-#                 set_list_of_pairs = ind.training_set_final
-#                 set_gabarito = ind.gabarito_set_final
-#                 n_rule = [0] * len(set_gabarito)
-             
-            
-            #if(flag_train == 1 and len(set_gabarito) < 50):
-             #    print ("\n ############################starting training \n\n")
-            
-                
-            
-            
-               # break
-            # flag=0;   
-             
-             #tuples_count=0                                   
-            # if(len(list_of_pairs)>0):
-            # print ("\n #############################starting testing \n\n")
-            #ind.test_svm_online(rf,model,set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process); 
+     
             df=pd.DataFrame()
             
-            
-             #set_gabarito=[]
-             #set_list_of_pairs=[]
-             #set_label=[]
-             
-             #ind.arfftoSVM(file, svm_file_full);
-             #ind.test_svm(model,svm_file_full); 
-             #print "list of pairs %s" % list_of_pairs_
-             
-             
-             #p_label, p_acc, p_val = svm_predict(gabarito, list_of_dict_, model)
-             #print p_label
-             #f.close
-             #open(file, 'w').close()
-             #f = open(file, 'w',100)
-            # time.sleep(10)
-       
-     #############################################################
-    #if(len(df)!=0):
-    #     classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr) 
-   # if(len(set_gabarito_to_process)>0):
-   #     ind.test_svm_online(rf,model, set_gabarito_to_process, set_list_of_pairs_to_process, set_label_to_process);     
+         
+    
     print ("####################")
     print ("false positive %i" % ind.false_positive)
     print ("true positive %i" % ind.true_positive)
     print ("false_negative %i" % ind.false_negative)
     print ("true_negative %i" % ind.true_negative)
     print ("full size %i" % ind.compute)
+    
+    
+    print ("TREINING SIZE " + str(len(df_train)))
+    
     
     print ('  Query timing %.3f sec' %             (sum(query_time_res))) 
     print ('  class_time timing %.3f sec' %             (sum(class_time) ))
@@ -650,15 +623,15 @@ if __name__ == '__main__':
      
        
     size_gab=0   
-#     for inv_list in ind.inv_index_gab.values():
-#         if(len(inv_list)>1  ):
-#             size_gab+=len(inv_list)-1
-#             print ("%s %d " % (inv_list[0],len(inv_list)))
-#             for i in range(len(inv_list)):
-#                 print ("\n\ngab %s" % inv_list[i])
+    for inv_list in ind.inv_index_gab.values():
+        if(len(inv_list)>1  ):
+            size_gab+=len(inv_list)-1
+            #print ("%s %d " % (inv_list[0],len(inv_list)))
+            #for i in range(len(inv_list)):
+            #    print ("\n\ngab %s" % inv_list[i])
     print (' TAMANHO GAB %d' % size_gab)
 
-      
+    print (' precisao %f  revo %f' %  ((100.0*ind.true_positive/(ind.true_positive+ind.false_positive)),(100.0*ind.true_positive/(size_gab+ind.true_positive))))  
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
     #
     num_tm = query_acc_res.count('TM')
@@ -669,15 +642,6 @@ if __name__ == '__main__':
     print ('-' * (33 + len(index_name)))
     
  
-    #if ind.count > 0:
-        #print '  Matching accuracy: %d/%d true matches (%.2f%%)' % \
-              #(num_tm, ind.count, 100.0 * num_tm / ind.count) 
-    #else:
-        #print' No duplicates where found' 
-    if num_tm>0 :    
-        print (' precisao %f  revo %f' %  ((100.0*num_tm/(num_tm+num_fm)),(100.0*num_tm/(size_gab+num_tm))))
-        print (' true pos %d  false posit %d' %  (num_tm, num_fm))
-    else:
-        print ('true matching equal zero')   
-   
+ 
+       
     

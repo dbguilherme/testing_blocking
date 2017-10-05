@@ -16,20 +16,20 @@ class Active_learning:
         self.df_train_d=pd.DataFrame()
         
         
-    def load_struct_active(self,list_of_pairs,gabarito):
-        
-        
-        ###load discretized file
-        list_of_pairs_discrete=[]
-        for line in list_of_pairs:
-            dict ={}
-            for k,v in line.items():
-                  dict[k]=str(int(v*10))
-                  if(v==1.0):
-                      dict[k]='k'
-            list_of_pairs_discrete.append(dict);
-    
-        return list_of_pairs_discrete,id 
+#     def load_struct_active(self,list_of_pairs,gabarito):
+#         
+#         
+#         ###load discretized file
+#         list_of_pairs_discrete=[]
+#         for line in list_of_pairs:
+#             dict ={}
+#             for k,v in line.items():
+#                   dict[k]=str(int(v*10))
+#                   if(v==1.0):
+#                       dict[k]='k'
+#             list_of_pairs_discrete.append(dict);
+#     
+#         return list_of_pairs_discrete,id 
     
     def active_select_first_pair(self, df_test,df_train,df_test_discrete,total_num_attr):
         
@@ -49,29 +49,18 @@ class Active_learning:
         #print (df_test_discrete.iloc[memory[0]])
         df_train=df_train.append(df_test.iloc[memory[0]])
         
-        #for i in range(total_num_attr,total_num_attr+total_num_attr):
-        #    df_train.iat[len(df_train)-1, i]=df_test.iloc[memory[0],(i-total_num_attr)]  
-            
-       # print ("posicao ")
-       # print (df_train)
-        #print(df_train.iloc[len(df_train)-1])
-        
-        
         
         df_train= pd.DataFrame(np.array([[1,1,1,1,1,1,1,1,1,1]])).append(df_train, ignore_index=False)
         df_train.at[0, 100]=1
         df_train.at[0, 1001]=-1
-        #df_train[9][0]=1
-       # print ("first two pairs")
-       # print (df_train )
+
     
         return df_train
     
     def active_learning(self,df_test, df_train,first_time_active,total_num_attr):
         
-        #print(type(df_test))
-        #df_test_discrete= df_test.iloc[:,:total_num_attr].apply(lambda x: ((x*10)))
-        #df_test_discrete=df_test_discrete.iloc[:,:total_num_attr].astype(int)
+       # print(type(df_test.ix[:,100]))
+        
         df_test_discrete=(df_test.loc[:,0:total_num_attr]*10).astype(int)
         
         assert (len(df_test_discrete)==len(df_test)), "problem with active learning  %s %s " %(df_test,df_test_discrete)                  
@@ -118,7 +107,7 @@ class Active_learning:
             index_test_discrete=df_test_discrete.index.tolist()
            # print (index_test_discrete[memory[0]])
             if(index_test_discrete[memory[0]] not in index_training):
-                print ("**************add the following pair "+  "  with " + str(df_test.iloc[memory[0]]) )
+                print ("**************add the following pair "+  "  with " + str(memory[0]) + "  label " + str(df_test.ix[memory[0],100]))
                 df_train=df_train.append(df_test.iloc[memory[0]])
                 #for i in range(total_num_attr,total_num_attr+total_num_attr):
                  #   df_train.iat[len(df_train)-1, i]=df_test.iloc[memory[0],(i-total_num_attr)]  
@@ -128,6 +117,7 @@ class Active_learning:
                 #print(df_train)
                 print ("less frequent rule value " + str(self.least_frequent_rule_value))
             else:
+                print("convergiu com a regra "+ str(memory[0]))
                 break;    
        
             rules=[]
@@ -139,6 +129,10 @@ class Active_learning:
             df_test_discrete=(df_test.iloc[:,0:total_num_attr-1]*10).astype(int)
         except:
             print("exception ")
+            return 
+        
+        if(df_test.loc[:,100].any()==1 and rule_number!=0):
+            print("entrou " + str(self.least_frequent_rule_value))
         
         assert (len(df_test_discrete)==len(df_test)), "problem with active learning  %s %s " %(df_test,df_test_discrete)                  
         flag=False
@@ -173,9 +167,10 @@ class Active_learning:
             print (str(e.strerror))
             print ("exception .............")
             print (self.df_train_d)
-            raise
+            return
         except IndexError as e:           
             print ("posiçaõ invalida ")
+            return
         #print (rules)
        #print((sorted(range(len(rules)), key=lambda i: rules[i], reverse=False)))
         memory=(sorted(range(len(rules)), key=lambda i: rules[i], reverse=False))
@@ -184,23 +179,20 @@ class Active_learning:
     
     def partial_active_learning(self, df_test, df_train,total_num_attr):
         
-        if(df_test.loc[df_test.index[0],100]==1):
+        if(df_test.loc[:,100].any()==1):
             print("entrou " + str(self.least_frequent_rule_value))
         flag=False
         rules,memory = self.rule_calculation(df_test, df_train, total_num_attr,self.least_frequent_rule_value)
         
         if(memory[0]!=0):        
-            print ("**************add the following pair "+  "  with " + str(df_test.iloc[0].index.values[0]) )
-            df_train=df_train.append((df_test.iloc[0]))
-            #self.df_train=self.df_train.append(df_test_discrete.iloc[memory[0]])
-            #for i in range(total_num_attr,total_num_attr+total_num_attr):
-             #   df_train.iat[len(df_train)-1, i]=df_test.iloc[memory[0],(i-total_num_attr)]  
-            
+            print ("**************add the following pair "+  "  with " + str(memory[0]-1))
+            df_train=df_train.append((df_test.iloc[memory[0]-1]))
+                        
             rules,memory = self.rule_calculation(df_train, df_train, total_num_attr,0)
             
             self.df_train_d=((df_train.iloc[:,0:total_num_attr-1])*10).astype(int)
             self.least_frequent_rule_value=rules[memory[0]]
-            #print(df_train)
+            print(" self.least_frequent_rule_value    " + str(self.least_frequent_rule_value))
             flag=True
        
    
@@ -208,25 +200,25 @@ class Active_learning:
         return df_train,flag
     
          ##############encontrar bug aqui!!!!!!!!!!!!!!!!!!!!!!!!!
-    def allac (self, file, flag):
-        self.count+=100;
-        if(flag==1):
-            os.system("cd ssarp &&  rm train-B5-* ")
-            os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  5")
-            os.system("cd ssarp && ./discretize_TUBE.pl train-B5 "+file+ "  5 lac_train_TUBEfinal.txt 1")
-    #             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
-    #             os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt")
-    #             os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
-    #             os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
-    #             os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
-        else:
-            #os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
-            #os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
-            #os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
-            
-            #os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
-            #os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
-            #os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
-            #os.system("cd ssarp && wc -l alac_lac_train_TUBEfinal.txt")  
-            print ("erro ")
-        #os.system("cd ssarp && cat "+file+" > /tmp/temp " )                          
+#     def allac (self, file, flag):
+#         self.count+=100;
+#         if(flag==1):
+#             os.system("cd ssarp &&  rm train-B5-* ")
+#             os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  5")
+#             os.system("cd ssarp && ./discretize_TUBE.pl train-B5 "+file+ "  5 lac_train_TUBEfinal.txt 1")
+#     #             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
+#     #             os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt")
+#     #             os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+#     #             os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
+#     #             os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+#         else:
+#             #os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
+#             #os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
+#             #os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
+#             
+#             #os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+#             #os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
+#             #os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+#             #os.system("cd ssarp && wc -l alac_lac_train_TUBEfinal.txt")  
+#             print ("erro ")
+#         #os.system("cd ssarp && cat "+file+" > /tmp/temp " )                          

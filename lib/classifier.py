@@ -18,7 +18,7 @@ import numpy as np
 def train_svm(rf,df_train,total_num_attr):
 
 	print ("treinamento  %i " % ( len(df_train)))
-	print (df_train.iloc[:,total_num_attr:total_num_attr+total_num_attr].values)
+	#print (df_train)
 	X=df_train.iloc[:,0:total_num_attr].values
 	Y=df_train[100].values
 	
@@ -43,28 +43,35 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 	
 	X=df_test.iloc[:,0:total_num_attr]
 	Y=df_test[100].values
-	if(1 in Y):
-		print (" Y " + str(Y))
 	
-	if(df_test.index[10]!=10):
+	temp=[]
+	for i in range(total_num_attr):
+		temp.append(i)
+	temp.append(100)
+	temp.append(1001)
+	#if(1 in Y):
+	#	print (" Y " + str(Y))
+	for i in range(len(Y)):
+		if(df_test.index[10]!=10):
 			
-		df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9, 100, 1001]);
+			df2=pd.DataFrame(columns = temp);
+# 			if(df_test.ix[i,100]==1 ):
+# 				print("entrou " + str(df_test.iloc[i]))	
+				
+			df2.loc[df_test.index[i]] = df_test.iloc[i]
 			
-			
-		df2=df2.append(df_test)
+			df_train, flag= active.partial_active_learning(df2, df_train,total_num_attr)
+			if(flag==True):
+				model=train_svm(rf,df_train,total_num_attr)
 		
-		df_train, flag= active.partial_active_learning(df2, df_train,total_num_attr)
-		if(flag==True):
-			model=train_svm(rf,df_train,total_num_attr)
-	
-	
-	_labs = model.predict(X) #svm_predict(y, x, model )
+		
+		_labs = model.predict(X.iloc[i].reshape(1, -1)) #svm_predict(y, x, model )
 	#print(df_test)   
 	
-	for i in range(len(Y)):
+		#print (_labs)
 		#self.compute+=1;
 		#true positive
-		if( _labs[i]==1 and Y[i]==1):
+		if( _labs[0]==1 and Y[i]==1):
 			ind.true_positive+=1;
 			#print ("------------------------------------------------------------true positive pair " +str(df_test.iloc[i]))				
 			#remove do gabarito as tags reais 
@@ -83,14 +90,17 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 						#print ("element not exists" + str(x))
 						continue
 		#false positive
-		if(_labs[i] ==1 and Y[i]==0):
+		if(_labs[0] ==1 and Y[i]==0):
 			ind.false_positive+=1;
 			print( " false positive " + str(i) + "  ")
 		#false negative 
-		if(_labs[i] ==0 and Y[i]==1):
+		if(_labs[0] ==0 and Y[i]==1):
+			print( " false negative  " + str(i) + "  ")
 			ind.false_negative +=1;
-		if(_labs[i] ==0 and Y[i]==0):
+		if(_labs[0] ==0 and Y[i]==0):
 			ind.true_negative +=1;	
+		
+			
   #  print ("#####################fim do teste")
 
 	return df_train

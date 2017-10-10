@@ -3,6 +3,7 @@ import sys
 import time
 import os
 from numpy.matlib import rand
+from asn1crypto._ffi import null
 #from compiler.ast import Assert
 sys.path.append("./libsvm/tools/")
 sys.path.append("./libsvm/python/")
@@ -107,22 +108,26 @@ class ActiveOnlineBlocking:
 #===========================================================================
     def resort_record(self,query):
         
-       inv_index_word_count=self.inv_index_word_count
-       num_attr_without_rec_id = self.num_attr_without_rec_id
-       rec_values={}
-       rec_sorted=[]
-       for i in range(0, num_attr_without_rec_id ):     
-           if(query[i] not in inv_index_word_count):
-               inv_index_word_count[query[i]]=1
-           else: 
-               inv_index_word_count[query[i]]=inv_index_word_count[query[i]]+1
-           rec_values[query[i]]=(inv_index_word_count[query[i]])
-       #sorted(rec_values.items(), key=lambda x: x[1])
-       rec_sorted = OrderedDict(sorted(rec_values.items(), key=lambda t: t[1]))
-       #print months_ordered 
-       #for k,v in months_ordered.iteritems():
-       #    print "k %s v %i " % (k,v)
-       return rec_sorted   
+        inv_index_word_count=self.inv_index_word_count
+        num_attr_without_rec_id = self.num_attr_without_rec_id
+        rec_values={}
+        rec_sorted=[]
+        
+            
+        for i in range(0, num_attr_without_rec_id ):     
+            if(query[i] not in inv_index_word_count):
+                inv_index_word_count[query[i]]=1
+            else: 
+                inv_index_word_count[query[i]]=inv_index_word_count[query[i]]+1
+            rec_values[query[i]]=(inv_index_word_count[query[i]])
+        #sorted(rec_values.items(), key=lambda x: x[1])
+        
+        rec_sorted = OrderedDict(sorted(rec_values.items(), key=lambda t: t[1]))
+        
+        #print (rec_sorted)#print months_ordered 
+        #for k,v in months_ordered.iteritems():
+        #    print "k %s v %i " % (k,v)
+        return rec_sorted   
                 
                 
 
@@ -132,19 +137,21 @@ class ActiveOnlineBlocking:
     def query(self, rec_id,query_rec):
        
         inv_index = self.inv_index  # Shorthands to make program faster
-        #ent_id = rec_id
-       
-        query_sort= self.resort_record(query_rec)  
-        #print "rec_values %s" % query_rec[3]
-        
-        # Process all attribute values started from 1 since the first
-        # attribute is the query record is the entity id 
-        
+        num_attr_without_rec_id=self.num_attr_without_rec_id
         rec_id_list=[]
+        
+        
+        if(len(query_rec)==0):
+            return (rec_id_list, 0) 
+        
+               
+        query_sort= self.resort_record(query_rec)  
+         
+        
         i=0
         for rec_val,v in query_sort.items():     
-#             if(i > num_compared_attr/2):
-#                break;
+            if(i > 6):
+                break;
             i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
@@ -170,8 +177,8 @@ class ActiveOnlineBlocking:
                 #print 'indice len %d %s' % (len(inv_index), rec_val)
                 temp_list.append((rec_id))
                 
-                if(len(temp_list)>150):
-                    temp_list=[]
+               # if(len(temp_list)>150):
+               #     temp_list=[]
                 inv_index[rec_val_ind]= temp_list   
                 #if(len(inv_index[rec_val_ind])>self.count):
                     #self.count=len(inv_index[rec_val_ind])
@@ -220,13 +227,7 @@ class ActiveOnlineBlocking:
         
         print (' Loading data file...')
         
-        #if (file_name.lower().endswith('.csv')):
-            #pass  
-        #else:
-            #print '\t Only (csv) file format is supported' 
-            #sys.exit()
-    
-      
+             
         # Get number of lines of the file   
         num_lines = self.getLineNumber(file_name)-1
          
@@ -270,33 +271,13 @@ class ActiveOnlineBlocking:
             # in the rec_dict variable
             # i.e.{rec_id:[entity_id, attr-1, ..., attr-n],...}
             rec_dict[rec_id] = clean_rec[1:]
-                    
+            
                    
-            # Break the data into build records, and query records
-            # based on the previously calculated number of build_records 
-            if this_line_num < build_records_count:
-                    
-                # Add the record to build dictionary 
-                build_records[rec_id] = clean_rec[1:]
-                    
-                # Group the records that have the same entity_id when 
-                # loading records from the dataset file and save them 
-                # in the variable named 'entity_records. 
-                # i.e {'ent-id':[rec_id_1,rec_id_2,...]}. 
-                # this variable is used for the purpose of calculating 
-                # accuracy. 
-                ent_id = clean_rec[1]
-                ent_rec_list = entity_records.get(ent_id, [])
-                ent_rec_list.append(rec_id)
-                entity_records[ent_id] = ent_rec_list
-    
-            else:
-                # add the record to the query dict
-                query_records[rec_id] = clean_rec[1:]
+            query_records[rec_id] = clean_rec[1:]
             this_line_num += 1
     
         print('\t Loaded file:                {0}'.format(file_name))
-       
+        print (query_records)
         print('\t Total number of records: {0}'.
               format(len(rec_dict)))
         print
@@ -334,14 +315,11 @@ class ActiveOnlineBlocking:
             
          rec_id_list=[]
          for i in range(0, num_attr_without_rec_id ):     
-                
        
                rec_val = query_rec[i]   
-                
-                
               #  print "     performing att rec_val %s \n" % rec_val
                # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
-               if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<3):
+               if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
                    continue
                # print rec_val
                 
@@ -375,8 +353,8 @@ class ActiveOnlineBlocking:
                     #f.write(str(temp) + ", ")
                     sum=temp+sum
                 # print ("summ -> " +str(sum/len(valueA)))
-                if(sum/self.total_num_attr<0.05):
-                    continue;
+                #if(sum/self.total_num_attr<0.05):
+                #    continue;
                    #((stringcmp.editdist(valueA[j], valueB[j])))
                 #if(sum/len(valueA)>0.1):
                 
@@ -558,8 +536,10 @@ if __name__ == '__main__':
     df_train=pd.DataFrame()
     flag_active=1;
     first_time_active=1
-    
+    model = null
     for rec_id, clean_rec in ind.query_records.items():        
+       
+        #print("RECORD ID " +str(rec_id) )
         ent_id = rec_id
         start_time = time.time()
         res_list, num_comp = ind.query(rec_id,clean_rec)
@@ -583,7 +563,7 @@ if __name__ == '__main__':
             continue;
                     
            
-        if(len(df)>10):
+        if(len(df)>20):
              
             count = 0 
              # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
@@ -603,8 +583,8 @@ if __name__ == '__main__':
      
             df=pd.DataFrame()
             
-         
-    
+    #if(len(df)>0 and model!=null):     
+    #    df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active)
     print ("####################")
     print ("false positive %i" % ind.false_positive)
     print ("true positive %i" % ind.true_positive)
@@ -626,9 +606,9 @@ if __name__ == '__main__':
     for inv_list in ind.inv_index_gab.values():
         if(len(inv_list)>1  ):
             size_gab+=len(inv_list)-1
-            #print ("%s %d " % (inv_list[0],len(inv_list)))
-            #for i in range(len(inv_list)):
-            #    print ("\n\ngab %s" % inv_list[i])
+            print ("%s %d " % (inv_list[0],len(inv_list)))
+            for i in range(len(inv_list)):
+                print ("\n\ngab %s" % inv_list[i])
     print (' TAMANHO GAB %d' % size_gab)
 
     print (' precisao %f  revo %f' %  ((100.0*ind.true_positive/(ind.true_positive+ind.false_positive)),(100.0*ind.true_positive/(size_gab+ind.true_positive))))  

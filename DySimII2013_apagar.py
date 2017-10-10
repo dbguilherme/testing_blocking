@@ -614,41 +614,41 @@ class ActiveOnlineBlocking:
                 self.true_positive+=1;
         
     
-    def test_svm_online(self, model, y, x, gabarito ):  
-        #y, x = svm_read_problem(file_full)
-        
-       # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
-        _labs, p_acc, p_vals = svm_predict(y, x, model )
-        print "-------------------------------teste online "
-        #print _labs
-        for i in xrange(len(y)):
-            self.compute+=1;
-            #true positive
-            if( _labs[i]==1 and y[i]==1):
-                self.true_positive+=1;
-                print "true positive %s " % gabarito[i]                
-                #remove do gabarito as tags reais 
-                for x in (gabarito):
-                    if(x!=-1):
-                        try:
-                            res_clean=x.split("-")[0]  
-                            
-                            gab_list=ind.inv_index_gab.get(res_clean,[])
-                            print "gab_list %s" % gab_list
-                            print "remove  %s" % x
-                            gab_list.remove(x)
-                            ind.inv_index_gab[res_clean]=gab_list
-                            print "gab_list %s" % gab_list
-                        except ValueError:
-                            print "element not exists"
-            #false positive
-            if(_labs[i] ==1 and y[i]==0):
-                self.false_positive+=1;
-            #false negative 
-            if(_labs[i] ==0 and y[i]==1):
-                self.false_negative +=1;
-            if(_labs[i] ==0 and y[i]==0):
-                self.true_negative +=1;
+#     def test_svm_online(self, model, y, x, gabarito ):  
+#         #y, x = svm_read_problem(file_full)
+#         
+#        # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
+#         _labs, p_acc, p_vals = svm_predict(y, x, model )
+#         print "-------------------------------teste online "
+#         #print _labs
+#         for i in xrange(len(y)):
+#             self.compute+=1;
+#             #true positive
+#             if( _labs[i]==1 and y[i]==1):
+#                 self.true_positive+=1;
+#                 print "true positive %s " % gabarito[i]                
+#                 #remove do gabarito as tags reais 
+#                 for x in (gabarito):
+#                     if(x!=-1):
+#                         try:
+#                             res_clean=x.split("-")[0]  
+#                             
+#                             gab_list=ind.inv_index_gab.get(res_clean,[])
+#                             print "gab_list %s" % gab_list
+#                             print "remove  %s" % x
+#                             gab_list.remove(x)
+#                             ind.inv_index_gab[res_clean]=gab_list
+#                             print "gab_list %s" % gab_list
+#                         except ValueError:
+#                             print "element not exists"
+#             #false positive
+#             if(_labs[i] ==1 and y[i]==0):
+#                 self.false_positive+=1;
+#             #false negative 
+#             if(_labs[i] ==0 and y[i]==1):
+#                 self.false_negative +=1;
+#             if(_labs[i] ==0 and y[i]==0):
+#                 self.true_negative +=1;
 # ============================================================================
 
 

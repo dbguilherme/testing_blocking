@@ -3,7 +3,7 @@ import sys
 import time
 import os
 from numpy.matlib import rand
-from asn1crypto._ffi import null
+
 #from compiler.ast import Assert
 sys.path.append("./libsvm/tools/")
 sys.path.append("./libsvm/python/")
@@ -536,7 +536,7 @@ if __name__ == '__main__':
     df_train=pd.DataFrame()
     flag_active=1;
     first_time_active=1
-    model = null
+    
     for rec_id, clean_rec in ind.query_records.items():        
        
         #print("RECORD ID " +str(rec_id) )

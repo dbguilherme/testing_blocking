@@ -17,8 +17,8 @@ class Active_learning:
         self.least_frequent_rule_id=0
         
         self.df_train_d=pd.DataFrame()
-        self.matrix_n=np.zeros((20, 20))
-        self.matrix_p=np.zeros((20, 20))
+        self.matrix_n=np.zeros((11, 12))
+        self.matrix_p=np.zeros((11, 12))
         self.rule=sys.maxsize;
         
 #     def load_struct_active(self,list_of_pairs,gabarito):
@@ -130,12 +130,13 @@ class Active_learning:
                 print("convergiu com a regra "+ str(memory[0]))
                 for i in range(len((self.df_train_d))):
                     for j in range(10):
-                        if(df_train.iloc[i,total_num_attr]==1):
-                            self.matrix_p[self.df_train_d.iloc[i][j]][j]=i
+                        if(df_train.iloc[i,total_num_attr]==1.0):
+                            self.matrix_p[self.df_train_d.iloc[i][j]][j]+=1
                         else:
-                            self.matrix_n[self.df_train_d.iloc[i][j]][j]=i
+                            self.matrix_n[self.df_train_d.iloc[i][j]][j]+=3
                 #print (self.df_train_d)
-                #print (self.matrix)
+                print (self.matrix_n)
+                print(self.df_train_d)
                 break;       
             rules=[]
         return df_train,flag
@@ -204,7 +205,26 @@ class Active_learning:
         
         
         #x=((df_test.iloc[:,0:total_num_attr-1])*10).astype(int)
+        count_p =0
+        count_n =0
+        for i in range(total_num_attr-1):   
+            #print(self.df_train_d.iloc[len(self.df_train_d)-1,i])             
+            if(self.matrix_p[self.df_train_d.iloc[len(df_test)-1,i]][i]>0):
+            
+                count_p+=(self.matrix_p[self.df_train_d.iloc[len(self.df_train_d)-1,i].astype(int)][i])
+            if(self.matrix_n[df_test.iloc[len(df_test)-1,i].astype(int)][i]>0):
+                
+                count_n+=(self.matrix_n[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i])
         
+#             counter_p=collections.Counter(count_p)
+#             counter_n=collections.Counter(count_n)
+#             soma=0
+#             for i in counter_p.values():
+#                 soma+=2**i
+#             for i in counter_n.values():    
+#                 soma+=2**(i*2)
+        print ("xxx  valor do count--->>>>>>>> " + str(count_p) +" n " + str(count_n) + "  ------- " + str(count_p + count_n))
+           # print ("soma------------------------ " + str(soma))
             
        
 #         if(3*count_n +count_p <= self.rule):
@@ -213,7 +233,7 @@ class Active_learning:
         #print ("valor do count--->>>>>>>> " + str(count_p) + "  n " + str(count_n) +  "  ------- " )
         rules,memory = self.rule_calculation(df_test, df_train, total_num_attr,self.least_frequent_rule_value)
         if(memory[0]!=0):        
-            print ("**************add the following pair "+  "  with " + str(rules[memory[0]]))
+            print ("**************add the following pair "+  "  with " + str(rules[memory[0]]) +"  label  " + str(df_test.iloc[memory[0]-1,10]))
             df_train=df_train.append((df_test.iloc[memory[0]-1]))
            
                        
@@ -226,30 +246,11 @@ class Active_learning:
            
             for i in range(total_num_attr-1):   
                 if(df_train.iloc[len(self.df_train_d)-1,total_num_attr]==1):
-                    self.matrix_p[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]=len(self.df_train_d)-1
+                    self.matrix_p[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]+=1
                 else:    
-                    self.matrix_n[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]=len(self.df_train_d)-1
+                    self.matrix_n[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]+=3
             
-            count_p =[]
-            count_n =[]
-            for i in range(total_num_attr-1):   
-                #print(self.df_train_d.iloc[len(self.df_train_d)-1,i])             
-                if(self.matrix_p[df_test.iloc[len(df_test)-1,i].astype(int)][i]>0):
-                
-                    count_p.append(self.matrix_p[df_test.iloc[len(df_test)-1,i].astype(int)][i])
-                if(self.matrix_n[df_test.iloc[len(df_test)-1,i].astype(int)][i]>0):
-                    
-                    count_n.append(self.matrix_n[df_test.iloc[len(df_test)-1,i].astype(int)][i])
-            
-            counter_p=collections.Counter(count_p)
-            counter_n=collections.Counter(count_n)
-            soma=0
-            for i in counter_p.values():
-                soma+=2**i
-            for i in counter_n.values():    
-                soma+=2**(i*2)
-            print ("xxx  valor do count--->>>>>>>> " + str(count_p) +" n " + str(count_n) + "  ------- " )
-            print ("soma------------------------ " + str(soma))
+           
         return df_train,flag
     
          ##############encontrar bug aqui!!!!!!!!!!!!!!!!!!!!!!!!!

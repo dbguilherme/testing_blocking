@@ -39,7 +39,7 @@ def train_svm(rf,df_train,total_num_attr):
 	return m		 
  
 	
-def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):  
+def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active,flag_active):  
 	
 	X=df_test.iloc[:,0:total_num_attr]
 	Y=df_test[100].values
@@ -52,7 +52,7 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 	#if(1 in Y):
 	#	print (" Y " + str(Y))
 	for i in range(len(Y)):
-		if(df_test.index[10]!=10):
+		if(flag_active==0):
 			
 			df2=pd.DataFrame(columns = temp);
 # 			if(df_test.ix[i,100]==1 ):
@@ -65,7 +65,7 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 				model=train_svm(rf,df_train,total_num_attr)
 		
 		
-		_labs = model.predict(X.iloc[i].reshape(1, -1)) #svm_predict(y, x, model )
+		_labs = model.predict(X.iloc[i].values.reshape(1, -1)) #svm_predict(y, x, model )
 	#print(df_test)   
 	
 		#print (_labs)

@@ -3,6 +3,7 @@ import sys
 import time
 import os
 from numpy.matlib import rand
+from nltk.metrics.association import TOTAL
 
 #from compiler.ast import Assert
 sys.path.append("./libsvm/tools/")
@@ -137,7 +138,6 @@ class ActiveOnlineBlocking:
     def query(self, rec_id,query_rec):
        
         inv_index = self.inv_index  # Shorthands to make program faster
-        num_attr_without_rec_id=self.num_attr_without_rec_id
         rec_id_list=[]
         
         
@@ -195,7 +195,8 @@ class ActiveOnlineBlocking:
                             rec_id_list.append(id);
              
         #spec_info = ( )
-        
+        #if(("dup") in rec_id ):
+        #    print("---" + str(rec_id) +" rec  " + str(rec_id_list))
         return (rec_id_list, 0)
      
      
@@ -477,7 +478,7 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 10 # Total number of attribute 
+    total_num_attr = 13 # Total number of attribute 
                         # including rec-id, and ent-id
    
     build_percentage = float(sys.argv[1])       # Percentage of records used to
@@ -571,20 +572,20 @@ if __name__ == '__main__':
              # f.flush()
             if(flag_active==1):             
                 # print ("\n ############################starting active  \n\n")             
-                df_train ,flag =(active.active_learning(df,df_train,1,total_num_attr))
+                df_train ,flag =(active.active_learningB(df,df_train,1,total_num_attr))
                 first_time_active=0
                 flag_active=0
                 model = classifier.train_svm(rf, df_train,total_num_attr)
                 
             start_time = time.time()    
-            df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active) 
+            df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active,flag_active) 
             timeclass = time.time() - start_time
             class_time.append(timeclass)
      
             df=pd.DataFrame()
             
-    #if(len(df)>0 and model!=null):     
-    #    df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active)
+    if(len(df)>0):     
+        df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active,flag_active)
     print ("####################")
     print ("false positive %i" % ind.false_positive)
     print ("true positive %i" % ind.true_positive)
@@ -592,8 +593,15 @@ if __name__ == '__main__':
     print ("true_negative %i" % ind.true_negative)
     print ("full size %i" % ind.compute)
     
-    
+    pos=neg=0
     print ("TREINING SIZE " + str(len(df_train)))
+    for i in range(len(df_train)):
+        if(df_train.iloc[i,total_num_attr]==1):
+            pos+=1
+        else:
+            neg+=1
+            
+    print ("True labels " + str(pos) +"  false labels  " +str(neg))
     
     
     print ('  Query timing %.3f sec' %             (sum(query_time_res))) 
@@ -611,7 +619,7 @@ if __name__ == '__main__':
                 print ("\n\ngab %s" % inv_list[i])
     print (' TAMANHO GAB %d' % size_gab)
 
-    print (' precisao %f  revo %f' %  ((100.0*ind.true_positive/(ind.true_positive+ind.false_positive)),(100.0*ind.true_positive/(size_gab+ind.true_positive))))  
+    print (' precisao %f  revo %f' %  ((100.0*ind.true_positive/(ind.true_positive+ind.false_positive)),(100.0*ind.true_positive/(ind.false_negative+ind.true_positive+size_gab))))  
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
     #
     num_tm = query_acc_res.count('TM')
@@ -620,8 +628,5 @@ if __name__ == '__main__':
     print
     print (' Query summary results for index: %s' % (index_name))
     print ('-' * (33 + len(index_name)))
-    
- 
- 
        
     

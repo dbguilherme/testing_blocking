@@ -16,7 +16,7 @@ from sklearn import svm
 
 from lib import auxiliary,classifier,blocking, encode,stringcmp
 from lib.active_learning import Active_learning
-
+from sklearn.svm import SVC
 #import Active_learning from active_learning
 #import random
 from collections import OrderedDict,defaultdict
@@ -150,8 +150,8 @@ class ActiveOnlineBlocking:
         
         i=0
         for rec_val,v in query_sort.items():     
-            if(i > 7):
-                break;
+            #if(i > 11):
+            #    break;
             i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
@@ -528,7 +528,7 @@ if __name__ == '__main__':
    
     
     
-    rf = RandomForestClassifier(n_estimators=10) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+    rf = SVC(kernel='linear', C=1.0) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
     query_time_res = []  # Collect results for each of query record
     class_time = []
     process_time = []

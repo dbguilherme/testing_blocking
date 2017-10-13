@@ -5,6 +5,7 @@ import numpy as np
 import sys 
 import os
 import collections
+from numpy.core.defchararray import lower
 
 
 
@@ -224,7 +225,7 @@ class Active_learning:
                             
                             self.matrix_p[self.df_train_d.iloc[i][j]][j]+=1
                         else:
-                            self.matrix_n[self.df_train_d.iloc[i][j]][j]+=3
+                            self.matrix_n[self.df_train_d.iloc[i][j]][j]+=2
                 #print (self.df_train_d)
 
                 print(self.matrix_p)
@@ -310,8 +311,8 @@ class Active_learning:
                     count_n+=(self.matrix_n[df_test_discrete.iloc[i,j]][j])
                     
                 count=count_p+count_n
-                if(df_test.iloc[:,total_num_attr].any()==1):
-                    print("positive pairs --->" + str(count) +"  "+ str(lower_frequency)+ "  "+ str(df_test.iloc[i,total_num_attr]))    
+                #if(df_test.iloc[:,total_num_attr].any()==1):
+                #    print("positive pairs --->" + str(count) +"  "+ str(lower_frequency)+ "  "+ str(df_test.iloc[i,total_num_attr]))    
                 if(count<lower_frequency):
                     lower_frequency=count
                     lower_pair_id=i;
@@ -322,12 +323,14 @@ class Active_learning:
             if(lower_frequency<=self.less_frequent and   index_test_discrete[lower_pair_id] not in index_training):
                 
                 
+                number_of_zeros=(df_train[100] == 0).sum()
+                number_of_one=(df_train[100] != 0).sum()
+
+                if(number_of_zeros>number_of_one and df_test.iloc[lower_pair_id,total_num_attr]==0):
+                    print("descartando par "+ str(df_test.iloc[lower_pair_id].name) +"  "+ str(lower_frequency) +" --- " + str(self.less_frequent))
+                    #break;
                 
-                
-                if(len(df_train)>50 and df_test.iloc[lower_pair_id,total_num_attr]==0):
-                    break;
-                
-                print ("**************add the following pair "+  "  with " + str(lower_pair_id) + "  label " + str(df_test.iloc[lower_pair_id,total_num_attr]))
+                print ("**************add the following pair "+  "  with " + str(lower_pair_id) + "  label " + str(df_test.iloc[lower_pair_id,total_num_attr]) +" ---- ID "+ str(df_test.iloc[lower_pair_id].name))
                 df_train=df_train.append(df_test.iloc[lower_pair_id])
                 #for i in range(total_num_attr,total_num_attr+total_num_attr):
                  #   df_train.iat[len(df_train)-1, i]=df_test.iloc[memory[0],(i-total_num_attr)]  
@@ -339,7 +342,7 @@ class Active_learning:
                     if(df_train.iloc[len(self.df_train_d)-1,total_num_attr]==1):
                         self.matrix_p[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]+=1
                     else:    
-                        self.matrix_n[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]+=3
+                        self.matrix_n[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]+=2
             
                 self.less_frequent=sys.maxsize
                 for i in range(1,len(self.df_train_d)):
@@ -356,6 +359,7 @@ class Active_learning:
                         self.less_frequent=count_p+count_n
                 #self.least_frequent_rule_value=rules[memory[0]]             
             else:
+                self.less_frequent+=3
                # print("convergiu com a regra "+ str(i))
                 break
         

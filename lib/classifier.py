@@ -25,7 +25,7 @@ def train_svm(rf,df_train,total_num_attr):
 # 		print (X)
 # 		print ("--------------")
 # 		print (Y)
-	svm = SVC(kernel="rbf")
+	svm = SVC(kernel='linear', C=1.0)
 	if(np.count_nonzero(Y == 1)>3):
 		print ("treinamento grid  %i " % ( len(df_train)))
 		p_grid = {"C": [1, 10, 100], "gamma": [.01, .1, .001]}		
@@ -39,49 +39,25 @@ def train_svm(rf,df_train,total_num_attr):
 	
 	#print (df_train)
 	#print (Y.astype(int))
-	m = rf.fit(X,Y.astype(int) ) #svm_train(gabarito, pairs, '-c 4') 
+	if(Y[len(Y)-1]==1):
+		print ("positve")
+	m = rf.fit(X,Y ) #svm_train(gabarito, pairs, '-c 4') 
 	
 	return m		 
  
-def train_svmB(rf,df_train,total_num_attr):
-
-	
-	#print (df_train)
-	X=df_train.iloc[:,0:total_num_attr-1].values
-	Y=df_train[100].values
-# 	if(len(X)>10):
-# 		print (X)
-# 		print ("--------------")
-# 		print (Y)
-	svm = RandomForestClassifier(n_estimators=10)
-# 	if(np.count_nonzero(Y == 1)>3):
-# 		print ("treinamento grid  %i " % ( len(df_train)))
-# 		p_grid = {"C": [1, 10, 100], "gamma": [.01, .1, .001]}		
-# 		svm = SVC(kernel="rbf")
-# 		rf = GridSearchCV(estimator=svm, param_grid=p_grid,cv=None)
-# 		
-		
-	
-	#import numpy.ma as ma
-	#np.where(np.isnan(X), ma.array(X, mask=np.isnan(X)).mean(axis=0), X)
-	
-	#print (df_train)
-	#print (Y.astype(int))
-	m = rf.fit(X,Y.astype(int) ) #svm_train(gabarito, pairs, '-c 4') 
-	
-	return m		 
+ 
 
 
 def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active,flag_active):  
 	
-	X=df_test.iloc[:,0:total_num_attr-1]
+	X=df_test.iloc[0:,0:total_num_attr-1]
 	Y=df_test[100].values
 	
-	temp=[]
-	for i in range(total_num_attr):
-		temp.append(i)
-	temp.append(100)
-	temp.append(1001)
+# 	temp=[]
+# 	for i in range(total_num_attr):
+# 		temp.append(i)
+# 	temp.append(100)
+# 	temp.append(1001)
 	#if(1 in Y):
 	#	print (" Y " + str(Y))
 	#
@@ -95,7 +71,7 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active,flag
 			
 		df_train, flag= active.partial_active_learning(df_test, df_train,total_num_attr)
 		if(flag==True):
-			model=train_svmB(rf,df_train,total_num_attr)
+			model=train_svm(rf,df_train,total_num_attr)
 		
 		
 	_labs = model.predict(X) #svm_predict(y, x, model )
@@ -104,7 +80,7 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active,flag
 		#print (_labs)
 		#self.compute+=1;
 		#true positive
-	for i in range(len(Y)):
+	for i in range(1):
 		if( _labs[i]==1 and Y[i]==1):
 			ind.true_positive+=1;
 			#print ("------------------------------------------------------------true positive pair " +str(df_test.iloc[i]))				
@@ -129,8 +105,12 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active,flag
 			print( " false positive " + str(i) + "  ")
 		#false negative 
 		if(_labs[i] ==0 and Y[i]==1):
-			print( " false negative  " + str(i) + "  ")
-			print (X.iloc[i,:])
+			print( " false negative  " + str(X.iloc[i].name) + "  ")
+			pd.set_option('display.max_colwidth', -1)
+			print(df_train.to_string())
+			df_train.to_csv("/tmp/lixo999", sep=',')
+			df_test.to_csv("/tmp/lixo99922", sep=',')
+			#print (X.iloc[i,:])
 			ind.false_negative +=1;
 		if(_labs[i] ==0 and Y[i]==0):
 			ind.true_negative +=1;	

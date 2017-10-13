@@ -3,31 +3,95 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.datasets import make_classification
 import numpy as np
 import pandas as pd
-
+from sklearn.ensemble import ExtraTreesClassifier
 #   First_graph.py
 #   Authour: Alan Richmond, Python3.codes
  
 from pylab import plot, show, bar
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV 
  
+from sklearn import svm
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn import linear_model
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier
+
+df = pd.read_csv('/tmp/lixo999')
+x=df.iloc[:,0:10]
+y=df.loc[:,'100']
+df2 = pd.read_csv('/tmp/lixo99922')
+x2=df2.iloc[:,0:10]
+y2=df2.loc[:,'100']
+
+X1 = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+y1 = np.array([1, 1, 1, 2, 2, 2])
+clf1 = ExtraTreesClassifier()
+clf2 = RandomForestClassifier()
+clf3 = GaussianNB()
+eclf = VotingClassifier(estimators=[('lr', clf1), ('rf', clf2), ('gnb', clf3)], voting='soft')
+#eclf1 = eclf1.fit(X1, y1)
+#eclf1.predict(X1)
+
+probas = [c.fit(X1, y1).predict_proba(X1) for c in (clf1, clf2, clf3, eclf)]
+
+class1_1 = [pr[0, 0] for pr in probas]
+class2_1 = [pr[0, 1] for pr in probas]
+
+print (class1_1)
+print (class2_1)
+#clf = svm.SVC(kernel='linear', C=1.0)
+#clf.fit(x, y)
+#print(clf.predict(x2))
 
 
-x=[ {0: 1.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0, 7: 0.5, 8: 1.0, 9: 0.75}]
-y= [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-lista= ['365-dup-5', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+#wclf = svm.SVC(kernel='linear', class_weight={1: 10})
+#wclf.fit(x, y)
 
-plot(x)                     # draw the graph
-show()   
+#print(wclf.predict(x2))
+
+#clf = svm.SVR()
+#extraTree=ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+#p_grid = {"C": [1, 10, 100], "gamma": [.01, .1, .001]}		
+#svm = svm.SVC(kernel="rbf")
+
+##svm = GridSearchCV(estimator=svm, param_grid=p_grid,cv=3)
+#clf.fit(x, y) 
+
+#m = svm.fit(x,y )
+#ext=extraTree.fit(x,y)
+
+#_labs = m.predict(x2)
+#print (y2)
+
+
+#print(_labs)
+
+#print ("---------------------")
+#print (extraTree.predict(x2))
+
+
+#print(x2.iloc[0,:])
+#print(x2.iloc[1,:])
+
+#x=[ {0: 1.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0, 7: 0.5, 8: 1.0, 9: 0.75}]
+#y= [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+#lista= ['365-dup-5', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+
+#plot(x)                     # draw the graph
+#show()   
 
 
 
-dt=pd.DataFrame(x,columns = [0,1,2,3,4,5,6,7,8,9])
+#dt=pd.DataFrame(x,columns = [0,1,2,3,4,5,6,7,8,9])
 
 
-df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9]);
+#df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9]);
 
-df2.loc[dt.index[0]] = dt.iloc[0]
-#dt= dt.append(dt, one_row)
-print (df2)
+#df2.loc[dt.index[0]] = dt.iloc[0]
+##dt= dt.append(dt, one_row)
+#print (df2)
 
 
 

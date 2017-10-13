@@ -11,7 +11,7 @@ def formatFile(inv_index_gab, filename):
     #file_out="/tmp/teste"+str(random.randint(0, 100))
     file_out="/tmp/teste"
     saida=open(file_out, 'w')
-    with open(filename) as books:
+    with open(filename, 'r', errors='ignore') as books:
         lines = books.readlines()   
     
     for rec in lines:

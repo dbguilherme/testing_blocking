@@ -4,12 +4,19 @@ from sklearn.datasets import make_classification
 import numpy as np
 import pandas as pd
 
+#   First_graph.py
+#   Authour: Alan Richmond, Python3.codes
+ 
+from pylab import plot, show, bar
+ 
+
 
 x=[ {0: 1.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0, 7: 0.5, 8: 1.0, 9: 0.75}]
 y= [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 lista= ['365-dup-5', -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
-
+plot(x)                     # draw the graph
+show()   
 
 
 

@@ -150,7 +150,7 @@ class ActiveOnlineBlocking:
         
         i=0
         for rec_val,v in query_sort.items():     
-            if(i > 6):
+            if(i > 7):
                 break;
             i=i+1
             #print rec_val
@@ -230,7 +230,7 @@ class ActiveOnlineBlocking:
         
              
         # Get number of lines of the file   
-        num_lines = self.getLineNumber(file_name)-1
+       # num_lines = self.getLineNumber(file_name)-1
          
          
          ##############################################
@@ -238,8 +238,8 @@ class ActiveOnlineBlocking:
         
         # Calculate the number of records that should be in the build 
         # dictionary based on the percentage provided by user
-        build_records_count = int(round(num_lines *
-                                            float(build_percentage)/ 100))
+        #build_records_count = int(round(num_lines *
+         #                                   float(build_percentage)/ 100))
             
             
         in_file = open(file_name)   
@@ -278,7 +278,7 @@ class ActiveOnlineBlocking:
             this_line_num += 1
     
         print('\t Loaded file:                {0}'.format(file_name))
-        print (query_records)
+        #print (query_records)
         print('\t Total number of records: {0}'.
               format(len(rec_dict)))
         print
@@ -528,7 +528,7 @@ if __name__ == '__main__':
    
     
     
-    rf = svm.SVC();#RandomForestClassifier(n_estimators=10) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+    rf = RandomForestClassifier(n_estimators=10) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
     query_time_res = []  # Collect results for each of query record
     class_time = []
     process_time = []
@@ -615,8 +615,8 @@ if __name__ == '__main__':
         if(len(inv_list)>1  ):
             size_gab+=len(inv_list)-1
             print ("%s %d " % (inv_list[0],len(inv_list)))
-            for i in range(len(inv_list)):
-                print ("\n\ngab %s" % inv_list[i])
+          #  for i in range(len(inv_list)):
+          #      print ("\n\ngab %s" % inv_list[i])
     print (' TAMANHO GAB %d' % size_gab)
 
     print (' precisao %f  revo %f' %  ((100.0*ind.true_positive/(ind.true_positive+ind.false_positive)),(100.0*ind.true_positive/(ind.false_negative+ind.true_positive+size_gab))))  

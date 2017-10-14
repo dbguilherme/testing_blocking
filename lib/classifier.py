@@ -29,7 +29,7 @@ def train_svm(rf,df_train,total_num_attr):
 	if(np.count_nonzero(Y == 1)>3):
 		print ("treinamento grid  %i " % ( len(df_train)))
 		p_grid = {"C": [1, 10, 100], "gamma": [.01, .1, .001]}		
-		svm = SVC(kernel="rbf")
+		svm = SVC(kernel="linear")
 		rf = GridSearchCV(estimator=svm, param_grid=p_grid,cv=None)
 		
 		
@@ -39,8 +39,8 @@ def train_svm(rf,df_train,total_num_attr):
 	
 	#print (df_train)
 	#print (Y.astype(int))
-	if(Y[len(Y)-1]==1):
-		print ("positve")
+	#if(Y[len(Y)-1]==1):
+	#	print ("positve")
 	m = rf.fit(X,Y ) #svm_train(gabarito, pairs, '-c 4') 
 	
 	return m		 
@@ -52,34 +52,13 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active,flag
 	
 	X=df_test.iloc[0:,0:total_num_attr-1]
 	Y=df_test[100].values
-	
-# 	temp=[]
-# 	for i in range(total_num_attr):
-# 		temp.append(i)
-# 	temp.append(100)
-# 	temp.append(1001)
-	#if(1 in Y):
-	#	print (" Y " + str(Y))
-	#
+
 	if(flag_active==0):
-			
-	#		df2=pd.DataFrame(columns = temp);
-# 			if(df_test.ix[i,100]==1 ):
-# 				print("entrou " + str(df_test.iloc[i]))	
-				
-	#		df2.loc[df_test.index[i]] = df_test.iloc[i]
-			
 		df_train, flag= active.partial_active_learning(df_test, df_train,total_num_attr)
 		if(flag==True):
 			model=train_svm(rf,df_train,total_num_attr)
-		
-		
 	_labs = model.predict(X) #svm_predict(y, x, model )
-	#print(df_test)   
-	
-		#print (_labs)
-		#self.compute+=1;
-		#true positive
+
 	for i in range(1):
 		if( _labs[i]==1 and Y[i]==1):
 			ind.true_positive+=1;

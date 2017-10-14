@@ -150,8 +150,8 @@ class ActiveOnlineBlocking:
         
         i=0
         for rec_val,v in query_sort.items():     
-            #if(i > 11):
-            #    break;
+            if(i > 9):
+                break;
             i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
@@ -347,25 +347,11 @@ class ActiveOnlineBlocking:
                 valueA=ind.query_records[ent_id]
                 valueB=ind.query_records[res_list[i]]
                 dictionary={}
-                sum=0.0
                 for j in range(self.total_num_attr):
                     temp=ind.comp_methods[1](valueA[j], valueB[j])
                     dictionary[j]=temp
                     #f.write(str(temp) + ", ")
-                    sum=temp+sum
-                # print ("summ -> " +str(sum/len(valueA)))
-                #if(sum/self.total_num_attr<0.05):
-                #    continue;
-                   #((stringcmp.editdist(valueA[j], valueB[j])))
-                #if(sum/len(valueA)>0.1):
-                
                 list_of_dict_.append(dictionary)  
-                #print (dictionary)   
-                     
-                #else:
-                #    continue    
-                
-                # print ("ent -> %s %s " % (ent_id,res_list[i]))
                 
                 if(("dup") not in ent_id and  ("dup") not in res_list[i]):
                 #    print "false match 1"
@@ -394,12 +380,6 @@ class ActiveOnlineBlocking:
                                 label.append(res_list[i])                            
                             else:
                                 label.append(dirty)                            
-                            #gab_list.remove(dirty)
-                            #query_acc_res.append('TM')
-                            #ind.inv_index_gab[dirty]=gab_list
-                    #        f.write("1")
-                           # print ("summ -> " +str(sum/len(valueA)) + "  "+ str(list_of_dict_))
-                           # print ("######################----------------------------dupppp")
                             gabarito.append(1) 
                         else:
                             if(("dup") not in ent_id):
@@ -413,7 +393,6 @@ class ActiveOnlineBlocking:
                      #   f.write("0")
                         gabarito.append(0);
                            
-                   #f.write("\n")   
         index=range(self.numberOfPairs,len(list_of_dict_)+self.numberOfPairs)
         dt=pd.DataFrame(list_of_dict_, index=index)
         self.numberOfPairs+=len(list_of_dict_)
@@ -478,10 +457,10 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 13 # Total number of attribute 
+    total_num_attr = 15 # Total number of attribute 
                         # including rec-id, and ent-id
    
-    build_percentage = float(sys.argv[1])       # Percentage of records used to
+    build_percentage = 0      # Percentage of records used to
                                                 # build the index
     file_name = sys.argv[2]             # optimization flag
     arff_file="/tmp/final_treina.arff"
@@ -564,7 +543,7 @@ if __name__ == '__main__':
             continue;
                     
            
-        if(len(df)>20):
+        if(len(df)>2):
              
             count = 0 
              # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))

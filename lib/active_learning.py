@@ -70,7 +70,7 @@ class Active_learning:
 
         return df_train
     
-    def active_learningB(self,df_test, df_train,first_time_active,total_num_attr):
+    def active_learning(self,df_test, df_train,first_time_active,total_num_attr):
         
         df_test_discrete=(df_test.loc[:,0:total_num_attr]*10).astype(int)
         
@@ -92,7 +92,7 @@ class Active_learning:
                 
                 self.matrix_p[self.df_train_d.iloc[1][j]][j]+=1
             else:
-                self.matrix_n[self.df_train_d.iloc[1][j]][j]+=3
+                self.matrix_n[self.df_train_d.iloc[1][j]][j]+=2
         #print (self.df_train_d)
 
         print(self.matrix_p)
@@ -342,7 +342,7 @@ class Active_learning:
                     if(df_train.iloc[len(self.df_train_d)-1,total_num_attr]==1):
                         self.matrix_p[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]+=1
                     else:    
-                        self.matrix_n[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]+=3
+                        self.matrix_n[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i]+=1
              
                 self.less_frequent=sys.maxsize
                 for i in range(1,len(self.df_train_d)):

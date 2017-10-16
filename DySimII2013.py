@@ -16,6 +16,7 @@ from sklearn import svm
 
 from lib import auxiliary,classifier,blocking, encode,stringcmp
 from lib.active_learning import Active_learning
+from lib.classifier import classification
 from sklearn.svm import SVC
 #import Active_learning from active_learning
 #import random
@@ -26,14 +27,18 @@ import numpy as np
 from timeit import default_timer as timer
 from treeinterpreter import treeinterpreter as ti
 import pandas as pd
-
+from lib.assemble import EnsembleClassifier
 
 class ActiveOnlineBlocking:
-    def __init__(self, total_num_attr, encoding_methods, comparison_methods):
+    def __init__(self,total_num_attr):
               
         self.total_num_attr = total_num_attr
-        self.enco_methods = encoding_methods
-        self.comp_methods = comparison_methods
+        self.enco_methods =  [None, encode.dmetaphone, encode.dmetaphone, 
+                        encode.dmetaphone, self.__get_substr__,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,]
+        self.comp_methods = [None, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist , stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist]
+    
+        
+        
               
         
         self.rec_dict = {}  # To hold the data set loaded from a file. Keys in
@@ -150,7 +155,7 @@ class ActiveOnlineBlocking:
         
         i=0
         for rec_val,v in query_sort.items():     
-            if(i > 9):
+            if(i > 4):
                 break;
             i=i+1
             #print rec_val
@@ -304,28 +309,28 @@ class ActiveOnlineBlocking:
         
         ###########################################
       
-    def remove_query(self, rec_id,query_rec):
-    
-    
-         inv_index = self.inv_index  # Shorthands to make program faster
-            
-         num_attr_without_rec_id = self.num_attr_without_rec_id
-         
-         entity_records = self.entity_records
-         num_compared_attr = self.num_compared_attr
-            
-         rec_id_list=[]
-         for i in range(0, num_attr_without_rec_id ):     
-       
-               rec_val = query_rec[i]   
-              #  print "     performing att rec_val %s \n" % rec_val
-               # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
-               if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
-                   continue
-               # print rec_val
-                
-               rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
-                                                        # index values
+#     def remove_query(self, rec_id,query_rec):
+#     
+#     
+#          inv_index = self.inv_index  # Shorthands to make program faster
+#             
+#          num_attr_without_rec_id = self.num_attr_without_rec_id
+#          
+#          entity_records = self.entity_records
+#          num_compared_attr = self.num_compared_attr
+#             
+#          rec_id_list=[]
+#          for i in range(0, num_attr_without_rec_id ):     
+#        
+#                rec_val = query_rec[i]   
+#               #  print "     performing att rec_val %s \n" % rec_val
+#                # if(rec_val == '' or rec_val == 'norole' or len(rec_val)<2):
+#                if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
+#                    continue
+#                # print rec_val
+#                 
+#                rec_val_ind = '%s' % (rec_val)     # Add attribute type for inverted
+#                                                         # index values
        
        ###################################################
        
@@ -344,18 +349,18 @@ class ActiveOnlineBlocking:
                 #    continue
                 
                 
-                valueA=ind.query_records[ent_id]
-                valueB=ind.query_records[res_list[i]]
+                valueA=self.query_records[ent_id]
+                valueB=self.query_records[res_list[i]]
                 dictionary={}
                 for j in range(self.total_num_attr):
-                    temp=ind.comp_methods[1](valueA[j], valueB[j])
+                    temp=self.comp_methods[1](valueA[j], valueB[j])
                     dictionary[j]=temp
                     #f.write(str(temp) + ", ")
                 list_of_dict_.append(dictionary)  
                 
                 if(("dup") not in ent_id and  ("dup") not in res_list[i]):
                 #    print "false match 1"
-                    query_acc_res.append('FM')
+                    #query_acc_res.append('FM')
                    # f.write("0")
                     gabarito.append(0);
                     label.append(-1)
@@ -373,7 +378,7 @@ class ActiveOnlineBlocking:
                         res_clean=res_list[i] 
                             
                     if(res_clean==ent_clean):
-                        gab_list=ind.inv_index_gab.get(res_clean,[])
+                        gab_list=self.inv_index_gab.get(res_clean,[])
                         
                         if(dirty in gab_list or res_list[i] in gab_list):                             
                             if(("dup") not in ent_id):
@@ -389,7 +394,7 @@ class ActiveOnlineBlocking:
                             gabarito.append(0) 
                     else:
                         label.append(-1)
-                        query_acc_res.append('FM')
+                       # self.query_acc_res.append('FM')
                      #   f.write("0")
                         gabarito.append(0);
                            
@@ -430,182 +435,183 @@ class ActiveOnlineBlocking:
       
          
  
-# Define special functions for post code encoding and comparison
-# Any other function can be used 
-def __get_substr__(s):  
-    # Function used for post code blocking
-    # Returns last three digits of post code
-    return s[1:]  
-        
-
-def __postcode_cmp__(s1, s2): 
-    # Function for post code comparison: count
-    # different digits. this function assumes that 
-    # compared post cods are of the same length
-    
-    pc_length = len(s1)  # length of post code
-    e = 0                # Number of equal digits found
-    
-    if len(s1) == len(s1):    
-        for i in range(pc_length):  # Loop over positions in strings
-                if (s1[i] == s2[i]):
-                    e += 1
-    return e / float(pc_length)
-    
-#=============================================================================
-    
-
-if __name__ == '__main__':
-    
-    total_num_attr = 15 # Total number of attribute 
-                        # including rec-id, and ent-id
-   
-    build_percentage = 0      # Percentage of records used to
-                                                # build the index
-    file_name = sys.argv[2]             # optimization flag
-    arff_file="/tmp/final_treina.arff"
-    svm_file="/tmp/final_treina.svm"
-    svm_file_full="/tmp/svm_full.svm"
-    
-    index_name = 'Active Online Blocking'
-    line_number=0
-    # Define encoding and comparison methods to be used for attributes
-    # Note: first element in the list should always be None. 
-    enco_methods = [None, encode.dmetaphone, encode.dmetaphone, 
-                    encode.dmetaphone, __get_substr__,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,]
-    comp_methods = [None, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist , stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist]
-    
-    ind = ActiveOnlineBlocking(total_num_attr,enco_methods, comp_methods)
-    active = Active_learning(0)
-    
-    print
-    print('Testing method: {0}'.format(index_name))
-    print('================' + '=' * len(index_name))
-    print       
-    start_time = time.time() 
-    
-    
-    ind.load(file_name,build_percentage)
-    load_time = time.time() - start_time
-    
-    build_time = time.time() - start_time
-    print('  Finished loading the index.')    
-    print ('  Loading time: %.1f sec' % (build_time))
-    # Match query records - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    #
-    query_time_res = []  # Collect results for each of query record
-    query_acc_res = []
-    num_comp_res = []
-    
-    query_cnt = 1
-    num_rec = 0
-    print (' Processing Query records ...')
-   
-    # Go through query records and try to find a match for each query 
-    tuples_count=0
-    count = 0 # count of true duplicates 
-   
-    
-    
-    rf = SVC(kernel='linear', C=1.0) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
-    query_time_res = []  # Collect results for each of query record
-    class_time = []
-    process_time = []
-    
-    df=pd.DataFrame()
-    df_train=pd.DataFrame()
-    flag_active=1;
-    first_time_active=1
-    
-    for rec_id, clean_rec in ind.query_records.items():        
-       
-        #print("RECORD ID " +str(rec_id) )
-        ent_id = rec_id
-        start_time = time.time()
-        res_list, num_comp = ind.query(rec_id,clean_rec)
-        
-       # print "query %s pairs %s" % (rec_id, res_list)
-        query_time = time.time() - start_time
-        query_time_res.append(query_time)
-        num_rec += 1
-        if (num_rec % 100 == 0):
+    # Define special functions for post code encoding and comparison
+    # Any other function can be used 
+    def __get_substr__(self,s):  
+        # Function used for post code blocking
+        # Returns last three digits of post code
+        return s[1:]  
             
-           
-            print ('\t Processed %d records in the query phase' % (num_rec))
-            #print "inverted inde size %i" % ((ind.count))
     
-        start_time = time.time()
-        df =df.append(ind.create_data_file(ent_id, res_list))
-        timecreate = time.time() - start_time
-        process_time.append(timecreate)
+    def __postcode_cmp__(self,s1, s2): 
+        # Function for post code comparison: count
+        # different digits. this function assumes that 
+        # compared post cods are of the same length
         
-        if(len(df)==0):
-            continue;
-                    
+        pc_length = len(s1)  # length of post code
+        e = 0                # Number of equal digits found
+        
+        if len(s1) == len(s1):    
+            for i in range(pc_length):  # Loop over positions in strings
+                    if (s1[i] == s2[i]):
+                        e += 1
+        return e / float(pc_length)
+    
+    def run(self,file):
+        print("starting active learning")
+        total_num_attr = self.total_num_attr # Total number of attribute 
+                            # including rec-id, and ent-id
+       
+        build_percentage = 0      # Percentage of records used to
+                                                    # build the index
+        file_name = file
+#         arff_file="/tmp/final_treina.arff"
+#         svm_file="/tmp/final_treina.svm"
+#         svm_file_full="/tmp/svm_full.svm"
+        
+        index_name = 'Active Online Blocking'
+#         line_number=0
+        # Define encoding and comparison methods to be used for attributes
+        # Note: first element in the list should always be None. 
            
-        if(len(df)>2):
-             
-            count = 0 
-             # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
-#            
-             # f.flush()
-            if(flag_active==1):             
-                # print ("\n ############################starting active  \n\n")             
-                df_train ,flag =(active.active_learningB(df,df_train,1,total_num_attr))
-                first_time_active=0
-                flag_active=0
-                model = classifier.train_svm(rf, df_train,total_num_attr)
+        
+        active = Active_learning(0)
+        assemble=EnsembleClassifier(weights=[1,1,1])
+        classifier_o= classification(assemble)
+        
+        print
+        print('Testing method: {0}'.format(index_name))
+        print('================' + '=' * len(index_name))
+        print       
+        start_time = time.time() 
+        
+        
+        self.load(file_name,build_percentage)
+        load_time = time.time() - start_time
+        
+        build_time = time.time() - start_time
+        print('  Finished loading the index.')    
+        print ('  Loading time: %.1f sec' % (build_time))
+        # Match query records - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        #
+#         query_time_res = []  # Collect results for each of query record
+#         query_acc_res = []
+#         num_comp_res = []
+#         
+#         query_cnt = 1
+        num_rec = 0
+        print (' Processing Query records ...')
+       
+        # Go through query records and try to find a match for each query 
+        tuples_count=0
+        count = 0 # count of true duplicates 
+       
+        
+        
+        rf = SVC(kernel='rbf', C=1.0) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+        query_time_res = []  # Collect results for each of query record
+        class_time = []
+        process_time = []
+        
+        df=pd.DataFrame()
+        df_train=pd.DataFrame()
+        flag_active=1;
+        first_time_active=1
+        
+        for rec_id, clean_rec in self.query_records.items():        
+           
+            #print("RECORD ID " +str(rec_id) )
+            ent_id = rec_id
+            start_time = time.time()
+            res_list, num_comp = self.query(rec_id,clean_rec)
+            
+           # print "query %s pairs %s" % (rec_id, res_list)
+            query_time = time.time() - start_time
+            query_time_res.append(query_time)
+            num_rec += 1
+            if (num_rec % 100 == 0):
                 
-            start_time = time.time()    
-            df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active,flag_active) 
-            timeclass = time.time() - start_time
-            class_time.append(timeclass)
-     
-            df=pd.DataFrame()
+               
+                print ('\t Processed %d records in the query phase' % (num_rec))
+                #print "inverted inde size %i" % ((ind.count))
+        
+            start_time = time.time()
+            df =df.append(self.create_data_file(ent_id, res_list))
+            timecreate = time.time() - start_time
+            process_time.append(timecreate)
             
-    if(len(df)>0):     
-        df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active,flag_active)
-    print ("####################")
-    print ("false positive %i" % ind.false_positive)
-    print ("true positive %i" % ind.true_positive)
-    print ("false_negative %i" % ind.false_negative)
-    print ("true_negative %i" % ind.true_negative)
-    print ("full size %i" % ind.compute)
+            if(len(df)==0):
+                continue;
+                        
+               
+            if(len(df)>500 or flag_active==0):
+                 
+                count = 0 
+                 # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
+    #            
+                 # f.flush()
+                if(flag_active==1):             
+                    # print ("\n ############################starting active  \n\n")             
+                    df_train ,flag =(active.active_learning(df,df_train,1,total_num_attr))
+                    first_time_active=0
+                    flag_active=0
+                    model = classifier_o.train(df_train,total_num_attr)
+                    
+                start_time = time.time()    
+                df_train =classifier_o.test_svm_online(rf, df,df_train,model,self,total_num_attr, active,flag_active) 
+                timeclass = time.time() - start_time
+                class_time.append(timeclass)
+         
+                df=pd.DataFrame()
+                
+        if(len(df)>0):     
+            df_train =classifier_o.test_svm_online(rf, df,df_train,model,self,total_num_attr, active,flag_active)
+        print ("####################")
+        print ("false positive %i" % self.false_positive)
+        print ("true positive %i" % self.true_positive)
+        print ("false_negative %i" % self.false_negative)
+        print ("true_negative %i" % self.true_negative)
+        print ("full size %i" % self.compute)
+        
+        pos=neg=0
+        print ("TREINING SIZE " + str(len(df_train)))
+        for i in range(len(df_train)):
+            if(df_train.iloc[i,total_num_attr]==1):
+                pos+=1
+            else:
+                neg+=1
+                
+        print ("True labels " + str(pos) +"  false labels  " +str(neg))
+        
+        
+        print ('  Query timing %.3f sec' %             (sum(query_time_res))) 
+        print ('  class_time timing %.3f sec' %             (sum(class_time) ))
+        print ('  process_time timing %.3f sec' %            ( sum(process_time)))
+         
+         
+           
+        size_gab=0   
+        for inv_list in self.inv_index_gab.values():
+            if(len(inv_list)>1  ):
+                size_gab+=len(inv_list)-1
+                print ("%s %d " % (inv_list[0],len(inv_list)))
+              #  for i in range(len(inv_list)):
+              #      print ("\n\ngab %s" % inv_list[i])
+        print (' TAMANHO GAB %d' % size_gab)
+        pre=(100.0*self.true_positive/(self.true_positive+self.false_positive))
+        recall=(100.0*self.true_positive/(self.false_negative+self.true_positive+size_gab))
+        print (' precisao %f  revo %f' % (pre,recall))  
+        # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
+        #
+#         num_tm = query_acc_res.count('TM')
+#         num_fm = query_acc_res.count('FM')
+#         #assert num_tm + num_fm == len(ind.query_records)
+#         print
+#         print (' Query summary results for index: %s' % (index_name))
+#         print ('-' * (33 + len(index_name)))
+    #=============================================================================
     
-    pos=neg=0
-    print ("TREINING SIZE " + str(len(df_train)))
-    for i in range(len(df_train)):
-        if(df_train.iloc[i,total_num_attr]==1):
-            pos+=1
-        else:
-            neg+=1
-            
-    print ("True labels " + str(pos) +"  false labels  " +str(neg))
-    
-    
-    print ('  Query timing %.3f sec' %             (sum(query_time_res))) 
-    print ('  class_time timing %.3f sec' %             (sum(class_time) ))
-    print ('  process_time timing %.3f sec' %            ( sum(process_time)))
-     
-     
-       
-    size_gab=0   
-    for inv_list in ind.inv_index_gab.values():
-        if(len(inv_list)>1  ):
-            size_gab+=len(inv_list)-1
-            print ("%s %d " % (inv_list[0],len(inv_list)))
-          #  for i in range(len(inv_list)):
-          #      print ("\n\ngab %s" % inv_list[i])
-    print (' TAMANHO GAB %d' % size_gab)
+        print("XXXPREC %i , %i " %( pre,recall))
 
-    print (' precisao %f  revo %f' %  ((100.0*ind.true_positive/(ind.true_positive+ind.false_positive)),(100.0*ind.true_positive/(ind.false_negative+ind.true_positive+size_gab))))  
-    # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
-    #
-    num_tm = query_acc_res.count('TM')
-    num_fm = query_acc_res.count('FM')
-    #assert num_tm + num_fm == len(ind.query_records)
-    print
-    print (' Query summary results for index: %s' % (index_name))
-    print ('-' * (33 + len(index_name)))
        
     

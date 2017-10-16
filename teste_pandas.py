@@ -121,8 +121,20 @@ print (class2_1)
 ##print (dt.index.tolist())
 ##print (df.index.isin(df.iloc[0].index.values))
 
-
-
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+objects = (1,2,3,4,5,6)
+y_pos = np.arange(len(objects))
+performance = [10,8,6,4,2,1]
+ 
+plt.bar(y_pos, performance, align='center', alpha=0.5)
+plt.xticks(y_pos, objects)
+#plt.ylabel('Usage')
+#plt.title('Programming language usage')
+ 
+plt.show()
 #df_test_discrete= dt.iloc[:,:10].apply(lambda x: ((x*10)))
 #df_test_discrete=df_test_discrete.iloc[:,:10].astype(int)
 ##df_test_discrete=df_test_discrete.replace([10,'k'],'k')

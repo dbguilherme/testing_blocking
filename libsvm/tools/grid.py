@@ -341,21 +341,21 @@ def find_parameters(dataset_pathname, options=''):
 	def update_param(c,g,rate,best_c,best_g,best_rate,worker,resumed):
 		if (rate > best_rate) or (rate==best_rate and g==best_g and c<best_c):
 			best_rate,best_c,best_g = rate,c,g
-		stdout_str = '[{0}] {1} {2} (best '.format\
-			(worker,' '.join(str(x) for x in [c,g] if x is not None),rate)
-		output_str = ''
-		if c != None:
-			stdout_str += 'c={0}, '.format(2.0**best_c)
-			output_str += 'log2c={0} '.format(c)
-		if g != None:
-			stdout_str += 'g={0}, '.format(2.0**best_g)
-			output_str += 'log2g={0} '.format(g)
-		stdout_str += 'rate={0})'.format(best_rate)
-		print(stdout_str)
-		if options.out_pathname and not resumed:
-			output_str += 'rate={0}\n'.format(rate)
-			result_file.write(output_str)
-			result_file.flush()
+		#stdout_str = '[{0}] {1} {2} (best '.format\
+			#(worker,' '.join(str(x) for x in [c,g] if x is not None),rate)
+		#output_str = ''
+		#if c != None:
+			#stdout_str += 'c={0}, '.format(2.0**best_c)
+			#output_str += 'log2c={0} '.format(c)
+		#if g != None:
+			#stdout_str += 'g={0}, '.format(2.0**best_g)
+			#output_str += 'log2g={0} '.format(g)
+		#stdout_str += 'rate={0})'.format(best_rate)
+	#	print(stdout_str)
+		#if options.out_pathname and not resumed:
+			#output_str += 'rate={0}\n'.format(rate)
+			#result_file.write(output_str)
+			#result_file.flush()
 		
 		return best_c,best_g,best_rate
 		
@@ -455,7 +455,7 @@ def find_parameters(dataset_pathname, options=''):
 	if best_g != None:
 		best_param['g'] = 2.0**best_g
 		best_cg += [2.0**best_g]
-	print('{0} {1}'.format(' '.join(map(str,best_cg)), best_rate))
+	#print('{0} {1}'.format(' '.join(map(str,best_cg)), best_rate))
 
 	return best_rate, best_param
 

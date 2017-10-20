@@ -1,24 +1,24 @@
-Reading training data [done]
-Reading test set 1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%[done]
+Reading training data [done]
+Reading test set 0%1%2%3%4%5%6%7%7%8%9%10%11%12%13%14%15%15%16%17%18%19%20%21%22%22%23%24%25%26%27%28%29%30%30%31%32%33%34%35%36%37%38%38%39%40%41%42%43%44%45%45%46%47%48%49%50%51%52%53%53%54%55%56%57%58%59%60%60%61%62%63%64%65%66%67%68%68%69%70%71%72%73%74%75%76%76%77%78%79%80%81%82%83%83%84%85%86%87%88%89%90%91%91%92%93%94%95%96%97%98%98%99%[done]
 status[0-1]:           
-total_occurs 268 n_rules 84 diff 84 
-total_occurs 248 n_rules 85 diff 85 
+total_occurs 3878 n_rules 119 diff 119 
+total_occurs 4122 n_rules 119 diff 119 
 TRAIN_EMPTY=0 
 OCCURS_CMP=1 
-inserting instance 149 0
-time: classify 0.076149
-time: create_itemset 0.010932
-time: get_THE_intersection 0.004924
-time: get_THE_score 0.000056
-time: get_THE_union 0.001385
-time: get_TOTAL_score 0.000111
-time: get_from_cache 0.037075
-time: induce_rules 0.071263
-time: insert_into_cache 0.009178
-time: lazy_active_classification 0.072973
-time: project_training 0.000045
-time: read_test_set 0.002429
-time: read_training_set 0.000707
-time: release_itemset 0.000604
-time: reset_rules 0.000001
+inserting instance 12175 0
+time: classify 0.779020
+time: create_itemset 0.070080
+time: get_THE_intersection 0.045335
+time: get_THE_score 0.000574
+time: get_THE_union 0.006814
+time: get_TOTAL_score 0.001158
+time: get_from_cache 0.499712
+time: induce_rules 0.709029
+time: insert_into_cache 0.040135
+time: lazy_active_classification 0.737307
+time: project_training 0.012580
+time: read_test_set 0.020273
+time: read_training_set 0.021401
+time: release_itemset 0.003452
+time: reset_rules 0.000010
 

@@ -19,8 +19,9 @@ from grid import *
 
 class ActiveOnlineBlocking:
     def __init__(self, total_num_attr, encoding_methods, comparison_methods, 
-                 min_threshold, min_total_threshold):
+                 min_threshold, min_total_threshold,alac_repetition):
               
+        self.alac_repetition=alac_repetition      
         self.total_num_attr = total_num_attr
         self.enco_methods = encoding_methods
         self.comp_methods = comparison_methods
@@ -84,8 +85,11 @@ class ActiveOnlineBlocking:
         # i.e. without the rec-id and ent-id
         self.num_compared_attr = self.total_num_attr - 2  
         
-        self.true_positive=0;
-        self.false_positive=0;
+        self.true_positive=0.0;
+        self.false_positive=0.0;
+        self.true_negative=0.0;
+        self.false_negative=0.0;
+        self.pairs_count=0.0;
 
 # ===============================================================================================        
     
@@ -150,7 +154,7 @@ class ActiveOnlineBlocking:
             
            # print join
         size_gab=0   
-        for inv_list in ind.inv_index_gab.itervalues():
+        for inv_list in self.inv_index_gab.itervalues():
             if(len(inv_list)>1):
                 size_gab+=len(inv_list)-1 
            # print inv_list[0]
@@ -340,7 +344,8 @@ class ActiveOnlineBlocking:
            # Calculate when to switch the accu building phase
         #
         phase_thres = num_compared_attr - min_tot_thres 
-        
+       # print ("----------------------------" + str(query_rec) +str (rec_id))
+       
                              
         ent_id = rec_id
        
@@ -353,8 +358,8 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.iteritems():     
-            if(i > num_compared_attr/4):
-               break;
+            if(i > 7):
+                break;
             i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
@@ -387,8 +392,9 @@ class ActiveOnlineBlocking:
                     #self.count=len(inv_index[rec_val_ind])
                     ##print "xxxxxxx %i %s" % (self.count,rec_val_ind)
                 
-            
+                
                 rec_id_list_temp=inv_index.get(rec_val_ind, [])                 
+              
                 if(len(rec_id_list)==0):                    
                     rec_id_list=rec_id_list_temp;
                 else:
@@ -398,6 +404,7 @@ class ActiveOnlineBlocking:
                             rec_id_list.append(id);
              
         #spec_info = ( )
+       
         
         return (rec_id_list, 0)
         
@@ -433,27 +440,28 @@ class ActiveOnlineBlocking:
             
     def create_output_file(self, ent_id,res_list,f):
         
-         if (res_list != [] and len(res_list)>1):  # Some results were returned
+        
+        # self.pairs_count=0
+         if (res_list != [] and len(res_list)>0):  # Some results were returned
             for i in range(len(res_list)):
                  try:
                     #cado sejam iguais                   
                     if(ent_id==res_list[i]):
                         continue
-                    #if (i > 100):
-                        #break
                     
-                    valueA=ind.query_records[ent_id]
-                    valueB=ind.query_records[res_list[i]]
+                    
+                    valueA=self.query_records[ent_id]
+                    valueB=self.query_records[res_list[i]]
                     sim=[]
                     for j in range(1,len(valueA)):
                        # print ("%s   %s   %f") % (valueA[j],valueB[j], stringcmp.jaro(valueA[j], valueB[j]))
-                        f.write(str(ind.comp_methods[1](valueA[j], valueB[j])) + ", ")
+                        f.write(str(self.comp_methods[1](valueA[j], valueB[j])) + ", ")
                        #((stringcmp.jaro(valueA[j], valueB[j])))
                               
                    #false match 
                     if(("dup") not in ent_id and  ("dup") not in res_list[i]):
                     #    print "false match 1"
-                        query_acc_res.append('FM')
+                        ##query_acc_res.append('FM')
                         f.write("0")
                     else:
                        
@@ -472,18 +480,19 @@ class ActiveOnlineBlocking:
                         #if("507-" in ent_id):
                         #        print "chegouuuuuuuuuuuuuuuuuuuuuuuuuuuu %s  %s" % (res_clean, res_list );  
                         if(res_clean==ent_clean):
-                            gab_list=ind.inv_index_gab.get(res_clean,[])
+                            gab_list=self.inv_index_gab.get(res_clean,[])
                            
                             if(dirty in gab_list or res_list[i] in gab_list):                             
                                 #gab_list.remove(dirty)
                                 #query_acc_res.append('TM')
                                 #ind.inv_index_gab[dirty]=gab_list
                                 f.write("1")
+                                self.pairs_count+=1
                             #else:
                                 #print "XXXXXres clean %s %s" % (res_clean,gab_list)
                         else:
                            # print "false match 2"
-                            query_acc_res.append('FM')
+                            #query_acc_res.append('FM')
                             f.write("0")
                             
                     f.write("\n")
@@ -500,6 +509,7 @@ class ActiveOnlineBlocking:
         for i in range(0,16):
             f.write("@attribute att"+str(i) +" numeric\n")
         f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
+        f.write("1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.611111111111, 1.0, 1.0, 1.0, 1.0, 0.0, 0.558080808081, 1.0, 1.0, 1.0, 1")
         f.flush();
         f.close();
         
@@ -508,26 +518,31 @@ class ActiveOnlineBlocking:
         
     ##############encontrar bug aqui!!!!!!!!!!!!!!!!!!!!!!!!!
     def allac (self, file, flag):
-        self.count+=100;
+        self.count+=1000;
         if(flag==1):
             os.system("cd ssarp &&  rm train-B16-* ")
             os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  16")
             os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
             os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt")
-            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
+            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1 " +str(self.alac_repetition))
             os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
             os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+           
+            #sys.stdin.read(1)
         else:
             #os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
-            #os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
-            #os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
+            os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
             
-            #os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1")
-            #os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
-            #os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+            os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
+            os.system("cd ssarp && cat alac_lac_train_TUBEfinal_rows.txt >> lac_train_TUBEfinal_rows.txt") 
+            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1 "+str(self.alac_repetition))
+            os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt_2 alac_lac_train_TUBEfinal.txt " + str(self.count))
+            os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+            #os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt >> lac_train_TUBEfinal.txt")
+           # sys.stdin.read(1)
             #os.system("cd ssarp && wc -l alac_lac_train_TUBEfinal.txt")  
-            print ("erro ")
+           # print ("erro ")
         #os.system("cd ssarp && cat "+file+" > /tmp/temp " )
         
         
@@ -542,8 +557,11 @@ class ActiveOnlineBlocking:
         
         beginToRead = False
         for line in lines:
-            flag =0
-            if beginToRead == True:
+            flag=0    
+            
+               # print("entrou leitura das linhas...............................")
+               
+            if len([pos for pos, char in enumerate(line) if char == ','])>5:
                 if len(line) > 1:# not an empty line
                     #read this line
                     dataList = line.split(',')
@@ -556,12 +574,11 @@ class ActiveOnlineBlocking:
                     for i in range(1,len(dataList)-1):
                         resultLine += str(i)
                         resultLine += (":"+dataList[i].strip()+" ")
-                   # print(resultLine)
+                    #print(resultLine)
                     fout.write(resultLine+"\n")
+            
 
-            if line[0:6] == ' @DATA' or len([pos for pos, char in enumerate(line) if char == ','])>5:
-                beginToRead = True
-
+        fout.flush()
         fout.close()
         
         
@@ -571,25 +588,58 @@ class ActiveOnlineBlocking:
         os.system("export PYTHONPATH=//home/guilherme/git/testing_blocking/libsvm/tools/:$PYTHONPATH")
         y, x = svm_read_problem(svm_file)
         
-        rate, param = find_parameters(svm_file, '-log2c -1,1,1 -log2g -1,1,1')
-        print "xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g')))
-        p='-c '+ str(param.get('c')) +' -g ' + str(param.get('g'))
+        rate, param = find_parameters(svm_file, '-out mull -resume -log2c -1,1,1 -log2g -1,1,1 -gnuplot null')
+        #print "xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g')))
+        
+        p='-q '+ '-c '+ str(param.get('c')) +' -g ' + str(param.get('g')) 
         m = svm_train(y, x, p) 
         return m 
          
          
     def test_svm(self, model, file_full):  
-        y, x = svm_read_problem(file_full)
+        Y, x = svm_read_problem(file_full)
         
        # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
-        _labs, p_acc, p_vals = svm_predict(y, x, model)
+        _labs, p_acc, p_vals = svm_predict(Y, x, model)
       
         
-        for i in xrange(len(y)):
-            if(y[i] != _labs[i]):
-                self.false_positive+=1;
-            else:
-                self.true_positive+=1;
+        #for i in xrange(len(y)):
+            #if(y[i] != _labs[i]):
+                #self.false_positive+=1;
+            #else:
+                #self.true_positive+=1;
+       # print (Y)        
+        t=0
+        for i in Y:
+            if i==1.0:
+                t+=1
+        print ("valor do t \n" + str(t))
+        for i in range(len(x)):
+# 				if(avg[i][0]>0.2 and avg[i][0]<0.8):
+# 					print ("instavel ...."+ str(X.iloc[i].name)+"  " +str(avg[i]))
+			if( _labs[i]==1 and Y[i]==1):
+				
+				self.true_positive+=1;
+				
+				#print ("------------------------------------------------------------true positive pair ")				
+				#remove do gabarito as tags reais 
+				
+			#false positive
+			if(_labs[i]==1 and Y[i]==0):
+				self.false_positive+=1;
+				#print( " false positive " + str(i) + "  "+  "  "+str(avg)  )
+			#false negative 
+			if(_labs[i] ==0 and Y[i]==1):
+				
+				
+				#print(df_train.to_string())
+				#if(len(df_train)>0):
+				
+				
+				#print (x[i])
+				self.false_negative +=1;
+			if(_labs[i] ==0 and Y[i]==0):
+				self.true_negative +=1;	
         
          
 # ============================================================================
@@ -622,10 +672,11 @@ def __postcode_cmp__(s1, s2):
 #=============================================================================
     
 
-if __name__ == '__main__':
+def run(sys):
     
-    total_num_attr = 16  # Total number of attribute 
+    total_num_attr = 15  # Total number of attribute 
                         # including rec-id, and ent-id
+    alac_repetition = int(sys.argv[1])          # Minimal similarity threshold
     min_threshold = float(sys.argv[2])          # Minimal similarity threshold
     min_total_threshold = float(sys.argv[3])    # Minimal total threshold
     build_percentage = float(sys.argv[4])       # Percentage of records used to
@@ -634,7 +685,7 @@ if __name__ == '__main__':
     arff_file="/tmp/final_treina.arff"
     svm_file="/tmp/final_treina.svm"
     svm_file_full="/tmp/svm_full.svm"
-    
+    file_input="/tmp/arff_out"
     index_name = 'Active Online Blocking'
     # Define encoding and comparison methods to be used for attributes
     # Note: first element in the list should always be None. 
@@ -643,7 +694,7 @@ if __name__ == '__main__':
     comp_methods = [None, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro , stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro, stringcmp.jaro]
     
     ind = ActiveOnlineBlocking(total_num_attr,enco_methods, comp_methods, 
-                  min_threshold, min_total_threshold)
+                  min_threshold, min_total_threshold,alac_repetition)
      
     
     print
@@ -662,7 +713,7 @@ if __name__ == '__main__':
     print '    ', load_memo_str
     print  
     ##
-    file="/tmp/arff_out"
+   
    
    
     # Match query records - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -679,9 +730,17 @@ if __name__ == '__main__':
     tuples_count=0
     count = 0 # count of true duplicates 
     flag=1;
-    f = open(file, 'w',100)
+    first_time=1
+    f = open(file_input, 'w',100)
+    #print(ind.query_records)
+    
+    #for attribute, value in ind.query_records.iteritems(): 
+        #print('{} : {}'.format(attribute, value))
+    ind.header(arff_file)
     for rec_id, clean_rec in ind.query_records.iteritems():
-        
+       
+        if  rec_id =="":
+            continue
         ent_id = rec_id
         #print 'PERFOMING RECORD %s \n\n' %   ((rec_id))
         start_time = time.time()
@@ -697,32 +756,54 @@ if __name__ == '__main__':
         query_time_res.append(query_time)
         num_comp_res.append(num_comp)
             
+            
+        
         tuples_count+=len(res_list);
+        #print("xxx " +str(ind.pairs_count))    
         #gera arquivo de saida para avaliacao da tupla
         ind.create_output_file(ent_id, res_list,f)
-        ind.header(arff_file)
+        
+        
+        if(first_time==1):
+            f.write("1.0, 1.0, 1.0, 1.0, 1.0, 1., 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1\n");
+            first_time=0
+        
        
-        if(tuples_count>100):             
-             f.flush()
-             if(flag==1):
-                ind.allac(file, flag)
-               
-                ########################treinamento do SVM
-             
-                ind.arfftoSVM(arff_file, svm_file);
-                model= ind.train_svm(svm_file)  
-             
-             tuples_count=0                      
-             flag=0;   
-            # if(flag==0):
-             
-             ind.arfftoSVM(file, svm_file_full);
-             ind.test_svm(model,svm_file_full); 
-             f.close
-             open(file, 'w').close()
-             f = open(file, 'w',100)
-            # time.sleep(10)
+            
+        if(tuples_count>200):             
+            f.flush()    
+        #     if(flag==1):
+            ind.allac(file_input, flag)
+            flag=0;
+                    #########################treinamento do SVM
+                
+            ind.arfftoSVM(arff_file, svm_file);
+            model= ind.train_svm(svm_file)  
+                
+                
+                    #flag=0;   
+                ## if(flag==0):
+            tuples_count=0                      
+        
+           
+        
+        
        
+            
+            #print("file size %s" % len(res_list))
+
+            ind.arfftoSVM(file_input, svm_file_full);
+            ind.test_svm(model,svm_file_full); 
+           # sys.stdin.read(1)
+            f.close            
+            open(file_input, 'w').close()
+            f = open(file_input, 'w',100)
+            open(svm_file_full, 'w').close()
+            
+            
+    #if((len(res_list))>0):
+       #ind.arfftoSVM(file_input, svm_file_full);
+       #ind.test_svm(model,svm_file_full);       
      #############################################################     
        
 
@@ -732,7 +813,20 @@ if __name__ == '__main__':
     
     print "false positive %i" % ind.false_positive
     print "true positive %i" % ind.true_positive
-     
+    print "false negative %i" % ind.false_negative
+    print "true negative %i" % ind.true_negative
+    
+    try:
+        p =  ind.true_positive /(ind.true_positive+ind.false_positive)
+        r=  ind.true_positive /(ind.true_positive + ind.false_negative)
+        print ("p %s %s " % (p,r))
+       # print ("GABARITO " + str(ind.pairs_count))
+        print ("tamanho do garito")
+        print (os.system("wc /tmp/final_treina.svm"))
+    except Exception:
+        print "Oops!  Precision or recall equal to zero  Try again... "  
+        
+    
     
     #if (1==1):
         #exit()
@@ -741,44 +835,46 @@ if __name__ == '__main__':
     #f.close()
     
       
-    size_gab=0   
-    for inv_list in ind.inv_index_gab.itervalues():
-        if(len(inv_list)>1  ):
-            size_gab+=len(inv_list)
-           # print "%s %d " % (inv_list[0],len(inv_list))
-            #for i in inv_list:
-            #    print "\n\ngab %i" % inv_list[i]
-    print ' TAMANHO GAB %d' % size_gab
+    #size_gab=0   
+    #print (ind.inv_index_gab)
+    #for inv_list in ind.inv_index_gab.itervalues():
+        #if(len(inv_list)>1  ):
+            #size_gab+=len(inv_list)-1
+            ##print "%s %d " % (inv_list,len(inv_list))
+            ##for i in inv_list:
+                ##print ("gab %s \n\n" % inv_list[i])
+    #print (' TAMANHO GAB %d' % size_gab)
 
    # values.sort()
     #print ind.inv_index
     
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
     #
-    num_tm = query_acc_res.count('TM')
-    num_fm = query_acc_res.count('FM')
-    #assert num_tm + num_fm == len(ind.query_records)
-    print
-    print ' Query summary results for index: %s' % (index_name)
-    print '-' * (33 + len(index_name))
+    #num_tm = query_acc_res.count('TM')
+    #num_fm = query_acc_res.count('FM')
+    ##assert num_tm + num_fm == len(ind.query_records)
+    #print
+    #print ' Query summary results for index: %s' % (index_name)
+    #print '-' * (33 + len(index_name))
     
-    print '  minimum threshold: %.2f;' % \
-              ( min_threshold) + ' minimum total threshold: %.2f' % \
-              (min_total_threshold)
-    #if ind.count > 0:
-        #print '  Matching accuracy: %d/%d true matches (%.2f%%)' % \
-              #(num_tm, ind.count, 100.0 * num_tm / ind.count) 
+    #print '  minimum threshold: %.2f;' % \
+              #( min_threshold) + ' minimum total threshold: %.2f' % \
+              #(min_total_threshold)
+    ##if ind.count > 0:
+        ##print '  Matching accuracy: %d/%d true matches (%.2f%%)' % \
+              ##(num_tm, ind.count, 100.0 * num_tm / ind.count) 
+    ##else:
+        ##print' No duplicates where found' 
+    #if num_tm>0 :    
+        #print ' precisao %f  revo %f' %  ((100.0*num_tm/(num_tm+num_fm)),(100.0*num_tm/(size_gab+num_tm)))
+        #print ' true pos %d  false posit %d' %  (num_tm, num_fm)
     #else:
-        #print' No duplicates where found' 
-    if num_tm>0 :    
-        print ' precisao %f  revo %f' %  ((100.0*num_tm/(num_tm+num_fm)),(100.0*num_tm/(size_gab+num_tm)))
-        print ' true pos %d  false posit %d' %  (num_tm, num_fm)
-    else:
-        print 'true matching equal zero'
+        #print 'true matching equal zero'
         
    
   
-   
+if __name__ == '__main__':
+    run(sys)
 
 
     

@@ -86,6 +86,8 @@ class ActiveOnlineBlocking:
         
         self.true_positive=0;
         self.false_positive=0;
+        self.true_negative=0;
+        self.false_negative=0;
 
 # ===============================================================================================        
     
@@ -353,8 +355,8 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.iteritems():     
-            if(i > num_compared_attr/4):
-               break;
+            if(i > 7):
+                break;
             i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
@@ -562,6 +564,7 @@ class ActiveOnlineBlocking:
             if line[0:6] == ' @DATA' or len([pos for pos, char in enumerate(line) if char == ','])>5:
                 beginToRead = True
 
+        fout.flush()
         fout.close()
         
         
@@ -579,17 +582,44 @@ class ActiveOnlineBlocking:
          
          
     def test_svm(self, model, file_full):  
-        y, x = svm_read_problem(file_full)
+        Y, x = svm_read_problem(file_full)
         
        # x0, max_idx = gen_svm_nodearray({1:1, 3:1})
-        _labs, p_acc, p_vals = svm_predict(y, x, model)
+        _labs, p_acc, p_vals = svm_predict(Y, x, model)
       
         
-        for i in xrange(len(y)):
-            if(y[i] != _labs[i]):
-                self.false_positive+=1;
-            else:
-                self.true_positive+=1;
+        #for i in xrange(len(y)):
+            #if(y[i] != _labs[i]):
+                #self.false_positive+=1;
+            #else:
+                #self.true_positive+=1;
+                
+                
+        for i in range(len(x)):
+# 				if(avg[i][0]>0.2 and avg[i][0]<0.8):
+# 					print ("instavel ...."+ str(X.iloc[i].name)+"  " +str(avg[i]))
+			if( _labs[i]>0.5 and Y[i]==1):
+				
+				self.true_positive+=1;
+				#print ("------------------------------------------------------------true positive pair " +str(df_test.iloc[i]))				
+				#remove do gabarito as tags reais 
+				
+			#false positive
+			if(_labs[i]>0.5 and Y[i]==0):
+				self.false_positive+=1;
+				#print( " false positive " + str(i) + "  "+  "  "+str(avg)  )
+			#false negative 
+			if(_labs[i] <0.5 and Y[i]==1):
+				
+				
+				#print(df_train.to_string())
+				#if(len(df_train)>0):
+				
+				
+				print (x[i])
+				self.false_negative +=1;
+			if(_labs[i] <0.5 and Y[i]==0):
+				self.true_negative +=1;	
         
          
 # ============================================================================
@@ -680,8 +710,11 @@ if __name__ == '__main__':
     count = 0 # count of true duplicates 
     flag=1;
     f = open(file, 'w',100)
+    
     for rec_id, clean_rec in ind.query_records.iteritems():
-        
+       
+        if  rec_id =="":
+            continue
         ent_id = rec_id
         #print 'PERFOMING RECORD %s \n\n' %   ((rec_id))
         start_time = time.time()
@@ -702,26 +735,27 @@ if __name__ == '__main__':
         ind.create_output_file(ent_id, res_list,f)
         ind.header(arff_file)
        
-        if(tuples_count>100):             
-             f.flush()
-             if(flag==1):
-                ind.allac(file, flag)
+        #if(tuples_count>10):             
+    f.flush()
+        #     if(flag==1):
+    ind.allac(file, flag)
                
-                ########################treinamento do SVM
+                #########################treinamento do SVM
              
-                ind.arfftoSVM(arff_file, svm_file);
-                model= ind.train_svm(svm_file)  
+    ind.arfftoSVM(arff_file, svm_file);
+    model= ind.train_svm(svm_file)  
              
-             tuples_count=0                      
-             flag=0;   
-            # if(flag==0):
              
-             ind.arfftoSVM(file, svm_file_full);
-             ind.test_svm(model,svm_file_full); 
-             f.close
-             open(file, 'w').close()
-             f = open(file, 'w',100)
-            # time.sleep(10)
+                #flag=0;   
+            ## if(flag==0):
+             #tuples_count=0                      
+    ind.arfftoSVM(file, svm_file_full);
+    
+    ind.test_svm(model,svm_file_full); 
+    f.close
+    open(file, 'w').close()
+    f = open(file, 'w',100)
+    time.sleep(1)
        
      #############################################################     
        
@@ -732,6 +766,8 @@ if __name__ == '__main__':
     
     print "false positive %i" % ind.false_positive
     print "true positive %i" % ind.true_positive
+    print "false negative %i" % ind.false_negative
+    print "true negative %i" % ind.true_negative
      
     
     #if (1==1):

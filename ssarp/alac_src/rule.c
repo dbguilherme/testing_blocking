@@ -176,7 +176,7 @@ void induce_rules(int* items, int n_items, int* count_target, int level, int pro
 			rule.conf=COMPUTE_CONFIDENCE;
 			rule.supp=COMPUTE_SUPPORT;
                         if(i==0)
-                            for(int w=0;w<3;w++){
+                            for(int w=0;w<5;w++){
                                 if(rule.count>=min_count && rule.conf>=MIN_CONF) {
                                         RULES[N_RULES].count=rule.count;
                                         RULES[N_RULES].supp=rule.supp;

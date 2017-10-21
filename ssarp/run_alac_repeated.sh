@@ -4,6 +4,8 @@ loop=1
 count=0;
 
 if [ ! -f alac_$1 ]; then touch alac_$1; fi
+rm alac_$1_2;
+if [ ! -f alac_$1_2 ]; then touch alac_$1_2; fi
 if [ ! -d result_temp_$1 ]; then mkdir result_temp_$1; fi
 
 
@@ -14,7 +16,7 @@ if [ ! -d result_temp_$1 ]; then mkdir result_temp_$1; fi
 #j=MAX_JUDGEMENTS
 #d
 while [ $loop == 1 ]; do
-  ./alac -i alac_$1 -t $1 -s 1 -m 3 -e 1000000000 -c 0.001 -j 1 -d 3 -o 1 > result_temp_$1/result_temp$count.txt
+  ./alac$3 -i alac_$1 -t $1 -s 1 -m 3 -e 1000000000 -c 0.001 -j 1 -d 3 -o 1 > result_temp_$1/result_temp$count.txt
   instance=`cat result_temp_$1/result_temp$count.txt | grep inserting | awk '{ print $3 }'`; 
   newclass=`cat result_temp_$1/result_temp$count.txt | grep "New CLASS" | awk '{ print $4 }'`;
   echo "../../alac -i alac_$1 -t $1 -s 1 -m 3 -e 1000000000 -c 0.001 -j 1 -d 3 -o 1 > result_temp_$1/result_temp$count.txt"
@@ -25,7 +27,8 @@ while [ $loop == 1 ]; do
       echo class changed to $newclass;
     fi
 
-    cat $1 | grep "^$instance\ " >> alac_$1; 
+    cat $1 | grep "^$instance\ " >> alac_$1;
+    cat $1 | grep "^$instance\ " >> alac_$1_2; 
     count=$(($count+1));
     
   else

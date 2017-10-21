@@ -223,7 +223,7 @@ class svm_parameter(Structure):
 			else:
 				raise ValueError("Wrong options")
 			i += 1
-
+                self.print_func = PRINT_STRING_FUN(print_null)
 		libsvm.svm_set_print_string_function(self.print_func)
 		self.weight_label = (c_int*self.nr_weight)()
 		self.weight = (c_double*self.nr_weight)()

@@ -695,7 +695,9 @@ def getLabels(filename):
     
 
 def run(sys):
-    
+    print("starting active v001")    
+    print("starting active v001")    
+
     total_num_attr = 15  # Total number of attribute 
                         # including rec-id, and ent-id
     alac_repetition = int(sys.argv[1])          # Minimal similarity threshold

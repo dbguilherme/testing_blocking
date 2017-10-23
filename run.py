@@ -5,15 +5,27 @@ import matplotlib.pyplot as plt2
 import os
 import DySimII2013 as dy
  
+from subprocess import Popen, PIPE
+
+ 
+ 
 def run():
     objects = (1,2,3)
     y_pos = np.arange(len(objects))
     prec = []
     recall=[]
-    os.system("ls aaa $> /tmp/lixo10")
-    for i in range(1,4):
-        for j in range(1,3):
-            os.system("python2.7 DySimII2013.py " + str(i)+" 1  1 0 data/teste_1000_desbanc $>> /tmp/lixo10")
+    os.system("echo "" $> /tmp/lixo10")
+    print ("iniciando range")
+    for i in range(1,5):
+        for j in range(0,2):
+            os.system("python2.7 DySimII2013.py " + str(i)+" 1  1 0 /home/guilherme/git/testing_blocking/data/teste_1000_desbanc $>> /tmp/lixo10")
+            
+    
+    
+    #os.system("ls aaa $> /tmp/lixo_teste_teste01")
+    #for i in range(1,5):
+        #for j in range(0,3):
+            #os.system("python2.7 DySimII2013.py " + str(i)+" 1  1 0 /home/guilherme/git/testing_blocking/data/teste01 $>> /tmp/lixo_teste_teste01")
             
     
     

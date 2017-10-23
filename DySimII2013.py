@@ -2,8 +2,7 @@ import string
 import sys
 import time
 import os
-sys.path.append ("/tmp/testing_blocking/libsvm/tools/")
-sys.path.append ("/tmp/testing_blocking/libsvm/python/")
+sys.path.append("/home/guilherme/git/testing_blocking/libsvm/tools/")
 import distance
 
 
@@ -359,8 +358,8 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.iteritems():     
-            #if(i > 9):
-                #break;
+            if(i > 8):
+                break;
             i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
@@ -510,7 +509,7 @@ class ActiveOnlineBlocking:
         for i in range(0,16):
             f.write("@attribute att"+str(i) +" numeric\n")
         f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
-        f.write("1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.611111111111, 1.0, 1.0, 1.0, 1.0, 0.0, 0.558080808081, 1.0, 1.0, 1.0, 1")
+        #f.write("1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.611111111111, 1.0, 1.0, 1.0, 1.0, 0.0, 0.558080808081, 1.0, 1.0, 1.0, 1")
         f.flush();
         f.close();
         
@@ -521,25 +520,33 @@ class ActiveOnlineBlocking:
     def allac (self, file, flag):
         self.count+=1000;
         if(flag==1):
-            os.system("cd ssarp &&  rm train-B16-* ")
-            os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  16")
-            os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
+            os.system("cd ssarp &&  rm train-B10-*  ")
+            os.system("cd ssarp &&  ./gera_bins_TUBE.sh "+ file +"  10 ")
+            os.system("cd ssarp && ./discretize_TUBE.pl train-B10 "+file+ "  10 lac_train_TUBEfinal.txt 1 /dev/null")
             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt lac_train_TUBEfinal_rows.txt " + str(self.count))
-            os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt")
+            os.system("cd ssarp && rm alac_lac_train_TUBEfinal_rows.txt ")
             os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1 " +str(self.alac_repetition))
             os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt alac_lac_train_TUBEfinal.txt " + str(self.count))
             os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
-           
+            return True
             #sys.stdin.read(1)
         else:
-            #os.system("cd ssarp &&  rm train-B16-* && ./gera_bins_TUBE.sh "+ file +"  16")
-            os.system("cd ssarp && ./discretize_TUBE.pl train-B16 "+file+ "  16 lac_train_TUBEfinal.txt 1")
+            #os.system("cd ssarp &&  rm train-B10-* && ./gera_bins_TUBE.sh "+ file +"  10")
+            os.system("cd ssarp && ./discretize_TUBE.pl train-B10 "+file+ "  10 lac_train_TUBEfinal.txt 1")
             
             os.system("cd ssarp && ./updateRows.pl lac_train_TUBEfinal.txt  lac_train_TUBEfinal_rows.txt  " + str(self.count))
-            os.system("cd ssarp && cat alac_lac_train_TUBEfinal_rows.txt >> lac_train_TUBEfinal_rows.txt") 
-            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1 "+str(self.alac_repetition))
+            os.system("cd ssarp && cat alac_lac_train_TUBEfinal_rows.txt >> lac_train_TUBEfinal_rows.txt ") 
+            os.system("cd ssarp && ./run_alac_repeated.sh lac_train_TUBEfinal_rows.txt 1 "+str(self.alac_repetition) + " >/dev/null")
             os.system("cd ssarp && ./desUpdateRows.pl alac_lac_train_TUBEfinal_rows.txt_2 alac_lac_train_TUBEfinal.txt " + str(self.count))
             os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt | awk '{ print $1 }'  | while read instance; do  sed  -n  \"$instance\"p  " + file+"; done >> /tmp/final_treina.arff;")
+            
+            
+            
+            statinfo = os.stat('ssarp/alac_lac_train_TUBEfinal.txt')
+            #print("file size " + str(statinfo.st_size))
+            #os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt >> lac_train_TUBEfinal.txt")
+           # sys.stdin.read(1)
+            return False if(statinfo.st_size==0) else True
             #os.system("cd ssarp && cat alac_lac_train_TUBEfinal.txt >> lac_train_TUBEfinal.txt")
            # sys.stdin.read(1)
             #os.system("cd ssarp && wc -l alac_lac_train_TUBEfinal.txt")  
@@ -549,7 +556,7 @@ class ActiveOnlineBlocking:
         
         
     def arfftoSVM(self, inputfilename,outfile):
-        print "gerando arquivo svm"
+        #print "gerando arquivo svm"
         fin = open(inputfilename,'r')
         lines = fin.readlines()
         #fin.close()
@@ -589,7 +596,7 @@ class ActiveOnlineBlocking:
         os.system("export PYTHONPATH=//home/guilherme/git/testing_blocking/libsvm/tools/:$PYTHONPATH")
         y, x = svm_read_problem(svm_file)
         
-        rate, param = find_parameters(svm_file, '-out mull -log2c -1,1,1 -log2g -1,1,1 -gnuplot null')
+        rate, param = find_parameters(svm_file, '-out null  -log2c -1,1,1 -log2g -1,1,1 -gnuplot null')
         #print "xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g')))
         
         p='-q '+ '-c '+ str(param.get('c')) +' -g ' + str(param.get('g')) 
@@ -614,7 +621,7 @@ class ActiveOnlineBlocking:
         for i in Y:
             if i==1.0:
                 t+=1
-        print ("valor do t \n" + str(t))
+       #print ("valor do t \n" + str(t))
         for i in range(len(x)):
 # 				if(avg[i][0]>0.2 and avg[i][0]<0.8):
 # 					print ("instavel ...."+ str(X.iloc[i].name)+"  " +str(avg[i]))
@@ -671,6 +678,20 @@ def __postcode_cmp__(s1, s2):
     return e / float(pc_length)
     
 #=============================================================================
+
+def getLabels(filename):
+        ''' Counts the line numbers of a file
+            it only works on csv '''
+
+        lines = 0
+        positivo=0
+        for line in open(filename):
+            lines += 1
+            line_splited=line.split(' ')[0]
+            if(int(line_splited)==1):
+                positivo+=1
+        print("positivos %s total %s" % (positivo,lines))
+        return lines,positivo
     
 
 def run(sys):
@@ -771,15 +792,16 @@ def run(sys):
         
        
             
-        if(tuples_count>200):             
+        if(tuples_count>200):       
+            print("...\n")
             f.flush()    
         #     if(flag==1):
-            ind.allac(file_input, flag)
+            status= ind.allac(file_input, flag)
             flag=0;
                     #########################treinamento do SVM
-                
-            ind.arfftoSVM(arff_file, svm_file);
-            model= ind.train_svm(svm_file)  
+            if(status):    
+                ind.arfftoSVM(arff_file, svm_file);
+                model= ind.train_svm(svm_file)  
                 
                 
                     #flag=0;   
@@ -823,11 +845,11 @@ def run(sys):
         print ("p %s %s " % (p,r))
        # print ("GABARITO " + str(ind.pairs_count))
         print ("tamanho do garito")
-        print (os.system("wc /tmp/final_treina.svm"))
+        
     except Exception:
         print "Oops!  Precision or recall equal to zero  Try again... "  
         
-    
+    print(getLabels(svm_file))
     
     #if (1==1):
         #exit()

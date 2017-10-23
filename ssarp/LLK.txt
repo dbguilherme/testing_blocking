@@ -1287,3 +1287,611 @@ Loglikeli Estimator. Counts =  160 0 19  (Total = 179 / 3 bins). LLK= 8.85491670
 java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
 Loglikeli Estimator. Counts =  178  (Total = 178 / 1 bins). LLK= NaN
 java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  82 0 97  (Total = 179 / 3 bins). LLK= 8.509079159738224
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  141 0 33 0 5  (Total = 179 / 5 bins). LLK= 8.46134721759871
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  67 0 2 0 5 0 7 0 9 1 26 0 2 0 25 0 5 1 16 0 8 0 3 0 1 0 1  (Total = 179 / 27 bins). LLK= 6.4891657032521595
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  163 0 6 0 10  (Total = 179 / 5 bins). LLK= 8.800476087003489
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  60 0 1 1 1 0 1 1 1 0 3 1 5 0 5 0 4 0 4 0 2 0 7 0 7 0 7 1 8 0 1 0 2 0 8 7 1 0 4 0 2 0 1 0 2 0 7 0 3 0 3 0 3 0 1 0 3 0 1 5 1 0 2 1 0 1  (Total = 179 / 66 bins). LLK= 4.257756821227105
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  36 0 1 4 2 0 2 0 2 3 4 16 8 5 4 2 10 3 17 2 8 0 3 1 10 3 4 20 3 3 1 0 2  (Total = 179 / 33 bins). LLK= 2.6388433486441594
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  64 1 114  (Total = 179 / 3 bins). LLK= 8.464774007322724
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  8 0 12 124 31 4  (Total = 179 / 6 bins). LLK= 1.2978146364018466
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  46 0 82 0 45 0 2 0 2 0 2  (Total = 179 / 11 bins). LLK= 7.456285516538216
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  155 0 2 0 11 1 5 0 5  (Total = 179 / 9 bins). LLK= 8.465393202641343
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  9 3 41 94 31 0 1  (Total = 179 / 7 bins). LLK= 0.8965672441579471
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  172 7  (Total = 179 / 2 bins). LLK= 8.679790321970305
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  44 0 1 0 3 0 1 0 2 0 1 6 0 6 2 0 2 0 2 0 1 0 4 0 2 0 4 0 6 0 4 0 3 2 0 5 0 4 0 2 0 4 1 2 0 5 0 4 3 0 2 0 1 4 0 4 0 2 0 5 0 2 0 4 0 5 0 5 1 3 0 1 0 4 0 1 0 2 0 1 0 1 1 2 1 1  (Total = 179 / 86 bins). LLK= 3.6508791282396538
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  13 0 11 0 55 0 14 0 37 1 34 0 5 0 7 1 1  (Total = 179 / 17 bins). LLK= 6.48700525835505
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  160 0 19  (Total = 179 / 3 bins). LLK= 8.854916707218313
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  178  (Total = 178 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  82 0 97  (Total = 179 / 3 bins). LLK= 8.509079159738224
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  141 0 33 0 5  (Total = 179 / 5 bins). LLK= 8.46134721759871
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  67 0 2 0 5 0 7 0 9 1 26 0 2 0 25 0 5 1 16 0 8 0 3 0 1 0 1  (Total = 179 / 27 bins). LLK= 6.4891657032521595
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  163 0 6 0 10  (Total = 179 / 5 bins). LLK= 8.800476087003489
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  60 0 1 1 1 0 1 1 1 0 3 1 5 0 5 0 4 0 4 0 2 0 7 0 7 0 7 1 8 0 1 0 2 0 8 7 1 0 4 0 2 0 1 0 2 0 7 0 3 0 3 0 3 0 1 0 3 0 1 5 1 0 2 1 0 1  (Total = 179 / 66 bins). LLK= 4.257756821227105
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  36 0 1 4 2 0 2 0 2 3 4 16 8 5 4 2 10 3 17 2 8 0 3 1 10 3 4 20 3 3 1 0 2  (Total = 179 / 33 bins). LLK= 2.6388433486441594
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  64 1 114  (Total = 179 / 3 bins). LLK= 8.464774007322724
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  8 0 12 124 31 4  (Total = 179 / 6 bins). LLK= 1.2978146364018466
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  46 0 82 0 45 0 2 0 2 0 2  (Total = 179 / 11 bins). LLK= 7.456285516538216
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  155 0 2 0 11 1 5 0 5  (Total = 179 / 9 bins). LLK= 8.465393202641343
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  9 3 41 94 31 0 1  (Total = 179 / 7 bins). LLK= 0.8965672441579471
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  172 7  (Total = 179 / 2 bins). LLK= 8.679790321970305
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  44 0 1 0 3 0 1 0 2 0 1 6 0 6 2 0 2 0 2 0 1 0 4 0 2 0 4 0 6 0 4 0 3 2 0 5 0 4 0 2 0 4 1 2 0 5 0 4 3 0 2 0 1 4 0 4 0 2 0 5 0 2 0 4 0 5 0 5 1 3 0 1 0 4 0 1 0 2 0 1 0 1 1 2 1 1  (Total = 179 / 86 bins). LLK= 3.6508791282396538
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  13 0 11 0 55 0 14 0 37 1 34 0 5 0 7 1 1  (Total = 179 / 17 bins). LLK= 6.48700525835505
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  160 0 19  (Total = 179 / 3 bins). LLK= 8.854916707218313
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  178  (Total = 178 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  82 0 97  (Total = 179 / 3 bins). LLK= 8.509079159738224
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  141 0 33 0 5  (Total = 179 / 5 bins). LLK= 8.46134721759871
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  67 0 2 0 5 0 7 0 9 1 26 0 2 0 25 0 5 1 16 0 8 0 3 0 1 0 1  (Total = 179 / 27 bins). LLK= 6.4891657032521595
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  163 0 6 0 10  (Total = 179 / 5 bins). LLK= 8.800476087003489
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  60 0 1 1 1 0 1 1 1 0 3 1 5 0 5 0 4 0 4 0 2 0 7 0 7 0 7 1 8 0 1 0 2 0 8 7 1 0 4 0 2 0 1 0 2 0 7 0 3 0 3 0 3 0 1 0 3 0 1 5 1 0 2 1 0 1  (Total = 179 / 66 bins). LLK= 4.257756821227105
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  36 0 1 4 2 0 2 0 2 3 4 16 8 5 4 2 10 3 17 2 8 0 3 1 10 3 4 20 3 3 1 0 2  (Total = 179 / 33 bins). LLK= 2.6388433486441594
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  64 1 114  (Total = 179 / 3 bins). LLK= 8.464774007322724
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  8 0 12 124 31 4  (Total = 179 / 6 bins). LLK= 1.2978146364018466
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  46 0 82 0 45 0 2 0 2 0 2  (Total = 179 / 11 bins). LLK= 7.456285516538216
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  155 0 2 0 11 1 5 0 5  (Total = 179 / 9 bins). LLK= 8.465393202641343
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  9 3 41 94 31 0 1  (Total = 179 / 7 bins). LLK= 0.8965672441579471
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  172 7  (Total = 179 / 2 bins). LLK= 8.679790321970305
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  44 0 1 0 3 0 1 0 2 0 1 6 0 6 2 0 2 0 2 0 1 0 4 0 2 0 4 0 6 0 4 0 3 2 0 5 0 4 0 2 0 4 1 2 0 5 0 4 3 0 2 0 1 4 0 4 0 2 0 5 0 2 0 4 0 5 0 5 1 3 0 1 0 4 0 1 0 2 0 1 0 1 1 2 1 1  (Total = 179 / 86 bins). LLK= 3.6508791282396538
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  13 0 11 0 55 0 14 0 37 1 34 0 5 0 7 1 1  (Total = 179 / 17 bins). LLK= 6.48700525835505
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  160 0 19  (Total = 179 / 3 bins). LLK= 8.854916707218313
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  178  (Total = 178 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  74 0 58  (Total = 132 / 3 bins). LLK= 8.514821440222649
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  82 0 30 0 20  (Total = 132 / 5 bins). LLK= 8.112649704524713
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  29 0 1 0 5 0 1 0 16 0 1 0 20 0 16 0 19 0 7 0 1 0 9 0 2 0 2 0 1 0 2  (Total = 132 / 31 bins). LLK= 6.010800796210729
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  122 0 4 0 6  (Total = 132 / 5 bins). LLK= 8.840520563976481
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  30 0 1 0 2 0 1 0 1 0 1 1 1 0 2 0 3 0 4 0 2 0 6 0 1 0 2 0 3 0 3 0 3 0 1 0 2 0 3 1 3 0 2 0 2 2 1 2 3 0 4 0 1 0 1 0 1 0 36  (Total = 132 / 59 bins). LLK= 4.945198662237642
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  40 0 1 10 39 4 0 21 8 4 5  (Total = 132 / 11 bins). LLK= 3.007280088760768
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  102 1 29  (Total = 132 / 3 bins). LLK= 8.553729727633899
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  11 0 1 15 1 3 14 3 1 3 60 2 8 2 5 1 1 1  (Total = 132 / 18 bins). LLK= 1.324668751424069
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  34 0 3 0 51 0 31 0 3 0 10  (Total = 132 / 11 bins). LLK= 7.272142930122823
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  93 0 2 0 4 0 10 1 4 0 1 0 17  (Total = 132 / 13 bins). LLK= 7.8674408216677945
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  24 1 4 2 13 69 9 5 5  (Total = 132 / 9 bins). LLK= 2.005695067692027
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  123 0 7 0 2  (Total = 132 / 5 bins). LLK= 8.460199696650067
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  28 0 1 2 2 6 2 0 3 2 0 2 0 3 0 3 0 2 1 3 0 4 0 2 0 1 0 1 0 5 1 3 0 5 0 2 0 1 0 1 0 3 0 1 2 2 1 1 0 2 0 4 0 1 0 4 0 2 0 1 0 3 0 2 0 2 0 2 0 1 0 3 0 2 0 2 0 1 0 1 0 1 0 1 0 1  (Total = 132 / 86 bins). LLK= 2.439898493062999
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  7 0 6 0 25 0 3 0 14 0 41 0 3 0 3 0 20 0 7 1 1 0 1  (Total = 132 / 23 bins). LLK= 6.264350592488664
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  113 0 19  (Total = 132 / 3 bins). LLK= 8.783858158891976
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  131  (Total = 131 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  74 0 58  (Total = 132 / 3 bins). LLK= 8.514821440222649
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  82 0 30 0 20  (Total = 132 / 5 bins). LLK= 8.112649704524713
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  29 0 1 0 5 0 1 0 16 0 1 0 20 0 16 0 19 0 7 0 1 0 9 0 2 0 2 0 1 0 2  (Total = 132 / 31 bins). LLK= 6.010800796210729
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  122 0 4 0 6  (Total = 132 / 5 bins). LLK= 8.840520563976481
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  30 0 1 0 2 0 1 0 1 0 1 1 1 0 2 0 3 0 4 0 2 0 6 0 1 0 2 0 3 0 3 0 3 0 1 0 2 0 3 1 3 0 2 0 2 2 1 2 3 0 4 0 1 0 1 0 1 0 36  (Total = 132 / 59 bins). LLK= 4.945198662237642
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  40 0 1 10 39 4 0 21 8 4 5  (Total = 132 / 11 bins). LLK= 3.007280088760768
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  102 1 29  (Total = 132 / 3 bins). LLK= 8.553729727633899
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  11 0 1 15 1 3 14 3 1 3 60 2 8 2 5 1 1 1  (Total = 132 / 18 bins). LLK= 1.324668751424069
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  34 0 3 0 51 0 31 0 3 0 10  (Total = 132 / 11 bins). LLK= 7.272142930122823
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  93 0 2 0 4 0 10 1 4 0 1 0 17  (Total = 132 / 13 bins). LLK= 7.8674408216677945
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  24 1 4 2 13 69 9 5 5  (Total = 132 / 9 bins). LLK= 2.005695067692027
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  123 0 7 0 2  (Total = 132 / 5 bins). LLK= 8.460199696650067
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  28 0 1 2 2 6 2 0 3 2 0 2 0 3 0 3 0 2 1 3 0 4 0 2 0 1 0 1 0 5 1 3 0 5 0 2 0 1 0 1 0 3 0 1 2 2 1 1 0 2 0 4 0 1 0 4 0 2 0 1 0 3 0 2 0 2 0 2 0 1 0 3 0 2 0 2 0 1 0 1 0 1 0 1 0 1  (Total = 132 / 86 bins). LLK= 2.439898493062999
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  7 0 6 0 25 0 3 0 14 0 41 0 3 0 3 0 20 0 7 1 1 0 1  (Total = 132 / 23 bins). LLK= 6.264350592488664
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  113 0 19  (Total = 132 / 3 bins). LLK= 8.783858158891976
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  131  (Total = 131 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  136 0 82 0 60  (Total = 278 / 5 bins). LLK= 7.952927485369346
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  45 0 2 0 3 0 2 0 32 0 1 0 6 0 38 0 38 0 1 0 4 0 42 0 20 0 28 0 3 0 10 0 2 0 1  (Total = 278 / 35 bins). LLK= 6.156159272252454
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  195 0 44 0 8  (Total = 247 / 5 bins). LLK= 8.470335117064398
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  66 0 1 0 2 0 2 0 1 0 1 0 2 0 1 0 5 0 6 0 1 0 22 0 14 0 2 0 12 0 17 0 12 0 2 0 3 0 1 0 7 0 9 0 4 0 1 0 4 0 2 0 2 0 8 0 13 0 5 0 6 0 3 0 7 0 3 1 0 1 0 1 0 4 0 1 0 3 1 2 0 1 0 1 0 3 0 1 0 3 0 1 0 3 0 2 0 1 0 6  (Total = 283 / 100 bins). LLK= 4.680133579225677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  89 0 1 0 1 0 1 0 1 0 2 0 3 0 13 0 7 0 2 0 5 0 10 0 1 0 2 0 5 0 5 0 1 0 9 0 8 0 8 0 13 0 1 0 1 0 9 0 3 0 1 0 1 0 7 0 5 0 6 0 2 0 2 0 1 0 1 0 1 0 2 0 2 0 2 0 2 0 3 0 1 0 1 0 2 2 0 1  (Total = 246 / 88 bins). LLK= 5.014494114212513
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  120 0 10 0 16  (Total = 146 / 5 bins). LLK= 8.544178774518944
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  10 0 2 4 3 0 2 2 3 3 0 31 0 17 0 2 0 1 0 6 0 2 0 6 1 5 4 6 2 3 16 13 0 9 5 34 2 0 8 4 4 1 3 0 3 0 3 0 1 3 3 0 2 5 13 1 4 1 0 1  (Total = 254 / 60 bins). LLK= 1.7715075318839133
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  64 0 132 0 62 0 2 0 19 0 3  (Total = 282 / 11 bins). LLK= 7.367416482579398
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  191 0 1 0 11 0 37 0 15 0 6 0 3 0 3 0 21  (Total = 288 / 17 bins). LLK= 7.763863311580167
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  1 0 1 0 1  (Total = 3 / 5 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  210  (Total = 210 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  22 0 1 0 1 0 1 0 3 3 6 1 12 2 3 0 2 2 0 1 0 2 0 3 0 2 0 3 0 4 4 2 0 7 3 3 0 6 0 2 0 4 0 2 0 4 0 3 0 2 0 3 0 3 3 2 19 2 0 3 0 2 0 1 4 0 3 2 5 0 1 4 0 2 0 4 4 0 3 0 2 0 3 0 2 0 3 0 1 0 4 0 3 0 2 1 1 2 1  (Total = 211 / 99 bins). LLK= 2.52282523646009
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  11 0 15 0 64 0 2 0 1 0 36 0 74 1 2 0 50 0 10 0 1 0 1 0 1 0 15 0 6 0 1  (Total = 291 / 31 bins). LLK= 6.2750195295654825
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  275 0 36  (Total = 311 / 3 bins). LLK= 8.84464500233604
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  310  (Total = 310 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16
+Loglikeli Estimator. Counts =  67 0 79  (Total = 146 / 3 bins). LLK= 8.505331346727328
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr1.arff -V 8 -B -X train-B16-1
+Loglikeli Estimator. Counts =  87 0 21 0 38  (Total = 146 / 5 bins). LLK= 8.150027933980752
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr2.arff -V 8 -B -X train-B16-2
+Loglikeli Estimator. Counts =  57 0 1 0 2 0 2 0 4 1 13 0 1 0 17 0 5 0 22 0 7 0 1 0 7 0 2 0 2 0 1 0 1  (Total = 146 / 33 bins). LLK= 6.297583745389678
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr3.arff -V 8 -B -X train-B16-3
+Loglikeli Estimator. Counts =  134 0 7 0 5  (Total = 146 / 5 bins). LLK= 8.820864945400434
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr4.arff -V 8 -B -X train-B16-4
+Loglikeli Estimator. Counts =  52 0 1 7 3 8 4 0 4 1 0 6 24 3 12 2 2 17  (Total = 146 / 18 bins). LLK= 4.072996250563198
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr5.arff -V 8 -B -X train-B16-5
+Loglikeli Estimator. Counts =  33 0 1 7 4 0 2 0 2 0 4 0 3 0 3 0 2 0 3 0 3 3 4 0 6 1 6 0 7 0 2 1 4 1 2 1 2 0 3 0 5 3 1 0 3 0 1 0 2 1 2 0 3 6 4 2 1 0 2  (Total = 146 / 59 bins). LLK= 2.962808372750148
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr6.arff -V 8 -B -X train-B16-6
+Loglikeli Estimator. Counts =  103 2 41  (Total = 146 / 3 bins). LLK= 8.412373189386482
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr7.arff -V 8 -B -X train-B16-7
+Loglikeli Estimator. Counts =  4 0 3 0 17 1 39 0 5 65 11 0 1  (Total = 146 / 13 bins). LLK= 1.074169817510096
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr8.arff -V 8 -B -X train-B16-8
+Loglikeli Estimator. Counts =  39 0 3 0 67 0 27 1 5 0 4  (Total = 146 / 11 bins). LLK= 7.263820643253114
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr9.arff -V 8 -B -X train-B16-9
+Loglikeli Estimator. Counts =  112 0 2 0 10 2 7 0 13  (Total = 146 / 9 bins). LLK= 8.106118865977669
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr10.arff -V 8 -B -X train-B16-10
+Loglikeli Estimator. Counts =  10 0 2 1 8 4 103 14 0 2 0 2  (Total = 146 / 12 bins). LLK= 1.1818701520826878
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr11.arff -V 8 -B -X train-B16-11
+Loglikeli Estimator. Counts =  133 0 11 1 1  (Total = 146 / 5 bins). LLK= 8.126247466575588
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr12.arff -V 8 -B -X train-B16-12
+Loglikeli Estimator. Counts =  41 0 1 0 2 0 2 0 2 0 1 0 1 0 2 3 1 0 4 18 2 0 3 0 1 0 4 0 1 0 2 0 1 4 0 5 0 4 0 1 0 1 0 3 0 2 0 2 15 3 0 2 0 1 0 2 4 2 1 1 0 1  (Total = 146 / 62 bins). LLK= 3.3381154925105827
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr13.arff -V 8 -B -X train-B16-13
+Loglikeli Estimator. Counts =  9 0 13 0 33 1 11 0 41 5 22 0 7 4  (Total = 146 / 14 bins). LLK= 6.066444099789677
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr14.arff -V 8 -B -X train-B16-14
+Loglikeli Estimator. Counts =  130 0 16  (Total = 146 / 3 bins). LLK= 8.848901032468472
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr15.arff -V 8 -B -X train-B16-15
+Loglikeli Estimator. Counts =  145  (Total = 145 / 1 bins). LLK= NaN
+java -Xmx1024m -classpath ./TUBE/src/ weka.estimators.TUBEstimator -i attr16.arff -V 8 -B -X train-B16-16

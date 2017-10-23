@@ -617,10 +617,10 @@ class ActiveOnlineBlocking:
             #else:
                 #self.true_positive+=1;
        # print (Y)        
-        t=0
-        for i in Y:
-            if i==1.0:
-                t+=1
+        #t=0
+        #for i in Y:
+            #if i==1.0:
+                #t+=1
        #print ("valor do t \n" + str(t))
         for i in range(len(x)):
 # 				if(avg[i][0]>0.2 and avg[i][0]<0.8):
@@ -696,7 +696,7 @@ def getLabels(filename):
 
 def run(sys):
     print("starting active v001")    
-    print("starting active v001")    
+    
 
     total_num_attr = 15  # Total number of attribute 
                         # including rec-id, and ent-id
@@ -790,12 +790,13 @@ def run(sys):
         
         if(first_time==1):
             f.write("1.0, 1.0, 1.0, 1.0, 1.0, 1., 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1\n");
+            f.write("0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0\n");
             first_time=0
         
        
             
         if(tuples_count>200):       
-            print("...\n")
+           
             f.flush()    
         #     if(flag==1):
             status= ind.allac(file_input, flag)
@@ -840,11 +841,11 @@ def run(sys):
     print "true positive %i" % ind.true_positive
     print "false negative %i" % ind.false_negative
     print "true negative %i" % ind.true_negative
-    
+    ind.true_positive-=1
     try:
         p =  ind.true_positive /(ind.true_positive+ind.false_positive)
         r=  ind.true_positive /(ind.true_positive + ind.false_negative)
-        print ("p %s %s " % (p,r))
+        print ("p %s %s %s" % (p,r , ((2*p*r)/(p+r))))
        # print ("GABARITO " + str(ind.pairs_count))
         print ("tamanho do garito")
         

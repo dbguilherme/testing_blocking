@@ -8,7 +8,7 @@ my $flag = $ARGV[4];
 my @bins;
 my @vals;
 my $linecount = 1;
-print "dddddddddddddd  $infile $train_file **** $ARGV[3]*** \n";
+#print "dddddddddddddd  $infile $train_file **** $ARGV[3]*** \n";
 open (F1, $train_file) || die ("Could not open $file!");
 if($flag==1){
     open (F3, ">$outfile") || die ("Could not open $file!");}
@@ -38,7 +38,7 @@ for ($i=1; $i<=$featnum; $i++) {
 	}
     }
     else {
-	print "ERROOOxxxx $infile-$i-0LL.hist \n";
+#	print "ERROOOxxxx $infile-$i-0LL.hist \n";
 	$bins[$i][0]=-1;
     }
     close(F2);

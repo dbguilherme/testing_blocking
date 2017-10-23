@@ -210,7 +210,7 @@ def svm_predict(y, x, m, options=""):
 		else:
 			raise ValueError("Wrong options")
 		i+=1
-
+        info = print_null
 	svm_type = m.get_svm_type()
 	is_prob_model = m.is_probability_model()
 	nr_class = m.get_nr_class()

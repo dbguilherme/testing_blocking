@@ -50,7 +50,7 @@ class Active_learning:
         df_train=df_train.append(df_test.iloc[memory[0]])
         
         
-        df_train= pd.DataFrame(np.array([[1,1,1,1,1,1,1,1,1,1]])).append(df_train, ignore_index=False)
+        df_train= pd.DataFrame(np.array([[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]])).append(df_train, ignore_index=False)
         df_train.at[0, 100]=1
         df_train.at[0, 1001]=-1
 
@@ -179,8 +179,8 @@ class Active_learning:
     
     def partial_active_learning(self, df_test, df_train,total_num_attr):
         
-        if(df_test.loc[:,100].any()==1):
-            print("entrou " + str(self.least_frequent_rule_value))
+#         if(df_test.loc[:,100].any()==1):
+#             print("entrou " + str(self.least_frequent_rule_value))
         flag=False
         rules,memory = self.rule_calculation(df_test, df_train, total_num_attr,self.least_frequent_rule_value)
         

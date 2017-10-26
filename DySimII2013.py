@@ -143,8 +143,8 @@ class ActiveOnlineBlocking:
         rec_id_list=[]
         i=0
         for rec_val,v in query_sort.items():     
-#             if(i > num_compared_attr/2):
-#                break;
+            if(i > 8):
+                break;
             i=i+1
             #print rec_val
             if(rec_val == 'norole' or rec_val == ''  or len(rec_val)<2):
@@ -368,15 +368,15 @@ class ActiveOnlineBlocking:
                 valueA=ind.query_records[ent_id]
                 valueB=ind.query_records[res_list[i]]
                 dictionary={}
-                sum=0.0
+                suma=0.0
                 for j in range(self.total_num_attr):
                     temp=ind.comp_methods[1](valueA[j], valueB[j])
                     dictionary[j]=temp
                     #f.write(str(temp) + ", ")
-                    sum=temp+sum
-                # print ("summ -> " +str(sum/len(valueA)))
-                if(sum/self.total_num_attr<0.05):
-                    continue;
+                    suma=temp+suma
+                    #print ("sum -> " +str(valueA[j]) + "  " + str(valueB[j]) +"  " + str(temp)   +" \n")
+#                 if(suma/self.total_num_attr<0.05):
+#                     continue;
                    #((stringcmp.editdist(valueA[j], valueB[j])))
                 #if(sum/len(valueA)>0.1):
                 
@@ -392,7 +392,7 @@ class ActiveOnlineBlocking:
                 #    print "false match 1"
                     query_acc_res.append('FM')
                    # f.write("0")
-                    gabarito.append(0);
+                    gabarito.append(0.0);
                     label.append(-1)
                 else:
                     if(("dup") in ent_id):
@@ -421,18 +421,18 @@ class ActiveOnlineBlocking:
                     #        f.write("1")
                            # print ("summ -> " +str(sum/len(valueA)) + "  "+ str(list_of_dict_))
                            # print ("######################----------------------------dupppp")
-                            gabarito.append(1) 
+                            gabarito.append(1.0) 
                         else:
                             if(("dup") not in ent_id):
                                 label.append(res_list[i])                            
                             else:
                                 label.append(dirty)                            
-                            gabarito.append(0) 
+                            gabarito.append(0.0) 
                     else:
                         label.append(-1)
                         query_acc_res.append('FM')
                      #   f.write("0")
-                        gabarito.append(0);
+                        gabarito.append(0.0);
                            
                    #f.write("\n")   
         index=range(self.numberOfPairs,len(list_of_dict_)+self.numberOfPairs)
@@ -448,16 +448,8 @@ class ActiveOnlineBlocking:
         #          print (label)    
         assert (len(dt)==len(label)), "problem %s %s %s %s" %(ent_id,res_list, gabarito, label)   
         
+    
         
-#         size_gab=0   
-#         for inv_list in ind.inv_index_gab.values():
-#             if(len(inv_list)>1  ):
-#                 size_gab+=len(inv_list)-1
-#             #print ("%s %d " % (inv_list[0],len(inv_list)))
-#             #for i in range(len(inv_list)):
-#             #    print ("\n\ngab %s" % inv_list[i])
-#         print (' TAMANHO GAB %d' % size_gab)                
-        #print ("problem %s %s %s %i %s" % (ent_id,res_list, gabarito, len(list_of_dict_), label))
         return (dt)
        
     def header(self,file):
@@ -466,7 +458,7 @@ class ActiveOnlineBlocking:
         f.write("@relation TrainingInstances\n")
         for i in range(0,5):
             f.write("@attribute att"+str(i) +" numeric\n")
-        f.write("@ATTRIBUTE class {0,1}\n @DATA\n")
+        f.write("@ATTRIBUTE class {0,1}\n@DATA\n")
         f.flush();
         f.close();
       
@@ -499,15 +491,15 @@ def __postcode_cmp__(s1, s2):
 
 if __name__ == '__main__':
     
-    total_num_attr = 10 # Total number of attribute 
+    total_num_attr = 15 # Total number of attribute 
                         # including rec-id, and ent-id
    
     build_percentage = float(sys.argv[1])       # Percentage of records used to
                                                 # build the index
     file_name = sys.argv[2]             # optimization flag
-    arff_file="/tmp/final_treina.arff"
-    svm_file="/tmp/final_treina.svm"
-    svm_file_full="/tmp/svm_full.svm"
+#     arff_file="/tmp/final_treina.arff"
+#     svm_file="/tmp/final_treina.svm"
+#     svm_file_full="/tmp/svm_full.svm"
     
     index_name = 'Active Online Blocking'
     line_number=0
@@ -515,7 +507,7 @@ if __name__ == '__main__':
     # Note: first element in the list should always be None. 
     enco_methods = [None, encode.dmetaphone, encode.dmetaphone, 
                     encode.dmetaphone, __get_substr__,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,encode.dmetaphone,]
-    comp_methods = [None, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist , stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist, stringcmp.editdist]
+    comp_methods = [None, stringcmp.editdist]
     
     ind = ActiveOnlineBlocking(total_num_attr,enco_methods, comp_methods)
     active = Active_learning(0)
@@ -568,8 +560,7 @@ if __name__ == '__main__':
         query_time = time.time() - start_time
         query_time_res.append(query_time)
         num_rec += 1
-        if (num_rec % 100 == 0):
-            
+        if (num_rec % 100 == 0):  
            
             print ('\t Processed %d records in the query phase' % (num_rec))
             #print "inverted inde size %i" % ((ind.count))
@@ -583,15 +574,15 @@ if __name__ == '__main__':
             continue;
                     
            
-        if(len(df)>10):
+        if(len(df)>200):
              
             count = 0 
-             # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))
+            print ("numero de pares a serem processados %i" % (len(df)))
 #            
              # f.flush()
             if(flag_active==1):             
-                # print ("\n ############################starting active  \n\n")             
-                df_train ,flag =(active.active_learning(df,df_train,1,total_num_attr))
+                print ("\n ############################starting active  \n\n")             
+                #df_train ,flag =(active.active_learning(df,df_train,1,total_num_attr))
                 first_time_active=0
                 flag_active=0
                 model = classifier.train_svm(rf, df_train,total_num_attr)
@@ -603,8 +594,8 @@ if __name__ == '__main__':
      
             df=pd.DataFrame()
             
-         
-    
+    if(len(df)>0):     
+        df_train =classifier.test_svm_online(rf, df,df_train,model,ind,total_num_attr, active)
     print ("####################")
     print ("false positive %i" % ind.false_positive)
     print ("true positive %i" % ind.true_positive)
@@ -631,7 +622,7 @@ if __name__ == '__main__':
             #    print ("\n\ngab %s" % inv_list[i])
     print (' TAMANHO GAB %d' % size_gab)
 
-    print (' precisao %f  revo %f' %  ((100.0*ind.true_positive/(ind.true_positive+ind.false_positive)),(100.0*ind.true_positive/(size_gab+ind.true_positive))))  
+    print (' precisao %f  revo %f' %  ((100.0*ind.true_positive/(ind.true_positive+ind.false_positive)),(100.0*ind.true_positive/(size_gab+ind.true_positive+ind.false_negative))))  
     # Summarise query results - - - - - - - - - - - - - - - - - - - - - - - - -
     #
     num_tm = query_acc_res.count('TM')

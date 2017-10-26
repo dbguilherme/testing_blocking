@@ -3,69 +3,98 @@ import sys
 sys.path.append("./libsvm/tools/")
 sys.path.append("./libsvm/python/")
 sys.path.append("./auxiliar/")
-from sklearn.model_selection import GridSearchCV
+
 
 import numpy as np
 import pandas as pd
-from sklearn.svm import SVC
-from sklearn.cross_validation import KFold
-#from lib import active_learning
-#from svmutil import *
-#from grid import *
 
+
+from scipy.io import arff
+from svmutil import *
 import numpy as np
+from grid import *
+
+
+def get_data():
+	data = arff.loadarff('/tmp/final_treina.arff')
+	df = pd.DataFrame(data[0])
+	
+	
+	
+	return df.iloc[:,0:len(df.columns)-2].values, df.iloc[:,len(df.columns)-1].values
+
+
+
 
 def train_svm(rf,df_train,total_num_attr):
-
-	print ("treinamento  %i " % ( len(df_train)))
-	print (df_train.iloc[:,total_num_attr:total_num_attr+total_num_attr].values)
-	X=df_train.iloc[:,0:total_num_attr].values
-	Y=df_train[100].values
+	import os
 	
-	if(np.count_nonzero(Y == 1)>3):
-		p_grid = {"C": [1, 10, 100], "gamma": [.01, .1]}		
-		svm = SVC(kernel="rbf")
-		rf = GridSearchCV(estimator=svm, param_grid=p_grid,cv=None)
-		
-		
+	os.system("export PYTHONPATH=//home/guilherme/git/testing_blocking/libsvm/tools/:$PYTHONPATH")
+	#print ("treinamento  %i " % ( len(df_train)))
+	#print (df_train.iloc[:,total_num_attr:total_num_attr+total_num_attr].values)
+# 	X=df_train.iloc[:,0:total_num_attr].values
+# 	Y=df_train[100].values
+	X, Y = get_data()
+	list = Y.tolist()
+	#results = map(int, list)
+	for i in range(len(list)):
+		list[i] = int(list[i])
+	#if(np.count_nonzero(Y == 1)>0):
+# 	p_grid = {"C": [0.1,1, 10, 100], "gamma": [.01, .1]}		
+# 	svm = SVC(kernel="rbf")
+# 	rf = GridSearchCV(estimator=svm, param_grid=p_grid,cv=None)
+	print (type(Y))	
+	m = rf.fit(X,np.asarray(list))	
 	
 	#import numpy.ma as ma
 	#np.where(np.isnan(X), ma.array(X, mask=np.isnan(X)).mean(axis=0), X)
 	
 	#print (df_train)
 	#print (Y.astype(int))
-	m = rf.fit(X,Y.astype(int) ) #svm_train(gabarito, pairs, '-c 4') 
+# 	y, x = svm_read_problem("/tmp/final_treina.svm")
+# 	
+# 	rate, param = find_parameters("/tmp/final_treina.svm", '-out null  -log2c -1,1,1 -log2g -1,1,1 -gnuplot null')
+# 	    #print "xxxxxxxxxxxxxxxxxx %s %s" % (param.get('c'),(param.get('g')))
+# 	    
+# 	p='-q '+ '-c '+ str(param.get('c')) +' -g ' + str(param.get('g')) 
+# 	m = svm_train(y, x, p) 
+	
+	
+	#m = svm_train(y,x)#rf.fit(X.astype(int),Y.astype(int)) #svm_train(gabarito, pairs, '-c 4') 
 	
 	return m		 
  
 	
 def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):  
 	
-	X=df_test.iloc[:,0:total_num_attr]
-	Y=df_test[100].values
-	if(1 in Y):
-		print (" Y " + str(Y))
+	#df_test.iloc[0:1,0:16]=.1,1,0.1,0.1,0.1,0.1,0.1,1,1,1,1,1,.99,.8,1,1
+	X=df_test.iloc[:,0:total_num_attr].values.tolist()
+	Y=df_test.iloc[:,total_num_attr].values
 	
-	if(df_test.index[10]!=10):
+	#print (X)
+#	if(df_test.index[10]!=10):
 			
-		df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9, 100, 1001]);
-			
-			
-		df2=df2.append(df_test)
-		
-		df_train, flag= active.partial_active_learning(df2, df_train,total_num_attr)
-		if(flag==True):
-			model=train_svm(rf,df_train,total_num_attr)
+# 		df2=pd.DataFrame(columns = [0,1,2,3,4,5,6,7,8,9, 100, 1001]);
+# 			
+# 			
+# 		df2=df2.append(df_test)
+# 		
+# 		df_train, flag= active.partial_active_learning(df2, df_train,total_num_attr)
+# 		if(flag==True):
+# 			model=train_svm(rf,df_train,total_num_attr)
 	
 	
-	_labs = model.predict(X) #svm_predict(y, x, model )
-	#print(df_test)   
+	_labs = model.predict(X) 
+	
+	#_labs, p_acc, p_vals = svm_predict(Y, X, model)
+	#print(p_acc)   
 	
 	for i in range(len(Y)):
 		#self.compute+=1;
 		#true positive
 		if( _labs[i]==1 and Y[i]==1):
 			ind.true_positive+=1;
+			#print (X[i])
 			#print ("------------------------------------------------------------true positive pair " +str(df_test.iloc[i]))				
 			#remove do gabarito as tags reais 
 			for x in (df_test[1001]):
@@ -85,9 +114,13 @@ def test_svm_online(rf, df_test,df_train, model,ind ,total_num_attr, active):
 		#false positive
 		if(_labs[i] ==1 and Y[i]==0):
 			ind.false_positive+=1;
-			print( " false positive " + str(i) + "  ")
+			print( " false positive " + str(X[i]) + "  " + str(_labs[i]) +"   " + "")
 		#false negative 
 		if(_labs[i] ==0 and Y[i]==1):
+# 			if(1 in Y):
+# 				print (" Y " + str(Y))
+			print (X[i])
+			print( " false negative ")
 			ind.false_negative +=1;
 		if(_labs[i] ==0 and Y[i]==0):
 			ind.true_negative +=1;	

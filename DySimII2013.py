@@ -155,7 +155,7 @@ class ActiveOnlineBlocking:
         
         i=0
         for rec_val,v in query_sort.items():     
-            if(i > 5):
+            if(i > 7):
                 break;
             i=i+1
             #print rec_val
@@ -549,7 +549,7 @@ class ActiveOnlineBlocking:
                 continue;
                         
                
-            if(len(df)>40):
+            if(len(df)>200):
                  
                 count = 0 
                  # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))

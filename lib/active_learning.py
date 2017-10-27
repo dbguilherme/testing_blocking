@@ -117,7 +117,7 @@ class Active_learning:
                 rules+= temp +((temp*(temp-1))/2) 
             for j in (merge_n):
                 temp=(merge_n[j])
-                rules+=(temp +((temp*(temp-1))/2))*3
+                rules+=(temp +((temp*(temp-1))/2))*4
             if(rules < self.less_frequent_rule_value):
                 self.less_frequent_rule_value=rules    
     
@@ -147,7 +147,7 @@ class Active_learning:
                 rules+= temp +((temp*(temp-1))/2) 
             for j in (merge_n):
                 temp=(merge_n[j])
-                rules+=(temp +((temp*(temp-1))/2))*3
+                rules+=(temp +((temp*(temp-1))/2))*4
             
             if(rules<lower_frequency):
                 lower_frequency=rules

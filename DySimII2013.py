@@ -155,7 +155,7 @@ class ActiveOnlineBlocking:
         
         i=0
         for rec_val,v in query_sort.items():     
-            if(i > 8):
+            if(i > 5):
                 break;
             i=i+1
             #print rec_val
@@ -354,8 +354,13 @@ class ActiveOnlineBlocking:
                 dictionary={}
                 for j in range(self.total_num_attr):
                     temp=self.comp_methods[1](valueA[j], valueB[j])
-                    dictionary[j]=temp
+                    if(len(valueA[j])< 4 or len(valueB[j])<4):
+                        dictionary[j]=0
+                    else:
+                        dictionary[j]=temp
                     #f.write(str(temp) + ", ")
+                    #if(dictionary[j] ==1.0):
+                    #    print (str(valueA[j]) +"  "+ str(valueB[j]) +" " + str(ent_id==res_list[i]))
                 list_of_dict_.append(dictionary)  
                 
                 if(("dup") not in ent_id and  ("dup") not in res_list[i]):

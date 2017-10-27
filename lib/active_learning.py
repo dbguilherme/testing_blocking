@@ -42,7 +42,7 @@ class Active_learning:
         a = np.empty(total_num_attr)
         a=a.reshape(1,total_num_attr)
         a.fill(1)
-        df_train= pd.DataFrame(a).append(df_train, ignore_index=False)
+        df_train= pd.DataFrame(a).append(df_train, ignore_index=True)
         df_train.at[0, 100]=1
         df_train.at[0, 1001]=-1
 
@@ -50,7 +50,7 @@ class Active_learning:
     
     def active_learning(self,df_test, df_train,first_time_active,total_num_attr):
         
-        df_test_discrete=(df_test.loc[:,0:total_num_attr]*5).astype(int)
+        df_test_discrete=(df_test.loc[:,0:total_num_attr]*10).astype(int)
         
         assert (len(df_test_discrete)==len(df_test)), "problem with active learning  %s %s " %(df_test,df_test_discrete)                  
         for i in range(total_num_attr):
@@ -60,7 +60,7 @@ class Active_learning:
         if(first_time_active==1):      
             df_train=(self.active_select_first_pair(df_test,df_train,df_test_discrete,total_num_attr))
             first_time_active=0
-        self.df_train_d=((df_train.loc[:,0:total_num_attr])*5).astype(int)
+        self.df_train_d=((df_train.loc[:,0:total_num_attr])*10).astype(int)
         
         for i in range(1,len(self.df_train_d)):
             for j in range(total_num_attr):
@@ -73,15 +73,22 @@ class Active_learning:
         while(1):
             lower_frequency, lower_pair_id= self.find_pair_less_frenquent(df_test,df_test_discrete,total_num_attr)
             
+           
+            
+            if(len(df_train)==2):
+                as_list = df_train.index.tolist()
+                idx = as_list.index(0)
+                as_list[idx] = -1
+                df_train.index = as_list
             index_training= (df_train.index.tolist())
             index_test_discrete=df_test_discrete.index.tolist()
             if(lower_frequency<self.less_frequent_rule_value and   index_test_discrete[lower_pair_id] not in index_training):
-                print ("**************add the following pair "+  "  with " + str(lower_frequency) + "  label " + str(df_test.ix[lower_pair_id,100]))
+                print ("first add the following pair "+  "  with " + str(lower_frequency) + "  label " + str(df_test.ix[lower_pair_id,100]))
                 df_train=df_train.append(df_test.iloc[lower_pair_id])
                 #for i in range(total_num_attr,total_num_attr+total_num_attr):
                  #   df_train.iat[len(df_train)-1, i]=df_test.iloc[memory[0],(i-total_num_attr)]  
                 flag=True
-                self.df_train_d=((df_train.loc[:,0:total_num_attr])*5).astype(int)
+                self.df_train_d=((df_train.loc[:,0:total_num_attr])*10).astype(int)
                 for i in range(total_num_attr):   
                     if(df_train.iloc[len(self.df_train_d)-1,total_num_attr]==1):
                         self.lists_p[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i].append(df_test.iloc[lower_pair_id].name)
@@ -96,7 +103,7 @@ class Active_learning:
   
     def count_less_frequent_pair(self,df_train, df_train_d,total_num_attr):
         self.less_frequent_rule_value=sys.maxsize
-        for i in range(0,len(self.df_train_d)):
+        for i in range(1,len(self.df_train_d)):
             list_p=[]
             list_n=[]
             rules=0;
@@ -106,9 +113,11 @@ class Active_learning:
             merge_p = dict(Counter(list_p))
             merge_n = dict(Counter(list_n))
             for j in (merge_p):
-                rules+=2**merge_p[j]
+                temp=(merge_p[j])
+                rules+= temp +((temp*(temp-1))/2) 
             for j in (merge_n):
-                rules+=2**merge_n[j]*5
+                temp=(merge_n[j])
+                rules+=(temp +((temp*(temp-1))/2))*3
             if(rules < self.less_frequent_rule_value):
                 self.less_frequent_rule_value=rules    
     
@@ -124,6 +133,8 @@ class Active_learning:
             list_p=[]
             list_n=[]
             rules=0;
+            #if(df_test.iloc[i,total_num_attr]==1):
+            #    print ("positive") 
             for j in range((total_num_attr)):
                 list_p+=((self.lists_p[df_test_discrete.iloc[i,j]][j]))
                 list_n+=((self.lists_n[df_test_discrete.iloc[i,j]][j]))
@@ -132,20 +143,21 @@ class Active_learning:
             merge_n = dict(Counter(list_n))
             
             for j in (merge_p):
-                rules+=2**merge_p[j]
+                temp=(merge_p[j])
+                rules+= temp +((temp*(temp-1))/2) 
             for j in (merge_n):
-                rules+=2**merge_n[j]*5
+                temp=(merge_n[j])
+                rules+=(temp +((temp*(temp-1))/2))*3
             
             if(rules<lower_frequency):
                 lower_frequency=rules
                 lower_pair_id=i;
-        if(df_test.iloc[:,total_num_attr].any()==1):
-            print(df_test)                                
+                                   
         return lower_frequency, lower_pair_id
                     
     def partial_active_learning(self, df_test, df_train,total_num_attr):
          
-        df_test_discrete=(df_test.loc[:,0:total_num_attr]*5).astype(int)
+        df_test_discrete=(df_test.loc[:,0:total_num_attr]*10).astype(int)
         flag=False
                  
         lower_pair_id=0
@@ -159,8 +171,8 @@ class Active_learning:
                 print ("**************add the following pair "+  "  with " + str(lower_frequency) + "  label " + str(df_test.iloc[lower_pair_id,total_num_attr]) +" ---- ID "+ str(df_test.iloc[lower_pair_id].name))
                 df_train=df_train.append(df_test.iloc[lower_pair_id])
                 flag=True
-                self.df_train_d=((df_train.loc[:,0:total_num_attr])*5).astype(int)
-                 
+                self.df_train_d=((df_train.loc[:,0:total_num_attr])*10).astype(int)
+                
                 for i in range(total_num_attr):   
                     if(df_train.iloc[len(self.df_train_d)-1,total_num_attr]==1):
                         self.lists_p[self.df_train_d.iloc[len(self.df_train_d)-1,i]][i].append(df_test.iloc[lower_pair_id].name)

@@ -67,15 +67,18 @@ class classification:
 		X=df_test.iloc[0:,0:total_num_attr-1]
 		Y=df_test[100].values
 	
-		
+		if(flag_active==0):
+			df_train, flag= active.partial_active_learning(df_test, df_train,total_num_attr)
+			if(flag==True):
+				self.train(df_train,total_num_attr)
 		
 		#for clf, label in zip([self.eclf.clf1, self.eclf.clf2, self.eclf.clf3, self.eclf.clfs], ['MultinomialNB','PassiveAggressiveClassifier','BernoulliNB' ]):#['Logistic Regression', 'Random Forest', 'SVC', 'Ensemble']):
-		_labs ,avg= self.eclf.predict(X) #svm_predict(y, x, model )
+		_labs = self.eclf.predict(X) #svm_predict(y, x, model )
 		
 		for i in range(len(X)):
 # 				if(avg[i][0]>0.2 and avg[i][0]<0.8):
 # 					print ("instavel ...."+ str(X.iloc[i].name)+"  " +str(avg[i]))
-			if( _labs[i]>0.5 and Y[i]==1):
+			if( _labs[i]==1 and Y[i]==1):
 				
 				ind.true_positive+=1;
 				#print ("------------------------------------------------------------true positive pair " +str(df_test.iloc[i]))				
@@ -95,13 +98,13 @@ class classification:
 							#print ("element not exists" + str(x))
 							continue
 			#false positive
-			if(_labs[i]>0.5 and Y[i]==0):
+			if(_labs[i]==1 and Y[i]==0):
 				ind.false_positive+=1;
 				#print( " false positive " + str(i) + "  "+  "  "+str(avg)  )
 			#false negative 
-			if(_labs[i] <0.5 and Y[i]==1):
-				for w in range(3):
-					print( " false negative  " + str(X.iloc[i].name) + "  " + "  " + str(avg[w][i]) )
+			if(_labs[i] ==0 and Y[i]==1):
+				
+				print( " false negative  " + str(X.iloc[i].name) + "  " + "  " )
 				
 				
 				#print(df_train.to_string())
@@ -109,13 +112,10 @@ class classification:
 				#df_test.to_csv("/tmp/lixo99922", sep=',')
 				#print (X.iloc[i,:])
 				ind.false_negative +=1;
-			if(_labs[i] <0.5 and Y[i]==0):
+			if(_labs[i] ==0 and Y[i]==0):
 				ind.true_negative +=1;	
 			
-		if(flag_active==0):
-			df_train, flag= active.partial_active_learning(df_test, df_train,total_num_attr)
-			if(flag==True):
-				self.train(df_train,total_num_attr)
+		
 		
 		count=0	
 	  #  print ("#####################fim do teste")

@@ -12,9 +12,10 @@ def run():
     recall=[]
     
    
-    ind = dy.ActiveOnlineBlocking(10)
+    ind = dy.ActiveOnlineBlocking(5)
     #ind.run("data/teste_20");
     ind.run("data/teste_1000_desbanc");
+    #ind.run("data/teste_20");
     
     
     

@@ -155,7 +155,7 @@ class ActiveOnlineBlocking:
         
         i=0
         for rec_val,v in query_sort.items():     
-            if(i > 4):
+            if(i > 8):
                 break;
             i=i+1
             #print rec_val
@@ -474,10 +474,10 @@ class ActiveOnlineBlocking:
         # Define encoding and comparison methods to be used for attributes
         # Note: first element in the list should always be None. 
            
-        
+        rf = SVC() #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
         active = Active_learning(0)
-        assemble=EnsembleClassifier(weights=[1,1,1])
-        classifier_o= classification(assemble)
+       # assemble=EnsembleClassifier(weights=[1,1,1])
+        classifier_o= classification(rf)
         
         print
         print('Testing method: {0}'.format(index_name))
@@ -508,7 +508,7 @@ class ActiveOnlineBlocking:
        
         
         
-        rf = SVC(kernel='rbf', C=1.0) #ExtraTreesClassifier(n_estimators=10, max_depth=None, min_samples_split=2, random_state=0)
+       
         query_time_res = []  # Collect results for each of query record
         class_time = []
         process_time = []
@@ -544,7 +544,7 @@ class ActiveOnlineBlocking:
                 continue;
                         
                
-            if(len(df)>500 or flag_active==0):
+            if(len(df)>40):
                  
                 count = 0 
                  # print ("numero de pares a serem processados %i" % (len(set_list_of_pairs)))

@@ -27,11 +27,11 @@ from sklearn import linear_model
 # 
 #     scores = cross_validation.cross_val_score(clf, X, y, cv=5, scoring='accuracy')
 #     print("Accuracy: %0.2f (+/- %0.2f) [%s]" % (scores.mean(), scores.std(), label))
-data = pd.read_csv('/tmp/lixo99922', header=None)
-  
-X = data.values[:, 1:10]
-y = data.iloc[:, 11]
-print (y)
+# data = pd.read_csv('/tmp/lixo99922', header=None)
+#   
+# X = data.values[:, 1:10]
+# y = data.iloc[:, 11]
+# print (y)
 
 
 

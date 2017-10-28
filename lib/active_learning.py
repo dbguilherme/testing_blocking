@@ -13,7 +13,7 @@ class Active_learning:
     
     
     
-    def __init__(self, rule_value):
+    def __init__(self, rule_value, weight):
         print ("start active object")
         self.less_frequent_rule_value=sys.maxsize
         self.less_frequent_rule_id=0
@@ -22,7 +22,7 @@ class Active_learning:
         
         self.lists_p = defaultdict(lambda  : defaultdict(list))
         self.lists_n = defaultdict(lambda  : defaultdict(list))
-  
+        self.weight=weight
     
     def active_select_first_pair(self, df_test,df_train,df_test_discrete,total_num_attr):
         
@@ -117,19 +117,20 @@ class Active_learning:
                 rules+= temp +((temp*(temp-1))/2) 
             for j in (merge_n):
                 temp=(merge_n[j])
-                rules+=(temp +((temp*(temp-1))/2))*4
+                rules+=(temp +((temp*(temp-1))/2))*self.weight
             if(rules < self.less_frequent_rule_value):
                 self.less_frequent_rule_value=rules    
     
     def find_pair_less_frenquent(self,df_test,df_test_discrete,total_num_attr):
         lower_frequency=sys.maxsize
+        lower_pair_id=-5
         for i in range(len(df_test)):
             soma=0;
             for w in range(total_num_attr):
                 soma+=df_test_discrete.iloc[i,w]
-#             if(soma<total_num_attr*2):
-#                 #print(soma)
-#                 continue;
+            if(soma<total_num_attr/4):
+                #print(soma)
+                continue;
             list_p=[]
             list_n=[]
             rules=0;
@@ -147,7 +148,8 @@ class Active_learning:
                 rules+= temp +((temp*(temp-1))/2) 
             for j in (merge_n):
                 temp=(merge_n[j])
-                rules+=(temp +((temp*(temp-1))/2))*4
+                
+                rules+=(temp +((temp*(temp-1))/2))*self.weight
             
             if(rules<lower_frequency):
                 lower_frequency=rules

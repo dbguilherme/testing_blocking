@@ -1,3 +1,48 @@
+# =============================================================================
+# AUSTRALIAN NATIONAL UNIVERSITY OPEN SOURCE LICENSE (ANUOS LICENSE)
+# VERSION 1.3
+# 
+# The contents of this file are subject to the ANUOS License Version 1.3
+# (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at:
+# 
+#   http://datamining.anu.edu.au/linkage.html
+# 
+# Software distributed under the License is distributed on an "AS IS"
+# basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+# the License for the specific language governing rights and limitations
+# under the License.
+# 
+# The Original Software is: "stringcmp.py"
+# 
+# The Initial Developer of the Original Software is:
+#   Dr Peter Christen (Department of Computer Science, Australian National
+#                      University)
+# 
+# Copyright (C) 2002 - 2008 the Australian National University and
+# others. All Rights Reserved.
+# 
+# Contributors:
+# 
+# Alternatively, the contents of this file may be used under the terms
+# of the GNU General Public License Version 2 or later (the "GPL"), in
+# which case the provisions of the GPL are applicable instead of those
+# above. The GPL is available at the following URL: http://www.gnu.org/
+# If you wish to allow use of your version of this file only under the
+# terms of the GPL, and not to allow others to use your version of this
+# file under the terms of the ANUOS License, indicate your decision by
+# deleting the provisions above and replace them with the notice and
+# other provisions required by the GPL. If you do not delete the
+# provisions above, a recipient may use your version of this file under
+# the terms of any one of the ANUOS License or the GPL.
+# =============================================================================
+#
+# Freely extensible biomedical record linkage (Febrl) - Version 0.4.1
+#
+# See: http://datamining.anu.edu.au/linkage.html
+#
+# =============================================================================
+
 """Module with various approximate string comparison methods.
 
 Provides routines for various approximate string comparisons. All return a
@@ -6,7 +51,6 @@ are the same).
 
 Comparison methods provided:
 
-  exact          Exact comparison
   jaro           Jaro
   winkler        Winkler (based on Jaro)  (for backwards compatibility)
   qgram          q-gram based
@@ -46,13 +90,13 @@ approximate string comparisons for various string pairs.
 import bz2
 import difflib
 import logging
-
+import math
 import time
 import zlib
 
-from lib import encode  # For Phonix transformation routine (used in syllable alignment
+import encode  # For Phonix transformation routine (used in syllable alignment
                # distance)
-from lib  import mymath  # Contains arithmetic coder
+import mymath  # Contains arithmetic coder
 
 # =============================================================================
 # Special character used in the Jaro, Winkler and q-gram comparions functions.
@@ -76,7 +120,6 @@ def do_stringcmp(cmp_method, str1, str2, min_threshold = None):
 
   Possible values for 'cmp_method' are:
 
-    exact            Exact comparison
     jaro             Jaro's method
     winkler          Jaro's method with Winkler modification (same as calling
                      'jaro-winkler')
@@ -205,12 +248,7 @@ def do_stringcmp(cmp_method, str1, str2, min_threshold = None):
   else:
     padded = False
 
-  if (cmp_method.startswith('exa')):
-    start_time = time.time()
-    sim_weight = exact(str1, str2)
-    time_used = time.time() - start_time
-
-  elif (cmp_method.startswith('jaro')):
+  if (cmp_method.startswith('jaro')):
     start_time = time.time()
     sim_weight = jaro(str1, str2, min_threshold)
     time_used = time.time() - start_time
@@ -319,19 +357,6 @@ def do_stringcmp(cmp_method, str1, str2, min_threshold = None):
 
 # =============================================================================
 
-def exact(str1, str2):
-  """Do exact comparison of two strings.
-  """
-
-  if (str1 == '') or (str2 == ''):
-    return 0.0
-  elif (str1 == str2):
-    return 1.0
-  else:
-    return 0.0
-
-# =============================================================================
-
 def jaro(str1, str2, min_threshold = None):
   """Return approximate string comparator measure (between 0.0 and 1.0)
 
@@ -359,7 +384,7 @@ def jaro(str1, str2, min_threshold = None):
   len1 = len(str1)
   len2 = len(str2)
 
-  halflen = max(len1,len2) / 2 - 1  # Or + 1?? PC 12/03/2009
+  halflen = max(len1,len2) / 2 + 1
 
   ass1 = ''  # Characters assigned in str1
   ass2 = ''  # Characters assigned in str2
@@ -375,8 +400,7 @@ def jaro(str1, str2, min_threshold = None):
   for i in range(len1):
     start = max(0,i-halflen)
     end   = min(i+halflen+1,len2)
-   # print ("--------->>>>>>>>.. %i %i" % (int(start),int(end)))
-    index = workstr2.find(str1[i],int(start),int(end))
+    index = workstr2.find(str1[i],start,end)
     if (index > -1):  # Found common character
       common1 += 1
       ass1 = ass1 + str1[i]
@@ -387,7 +411,7 @@ def jaro(str1, str2, min_threshold = None):
   for i in range(len2):
     start = max(0,i-halflen)
     end   = min(i+halflen+1,len1)
-    index = workstr1.find(str2[i],int(start),int(end))
+    index = workstr1.find(str2[i],start,end)
     if (index > -1):  # Found common character
       common2 += 1
       ass2 = ass2 + str2[i]
@@ -405,12 +429,7 @@ def jaro(str1, str2, min_threshold = None):
   # Compute number of transpositions  - - - - - - - - - - - - - - - - - - - - -
   #
   transposition = 0
-  string_len=0;
-  if(len(ass2)>len(ass1)):
-    string_len=len(ass1)
-  else:
-    string_len=len(ass2)
-  for i in range(string_len):
+  for i in range(len(ass1)):
     if (ass1[i] != ass2[i]):
       transposition += 1
   transposition = transposition / 2.0
@@ -676,7 +695,7 @@ def posqgram(str1, str2, q=2, max_dist = 2, common_divisor = 'average',
     [('*p',0),('pe',1),('et',2),('te',3),('er',4),('r@',5)], with '*'
     illustrating the start and '@' the end character.
 
-    This routine counts the number of common q-grams within the maximum 
+    This routine counts the number of common q-grams within the maximum
     distance and divides by the average number of q-grams. The resulting number
     is returned.
   """
@@ -1173,24 +1192,24 @@ def editdist_edits(str1, str2):
   i = m
 
   while (d_curr > 0):
-    if (i>0) and (j>0) and (d[i-1][j-1]+1 == d_curr):  # Substitution
+    if (d[i-1][j-1]+1 == d_curr):  # Substitution
       i -= 1
       j -= 1
       num_edits[2] += 1
-    elif (i>0) and (d[i-1][j]+1 == d_curr):  # Delete
+    elif (d[i-1][j]+1 == d_curr):  # Delete
       i -= 1
       num_edits[1] += 1
-    elif (j>0) and (d[i][j-1]+1 == d_curr):  # Insert
+    elif (d[i][j-1]+1 == d_curr):  # Insert
       j -= 1
       num_edits[0] += 1
 
     else:  # Current position not larger than any of the previous positions
-      if (i>0) and (j>0) and (d[i-1][j-1] == d_curr):
+      if (d[i-1][j-1] == d_curr):
         i -= 1
         j -= 1
-      elif (i>0) and (d[i-1][j] == d_curr):
+      elif (d[i-1][j] == d_curr):
         i -= 1
-      elif (j>0) and (d[i][j-1] == d_curr):
+      elif (d[i][j-1] == d_curr):
         j -= 1
     d_curr = d[i][j]  # Update current position in table
 
@@ -1424,12 +1443,12 @@ def syllaligndist(str1, str2, common_divisor = 'average', min_threshold = None,
   elif (str1 == str2):
     return 1.0
 
-#   if (do_phonix == True):
-#     workstr1 = encode.phonix_transform(str1)
-#     workstr2 = encode.phonix_transform(str2)
-#   else:
-  workstr1 = str1
-  workstr2 = str2
+  if (do_phonix == True):
+    workstr1 = encode.phonixtransform(str1)
+    workstr2 = encode.phonixtransform(str2)
+  else:
+    workstr1 = str1
+    workstr2 = str2
 
   # Substitution and gap penalty weights
   #
@@ -1679,8 +1698,8 @@ def compression(str1, str2, compressor='zlib', min_threshold = None):
     #print c1, c2, c12, 1.0 - (c12 - min(c1,c2)) / max(c1,c2)
     #print
 
-#     if (c21 != c12):
-#       print str1, str2, c12, c21
+    if (c21 != c12):
+      print (str1, str2, c12, c21)
 
   if (c12 == 0.0):
     return 0.0  # Maximal distance
@@ -1688,8 +1707,6 @@ def compression(str1, str2, compressor='zlib', min_threshold = None):
   w = 1.0 - (c12 - min(c1,c2)) / max(c1,c2)
 
   if (w < 0.0):
-    print ('warning:Compression based comparison smaller than 0.0 with ' + \
-          'strings "%s" and "%s": %.3f (cap to 1.0)' % (str1, str2, w))
     w = 0.0
 
   assert (w >= 0.0) and (w <= 1.0), 'Similarity weight outside 0-1: %f' % (w)
@@ -1727,7 +1744,7 @@ def lcs(str1, str2, min_common_len = 2, common_divisor = 'average',
       http://www.unixuser.org/~euske/python/index.html
 
       http://en.wikipedia.org/wiki/Longest_common_substring_problem
-    
+
     The algorithm extracts common substrings until no more are found with a
     minimum common length and then calculates a similairy measure.
 
@@ -2546,8 +2563,8 @@ def charhistogram(str1, str2, min_threshold = None):
     cos_sim = 0.0  # At least one vector is all zeros
 
   else:
-#     vec1sum = math.sqrt(vec1sum)
-#     vec2sum = math.sqrt(vec2sum)
+    vec1sum = math.sqrt(vec1sum)
+    vec2sum = math.sqrt(vec2sum)
 
     cos_sim = vec12sum / (vec1sum * vec2sum)
 
@@ -2654,7 +2671,5 @@ if (__name__ == '__main__'):
     if (editdist(str1, str2) > mod_editdist(str1,str2)):
       msg.append('  Error: EditD > Modified EditD')
 
-  for m in msg:
-    print (m)
 
 # =============================================================================
